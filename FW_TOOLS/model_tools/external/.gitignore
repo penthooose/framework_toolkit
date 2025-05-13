@@ -1,0 +1,32 @@
+# llama.cpp specific
+llama.cpp/build/
+llama.cpp/out/
+llama.cpp/bin/
+llama.cpp/.git/
+llama.cpp/models/
+llama.cpp/*.bin
+llama.cpp/*.gguf
+llama.cpp/*.ggml
+llama.cpp/*.pth
+
+# Compiled objects
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build artifacts
+build/
+out/
+bin/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/

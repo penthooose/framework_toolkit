@@ -1,0 +1,225 @@
+<div class="container mx-auto p-4">
+  <h2 class="text-2xl font-bold mb-6">PII Industrial: Sanitizing multiple files at once</h2>
+
+  <!-- File Upload Section -->
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div class="mb-4">
+      <h3 class="text-xl font-semibold mb-4">Input Files</h3>
+      <div class="w-full p-4 border-2 border-gray-200 rounded-lg">
+        <div class="flex justify-between items-center mb-4">
+          <h4 class="text-lg font-semibold">Upload ZIP File</h4>
+          <%= if @is_uploading do %>
+            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
+          <% end %>
+        </div>
+        <form id="directory-form" phx-change="validate" phx-submit="save">
+          <div class="space-y-2">
+            <p class="text-sm text-gray-600">
+              Please upload a ZIP file containing your (TXT) files to process
+            </p>
+            <.live_file_input
+              upload={@uploads.directory}
+              class="block w-full text-sm text-gray-500
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-full file:border-0
+                file:text-sm file:font-semibold
+                file:bg-blue-50 file:text-blue-700
+                hover:file:bg-blue-100"
+              accept=".zip"
+            />
+          </div>
+        </form>
+        
+        <!-- Structure Retention Button with conditional rendering and more spacing -->
+        <%= if @has_valid_files do %>
+          <div class="mt-8">
+            <button
+              class={"py-2 px-4 rounded focus:outline-none focus:shadow-outline text-white " <>
+                if @retain_structure do
+                  "bg-orange-500 hover:bg-orange-700"
+                else
+                  "bg-purple-500 hover:bg-purple-700"
+                end}
+              phx-click="toggle_structure"
+            >
+              <%= if @retain_structure, do: "Retain directory structure", else: "Output files in one directory" %>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flash Messages -->
+  <%= if @flash_message do %>
+    <div class={"fixed bottom-4 right-4 px-4 py-2 rounded-lg transition-all duration-500 #{if @flash_type == :error, do: "bg-red-500", else: "bg-green-500"} text-white"}>
+      <%= @flash_message %>
+    </div>
+  <% end %>
+
+  
+  
+  <!-- Anonymizer Area -->
+  <div class="mt-8 p-4 bg-gray-50 rounded-lg">
+    <h3 class="text-lg font-semibold mb-4">PII Removal</h3>
+    
+    <!-- Protection Mode Selection -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700 mb-2">Protection Mode</label>
+      <form phx-change="update_mode">
+        <select name="value" class="w-full p-2 border rounded">
+          <option value="anonymize" selected={@current_mode == :anonymize}>Anonymize</option>
+          <option value="pseudonymize" selected={@current_mode == :pseudonymize}>Pseudonymize</option>
+        </select>
+      </form>
+      <p class="text-sm text-gray-600 mt-1">
+        Choose how to protect the identified PII data
+      </p>
+    </div>
+
+    <!-- Protection Controls -->
+    <div class="flex justify-between items-center mb-6">
+      <div class="flex items-center gap-4">
+        <%= if @loading_protect do %>
+          <div class="spinner"></div>
+        <% end %>
+        <button 
+          phx-click="protect_all_files"
+          class={"px-4 py-2 rounded text-white transition-colors duration-200 #{if @has_valid_files, do: 'bg-green-500 hover:bg-green-600', else: 'bg-gray-400 cursor-not-allowed'}"} 
+          disabled={not @has_valid_files}
+        >
+          <%= if @has_valid_files do %>
+            Protect <%= @txt_files_count %> Files
+          <% else %>
+            No TXT Files Found
+          <% end %>
+        </button>
+      </div>
+      <form phx-change="language_changed">
+        <select          
+          class="px-4 py-2 border rounded"
+          name="language">
+          <option value="auto" selected={@selected_language == "auto"}>Auto Detection</option>
+          <option value="de" selected={@selected_language == "de"}>German</option>
+          <option value="en" selected={@selected_language == "en"}>English</option>
+          <option value="fr" selected={@selected_language == "fr"}>French</option>
+          <option value="es" selected={@selected_language == "es"}>Spanish</option>
+        </select>
+      </form>
+    </div>
+
+    <!-- Download Result Section -->
+      <%= if @show_download_section do %>
+        <div class="w-1/2 p-4 border-2 border-gray-200 rounded-lg bg-green-50">
+          <h4 class="text-lg font-semibold mb-4 pb-2 border-b">Download Result</h4>
+          <div class="space-y-4">
+            <div class="relative">
+              <p class="mb-4 text-gray-600">Your file has been successfully converted!</p>
+              <a
+                href={@download_path}
+                class="inline-block bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                download
+              >
+                Download ZIP Archive
+              </a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    <!-- Collapsible Protected Text Output -->
+    <div class="mt-8">
+      <div class="flex justify-between items-center mb-2 cursor-pointer bg-gray-100 p-2 rounded" phx-click="toggle_output">
+        <div class="flex items-center gap-2">
+          <h4 class="text-lg font-medium">Protected Text Output</h4>
+          <span class="text-sm text-gray-600">
+            (<%= length(@protected_segments) %> matches)
+          </span>
+          <%= if @loading_protect do %>
+            <div class="spinner"></div>
+          <% end %>
+        </div>
+        <span><%= if @output_expanded, do: "▼", else: "▶" %></span>
+      </div>
+    
+      <%= if @output_expanded do %>
+        <div class="p-2 bg-gray-50 rounded-lg min-h-[150px] leading-[1.2] text-sm">
+          <%= if Enum.empty?(@protected_segments) do %>
+            <p class="text-gray-500">No protected segments found.</p>
+          <% else %>
+            <div class="space-y-1">
+              <%= for {filename, segment} <- @protected_segments do %>
+                <div class={"flex flex-col transition-all duration-200 " <> if(@selected_segment_id == segment.id, do: "mb-24", else: "mb-1")}>
+                  <div class="flex items-center">
+                    <span class="text-gray-600 min-w-[100px] truncate"><%= filename %>:&nbsp;&nbsp;</span>
+                    <div class="relative">
+                      <span class="text-red-600 cursor-pointer hover:underline" phx-click="toggle_segment_details" phx-value-id={segment.id} id={"segment-#{segment.id}"}><%= segment.original_text %></span>
+                      <%= if @selected_segment_id == segment.id do %>
+                        <div class="absolute left-0 top-6 bg-white border rounded shadow-lg w-max" style="z-index: 9999;">
+                          <div class="p-2 flex items-start gap-4 bg-white">
+                            <div class="whitespace-pre leading-tight bg-white">String: <%= segment.original_text %>
+Type: <%= segment.recognizer_name %>
+Score: <%= Float.round(segment.score, 2) %></div>
+                            <button 
+                              class={"px-2 py-1 rounded text-xs " <> if(segment.original_text in @claimed_false_positives, do: "bg-gray-400 text-gray-700 cursor-not-allowed opacity-50", else: "bg-red-500 text-white hover:bg-red-600")} 
+                              phx-click="add_not_recognizer" 
+                              phx-value-name={segment.recognizer_name} 
+                              phx-value-deny_item={segment.original_text} 
+                              phx-value-language={@selected_language}
+                              disabled={segment.original_text in @claimed_false_positives}>
+                              <%= if segment.original_text in @claimed_false_positives, do: "Already claimed!", else: "Claim as false positive" %>
+                            </button>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                    <span class="text-gray-400 mx-1">&nbsp;&nbsp;→&nbsp;&nbsp;</span>
+                    <span class="text-blue-600"><%= segment.protected_text %></span>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Separator -->
+    <hr class="my-6 border-gray-300" />
+    
+    <!-- Custom Recognizer Form -->
+    <.custom_recognizer_form
+      custom_recognizer_expanded={@custom_recognizer_expanded}
+      recognizer_type={@recognizer_type}
+      recognizer_name={@recognizer_name}
+      current_examples={@current_examples}
+      recognizer_context={@recognizer_context}
+      recognizer_language={@recognizer_language}
+      generated_regex={@generated_regex}
+      current_regex_input={@current_regex_input}
+      recognizer_valid={@recognizer_valid}
+      loading_add_recognizer={@loading_add_recognizer}
+    />
+    
+
+    <!-- Separator -->
+    <hr class="my-6 border-gray-300" />
+    
+    <!-- Labels and Label Sets Section -->
+    <.labels_section
+        label_sets_expanded={@label_sets_expanded}
+        single_labels_expanded={@single_labels_expanded}
+        all_label_sets={@all_label_sets}
+        active_label_sets={@active_label_sets}
+        all_labels={@all_labels}
+        active_labels={@active_labels}
+      />
+  </div>
+
+  <!-- Flash Messages -->
+  <%= if @flash_message do %>
+    <div class={"fixed bottom-4 right-4 px-4 py-2 rounded-lg transition-all duration-500 #{if @flash_type == :error, do: "bg-red-500", else: "bg-green-500"} text-white"}>
+      <%= @flash_message %>
+    </div>
+  <% end %>
+</div>

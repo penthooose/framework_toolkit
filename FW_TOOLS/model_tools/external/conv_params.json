@@ -1,0 +1,46 @@
+{
+  "1": {
+    "path_safetensors_model": "N:/LLMs/huggingface_models/models--DiscoResearch--Llama3-DiscoLeo-Instruct-8B-v0.1/snapshots/0d7cf14a066a65f037d184d00eddc9d284225d93",
+    "path_output_gguf": "C:/Users/Paul/.cache/gguf_models/llama3_german_instruct.gguf"
+  },
+  "2": {
+    "path_safetensors_model": "C:/Users/Paul/.cache/merged_models/llama3_german_merged_supervised_5",
+    "path_output_gguf": "C:/Users/Paul/.cache/gguf_models/llama3_german_instruct_FT_stage_D.gguf",
+    "integrate_in_ollama": true,
+    "quantization": "f16",
+    "modelfile_contents": {
+      "PARAMETER_1": "temperature 0.2",
+      "PARAMETER_2": "top_p 0.5",
+      "PARAMETER_3": "top_k 50",
+      "PARAMETER_4": "num_predict 3072",
+      "PARAMETER_5": "num_ctx 8192",
+      "PARAMETER_6": "stop \"\\n\\n\""
+    }
+  },
+  "3": {
+    "path_safetensors_model": "C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3_c1",
+    "path_output_gguf": "C:/Users/Paul/.cache/gguf_models/llama3_german_V3.gguf",
+    "integrate_in_ollama": true,
+    "quantization": "f16",
+    "modelfile_contents": {
+      "PARAMETER_1": "temperature 0.0",
+      "PARAMETER_2": "top_p 0.5",
+      "PARAMETER_3": "top_k 60",
+      "PARAMETER_4": "num_predict 4096",
+      "PARAMETER_5": "num_ctx 8192"
+    }
+  },
+  "4": {
+    "path_safetensors_model": "C:/Users/Paul/.cache/merged_models/llama3_german_merged_supervised_V1_2",
+    "path_output_gguf": "C:/Users/Paul/.cache/gguf_models/llama3_german_V1-B.gguf",
+    "integrate_in_ollama": true,
+    "quantization": "f16",
+    "modelfile_contents": {
+      "PARAMETER_1": "temperature 0.0",
+      "PARAMETER_2": "top_p 0.5",
+      "PARAMETER_3": "top_k 60",
+      "PARAMETER_4": "num_predict 4096",
+      "PARAMETER_5": "num_ctx 8192"
+    }
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "Umfang": [
+    "Auftragsart",
+    "Auftragsbeschreibung",
+    "Hersteller",
+    "Medizinprodukteart",
+    "Medizinproduktetypen",
+    "Produktart",
+    "Produktart_Kategorie",
+    "Produkttyp",
+    "Modell_Nr",
+    "Serie_Nr",
+    "Versicherungsnehmer"
+  ],
+
+  "Aufgaben_und_Fragestellungen": [
+    "Hersteller",
+    "Medizinprodukteart",
+    "Medizinproduktetypen",
+    "Produktart",
+    "Produktart_Kategorie",
+    "Produkttyp"
+  ],
+
+  "Schadenursache_Angaben": [
+    "Hersteller",
+    "Medizinprodukteart",
+    "Medizinproduktetypen",
+    "Produktart",
+    "Produktart_Kategorie",
+    "Produkttyp",
+    "Schadentag",
+    "Schadentag_Meldung",
+    "Schadentag_Zeitraum",
+    "Versicherungsnehmer"
+  ],
+
+  "Technische_Daten": [],
+
+  "Systembeschreibung": [
+    "Hersteller",
+    "Medizinprodukteart",
+    "Medizinproduktetypen",
+    "Produktart",
+    "Produktart_Kategorie",
+    "Produkttyp",
+    "Modell_Nr",
+    "Serie_Nr"
+  ],
+
+  "Begutachtung": [
+    "Hersteller",
+    "Medizinprodukteart",
+    "Medizinproduktetypen",
+    "Produktart",
+    "Produktart_Kategorie",
+    "Produkttyp",
+    "Modell_Nr",
+    "Serie_Nr",
+    "Schadentag",
+    "Schadentag_Meldung",
+    "Schadentag_Zeitraum",
+    "Schadenobjekt",
+    "Dokumentation",
+    "Versicherungsnehmer"
+  ],
+
+  "Schäden_und_Schadenereignisse": [
+    "Hersteller",
+    "Medizinprodukteart",
+    "Medizinproduktetypen",
+    "Produktart",
+    "Produktart_Kategorie",
+    "Produkttyp",
+    "Modell_Nr",
+    "Serie_Nr",
+    "Schadenobjekt",
+    "Polizei_Aktenzeichen",
+    "Schadennummer",
+    "Schadennummer_Makler",
+    "Schadennummer_Makler_VNr",
+    "Schadennummer_Versicherer",
+    "Versicherungsnehmer"
+  ],
+
+  "Wiederinstandsetzungsmöglichkeiten": [
+    "Hersteller",
+    "Medizinprodukteart",
+    "Medizinproduktetypen",
+    "Produktart",
+    "Produktart_Kategorie",
+    "Produkttyp",
+    "Modell_Nr",
+    "Serie_Nr",
+    "Anschaffungsdatum",
+    "Anschaffungsjahr",
+    "Anschaffungskosten",
+    "Anschaffungspreis",
+    "Neupreis",
+    "Wiederbeschaffungswert"
+  ],
+
+  "Finanzielle_Bewertung": [
+    "Hersteller",
+    "Medizinprodukteart",
+    "Medizinproduktetypen",
+    "Produktart",
+    "Produktart_Kategorie",
+    "Produkttyp",
+    "Modell_Nr",
+    "Serie_Nr",
+    "Anschaffungsdatum",
+    "Anschaffungsjahr",
+    "Anschaffungskosten",
+    "Anschaffungspreis",
+    "Neupreis",
+    "Wiederbeschaffungswert"
+  ],
+
+  "Zeitwert": [
+    "Hersteller",
+    "Medizinprodukteart",
+    "Medizinproduktetypen",
+    "Produktart",
+    "Produktart_Kategorie",
+    "Produkttyp",
+    "Modell_Nr",
+    "Serie_Nr",
+    "Anschaffungsdatum",
+    "Anschaffungsjahr",
+    "Anschaffungskosten",
+    "Anschaffungspreis",
+    "Neupreis",
+    "Wiederbeschaffungswert"
+  ],
+
+  "Zusammenfassung_und_Bewertung": [
+    "Hersteller",
+    "Medizinprodukteart",
+    "Medizinproduktetypen",
+    "Produktart",
+    "Produktart_Kategorie",
+    "Produkttyp",
+    "Modell_Nr",
+    "Serie_Nr",
+    "Datum_GA_Erstellung",
+    "Sachverständiger",
+    "Versicherungsnehmer"
+  ],
+
+  "Beweisschluss": [
+    "Hersteller",
+    "Medizinprodukteart",
+    "Medizinproduktetypen",
+    "Produktart",
+    "Produktart_Kategorie",
+    "Produkttyp",
+    "Modell_Nr",
+    "Serie_Nr",
+    "Versicherungsnehmer",
+    "Auftragerteiler"
+  ],
+
+  "Referenzen": []
+}

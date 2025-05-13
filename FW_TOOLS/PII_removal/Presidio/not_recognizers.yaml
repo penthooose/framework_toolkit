@@ -1,0 +1,11 @@
+recognizers:
+- name: NOT_person_id_DL-recognizer_de
+  supported_language: de
+  supported_entity: NOT_PERSON_ID
+  deny_list:
+  - ID284$NJ2
+- name: NOT_date_time_DL-recognizer_en
+  supported_language: en
+  supported_entity: NOT_DATE_TIME
+  deny_list:
+  - October 19, 2021

@@ -1,0 +1,182 @@
+<div class="container mx-auto p-4">
+  <h2 class="text-2xl font-bold mb-6">Framework Tools</h2>
+
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <h3 class="text-xl font-semibold mb-4">File Format to TXT Format Conversion</h3>
+    
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="input-type">
+        Select Input File Type
+      </label>
+      <form phx-change="select_input_type"> 
+
+        <select
+          id="input-type"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          name="type"
+        >
+          <option value="PDF" selected={@selected_input_type == "PDF"}>PDF</option>
+          <option value="DOCX" selected={@selected_input_type == "DOCX"}>Word (doc / docx)</option>
+          <option value="PDF_DOCX" selected={@selected_input_type == "PDF_DOCX"}>PDF / Word (doc / docx)</option>
+        </select>
+      </form>
+    </div>
+
+    <div class="mb-4 flex justify-between items-center">
+      <div class="flex items-center space-x-4">
+        <div class="flex flex-col space-y-2">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            phx-click="toggle_mode"
+          >
+            Mode: <%= if @mode_single_file, do: "Convert single file", else: "Convert multiple files" %>
+          </button>
+
+          <%= if not @mode_single_file do %>
+            <button
+              class={"py-2 px-4 rounded focus:outline-none focus:shadow-outline text-white " <>
+                if @retain_structure do
+                  "bg-orange-500 hover:bg-orange-700"
+                else
+                  "bg-purple-500 hover:bg-purple-700"
+                end}
+              phx-click="toggle_structure"
+            >
+              <%= if @retain_structure, do: "Retain directory structure", else: "Output files in one directory" %>
+            </button>
+          <% end %>
+        </div>
+
+        <%= if @is_processing do %>
+          <div class="mt-4">
+            <div class="spinner"></div>
+          </div>
+        <% end %>
+      </div>
+      
+
+      <div class="flex items-center space-x-4">
+        <button
+          class={"font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline
+            #{if @upload_complete, do: 'bg-green-500 hover:bg-green-700', else: 'bg-gray-400'} text-white"}
+          phx-click="start_conversion"
+          disabled={not @upload_complete or @is_processing}
+        >
+          <%= if @is_processing, do: "Converting...", else: "Start Conversion" %>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex space-x-8">
+      <!-- Input Section -->
+      <div class="w-1/2 p-4 border-2 border-gray-200 rounded-lg">
+        <div class="flex justify-between items-center mb-4">
+          <h4 class="text-lg font-semibold">Input Selection</h4>
+          <%= if @is_uploading do %>
+            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
+          <% end %>
+        </div>
+        <div class="space-y-4">
+          <div class="relative">
+            <%= if @mode_single_file do %>
+              <form id="upload-form" phx-change="validate" phx-submit="save">
+                <.live_file_input
+                  upload={@uploads.file}
+                  class="block w-full text-sm text-gray-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-blue-50 file:text-blue-700
+                    hover:file:bg-blue-100"
+                  accept={@file_accept}
+                />
+              </form>
+              
+              <%= for entry <- @uploads.file.entries do %>
+                <div class="mt-2">
+                  <div class="flex items-center gap-3">
+                    <div class="text-sm text-gray-600">
+                      <%= entry.client_name %> - <%= entry.progress %>%
+                    </div>
+                    <button
+                      phx-click="cancel-upload"
+                      phx-value-ref={entry.ref}
+                      class="text-red-500 hover:text-red-700"
+                    >
+                      &times;
+                    </button>
+                  </div>
+
+                  <%= for err <- upload_errors(@uploads.file, entry) do %>
+                    <div class="mt-1 text-red-500 text-sm">
+                      <%= case err do
+                        :not_accepted -> "File type must match selected input type"
+                        _ -> err
+                      end %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            <% else %>
+              <form id="directory-form" phx-change="validate" phx-submit="save">
+                <div class="space-y-2">
+                  <p class="text-sm text-gray-600">
+                    Please upload a ZIP file containing your files to convert
+                  </p>
+                  <.live_file_input
+                    upload={@uploads.directory}
+                    class="block w-full text-sm text-gray-500
+                      file:mr-4 file:py-2 file:px-4
+                      file:rounded-full file:border-0
+                      file:text-sm file:font-semibold
+                      file:bg-blue-50 file:text-blue-700
+                      hover:file:bg-blue-100"
+                    accept=".zip"
+                  />
+                </div>
+              </form>
+            <% end %>
+            <%= if @input_path do %>
+              <p class="mt-2 text-sm text-gray-600 truncate">
+                Selected: <%= Path.basename(@input_path) %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Download Result Section -->
+      <%= if @show_download_section do %>
+        <div class="w-1/2 p-4 border-2 border-gray-200 rounded-lg bg-green-50">
+          <h4 class="text-lg font-semibold mb-4 pb-2 border-b">Download Result</h4>
+          <div class="space-y-4">
+            <div class="relative">
+              <p class="mb-4 text-gray-600">Your file has been successfully converted!</p>
+              <a
+                href={@download_path}
+                class="inline-block bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                download
+              >
+                Download <%= if @mode_single_file, do: "Converted File", else: "ZIP Archive" %>
+              </a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Flash Messages -->
+  <%= if @flash_message do %>
+    <div class={"fixed bottom-4 right-4 px-4 py-2 rounded-lg transition-all duration-500 #{if @flash_type == :error, do: "bg-red-500", else: "bg-green-500"} text-white"}>
+      <%= if @flash_link_type == :download and @download_path do %>
+        <a href={@download_path} class="hover:underline">
+          <%= @flash_message %>
+        </a>
+      <% else %>
+        <%= @flash_message %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+

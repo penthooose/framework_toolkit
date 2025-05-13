@@ -1,0 +1,77 @@
+recognizers:
+  - name: employee_ID_recognizer_en
+    supported_language: en
+    supported_entity: EMPLOYEE_ID
+    patterns:
+      - name: employee_ID
+        regex: \b(DP\d{6})\b
+        score: 0.9
+    context:
+      - employee
+      - worker
+      - laborer
+  - name: university_ID_recognizer_de
+    supported_language: de
+    supported_entity: UNIVERSITY_ID
+    patterns:
+      - name: university_student_ID
+        regex: \b(ba\d{5}(\d)?)\b
+        score: 0.9
+    context:
+      - Dozent
+      - Dr
+      - Hilfskraft
+      - HiWi
+      - Student
+      - Professor
+  - name: special_persons_DL-recognizer_de
+    supported_language: de
+    supported_entity: SPECIAL_PERSON
+    deny_list:
+      - Igram van Achelen
+      - Franz Joseph
+      - Eduard von Alvensleben
+      - Johann Friedrich VII
+      - Philipp August
+      - Andreas Andersen
+    context:
+      - Prof
+      - Dr
+      - Herr
+      - Frau
+  - name: special_persons_DL-recognizer_fr
+    supported_language: fr
+    supported_entity: SPECIAL_PERSONS
+    deny_list:
+      - Igram van Achelen
+      - Franz Joseph
+      - Eduard von Alvensleben
+      - Johann Friedrich VII
+      - Philipp August
+      - Andreas Andersen
+    context:
+      - Prof
+      - Dr
+      - Mr
+      - Ms
+      - Mrs
+      - Herr
+      - Frau
+  - name: special_persons_DL-recognizer_es
+    supported_language: es
+    supported_entity: SPECIAL_PERSONS
+    deny_list:
+      - Igram van Achelen
+      - Franz Joseph
+      - Eduard von Alvensleben
+      - Johann Friedrich VII
+      - Philipp August
+      - Andreas Andersen
+    context:
+      - Prof
+      - Dr
+      - Mr
+      - Ms
+      - Mrs
+      - Herr
+      - Frau

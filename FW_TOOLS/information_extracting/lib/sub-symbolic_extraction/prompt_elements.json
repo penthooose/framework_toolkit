@@ -1,0 +1,455 @@
+{
+  "system_prompt": "### SYSTEM \n Du bist ein Assistent für die Analyse von Gutachten über Schäden an medizinischen Geräten.",
+
+  "prompt_initial": "Analysiere die einzelnen Kapitel und beantworte dann die folgenden Leitfragen:\n\n1. Welche Angaben hat der Anwender und/oder der Versicherungsnehmer des Medizinprodukts über den Hergang des Schadensereignisses gemacht? (optional)\n2. Welche einzelnen Schäden hat der Sachverständige festgestellt?\n3. Sind mehrere Schäden ohne kausalen Zusammenhang ersichtlich? (optional)\n4. Welche möglichen Schadensursachen nennt der Gutachter für die einzelnen festgestellten Schäden?\n5. Wie hoch schätzt der Gutachter die einzelnen Schäden ein?\n6. Welche Empfehlungen hat der Gutachter ausgesprochen? (optional)\n7. Welche Maßnahmen hat der Versicherungsnehmer und/oder der Anwender ergriffen, um den Schaden zu vermeiden? (optional)\n8. Lässt sich aus unzureichenden Maßnahmen oder der Vernachlässigung einer Versicherungsbedingung eine Obliegenheitsverletzung ableiten? (optional)\n9. Wurden nach dem Schadenereignis geeignete Maßnahmen ergriffen, um eine Ausweitung des Schadens und das Entstehen weiterer Schäden zu verhindern?\n10. Wurden Maßnahmen getroffen, um eine uneingeschränkte Begutachtung des Schadens zu gewährleisten?\n11. Welche Maßnahmen wurden zur Behebung der Schäden empfohlen? (optional)\n\n",
+
+  "prompt_full_report": "Dies ist der vollständige Text des Gutachtens:\n\n<%= @full_report %>",
+
+  "prompt_chapters": "Dies sind die einzelnen Kapitel des Gutachtens:",
+
+  "final_prompt": "Du hast nun alle Teile des Gutachtens erhalten. Bitte beantwore die zu Beginn aufgeführten Leitfragen mithilfe aller genannten Informationen.",
+
+  "prompt_chapter_initial_a": "### ANWEISUNG \n Beantworte die folgenden Fragen ausschließlich anhand des TEXTES. \n Wenn die Antwort nicht aus dem TEXT hervorgeht, schreibe: 'N.A.' \n Gib kurze, stichpunktartige Antworten. \n Die folgenden Fragen gelten für alle BEISPIELE, als auch für den eigentlichen FALL. \n\n ### FRAGEN \n <%= @questions %> \n\n <%= @examples_section %> \n\n ### FALL BEGINN \n\n ### TEXT \n <%= @chapter %> \n\n ### FRAGEN \n <%= @questions %> \n\n ### ANTWORTEN \n",
+  "prompt_chapter_initial_b": "### ANWEISUNG \n Beantworte die folgenden Fragen ausschließlich anhand des TEXTES im Abschnitt **FALL BEGINN**. \n Nutze die enthaltenen BEISPIELE ausschließlich als Vorlage für das Format. \n Falls die Antwort nicht aus dem Text hervorgeht, schreibe: 'N.A.'. \n Gib kurze, stichpunktartige Antworten. \n\n  <%= @examples_section %> \n\n ### FALL BEGINN \n Beantworte die folgenden Fragen **ausschließlich basierend auf dem untenstehenden Textabschnitt**. \n Ignoriere dabei alle vorherigen Beispiele. \n\n ### TEXT \n <%= @chapter %> \n\n ### FRAGEN \n <%= @questions %> \n\n ### ANTWORTEN \n",
+
+  "prompt_compare_text_json_initial": "### ANWEISUNG \n Analysiere ausschließlich **inhaltliche Unterschiede** – unterschiedliche **Darstellungsformen mit gleicher Bedeutung** (z.B. \"--\" und \"unbekannt\") **sind zu ignorieren**. \n Falls bestimmte Informationen **im TEXT vorkommen, aber im JSON fehlen**, zähle diese genau auf. \nWenn keine inhaltlichen Unterschiede festgestellt werden können, schreibe: 'N.A.'. \n ### \n\n <%= @examples_section %> \n\n FALL BEGINN \n Vergleiche nun den folgenden TEXT und JSON. Nutze für die Analyse **keine Inhalte der vorherigen BEISPIELE**. \n\n ### TEXT \n <%= @chapter %> \n\n ### JSON \n <%= @json %> \n\n ### FEHLENDE INHALTE \n",
+  "prompt_summary": "### ANWEISUNG \n Extrahiere die essenziellen Kernaussagen aus dem folgenden TEXT. \n Gib ausschließlich die wichtigsten Informationen **in prägnanten Stichpunkten** wieder. \n Ziel ist eine inhaltlich präzise, knappe Zusammenfassung. Vermeide Nebensächlichkeiten, Wiederholungen und Interpretationen. \n Nutze die folgenden BEISPIELE **nur als Formatvorlage**, nicht als inhaltliche Referenz. \n\n <%= @examples_section %> \n\n ### FALL BEGINN \n Analysiere und fasse nun den folgenden TEXT zusammen. Nutze **keine Inhalte der vorherigen Beispiele** in der Zusammenfassung. \n\n ### TEXT \n <%= @chapter %> \n\n ### ZUSAMMENFASSUNG \n",
+  "prompt_summary_previous_chapters": "### ANWEISUNG \n Fasse die wichtigsten Punkte der folgenden Zusammenfassungen der einzelnen Kapitel des Gutachtens weiter zu einer Gesamtzusammenfassung zusammen. \n Gib ausschließlich die wichtigsten Informationen **in prägnanten Stichpunkten** wieder. \n Ziel ist eine inhaltlich präzise, **knappe Zusammenfassung ohne Redundanz**. \n Vermeide Nebensächlichkeiten, Wiederholungen und Interpretationen. \n Nutze die folgenden BEISPIELE **nur als Formatvorlage**, nicht als inhaltliche Referenz. \n\n <%= @examples_section %> \n\n ### FALL BEGINN \n Analysiere und fasse nun die folgenden Textblöcke zusammen. Nutze **keine Inhalte der vorherigen Beispiele** in der Zusammenfassung. \n\n ### TEXT \n <%= @chapter %> \n\n ### ZUSAMMENFASSUNG \n",
+
+  "examples_section_a": "### BEISPIEL <%= @example_num %> BEGINN \n\n ### TEXT \n <%= @example_text %> \n\n ### ANTWORTEN \n <%= @example_answers %> \n\n ### BEISPIEL <%= @example_num %> ENDE",
+  "examples_section_b": "### BEISPIEL <%= @example_num %> BEGINN \n\n ### TEXT \n <%= @example_text %> \n\n ### FRAGEN \n <%= @questions %> \n\n ### ANTWORTEN \n <%= @example_answers %> \n\n ### BEISPIEL <%= @example_num %> ENDE",
+
+  "examples_compare_text_json": "### BEISPIEL <%= @example_num %> BEGINN \n\n ### TEXT \n <%= @example_text %> \n\n ### JSON \n <%= @example_json %> \n\n ### FEHLENDE INHALTE \n <%= @example_missing %> \n\n ### BEISPIEL <%= @example_num %> ENDE",
+  "examples_summary": "### BEISPIEL <%= @example_num %> BEGINN \n\n ### TEXT \n <%= @example_text %> \n\n ### ZUSAMMENFASSUNG \n <%= @example_summary %> \n\n ### BEISPIEL <%= @example_num %> ENDE",
+
+  "prompt_chapter_elements": {
+    "Technische_Daten": {
+      "examples": [
+        {
+          "example_text_1": "Kapitel 2: Technische Gerätedaten \nProduktart : Flexibles Endoskop\nProdukttyp : EG-530WR\nHersteller : Fujifilm\nSerie Nr. : 3G290B008\nBaujahr : 2009\nAnschaffungsdatum : 04.2009\nAnschaffungspreis : unbekannt",
+          "example_json_1": "{\n  \"Anschaffungsdatum\": \"04.2009\",\n  \"Anschaffungspreis\": \"unbekannt\",\n  \"Anschrift\": \"Bayerischer Versicherungsverband\\nVersicherungsaktiengesellschaft\\nHerr Prusina\\nWarngauer Straße 30\\n81539 München\",\n  \"Auftraggeber\": \"Herr Prusina\",\n  \"Auftragsdatum\": \"29. August 2014\",\n  \"Baujahr\": \"2009\",\n  \"Datum_GA_Erstellung\": \"20.12.2014\",\n  \"GA_Nr\": \"GA 14/054\",\n  \"GA_Typ\": \"Gutachten\",\n  \"Hersteller\": \"Fujifilm\",\n  \"Produktart\": \"Flexibles Endoskop\",\n  \"Produkttyp\": \"EG-530WR\",\n  \"Sachverständiger\": \"Walter Sigloch\",\n  \"Sachverständiger_Titel\": \"Dipl.-Kfm. Med.-Ing. (B.Sc)\\nSachverständiger für Medizinprodukte\",\n  \"Schadennummer\": \"8ST04 / 521-14-004515 PRU\",\n  \"Schadenobjekt\": \"Flexibles Endoskop (Video-Gastroskop)\",\n  \"Serie_Nr\": \"3G290B008\",\n  \"Versicherungsnehmer\": \"St. Josefs Krankenhaus\",\n  \"Versicherungsnehmer_Adresse\": \"Balserische Stiftung gGmbH\\nWilhelmsstraße 7\\n35392 Gießen\",\n  \"Versicherungsscheinnummer\": \"EL 140 144\"\n}",
+          "example_missing_1": "N.A."
+        },
+        {
+          "example_text_2": "Kapitel 2: Technische Gerätedaten \nProduktart : Flexibles Video-Duodenoskop\nProdukttyp : ED-450XT8\nHersteller : Fujinon\nSerie Nr. : MD103A008\nBaujahr : 2010\nAnschaffungsdatum : Juni 2010\nAnschaffungspreis : --\nNeupreis : 26.775,00 € brutto",
+          "example_json_2": "{\n  \"Anschaffungsdatum\": \"Juni 2010\",\n  \"Anschaffungspreis\": \"unbekannt\",\n  \"Anschrift\": \"Bayerischer Versicherungsverband\\nVersicherungsaktiengesellschaft\\nHerr Nega\\nMaximilianstrasse 53\\n80530 München\",\n  \"Auftraggeber\": \"Herr Nega\",\n  \"Auftragsdatum\": \"02. November 2012\",\n  \"Baujahr\": \"2010\",\n  \"Datum_GA_Erstellung\": \"21.01.2013\",\n  \"GA_Nr\": \"GA 13/004\",\n  \"GA_Typ\": \"Gutachten\",\n  \"Hersteller\": \"Fujinon\",\n  \"Neupreis\": \"26.775,00 € brutto\",\n  \"Produktart\": \"Flexibles Video-Duodenoskop\",\n  \"Sachverständiger\": \"Walter Sigloch\",\n  \"Sachverständiger_Titel\": \"Dipl.-Kfm. Med.-Ing.\\nSachverständiger für Medizinprodukte\",\n  \"Schadennummer\": \"8ST04 / 521-12-005037 NEG\",\n  \"Schadenobjekt\": \"Flexibles Endoskop (Duodenoskop)\",\n  \"Schadentag\": \"Oktober 2012\",\n  \"Serie_Nr\": \"MD103A008\",\n  \"Versicherungsnehmer\": \"DRK Krankenhaus GmbH\",\n  \"Versicherungsnehmer_Adresse\": \"Vaubanstraße 25\\n66740 Saarlouis\",\n  \"Versicherungsscheinnummer\": \"EL 126 241\"\n}",
+          "example_missing_2": "Produkttyp: ED-450XT8"
+        }
+      ]
+    },
+    "Umfang": {
+      "questions": [
+        "A. Welche konkrete Aufgabe oder Untersuchung soll durchgeführt werden?",
+        "B. In welchem Kontext oder für welchen Fachbereich findet das Vorhaben statt?",
+        "C. Welche rechtlichen, normativen oder fachlichen Standards sind für das Vorhaben relevant?"
+      ],
+      "examples": [
+        {
+          "example_text_1": "Kapitel 1: Vorwort \n Das vorliegende Gutachten dient der Untersuchung, inwiefern die erforderlichen Maßnahmen zur Erfüllung der Trinkwasserverordnung -- TrinkwV sowie der Empfehlung des Robert Koch-Institutes bzgl. der Anforderungen an die Hygiene zur Infektionsprävention in der Zahnheilkunde erfüllt sind.",
+          "example_answers_1": [
+            "A. Überprüfung der Einhaltung von Hygienemaßnahmen zur Infektionsprävention",
+            "B. Zahnheilkunde",
+            "C. Trinkwasserverordnung (TrinkwV); \n Empfehlungen des Robert Koch-Institutes zur Hygiene in der Zahnheilkunde"
+          ]
+        },
+        {
+          "example_text_2": "Kapitel 1: Vorwort / Vorgang \n In der oben genannten Schadensache wurde mit Datum vom 01.04.2022 ein Gutachten zur Schadenermittlung eines Überspannungsschadens erstattet (vgl. GA 22/027).\nZwischenzeitlich wurden durch den Versicherungsnehmer weitere Serviceberichte und Reparaturrechnungen mit der Bitte eingereicht, einen evtl. Zusammenhang mit dem Schaden durch Überspannung zu prüfen.",
+          "example_answers_2": [
+            "A. Prüfung eines möglichen Zusammenhangs zwischen weiteren Serviceberichten und Reparaturrechnungen, und einem bereits begutachteten Überspannungsschaden",
+            "B. Versicherungswesen",
+            "C. N.A."
+          ]
+        }
+      ],
+      "summary": [
+        {
+          "example_text_1": "Kapitel 1: Vorwort \nGemäß Auftrag des Bayerischen Versicherungsverbandes vom 03. Dezember 2024, ist zu dem nachfolgend näher beschriebenen Videokoloskop ein Schadengutachten zu erstatten. Der beauftragte Gutachtenumfang entspricht nachfolgender Gliederung:\n- beschädigtes Objekt mit technischen Daten\n- Schadenursache/-auswirkungen\n- beschädigte Teile\n- Reparaturmöglichkeiten/-kosten\n- Neu- und Zeitwert des Objektes\n- verschleißbedingte Abzüge\n- Anzahl separater Akutschäden\n- ggf. vorliegende Obliegenheitsverletzungen.\nHinweis:\nDurch das vorliegende Gutachten wird die Leistungspflicht des Versicherers weder dem Grunde, noch der Höhe nach anerkannt.\n",
+          "example_summary_1": "Bayerischer Versicherungsverband beauftragte am 03.12.2024 ein Schadengutachten; \nBetroffenes Objekt: Videokoloskop; \nGutachtenumfang umfasst: Objektbeschreibung mit technischen Daten, Schadenursache und -auswirkungen, Beschädigte Komponenten, Reparaturoptionen und -kosten, Neu- und Zeitwertermittlung, Verschleißbedingte Abzüge, Anzahl separater Akutschäden, Mögliche Obliegenheitsverletzungen; \nGutachten impliziert keine Anerkennung der Leistungspflicht des Versicherers"
+        },
+        {
+          "example_text_2": "Kapitel 1: Vorwort/Vorgang \nZur Regulierung des vorliegenden Schadens, an einem Ultraschalldiagnostikgerät der tierärztlichen Praxis Dr. Schäfer in Regenstauf, soll im Auftrag des Bayerischen Versicherungsverbandes der Zeitwert des betroffenen Gerätes ermittelt werden.",
+          "example_summary_2": "Schadensregulierung für ein beschädigtes Ultraschalldiagnostikgerät; \nGerät gehört zur tierärztlichen Praxis Dr. Schäfer in Regenstauf; \nBayerischer Versicherungsverband beauftragte die Ermittlung; \nZiel ist die Zeitwertbestimmung des Gerätes"
+        }
+      ]
+    },
+    "Aufgaben_und_Fragestellungen": {
+      "questions": [
+        "A. Welche Fragen werden gestellt bzw. welche Aufgaben gilt es zu bearbeiten?",
+        "B. Wer stellt die Fragen?"
+      ],
+      "examples": [
+        {
+          "example_text_1": "Kapitel 3: Ergänzungsfragen der Antragsgegnerin (gemäß Schriftsatz vom 31.01.2019) \nFrage 1. Wie ist es technisch möglich, dass bei dem Prozess der Pulverbeschichtung einzelne Flächen eines Teiles fehlerhaft beschichtet sein sollen und andere Flächen an dem gleichen Teil nicht. Kann eine Vernetzung des Materials ungleichmäßig erfolgen?\nFrage 2. Warum ist unter der Berücksichtigung der Frage 1. ein systematischer Fehler im Prozess bzw. in der Anwendungsform, d.h. zu nasse Jumbo/Maxi Wipes, ausgeschlossen?\nFrage 3. Warum soll die Aufnahme für den Fixierstift der Gelenkabdeckung an einem Arm durch eine fehlerhafte Beschichtung entstanden sein und nicht durch ein fehlerhaftes, verkantetes Aufstecken der Abdeckung?",
+          "example_answers_1": [
+            "A. Gestellte Fragen: \nFrage 1: Technische Möglichkeit ungleichmäßiger Pulverbeschichtung; \nFrage 2: Ausschluss systematischer Fehler bei zu nassen Jumbo/Maxi Wipes; \nFrage 3: Ursache der Aufnahme für Fixierstift (Beschichtungsfehler vs. verkantetes Aufstecken)",
+            "B. Die Antragsgegnerin (gemäß Schriftsatz vom 31.01.2019)"
+          ]
+        },
+        {
+          "example_text_2": "Kapitel 2: Aufgabenstellung \nDie Staatsanwaltschaft München I bittet um Klärung folgender Fragen:\n1. Um was für einen Schaden an dem Dental-Laser 'Lite Touch' handelt es sich? Wie wirkt er sich auf die Funktionsfähigkeit aus? (Genaue Schadensbeschreibung),\n2. Soweit anhand des Schadenbildes rekonstruierbar: Wodurch wurde der Schaden verursacht?\n3. Kann das Gerät repariert werden? Welche Kosten würden hierfür anfallen?\n4. Wie hoch ist der Zeitwert des Gerätes anzusetzen? Dabei wird zu berücksichtigen sein, dass eine messtechnische Untersuchung durch die Bundesagentur für Elektrizität, Gas, Telekommunikation, Post und Eisenbahnen, Messlabor Kolberg, die von der Staatsanwaltschaft in dem zugrunde liegenden Ermittlungsverfahren in Auftrag gegeben wurde, ergeben hat, dass die untersuchten Dental-Laser 'Lite-Touch' die in der Europäischen Norm (EN) 55011:2009 vorgegebenen Störfeldstärkegrenzwerte und zum Teil auch den Grenzwerten der Störspannung nicht einhalten. Die Dental-Laser entsprechen daher nicht der Richtlinie 93/42/EWG über Medizinprodukte und dürfen im Europäischen Wirtschaftsraum weder vertrieben noch betrieben werden.",
+          "example_answers_2": [
+            "A. Gestellte Fragen: \nFrage 1: Art des Schadens am Dental-Laser 'Lite Touch' und Auswirkungen auf Funktionsfähigkeit; \nFrage 2: Rekonstruktion der Schadensursache; \nFrage 3: Reparaturmöglichkeit und anfallende Kosten; \nFrage 4: Bestimmung des Zeitwerts des Gerätes (unter Berücksichtigung, dass das Gerät nicht EU-konform ist)",
+            "B. Staatsanwaltschaft München I"
+          ]
+        }
+      ],
+      "summary": [
+        {
+          "example_text_1": "Kapitel 2: Aufgabenstellung \nDie Staatsanwaltschaft München I bittet um Klärung folgender Fragen:\n1. Um was für einen Schaden an dem Dental-Laser 'Lite Touch' handelt es sich? Wie wirkt er sich auf die Funktionsfähigkeit aus? (Genaue Schadensbeschreibung),\n2. Soweit anhand des Schadenbildes rekonstruierbar: Wodurch wurde der Schaden verursacht?\n3. Kann das Gerät repariert werden? Welche Kosten würden hierfür anfallen?\n4. Wie hoch ist der Zeitwert des Gerätes anzusetzen? Dabei wird zu berücksichtigen sein, dass eine messtechnische Untersuchung durch die Bundesagentur für Elektrizität, Gas, Telekommunikation, Post und Eisenbahnen, Messlabor Kolberg, die von der Staatsanwaltschaft in dem zugrunde liegenden Ermittlungsverfahren in Auftrag gegeben wurde, ergeben hat, dass die untersuchten Dental-Laser 'Lite-Touch' die in der Europäischen Norm (EN) 55011:2009 vorgegebenen Störfeldstärkegrenzwerte und zum Teil auch den Grenzwerten der Störspannung nicht einhalten. Die Dental-Laser entsprechen daher nicht der Richtlinie 93/42/EWG über Medizinprodukte und dürfen im Europäischen Wirtschaftsraum weder vertrieben noch betrieben werden.",
+          "example_summary_1": "Staatsanwaltschaft München I stellt vier Fragen zum Dental-Laser 'Lite Touch'; \nGeforderte Klärung: Schadensbeschreibung, Schadensursache, Reparaturmöglichkeiten/-kosten, Zeitwert; \nMesstechnische Untersuchung ergab: Geräte halten Grenzwerte nach EN 55011:2009 nicht ein; \nDental-Laser entsprechen nicht der Richtlinie 93/42/EWG über Medizinprodukte; \nVertrieb und Betrieb im Europäischen Wirtschaftsraum unzulässig"
+        }
+      ]
+    },
+    "Schadenursache_Angaben": {
+      "questions": [
+        "A. Wann und wie wurde der Schaden festgestellt?",
+        "B. Welche Angaben hat der Anwender oder der Versicherungsnehmer über den Hergang des Schadensereignisses gemacht?"
+      ],
+      "examples": [
+        {
+          "example_text_1": "Kapitel 3: Vorgang \nZu dem nachfolgend näher untersuchten Schaden an einem Video-Koloskop des Klinikums Dritter Orden in München, liegen keine näheren Angaben zur Schadensursache bzw. zum Schadenhergang vor. Der Schadenmeldung des Versicherungsnehmers zufolge, wurden die Schäden am Einführungsschlauch erst im Rahmen der Geräteaufbereitung festgestellt.\nDie Firma Olympus hat mit Datum vom 03.09.2013 einen detaillierten Reparaturkostenvoranschlag erstellt.[^1] ",
+          "example_answers_1": [
+            "A. Schadenfeststellung erst im Rahmen der Geräteaufbereitung; genaues Datum wurde nicht genannt",
+            "B. N.A."
+          ]
+        },
+        {
+          "example_text_2": "Kapitel 1: Vorwort / Vorgang \nGemäß Auftrag des Bayerischen Versicherungsverbandes vom 07. Dezember 2017, ist zu dem unten näher beschriebenen Autorefraktometer der Zeitwert zum Schadenzeitpunkt zu ermitteln.\nAls die Versicherungsnehmerin nach der Untersuchung beim Augenarzt vom Untersuchungsstuhl aufstehen wollte, verlor sie das Gleichgewicht und fiel nach hinten. Beim Versuch, sich an einem Sehschärfenmessgerät (Refraktometer) festzuhalten, fiel dieses um. Das Gerät erlitt dabei einen erheblichen Schaden.",
+          "example_answers_2": [
+            "A. Schadenfeststellung zum Zeitpunkt des Unfalls; genaue Uhrzeit wurde nicht genannt",
+            "B. Versicherungsnehmerin verlor nach Untersuchung beim Aufstehen das Gleichgewicht, versuchte sich am Refraktometer festzuhalten, Gerät fiel um und erlitt erheblichen Schaden"
+          ]
+        }
+      ],
+      "summary": [
+        {
+          "example_text_1": "3. Vorgang \nGemäß der vorliegenden Schadenmeldung des Versicherungsnehmers, vom 06.09.2023, wurde am 31.08.2023, unmittelbar nach einer Patientenuntersuchung, ein Wasseraustritt am Kernspintomographen festgestellt.\nDer Schaden wurde sofort an die Hersteller- und Wartungsfirma Siemens gemeldet, die nähere, technische Untersuchungen hinsichtlich der Ursache durchführen ließ und eine kurzfristige Instandsetzung veranlasste.",
+          "example_summary_1": "Schadenmeldung durch Versicherungsnehmer am 06.09.2023; \nWasseraustritt am Kernspintomographen am 31.08.2023 direkt nach Patientenuntersuchung festgestellt; \nSofortige Meldung des Schadens an Hersteller- und Wartungsfirma Siemens; \nSiemens führte technische Untersuchungen zur Ursache durch; \nKurzfristige Instandsetzung wurde durch Siemens veranlasst"
+        }
+      ]
+    },
+
+    "Systembeschreibung": {
+      "questions": [
+        "A. Was ist die grundlegende Funktionsweise des Geräts?",
+        "B. Für welche Patientengruppe ist das Gerät konzipiert?",
+        "C. Aus welchen wesentlichen Komponenten besteht das System?",
+        "D. Wie erfolgt die Bedienung des Systems?"
+      ],
+      "examples": [
+        {
+          "example_text_1": "Kapitel 4: Systembeschreibung \nBei dem vorgenannten Gerät handelt es sich um ein Beatmungsgerät, das sowohl für beatmungsunabhängige, als auch für beatmungsabhängige Patienten zum Einsatz kommt. Das Gerät verfügt dazu über kontrollierte und assistierte Beatmungsformen, die einerseits den spontan atmenden Patienten unterstützen, andererseits aber auch druck- oder volumenkontrolliert die gesamte Atemarbeit des Patienten übernehmen können. Darüber hinaus ist die Art der Beatmung invasiv oder noninvasiv möglich. Die invasive Beatmung erfolgt über eine Trachealkanüle, die im Halsbereich des Patienten direkt in die Trachea (Luftröhre) eingebracht wird. Die noninvasive Beatmung erfolgt hingegen über eine Maske, die Mund und Nase umschließt.\nGrundsätzlich erfolgt die Gerätebedienung über einen berührungssensitiven Bildschirm (Touchbildschirm). Als Beatmungsgerät, das auch durch Laien in häuslicher Umgebung verwendet werden kann (sogenanntes Heimbeatmungsgerät), verfügt das Gerät über zwei unterschiedliche Bildschirmoberflächen:\n1. Die klinische Bildschirmoberfläche ermöglicht dem Ärzte- und Pflegepersonal die detaillierten und individuellen Einstellungen der Beatmungs- und Alarmierungsparameter.\n2. Die Patientenoberfläche erlaubt die Auswahl der voreingestellten Beatmungsmuster, sowie die In- und Außerbetriebnahme des Gerätes. Die Änderung einzelner Parameter ist in diesem Modus nicht möglich.",
+          "example_answers_1": [
+            "A. Beatmungsgerät mit kontrollierten und assistierten Beatmungsformen; \nKann spontan atmende Patienten unterstützen oder die gesamte Atemarbeit übernehmen; \nErmöglicht invasive (über Trachealkanüle) oder noninvasive (über Maske) Beatmung",
+            "B. Für beatmungsunabhängige und beatmungsabhängige Patienten; \nKann auch durch Laien in häuslicher Umgebung verwendet werden (Heimbeatmungsgerät)",
+            "C. Berührungssensitiver Bildschirm zur Bedienung; \nTrachealkanüle für invasive Beatmung; \nMaske für noninvasive Beatmung",
+            "D. Bedienung über berührungssensitiven Bildschirm (Touchbildschirm); \nZwei Oberflächen: klinische (für Fachpersonal) und Patientenoberfläche; \nKlinische Oberfläche: Einstellung von Beatmungs- und Alarmierungsparametern; \nPatientenoberfläche: Auswahl voreingestellter Beatmungsmuster, keine Parameteränderung möglich"
+          ]
+        },
+        {
+          "example_text_2": "Kapitel 3: Systembeschreibung \nBei dem vorgenannten Gerät handelt es sich um eine tragbare Insulinpumpe, die mittels Halteclip an der Kleidung befestigt werden kann. Parameter wie Basalrate (kontinuierliche Flussrate), Bolusvolumen etc. sind im Gerät programmiert. Zusätzliche Boli können vom Träger jederzeit per Tastendruck abgerufen werden. Das Insulin gelangt über einen Verweilkatheter vom Reservoir des Gerätes in das Körpergewebe des Trägers. Für eine permanente Messung des Blutzuckers, wird ein zusätzlicher Sensor getragen.\n![http://www.diabetes-support.org.uk/info/wp-content/uploads/veo.jpg](media/image1.jpeg){width='2.5609755030621173in' height='2.5609755030621173in'}\nAbbildung: Insulinpumpe samt Kathetersystem und Sensor (links).",
+          "example_answers_2": [
+            "A. Tragbare Insulinpumpe zur kontinuierlichen Insulinabgabe; \nInsulin gelangt über Verweilkatheter vom Reservoir in das Körpergewebe",
+            "B. N.A.",
+            "C. Tragbare Pumpe mit Halteclip zur Befestigung an Kleidung; \nReservoir für Insulin; \nVerweilkatheter zur Verbindung zwischen Gerät und Körpergewebe; \nZusätzlicher Sensor für permanente Blutzuckermessung",
+            "D. Parameter wie Basalrate und Bolusvolumen sind programmiert; \nZusätzliche Boli können per Tastendruck abgerufen werden"
+          ]
+        }
+      ],
+      "summary": [
+        {
+          "example_text_1": "Kapitel 4: Systembeschreibung \nBei dem vorgenannten Gerät handelt es sich um ein Beatmungsgerät, das sowohl für beatmungsunabhängige, als auch für beatmungsabhängige Patienten zum Einsatz kommt. Das Gerät verfügt dazu über kontrollierte und assistierte Beatmungsformen, die einerseits den spontan atmenden Patienten unterstützen, andererseits aber auch druck- oder volumenkontrolliert die gesamte Atemarbeit des Patienten übernehmen können. Darüber hinaus ist die Art der Beatmung invasiv oder noninvasiv möglich. Die invasive Beatmung erfolgt über eine Trachealkanüle, die im Halsbereich des Patienten direkt in die Trachea (Luftröhre) eingebracht wird. Die noninvasive Beatmung erfolgt hingegen über eine Maske, die Mund und Nase umschließt.\nGrundsätzlich erfolgt die Gerätebedienung über einen berührungssensitiven Bildschirm (Touchbildschirm). Als Beatmungsgerät, das auch durch Laien in häuslicher Umgebung verwendet werden kann (sogenanntes Heimbeatmungsgerät), verfügt das Gerät über zwei unterschiedliche Bildschirmoberflächen:\n1. Die klinische Bildschirmoberfläche ermöglicht dem Ärzte- und Pflegepersonal die detaillierten und individuellen Einstellungen der Beatmungs- und Alarmierungsparameter.\n2. Die Patientenoberfläche erlaubt die Auswahl der voreingestellten Beatmungsmuster, sowie die In- und Außerbetriebnahme des Gerätes. Die Änderung einzelner Parameter ist in diesem Modus nicht möglich.",
+          "example_summary_1": "Beatmungsgerät für beatmungsabhängige und beatmungsunabhängige Patienten; \nVerfügt über kontrollierte und assistierte Beatmungsformen; \nKann spontane Atmung unterstützen oder gesamte Atemarbeit übernehmen; \nBeatmungsarten: invasiv (Trachealkanüle) oder noninvasiv (Maske); \nBedienung über Touchbildschirm; \nEinsetzbar als Heimbeatmungsgerät (auch durch Laien); \nZwei Bedienoberflächen: \nKlinische Oberfläche: detaillierte Parametereinstellung für Fachpersonal, Patientenoberfläche: vereinfachte Bedienung ohne Parameteränderung"
+        }
+      ]
+    },
+    "Begutachtung": {
+      "questions": [
+        "A. Welche Schäden wurden festgestellt?",
+        "B. Welche möglichen Schadensursachen kommen in Frage für die Schäden?",
+        "C. Wann und wie ist der Schaden eingetreten?",
+        "D. Welche versicherungsrelevanten Feststellungen wurden getroffen?",
+        "E. Wie hoch werden die Einzelschäden eingeschätzt?",
+        "F. Wie hoch wird der Gesamtschaden eingeschätzt?"
+      ],
+      "examples": [
+        {
+          "example_text_1": "Kapitel 3: Feststellung zur Schadenursache \nIm Rahmen eines Ortstermines wurden die Schäden an den Zahnbehandlungseinheiten am 06.06.2016 begutachtet.\nSowohl am Chassis, als auch auf den Platinen, den Elektro- und Wasserleitungen sowie im Fußbodenbereich, sind getrocknete Feuchtigkeitsrückstände zu erkennen. An Kupfer- bzw. Messingoberflächen hat sich eine feine Patinaschicht gebildet. Neben den reinen Ablagerungen hat ein Oxidations- und Korrosionsprozess auf den Steuerplatinen und den Schaltrelais zu elektronischen Kontaktschwächen geführt, worauf mit sehr großer Wahrscheinlichkeit die sporadischen Funktionsausfälle zurückzuführen sind.",
+          "example_answers_1": [
+            "A. Getrocknete Feuchtigkeitsrückstände am Chassis, Platinen, Elektro- und Wasserleitungen und im Fußbodenbereich; \nPatinaschicht auf Kupfer/Messingoberflächen; \nOxidations- und Korrosionsprozess auf Steuerplatinen und Schaltrelais; \nElektronische Kontaktschwächen; \nSporadische Funktionsausfälle",
+            "B. Wasserschaden/Feuchtigkeit",
+            "C. N.A.",
+            "D. Ortstermin zur Begutachtung am 06.06.2016",
+            "E. N.A.",
+            "F. N.A."
+          ]
+        },
+        {
+          "example_text_2": "Kapitel 3: Sachverständige Untersuchungen \nDie Schadenbewertung beruht auf der tabellarischen Aufstellung aller entwendeten Geräte, wie sie vom Versicherungsnehmer auch der örtlich zuständigen Polizeidienststelle zur Verfügung gestellt wurde (Tab. 1).\n*[Eigentumsnachweis:]*\nDer Eigentumsnachweis der Gerätepositionen 1 bis 11 wurde durch Vorlage der entsprechenden Anschaffungsrechnungen erbracht. Bei der Position 12 handelt es sich um ein Leihgerät der Firma BR-melatec GmbH.\n*[Polizeiliche Anzeige:]*\nDer Diebstahl wurde am 09.02.2016 der Kriminalinspektion Koblenz gemeldet und wird unter dem Aktenzeichen: 040009/08022016/0849 geführt. #Kapitel 3: 1 Schadenbewertung Grundlage der Bewertung sind die Angebotspreise der jeweiligen Gerätehersteller zum Bewertungsstichtag. Bei Gerätetypen, die noch im Fachhandel verfügbar sind, kommt dieser Wert unmittelbar zum Ansatz.\nBei Gerätetypen, die im Handel bereits durch andere ersetzt wurden, werden Preise angesetzt, die der Art und Güte nach den betroffenen Gerätetypen entsprechen.\nSollte durch einen Geräte-Generationssprung die Ausstattung mit neuen Videoprozessoren, Bildschirmen, Kaltlichtquellen etc. erforderlich werden, wird ein pauschaler Abzug für technische Neuerung vorgenommen.\n*Bewertungsabweichungen:*\nPosition 1:\nAnstelle des angebotenen Ersatzgerätetyps CF-H180AL wurde für die Position 1 auf den aktuellen Listenpreis des noch verfügbaren und vergleichbaren Folgetyps CF-Q165L zurückgegriffen.\nPosition 2, 4, 6:\nDie von den Herstellern angebotenen Gerätetypen bleiben für die Feststellung der Wiederbeschaffungskosten beibehalten, weil sich durch entsprechende Rabattierungen Preise ergeben, die unterhalb den Listenpreisen der tatsächlich infrage kommenden, nach Art und Güte entsprechenden Gerätetypen liegen.\n+---+------------+------------+---------------+----------------------+ | * | G | Bet | A | W | | * | eräteart | roffener | bweichender | iederbeschaffungs- | | N | | | | | | r | | G | * | kosten (brutto)** | | . | | erätetyp | *Wertansatz | | | * | | | | | | * | | | | | +==:+============+============+===============+=====================:+ | 1 | Koloskop, | CF-Q145L | CF-Q165L | 22.491,00 € | | | Video | | | | +---+------------+------------+---------------+----------------------+ | 2 | G | GIF-Q160 | GIF-H190 | 41.783,28 € | | | astroskop, | | | | | | Video | | | | +---+------------+------------+---------------+----------------------+ | 3 | Br | BF-1T180 | -- | 25.237,52 € | | | onchoskop, | | | | | | Video | | | | +---+------------+------------+---------------+----------------------+ | 4 | Koloskop, | CF-Q180AL | CF-H180AL | 40.107,76 € | | | Video | | | | +---+------------+------------+---------------+----------------------+ | 5 | Br | BF-P180 | -- | 25.237,52 € | | | onchoskop, | | | | | | Video | | | | +---+------------+------------+---------------+----------------------+ | 6 | Koloskop, | EC-530LT | EC-530WL3H | 19.877,76 € | | | Video | | | | +---+------------+------------+---------------+----------------------+ | 7 | Br | EB-530H | -- | 16.107,84 € | | | onchoskop, | | | | | | Video | | | | +---+------------+------------+---------------+----------------------+ | 8 | Br | EB-530XT | -- | 16.107,84 € | | | onchoskop, | | | | | | Video | | | | +---+------------+------------+---------------+----------------------+ | 9 | G | GIF-HQ190 | -- | 41.783,28 € | | | astroskop, | | | | | | Video | | | | +---+------------+------------+---------------+----------------------+ | 1 | Koloskop, | CF-HQ190L | -- | 46.181,52 € | | 0 | Video | | | | +---+------------+------------+---------------+----------------------+ | 1 | Koloskop, | CF-HQ190L | -- | 46.181,52 € | | 1 | Video | | | | +---+------------+------------+---------------+----------------------+ | 1 | Du | TJF-160VR | -- | 36.442,56 € | | 2 | odenoskop, | | | | | | Video | | | | +---+------------+------------+---------------+----------------------+ | | Ges | | | 377.539,40 €** | | | amtschaden | | | | | | brutto** | | | | +---+------------+------------+---------------+----------------------+\nTabelle 2: Ermittlung der Wiederbeschaffungskosten.",
+          "example_answers_2": [
+            "A. Diebstahl von 12 medizinischen Geräten (überwiegend Endoskope)",
+            "B. Diebstahl",
+            "C. Vor dem 09.02.2016 (Datum der Anzeige)",
+            "D. Eigentumsnachweis durch Anschaffungsrechnungen für Positionen 1-11; \nPosition 12 war Leihgerät der Firma BR-melatec GmbH; \nPolizeiliche Anzeige am 09.02.2016 bei Kriminalinspektion Koblenz (AZ: 040009/08022016/0849)",
+            "E. Position 1: 22.491,00 €; \nPosition 2: 41.783,28 €; \nPosition 3: 25.237,52 €; \nPosition 4: 40.107,76 €; \nPosition 5: 25.237,52 €; \nPosition 6: 19.877,76 €; \nPosition 7: 16.107,84 €; \nPosition 8: 16.107,84 €; \nPosition 9: 41.783,28 €; \nPosition 10: 46.181,52 €; \nPosition 11: 46.181,52 €; \nPosition 12: 36.442,56 €",
+            "F. 377.539,40 € brutto"
+          ]
+        }
+      ],
+      "summary": [
+        {
+          "example_text_1": "Kapitel 3: Sachverständige Ausführungen \n*[Besonderer Hinweis:]*\nNach Rücksprache mit der Auftraggeberin, werden die Gutachtenergebnisse in verkürzter Form wiedergegeben. Grund dafür sind die messtechnisch ermittelten Ergebnisse, die nach eingehendem Abgleich mit den einschlägigen normativen Vorgaben, keinen Einfluss auf die Störempfindlichkeit elektrisch medizinischer Geräte bzw. Systeme erwarten lassen.\nAuch eine erweiterte Recherche im geplanten Einsatzgebiet, ergibt dem aktuellen Kenntnisstand zufolge keinen Grund zur Besorgnis. Insofern wird nachfolgend auf die erweiterte Darstellung von Messreihen und Diagrammen weitgehend verzichtet. #Kapitel 3: 1 Sachverständige Untersuchungen\nGegenstand der Untersuchungen waren die Komponenten IQ8Wireless-Funkkoppler, IQ8Wireless-Funksockel und IQ8Quad Melder des IQ8Wireless Systems der Firma Esser/Honeywell, das der kabellosen Anbindung unterschiedlicher Rauchmelder und Alarmgeber an ein Brandmeldesystem dient.\nGemäß den Angaben des Herstellers, sind die Komponenten entsprechend den normativen Vorgaben der EN 54-7/-5 B/-17, CEA 4021 (Brandmeldeanlagen, Rauchmelder, Wärmemelder) konzipiert. Darüber hinaus sind die Funkrauchmelder gemäß DIN EN 55022:2008 (Einrichtungen der Informationstechnik; Funkstöreigenschaften-Grenzwerte und Messverfahren) geprüft.\nFür Neuzulassungen und aktualisierte Zulassungen von medizinischen elektrischen Geräten, sind seit April 2017 die höheren Anforderungen gemäß IEC 60601-1-2 4th Edition zu beachten. Die Störfestigkeitsanforderungen entsprechen CISPR11 Class B (analog EN 55011).\nDer Grenzwert der elektrischen Feldstärke beträgt im Frequenzspektrum zwischen 80 und 2500 MHz, 3 Volt/Meter (V/m).",
+          "example_summary_1": "Gutachtenergebnisse werden verkürzt dargestellt, da Messungen keinen Einfluss auf die Störempfindlichkeit medizinischer Geräte erwarten lassen; \nUntersuchungsgegenstand: IQ8Wireless System (Funkkoppler, Funksockel, IQ8Quad Melder) der Firma Esser/Honeywell; \nSystem dient zur kabellosen Anbindung von Rauchmeldern an Brandmeldesystem; \nKomponenten nach Brandmeldeanlagen-Normen konzipiert: EN 54-7/-5 B/-17, CEA 4021; \nFunkrauchmelder nach DIN EN 55022:2008 (Funkstöreigenschaften) geprüft; \nMedizinische Geräte unterliegen seit April 2017 höheren Anforderungen (IEC 60601-1-2 4th Edition); \nStörfestigkeitsanforderungen entsprechen CISPR11 Class B (analog EN 55011); \nGrenzwert der elektrischen Feldstärke: 3 V/m im Frequenzbereich 80-2500 MHz"
+        },
+        {
+          "example_text_2": "Kapitel 3: Sachverständige Untersuchung \nNach Prüfung der übermittelten Serviceberichte und telefonischer Erörterung der Fehleranalyse und Reparaturmaßnahmen mit der Dental-Fachfirma bauer, kann nicht ausgeschlossen werden, dass das Netzteil samt Stuhl-Steuerungsplatine einer weiteren Behandlungseinheit (vgl. Pkt. 2.2), durch den Überspannungsschaden vom 18.10.2021 ebenfalls Schaden genommen hatten. Schäden an Halbleiterelementen können sich durchaus zeitlich verzögert zu erkennen geben, sofern sie aufgrund einer Vorschädigung nicht mehr in ihrem optimalen Arbeitsbereich arbeiten.\nDie Undichtigkeit an der Wasserversorgung einer weiteren Behandlungseinheit (vgl. Pkt. 2.1), die auf einen defekten Dichtungsring zurückzuführen war und damit zum Wasseraustritt am Stuhl führte, kann hingegen nicht mit dem Akutschaden durch Überspannung in kausalen Zusammenhang gebracht werden. Hierbei handelt es sich vielmehr um gebrauchsbedingten Verschleiß.\nDie einzelnen Gerätefehler hatten sich wie folgt dargestellt:\n[Behandlungseinheit TENEO, SNr. 100153]\n- Undichte Wasserverbindungsleitung\n[Behandlungseinheit TENEO, SNr. 111105]\n- Netzteilfehler (Anschlusskasten)\n- Platinenfehler Stuhlsteuerung",
+          "example_summary_2": "Überspannungsschaden vom 18.10.2021 könnte Netzteil und Stuhl-Steuerungsplatine einer weiteren Behandlungseinheit beschädigt haben; \nHalbleiterschäden können sich zeitverzögert bemerkbar machen; \nWasserundichtigkeit aufgrund defekten Dichtungsrings ist auf normalen Verschleiß zurückzuführen, nicht auf Überspannung; \nBetroffene Geräte: Behandlungseinheit TENEO (SNr. 100153): Undichte Wasserverbindungsleitung, Behandlungseinheit TENEO (SNr. 111105): Netzteilfehler und Platinenfehler der Stuhlsteuerung"
+        }
+      ]
+    },
+    "Schäden_und_Schadenereignisse": {
+      "questions": [
+        "A. Welche Komponenten wurden beschädigt?",
+        "B. Welche Akutschäden und/oder Verschleißschäden wurden festgestellt?",
+        "C. Welche Schadensereignisse lassen sich bestimmen?"
+      ],
+      "examples": [
+        {
+          "example_text_1": "Kapitel 6: Beschädigte Teile \nNachfolgend aufgeführte Teile wurden durch den Aufprall des Infusionsständers direkt beschädigt oder mussten montagebedingt erneuert werden.\n- Vorderes Gehäuse\n- Rückwärtiges Gehäuse\n- Verklebte Gummidichtung (montagebedingt)\n- Lampenhalterungen in der Röhre (montagebedingt)\n- LED Lichtzeile in der Röhre (montagebedingt)\n- Typenschild am vorderen Gehäuse (montagebedingt)\n- Dichtungen und Kleinteile (montagebedingt)",
+          "example_answers_1": [
+            "A. Vorderes Gehäuse; \nRückwärtiges Gehäuse; \nVerklebte Gummidichtung; \nLampenhalterungen in der Röhre; \nLED Lichtzeile in der Röhre; \nTypenschild am vorderen Gehäuse; \nDichtungen und Kleinteile",
+            "B. Akutschäden: Direkte Beschädigungen durch Aufprall eines Infusionsständers",
+            "C. Aufprall eines Infusionsständers"
+          ]
+        },
+        {
+          "example_text_2": "Kapitel 7: Anzahl der Schadenereignisse / Obliegenheitsverletzung \nDie vorliegenden Untersuchungsergebnisse lassen neben gebrauchsbedingten Verschleißschäden zwei Akutschäden erkennen. Eine zeitliche bzw. räumliche Kausalität ist diesbezüglich nicht erkennbar.",
+          "example_answers_2": [
+            "A. N.A.",
+            "B. Akutschäden: Zwei Akutschäden (nicht näher spezifiziert); \nVerschleißschäden: Gebrauchsbedingte Verschleißschäden (nicht näher spezifiziert)",
+            "C. Zwei Schadensereignisse ohne erkennbare zeitliche/räumliche Kausalität"
+          ]
+        }
+      ],
+      "summary": [
+        {
+          "example_text_1": "Kapitel 6: Beschädigte Teile \nNachfolgend angeführte Teile waren beschädigt oder mussten montagebedingt bzw. präventiv erneuert werden:\n- CCD-FPC,\n- Distale Endkappe,\n- Düse komplett,\n- Schaltkontakt 1 kompl.\n- Abwinkelungsteil,\n- Einführungsschlauch,\n- FPC-Platine für ID-Kabel,\n- Absaugkanal,\n- Kontrollteilgehäuse,\n- Seitenabdeckung,\n- Griffgehäuse-60,\n- Abwinkelungsgummi,\n- Seilstopper 4x,\n- Arretierungsknopf,\n- Gummikappe (Schalter 1) kompl.\n- Luft-, Wasserkanal kompl.,\n- Instrumentierkanal,\n- Belüftungsventil kompl.\n- Diverse Dichtungen.",
+          "example_summary_1": "Liste von 19 Teilen, die beschädigt waren oder ersetzt werden mussten; \nGründe für Erneuerung: Beschädigung, montagebedingt oder präventiv; \nBetroffene Komponenten umfassen: Elektronische Teile (CCD-FPC, FPC-Platine), Strukturelle Elemente (Griffgehäuse, Seitenabdeckung), Kanalkomponenten (Luft-/Wasserkanal, Instrumentierkanal, Absaugkanal), Dichtungen und Verbindungselemente"
+        },
+        {
+          "example_text_2": "Kapitel 10: Anzahl der Schadenereignisse/Obliegenheitsverletzung \n# Entsprechend der Analyse unter Punkt 5. liegt ein einzelnes Akutschadenereignis vor.\n# Hinsichtlich der Schadenursache muss von einer Obliegenheitsverletzung im Sinne der zugrundeliegenden Versicherungsvereinbarungen ausgegangen werden. # Unabhängig davon, ob das Gerät bei der Anwendung oder der Aufbereitung zu Schaden kam, hätte der Flüssigkeitseinbruch durch einen Dichtigkeitstest verhindert werden können. Das Ausmaß des vorliegenden Schadens lässt erkennen, dass dieser nicht bzw. nicht mit der erforderlichen Sorgfalt durchgeführt wurde. # # Aufgrund fehlender Angaben zum Schadenhergang kann nicht mehr festgestellt werden, ob der Arbeitskanal im abgewinkelten Zustand perforiert wurde. Insofern lässt sich diesbezüglich eine zweite Obliegenheitsverletzung nicht ausschließen. Ob und in welcher Höhe eine Regulierung des Schadens erfolgt, bleibt aufgrund der festgestellten Obliegenheitsverletzung ausschließlich dem Versicherer vorbehalten.",
+          "example_summary_2": "Ein einzelnes Akutschadenereignis liegt vor; \nSchadenursache: Obliegenheitsverletzung gemäß Versicherungsvereinbarungen; \nFlüssigkeitseinbruch wäre durch ordnungsgemäßen Dichtigkeitstest vermeidbar gewesen; \nTest wurde nicht oder unzureichend durchgeführt; \nMögliche zweite Obliegenheitsverletzung: Perforation des Arbeitskanals im abgewinkelten Zustand (nicht ausschließbar); \nEntscheidung über Schadenregulierung liegt aufgrund der Obliegenheitsverletzung beim Versicherer"
+        }
+      ]
+    },
+    "Wiederinstandsetzungsmöglichkeiten": {
+      "questions": [
+        "A. Welche Möglichkeit der Wiederinstandsetzung (Reparatur/Austausch/Neuanschaffung) wird empfohlen und warum?",
+        "B. Welche Komponenten müssen repariert oder augetauscht werden?",
+        "C. Wie hoch sind die geschätzten Kosten für die Wiederinstandsetzung?"
+      ],
+      "examples": [
+        {
+          "example_text_1": "Kapitel 7: Reparaturmöglichkeiten und Gesamtschaden \nEine Einzelreparatur ist vorliegend, den Informationen der Herstellerfirma Siemens zufolge nicht möglich. Stattdessen wurde das System durch sogenannte Reparaturaustauschrechner instandgesetzt.\nDie Kosten der Fehlersuche und Instandsetzung ergeben sich wie folgt:\n# Fahrtkosten (Entfernungskilometer) 932 km \\* 1,- € : 932,00 €\n# Fahrtkosten (Fahrzeit) 14 Std. \\* 295,- € : 4.130,00 €\n# Montagezeiten 32 Std. \\* 295,- € : 9.440,00 €\n# Rechnersystem IAS BB2, (Austauschpreis) : 4.665,60 €\n# Rechnersystem IVS (Replace), (Austauschpreis) : 6.795,36 €\n## ## Schadensumme gesamt, netto : 25.962,96 €\n## MwSt. 19% : 4.932,96 €\n## Schadensumme gesamt, brutto : 30.895,92 €\nDie Reparaturaustauschpreise liegen wesentlich unterhalb der Listenneupreise. Diese betrugen zum Zeitpunkt der Instandsetzung:\n# Rechnersystem IAS BB2, (Neupreis netto) : 9.579,60 €\n# Rechnersystem IVS-S-R640-BB2, (Neupreis netto) : 19.388,16 €\nDie tatsächliche Schadenregulierung richtet sich ggf. nach den zusätzlich vereinbarten Versicherungsbedingungen wie Obliegenheitsverletzungen, Selbstbehalt etc. und bleibt der abschließenden Bewertung des Versicherers vorbehalten.\nKirchheim, den 16.10.2019 Der Sachverständige\\*:\n![](media/image1.png){width='1.0659722222222223in' height='1.0520833333333333in'}\n![J:\\G U T A C H T E N Zwischenordner\\Vorlagen, Vorlagen, Vorlagen\\Walter Sigloch, Unterschrift.jpg](media/image2.jpeg){width='1.94375in' height='0.8173611111111111in'}\nWalter Sigloch",
+          "example_answers_1": [
+            "A. Austausch durch Reparaturaustauschrechner, weil Einzelreparatur nicht möglich",
+            "B. Rechnersystem IAS BB2, Rechnersystem IVS (Replace)",
+            "C. 30.895,92 € brutto"
+          ]
+        },
+        {
+          "example_text_2": "Kapitel 8: Alternativangebot \nDas vorliegende Alternativangebot ist für die vorliegende Bewertung der versicherungspflichtigen Schäden irrelevant, da die Kosten über den Reparaturkosten liegen.\nHinsichtlich der festgestellten Verschleißentwicklung am Ultraschallkabel und den damit verbundenen, zukünftig zu erwartenden Instandsetzungskosten, wird jedoch eine Prüfung des Austauschangebotes durch den Betreiber empfohlen.",
+          "example_answers_2": [
+            "A. Reparaturkosten liegen unterhalb der Austauschkosten; \nPrüfung des Austauschangebots wird empfohlen, wegen Verschleißentwicklung am Ultraschallkabel und zukünftig zu erwartenden Instandsetzungskosten",
+            "B. N.A.",
+            "C. N.A."
+          ]
+        }
+      ],
+      "summary": [
+        {
+          "example_text_1": "Kapitel 6: Instandsetzungsmöglichkeiten und -kosten \nDie Instrumente haben einen komplexen Aufbau, d. h. sie beinhalten dünne Lumen oder Hohlräume oder sind nicht im notwendigen Maße zu zerlegen, so dass keine Einzelreparatur mit anschließender, sachgerechter Aufbereitung möglich ist. Die zusätzliche Gebrauchsbeschränkung führt deshalb schließlich zum vollständigen Ersatz der Schadhaften durch Neuinstrumente.\nDie Listen-Neupreise der einzelnen Instrumente belaufen sich auf: ------------------------------------------------------------------------ Artikel Instrumententyp Preis **Preis Nr. (netto) (brutto)** ------------ ------------------------ ---------------- ----------------- 470179 Hot Shears, Monop. Curv. 3.200,00 € 3.808,00 € 470172 Maryland Bipolar Forceps 2.700,00 € 3.213,00 € 470205 Fenestrated Bipolar 2.700,00 € 3.213,00 € Force. 470296 Large SutureCut Needle 2.400,00 € 2.856,00 € D. 470318 Small Graptor Grasping 2.400,00 € 2.856,00 € R. 470093 ProGrasp Foreps 2.200,00 € 2.618,00 € 470006 Large Needle Driver 2.200,00 € 2.618,00 € 470347 Tip-Up Fenestrated G. 2.200,00 € 2.618,00 € 470049 Cardiere Forceps 2.100,00 € 2.499,00 € 470298 EndoWrist Stapler 7.000,00 € 8.330,00 € ------------------------------------------------------------------------\nTabelle 2: Listenneupreise der schadhaften Instrumente.",
+          "example_summary_1": "Instrumente haben komplexen Aufbau mit dünnen Lumen/Hohlräumen; \nKeine Einzelreparatur möglich, da Instrumente nicht ausreichend zerlegbar; \nSchadhafte Instrumente müssen vollständig durch Neuinstrumente ersetzt werden; \nNeupreise der Instrumente liegen zwischen 2.100,00 € und 7.000,00 € (netto); \nTeuerstes Instrument: EndoWrist Stapler (7.000,00 € netto); \nPreisspanne der übrigen Instrumente: 2.100,00 € - 3.200,00 € netto; \nInsgesamt 10 verschiedene Instrumententypen mit jeweiligen Artikelnummern aufgelistet"
+        },
+        {
+          "example_text_2": "Kapitel 7: Möglichkeiten der Instandsetzung \nDie schadhafte Röntgeneinrichtung kann nicht instandgesetzt werden. Die Dental-Fachfirma Henry Schein hat deshalb mit Datum vom 19.01.2023 ein Angebot zum Austausch des kompletten Röntgensystems, durch ein technisch verbessertes Folgemodell vorgelegt:\nRöntgensensor Sirona Xios XG Supreme USB 6.540,00 €\nMontagekosten pauschal 326,00 €\nzzgl. Abnahmeprüfung gemäß Röntgenverordnung\nGesamtkosten netto 6.866,00 €\nMwSt. 19 % 1.304,54 €\nGesamtkosten brutto 8.170,54 €",
+          "example_summary_2": "Röntgeneinrichtung nicht reparabel; \nAngebot von Henry Schein (19.01.2023): Austausch durch verbessertes Folgemodell; \nAngebot umfasst: Röntgensensor Sirona Xios XG Supreme USB; \nKosten: 6.540,00 € für Sensor + 326,00 € Montagekosten + Abnahmeprüfung; \nGesamtkosten: 8.170,54 € (brutto)"
+        }
+      ]
+    },
+    "Finanzielle_Bewertung": {
+      "questions": [
+        "A. Welche Teilschäden bzw. Teilkosten werden aufgeführt?",
+        "B. Welche Gesamtschäden bzw. Gesamtkosten werden aufgeführt?",
+        "C. Welche Schäden bzw. Kosten wurden bereits reguliert?",
+        "D. Wie hoch ist der verbleibende Betrag nach Abzug der Regulierungskosten?"
+      ],
+      "examples": [
+        {
+          "example_text_1": "Kapitel 6: Kostenschätzung \nFür die kostenverursachenden Risiken, die mit der Sanierung des vorliegenden Wasserschadens in Zusammenhang stehen, ergeben sich zwei Szenarien.\n1. Für den Fall, dass sich Fußboden und Metallstützen problemlos montieren/demontieren lassen und die Permeat-Ringleitung keine bereits vorhandenen Schäden aufweist, fallen nach dem Abschluss der Sanierungsarbeiten lediglich Kosten für die Desinfektion des Rohrleitungssystems an. Diese belaufen sich nach vorläufiger Einschätzung auf 800 - 1.200,- € brutto.\n2. Für den Fall, dass nach der Demontage des Fußbodens Schäden am Rohrleitungssystem erkennbar sind, die bisher unentdeckt blieben, müssen die betroffenen Rohrsegmente erneuert werden. Dies gilt auch für den Fall, dass bei der Durchführung der Montagearbeiten mechanische Schäden oder Undichtigkeiten entstehen. Für dieses Szenario ergeben sich Kosten für den Austausch der schadhaften Rohrleitungssegmente sowie die abschließende Desinfektion der gesamten Leitung. Im Voraus ist diesbezüglich keine objektive Kostenschätzung möglich.\nAls maximale Kostengröße hat der Hersteller ein Angebot für eine komplette Ringleitung in Höhe von 50.740,48 € brutto angegeben, deren Notwendigkeit nach bisheriger Einschätzung nicht gegeben ist.",
+          "example_answers_1": [
+            "A. Szenario 1: Desinfektion Rohrleitungssystem 800-1.200 € brutto; \nSzenario 2: Potenzielle Kosten für Austausch schadhafter Rohrleitungssegmente",
+            "B. Szenario 1: 800-1.200 € brutto; \nSzenario 2: Maximale Kostengröße für komplette Ringleitung: 50.740,48 € brutto",
+            "C. N.A.",
+            "D. N.A."
+          ]
+        },
+        {
+          "example_text_2": "Kapitel 5: Gesamtschaden \nDer Gesamtschaden ergibt sich aus den drei Leistungsrechnungen.\n1. Teilrechnung 9.256,30 €\n2. Teilrechnung 11.666,39 €\n3. Teilrechnung 3.396,86 €\nGesamtschaden, brutto 24.319,55 €\nBereits reguliert ./. 9.256,30 €\nVerbleibender Regulierungsbetrag, brutto 15.063,25 €",
+          "example_answers_2": [
+            "A. Teilrechnung 9.256,30 € / Teilrechnung 11.666,39 € / Teilrechnung 3.396,86 €",
+            "B. Gesamtschaden, brutto 24.319,55 €",
+            "C. Bereits reguliert 9.256,30 €",
+            "D. Verbleibender Regulierungsbetrag, brutto 15.063,25 €"
+          ]
+        }
+      ],
+      "summary": [
+        {
+          "example_text_1": "Kapitel 5: Gesamtschaden \nDer Gesamtschaden ergibt sich aus den drei Leistungsrechnungen.\n1. Teilrechnung 9.256,30 €\n2. Teilrechnung 11.666,39 €\n3. Teilrechnung 3.396,86 €\nGesamtschaden, brutto 24.319,55 €\nBereits reguliert ./. 9.256,30 €\nVerbleibender Regulierungsbetrag, brutto 15.063,25 €",
+          "example_summary_1": "Gesamtschaden besteht aus drei Teilrechnungen; \nTeilrechnung 1: 9.256,30 €; \nTeilrechnung 2: 11.666,39 €; \nTeilrechnung 3: 3.396,86 €; \nGesamtschaden brutto: 24.319,55 €; \nBereits regulierter Betrag: 9.256,30 €; \nVerbleibender Regulierungsbetrag brutto: 15.063,25 €"
+        },
+        {
+          "example_text_2": "Kapitel 6: Beschädigte Teile / Reparaturmöglichkeiten und Kosten \nDas Kameramodul zeigte offensichtlich einen irreparablen Fehler und konnte nur durch dessen kompletten Austausch behoben werden.\nEin Totalschaden kann aufgrund der Reparaturmöglichkeiten ausgeschlossen werden, da die CCD-Kamera eine integrierte Einheit in einen Chirurgischen C-Bogen darstellt, dessen Neupreis \\>60.000,- € liegt. Die Originalrechnung der Instandsetzung lag zum Zeitpunkt der Gutachtenerstellung bereits vor.\nReparaturkosten Gesamt netto, 9.065,60 €\nMwSt. 19 % 1.722,46 €\nSchadensumme Gesamt brutto, 10.788,06 € ",
+          "example_summary_2": "Kameramodul wies irreparablen Fehler auf, kompletter Austausch notwendig; \nKein Totalschaden, da CCD-Kamera Teil eines chirurgischen C-Bogens (Neupreis >60.000 €); \nReparaturkosten: 9.065,60 € (netto); \nGesamtschadensumme: 10.788,06 € (brutto)"
+        }
+      ]
+    },
+    "Zeitwert": {
+      "questions": [
+        "A. Wie hoch ist der ermittelte Zeitwert des Geräts zum Schadenzeitpunkt?",
+        "B. Wie hoch war der Listen-Neupreis/Neupreis des Geräts zum Schadenzeitpunkt?",
+        "C. Wie alt war das Gerät zum Zeitpunkt des Schadens?",
+        "D. Was ist die angenommene mittlere Lebensdauer des Geräts für die Zeitwertberechnung?"
+      ],
+      "examples": [
+        {
+          "example_text_1": "Kapitel 6: Neupreis und Zeitwert \nDer Listen-Neupreis einer Ultraschallsonde vom Typ RAB6-RS, lag zum Schadenzeitpunkt bei 16.898, - € brutto. Da die schadhafte Sonde erst wenige Wochen vor dem Schadeneintritt erneuert wurde, entspricht der Zeitwert dem Listen-Neupreis.",
+          "example_answers_1": [
+            "A. 16.898,- € brutto",
+            "B. 16.898,- € brutto",
+            "C. wenige Wochen",
+            "D. N.A."
+          ]
+        },
+        {
+          "example_text_2": "Kapitel 9: Neupreis und Zeitwertermittlung \nDer Neupreis des Patientenüberwachungsmonitores vom Typ 'Kompaktmonitor Anästhesie' (Grundgerät/Folgetyp), lag zum Schadenzeitpunkt bei 7.378,00 € brutto.\nBei einer angenommenen, mittleren Lebensdauer von 10 Jahren und einem arithmetisch degressiven Verlauf des zeitlichen Wertverlustes, wird bei einem Gerätealter von ca. 13 Jahren ein Zeitwert von 350,- € brutto (bezogen auf den Schadenzeitpunkt) angesetzt.",
+          "example_answers_2": [
+            "A. 350,- € brutto",
+            "B. 7.378,00 € brutto",
+            "C. ca. 13 Jahre",
+            "D. 10 Jahre"
+          ]
+        }
+      ],
+      "summary": [
+        {
+          "example_text_1": "Kapitel 9: Neupreis und Zeitwertermittlung \n# Der Neupreis des Röntgenflachdetektors vom Typ Panel 1012WCA (Folgetyp) beträgt aktuell 38.900,- € netto. Bei einer angenommenen mittleren Lebensdauer von 10 Jahren und einem arithmetisch degressiven Verlauf des zeitlichen Wertverlustes, wird bei einem Gerätealter von 4,65 Jahren, ohne Berücksichtigung des technischen Fortschritts (das heißt, ohne Abzug für technischen Fortschritt) ein Zeitwert von 14.800,00 € netto ermittelt. Unter Berücksichtigung des technischen Fortschritts (und einem pauschalen Abzug von 25% vom Listen-Neupreis, für den technischen Fortschritt) ergibt sich ein Zeitwert von 11.100,00 € netto. Die einzelnen Werte beziehen sich jeweils auf den Schadenzeitpunkt.",
+          "example_summary_1": "Röntgenflachdetektor Typ Panel 1012WCA (Folgetyp); \nNeupreis: 38.900,- € netto; \nMittlere Lebensdauer: 10 Jahre; \nGerätealter: 4,65 Jahre; \nWertverlustverlauf: arithmetisch degressiv; \nZeitwert ohne Berücksichtigung des technischen Fortschritts: 14.800,00 € netto; \nZeitwert mit Berücksichtigung des technischen Fortschritts (25% Abzug): 11.100,00 € netto; \nWerte beziehen sich auf den Schadenzeitpunkt"
+        },
+        {
+          "example_text_2": "Kapitel 7: Schadenhöhe bzw. Zeitwertermittlung \nZur Bestimmung der Versicherungsleistungen, wird der Zeitwert des Gerätes ermittelt. Grundlage dafür ist ein aktuell verfügbares Gerät, das der Art und Güte nach dem schadhaften Gerät entspricht.\nGrundlage der arithmetisch degressiven Zeitwertberechnung, ist das Folgemodell vom Typ GIVTPferd230, das zum Schadenzeitpunkt einen Listenpreis von 8.092,00 € brutto hatte.\nUnter Berücksichtigung des historischen Anschaffungszeitpunktes, ergibt sich bei einem Gerätealter von 0,96 Jahren ein Zeitwert von 6.820,00 € brutto.",
+          "example_summary_2": "Zeitwert des Geräts dient als Grundlage für Versicherungsleistungen; \nVergleichsgerät: Folgemodell GIVTPferd230; \nListenpreis des Vergleichsgeräts: 8.092,00 € brutto; \nGerätealter: 0,96 Jahre; \nErmittelter Zeitwert: 6.820,00 € brutto; \nBerechnungsmethode: arithmetisch degressive Zeitwertberechnung"
+        }
+      ]
+    },
+    "Zusammenfassung_und_Bewertung": {
+      "questions": [
+        "A. Zu welchem Urteil oder zu welcher Schlussfolgerung über den Schaden und Schadenhergang wird gefolgert?",
+        "B. Wurde der Schaden bereits behoben und wenn ja, wie?",
+        "C. Welche versicherungsrelevanten Angaben werden gemacht?",
+        "D. Welche abschließenden Bemerkungen oder Empfehlungen werden genannt?"
+      ],
+      "examples": [
+        {
+          "example_text_1": "Kapitel 5: Zusammenfassung und Ergebnis \nDie technische Untersuchung des Patientenüberwachungsmonitores ergab keinen Hinweis auf einen technischen Mangel, der einen elektrischen Stromstoß einer Anwenderin erklären würde.\nDurch sämtliche, den vorliegenden Untersuchungen zugrunde liegenden Informationen kann jedoch nicht ausgeschlossen werden, dass es sich bei dem elektrischen Stromstoß um eine elektrostatischen Entladungsimpuls handelte, der durch eine Ladungsverschiebung und Ladungstrennung an den Oberflächen der beteiligten Materialien verursacht wurde.\nSowohl die elektrostatischen Materialeigenschaften, samt hohem Oberflächenwiderstand sowie die niedrige Luftfeuchtigkeit im Krankenhaus würden dies begünstigen.\nZur Verhinderung elektrostatischer Entladungen ist die Entstehung elektrischer Felder zu vermeiden. Dies wird insbesondere durch leitfähige bzw. ableitfähige Materialien in Kleidung, Schuhen, Abdecktücher und Unterlagen, Geräte und Geräterollen (an Liegen und Betten) sowie leitfähigen Fußböden in medizinisch genutzten Bereichen der Gruppe 2 (OP und Intensivbereich) erreicht.",
+          "example_answers_1": [
+            "A. Kein technischer Mangel am Patientenüberwachungsmonitor; vermutlich elektrostatische Entladung durch Ladungsverschiebung und -trennung",
+            "B. N.A.",
+            "C. N.A.",
+            "D. Vermeidung elektrischer Felder durch leitfähige/ableitfähige Materialien in Kleidung, Schuhen, Abdecktüchern, Unterlagen, Geräten und leitfähigen Fußböden"
+          ]
+        },
+        {
+          "example_text_2": "Kapitel 8: Ergebnis \nDas schadhafte Gerät wurde zwischenzeitlich beim US-amerikanischen Hersteller kostenlos instandgesetzt. Insofern ist zu vermuten, dass kein versicherungspflichtiges Schadenereignis zum Ausfall des Gerätes geführt hatte. Die Instandsetzung erfolgte vonseiten des Herstellers kostenneutral.\nKirchheim, den 31.10.2022 Der Sachverständige[^2]:\n![J:\\G U T A C H T E N Zwischenordner\\Vorlagen, Vorlagen, Vorlagen\\Walter Sigloch, Unterschrift.jpg](media/image1.jpeg){width='1.94375in' height='0.8173611111111111in'}![SV Stempel](media/image2.png){width='1.1305555555555555in' height='1.1215277777777777in'} Walter Sigloch",
+          "example_answers_2": [
+            "A. Kein versicherungspflichtiges Schadenereignis vermutet",
+            "B. Ja, das Gerät wurde vom US-amerikanischen Hersteller kostenlos instandgesetzt",
+            "C. Keine Kosten, da Instandsetzung kostenneutral durch Hersteller erfolgte",
+            "D. N.A."
+          ]
+        }
+      ],
+      "summary": [
+        {
+          "example_text_1": "Kapitel 7: Zusammenfassung \nHinsichtlich der gestellten Fragen bezüglich eines möglicherweise vorliegenden, technischen Defektes bzw. einer Manipulation der Gerätetechnik an der untersuchten Insulinpumpe, kann zusammenfassend festgestellt werden:\nWeder die vorliegenden Informationen, noch die im Rahmen der Begutachtung gewonnenen Ergebnisse, lassen einen technischen Defekt an der gegenständlichen Insulinpumpe erkennen.\nMit sehr großer Wahrscheinlichkeit kann aus sachverständiger Sicht die Frage verneint werden, ob ein möglicher Defekt der Insulinpumpe die veränderte Basalrate erbracht haben könnte. Entsprechende Tests im Rahmen der Geräteuntersuchungen, haben zur Veränderung sämtlicher Einstellungen geführt, nicht jedoch zur Änderung einzelner Parameter.\nAn der Technik des Gerätes, ist ebenfalls mit sehr großer Wahrscheinlichkeit nicht manipuliert worden. Weder das Gehäuse, noch der geräteinterne Alarmspeicher lassen dafür Anhaltspunkte zu.\nAllerdings konnten Manipulationen in Form veränderter Parametereinstellungen festgestellt werden. Aus sachverständiger Sicht kann nicht ausgeschlossen werden, dass diese Parametereinstellungen beispielsweise auf eine fehlerhafte Annahme eines defekten Glukose-messsensors beruhten (Deaktivierung des Messsensors), teilweise jedoch auf unzureichende Kenntnisse der Gerätehandhabung oder gar eine Verwechslung der einstellbaren Parameter zurückzuführen sind.\nKirchheim b. M., den 23.11.2014 Der Sachverständige[^1]\n![SV Stempel](media/image1.png){width='1.1305555555555555in' height='1.1215277777777777in'}![Walter Sigloch, Unterschrift](media/image2.jpeg){width='2.2090277777777776in' height='0.8868055555555555in'}\nWalter Sigloch",
+          "example_summary_1": "Kein technischer Defekt an der untersuchten Insulinpumpe festgestellt; \nVeränderte Basalrate wurde sehr wahrscheinlich nicht durch Defekt verursacht; \nTests zeigten: nur Änderung sämtlicher Einstellungen möglich, nicht einzelner Parameter; \nKeine Anzeichen für technische Manipulation am Gerät (Gehäuse und Alarmspeicher unversehrt); \nFeststellung von Manipulationen in Form veränderter Parametereinstellungen; \nMögliche Ursachen der Parameteränderungen: Reaktion auf angenommenen defekten Glukose-Messsensor, Unzureichende Kenntnisse der Gerätehandhabung, Verwechslung einstellbarer Parameter"
+        },
+        {
+          "example_text_2": "Kapitel 5: Zusammenfassung \nIm vorliegenden Gutachten wurde die Gesamt-Versicherungssumme ermittelt, die zum Zeitpunkt des Schadeneintritts erforderlich gewesen wäre, um den Gesamtschaden zu regulieren. ----------------------------------------------------------------------- Gesamt-Versicherungssumme 11/2015 (brutto) 28.283,80 € ------------------------------------------------------ ---------------- -----------------------------------------------------------------------\nDesweiteren wurden die Kosten für den Ersatz der entwendeten Geräte, nach deren Art und Güte ermittelt. Die Kosten entsprechen der Gesamt-Versicherungssumme, da zum Schadenzeitpunkt noch alle betroffenen Geräte am medizinisch technischen Markt erhältlich waren. ----------------------------------------------------------------------- Kosten für gleichwertigen Ersatz 11/2015(brutto) 28.283,80 € ------------------------------------------------------ ---------------- -----------------------------------------------------------------------\nZuletzt wurden die tatsächlich entstandenen Beschaffungskosten ermittel. Preisunterschiede ergaben sich durch den Kauf von Gerätetypen, die in Art und Güte wesentlich über den entwendeten Geräte liegen. Davon betroffen sind insbesondere das Kardiotokographiegerät und das Ultraschalldiagnostikgerät. ----------------------------------------------------------------------- Kosten neu beschaffter Geräte 11/2015 (brutto) 44.078,79 € ------------------------------------------------------ ---------------- -----------------------------------------------------------------------\n",
+          "example_summary_2": "Gesamt-Versicherungssumme (11/2015): 28.283,80 € brutto; \nKosten für gleichwertigen Ersatz: 28.283,80 € brutto; \nTatsächliche Beschaffungskosten: 44.078,79 € brutto; \nPreisdifferenz entstand durch Kauf höherwertiger Geräte (insbesondere Kardiotokograph und Ultraschalldiagnostikgerät); \nAlle entwendeten Geräte waren zum Schadenzeitpunkt noch am medizinisch-technischen Markt erhältlich"
+        }
+      ]
+    },
+    "Beweisschluss": {
+      "questions": [
+        "A. Zu welchem Urteil oder zu welcher Schlussfolgerung wird gefolgert?",
+        "B. Was sind die Antworten auf die gestellten Fragen oder Behauptungen?",
+        "C. Welche abschließenden Bemerkungen oder Empfehlungen werden genannt?"
+      ],
+      "examples": [
+        {
+          "example_text_1": "Kapitel 6: Zu den Fragen der Staatsanwaltschaft \nDie Analyse der gespeicherten Daten lässt keine Zweifel an der ordnungsgemäßen Funktion der Insulinpumpe, des Blutzuckermessgerätes und des verwendeten Zubehörs zu. Der Datenverlauf ist plausibel und jederzeit nachvollziehbar.\nEine im Gesamtkontext durchgeführte, nachträgliche Analyse aller bekannten Messwerte, Parametereinstellungen und Verhaltensdaten des Verstorbenen lassen Auffälligkeiten erkennen, die durchaus Einfluss auf den eingetretenen Verlauf hatten. Aus technischer Sicht sind diesbezüglich zwei wesentliche Punkte zu nennen:\n1. Der Sensorglukosewert ist im Auto-Modus auf einen Standardwert von 6,7 mmol/l (≙120,7 mg/dl) eingestellt. Bei sportlichen Aktivitäten kann der Patient seinen Zielwert per Menütaste temporär auf den voreingestellten Wert von 8,3 mmol/l (≙150 mg/dl) erhöhen. Diese Einstellung berücksichtigt den Umstand, dass bei sportlicher Aktivität ein höherer Glukosebedarf entsteht und die Basalrate des Insulins deshalb verringert werden muss.\nDie Datenauswertung ergab keinen Hinweis darauf, dass diese Funktion betätigt wurde. In der graphischen Auswertung wäre die Aktivierung symbolisch markiert und eine erhöhte Zielwertlinie angezeigt worden.\n2. Die Insulinpumpe verfügt im manuellen Modus über eine AlarmWarnfunktion die bereits aktiviert wird, bevor der obere bzw. untere Grenzwert des Zielbereichs erreicht wird. Diese Warnmeldung wird im Auto-Modus deaktiviert, weil das Gerät den Insulinbedarf selbst ermittelt. Bei steil abfallenden Blutzuckerwerten wie sie bei sportlichen Aktivitäten zu erwarten sind, wird kein vorzeitiger Warnhinweis abgegeben. Die Warnmeldung erscheint erst bei Über- bzw. Unterschreitung der Zielwertgrenzen. Im Ergebnis hat sich der Auto-Modus im vorliegenden Fall negativ ausgewirkt, weil die Insulinabgabe nicht vorzeitig gestoppt werden konnte.\nAus medizinisch-technischer Sicht zeigen die vorbeschriebenen beiden Punkte, dass die technischen Möglichkeiten der Insulinpumpe nicht an die Lebensgewohnheiten des Patienten angepasst wurden.\nInwiefern Schulungsmaßnahmen durchgeführt wurden, um dem Patienten einen sicheren Umgang mit seiner Insulinpumpe und besonders der Auto-Modus Funktion zu ermöglichen, ist den vorliegenden Informationen nicht zu entnehmen.",
+          "example_answers_1": [
+            "A. Die Insulinpumpe funktionierte ordnungsgemäß, aber technische Möglichkeiten wurden nicht an die Lebensgewohnheiten des Patienten angepasst",
+            "B. Bei sportlichen Aktivitäten wurde der Zielwert nicht temporär erhöht; \nIm Auto-Modus wird die frühzeitige Warnfunktion deaktiviert, was sich negativ auswirkte",
+            "C. Unklar, ob ausreichende Schulungsmaßnahmen zum Umgang mit dem Auto-Modus durchgeführt wurden"
+          ]
+        },
+        {
+          "example_text_2": "Kapitel 6: Zur Frage der Staatsanwaltschaft \nDie durchgeführten Untersuchungen an der oben näher bezeichneten Insulinpumpe ergaben, dass deren ordnungsgemäße Funktion mit den eingestellen Parametern gegeben ist. Dass dies auch für den untersuchungsrelevanten Zeitraum zutrifft, kann anhand der geräteinternen Speicherdaten nachvollzogen werden.\nDie ab dem 02.07.2023 gegen 19:30 Uhr unterbrochene Glukoseaufzeichnung, steht ursächlich nicht mit der Funktion der Insulinpumpe selbst in Zusammenhang. Die Ursache dafür liegt vielmehr aufseiten des Transmitters bzw. des Glukosesensors, dessen Messwerte per Funkverbindung an die Insulinpumpe gesendet werden. Defekte am Sensor selbst, ein Lage- bzw. bewegungsinduzierter, mangelhafter Kontakt zwischen Sensor und Transmitter oder eine patientenseitige Maßnahme können dafür verantwortlich sein.\nZweifel an der Richtigkeit der Messwerte, ergeben sich im Zeitfenster vom 02.07.2023 ab ca.15 Uhr. Mangels durchgeführter bzw. in die Insulinpumpe eingegebener Blutzuckermesswerte, kann deren Richtigkeit nicht mehr überprüft werden.\nKirchheim b. M. den 29.12.2023 Der Sachverständige:[^3]\n![SV Stempel](media/image3.png){width='1.1305555555555555in' height='1.1215277777777777in'}![Walter Sigloch, Unterschrift](media/image4.jpeg){width='2.2090277777777776in' height='0.8868055555555555in'}\nWalter Sigloch",
+          "example_answers_2": [
+            "A. Die Insulinpumpe funktionierte ordnungsgemäß; \ndie unterbrochene Glukoseaufzeichnung steht nicht im Zusammenhang mit einer Fehlfunktion der Pumpe",
+            "B. Unterbrechung der Aufzeichnung ist auf Probleme mit dem Transmitter/Glukosesensor zurückzuführen; \nZweifel an der Richtigkeit der Messwerte im Zeitfenster vom 02.07.2023 ab ca. 15 Uhr; \nRichtigkeit der Blutzuckermesswerte kann nicht mehr überprüft werden",
+            "C. N.A."
+          ]
+        }
+      ],
+      "summary": [
+        {
+          "example_text_1": "Kapitel 6: Zu den Fragen der Staatsanwaltschaft \nDie Analyse der gespeicherten Daten lässt keine Zweifel an der ordnungsgemäßen Funktion der Insulinpumpe, des Blutzuckermessgerätes und des verwendeten Zubehörs zu. Der Datenverlauf ist plausibel und jederzeit nachvollziehbar.\nEine im Gesamtkontext durchgeführte, nachträgliche Analyse aller bekannten Messwerte, Parametereinstellungen und Verhaltensdaten des Verstorbenen lassen Auffälligkeiten erkennen, die durchaus Einfluss auf den eingetretenen Verlauf hatten. Aus technischer Sicht sind diesbezüglich zwei wesentliche Punkte zu nennen:\n1. Der Sensorglukosewert ist im Auto-Modus auf einen Standardwert von 6,7 mmol/l (≙120,7 mg/dl) eingestellt. Bei sportlichen Aktivitäten kann der Patient seinen Zielwert per Menütaste temporär auf den voreingestellten Wert von 8,3 mmol/l (≙150 mg/dl) erhöhen. Diese Einstellung berücksichtigt den Umstand, dass bei sportlicher Aktivität ein höherer Glukosebedarf entsteht und die Basalrate des Insulins deshalb verringert werden muss.\nDie Datenauswertung ergab keinen Hinweis darauf, dass diese Funktion betätigt wurde. In der graphischen Auswertung wäre die Aktivierung symbolisch markiert und eine erhöhte Zielwertlinie angezeigt worden.\n2. Die Insulinpumpe verfügt im manuellen Modus über eine AlarmWarnfunktion die bereits aktiviert wird, bevor der obere bzw. untere Grenzwert des Zielbereichs erreicht wird. Diese Warnmeldung wird im Auto-Modus deaktiviert, weil das Gerät den Insulinbedarf selbst ermittelt. Bei steil abfallenden Blutzuckerwerten wie sie bei sportlichen Aktivitäten zu erwarten sind, wird kein vorzeitiger Warnhinweis abgegeben. Die Warnmeldung erscheint erst bei Über- bzw. Unterschreitung der Zielwertgrenzen. Im Ergebnis hat sich der Auto-Modus im vorliegenden Fall negativ ausgewirkt, weil die Insulinabgabe nicht vorzeitig gestoppt werden konnte.\nAus medizinisch-technischer Sicht zeigen die vorbeschriebenen beiden Punkte, dass die technischen Möglichkeiten der Insulinpumpe nicht an die Lebensgewohnheiten des Patienten angepasst wurden.\nInwiefern Schulungsmaßnahmen durchgeführt wurden, um dem Patienten einen sicheren Umgang mit seiner Insulinpumpe und besonders der Auto-Modus Funktion zu ermöglichen, ist den vorliegenden Informationen nicht zu entnehmen.\nKirchheim b. M. den 27.01.2021 Der Sachverständige:[^5]\n![SV Stempel](media/image2.png){width='1.1305555555555555in' height='1.1215277777777777in'}![Walter Sigloch, Unterschrift](media/image3.jpeg){width='2.2090277777777776in' height='0.8868055555555555in'}\nWalter Sigloch",
+          "example_summary_1": "Insulinpumpe, Blutzuckermessgerät und Zubehör funktionierten technisch einwandfrei; \nDatenverlauf ist plausibel und nachvollziehbar; \nZwei wesentliche technische Auffälligkeiten: \n1. Bei sportlicher Aktivität wurde der Glukosezielwert nicht von 6,7 mmol/l auf 8,3 mmol/l erhöht \n2. Im Auto-Modus ist die frühzeitige Warnfunktion deaktiviert, Warnmeldung erscheint erst bei tatsächlicher Grenzwertüberschreitung; \nAuto-Modus wirkte sich negativ aus, da Insulinabgabe nicht vorzeitig gestoppt werden konnte; \nTechnische Möglichkeiten der Insulinpumpe wurden nicht an Lebensgewohnheiten des Patienten angepasst; \nKeine Informationen zu durchgeführten Patientenschulungen vorhanden"
+        }
+      ]
+    },
+    "Referenzen": {
+      "questions": [
+        "A. Welche Medizinprodukte, Literatur, oder sonstige Unterlagen wurden verwendet?"
+      ],
+      "examples": [
+        {
+          "example_text_1": "Kapitel 3: Verwendete Medizinprodukte \n3.1\nProduktart : Anästhesiearbeitsplatz\nTyp : Primus\nHersteller : Dräger Medical GmbH\nKonformität : Richtlinie 93/42/EWG, CE~0123~\n3.2\nProduktart : Narkosegaskanister (Filter)\nTyp : CONTRAfluran^TM^\nHersteller : ZeoSys Medical GmbH\nKonformität : Richtlinie 93/42/EWG, CE\n3.3\nProduktart : Füllstandskontrolle\nTyp : SENSOfluran\nHersteller : ZeoSys Medical GmbH\nKonformität : Richtlinie 93/42/EWG, CE\nVerwendetes Zubehör u.a.\nProduktart : Hydrophober Beatmungsfilter, patientennah\nTyp : Ultipor^TM^ 25\nREF : BB25\nHersteller : PALL Medical\nKonformität : CE~1282~\nProduktart : Hydrophober Beatmungsfilter, 2 x gerätenah\nTyp : Ultipor^TM^ 50\nREF : U50\nHersteller : PALL Medical\nKonformität : CE~1282~",
+          "example_answers_1": [
+            "A. Verwendete Medizinprodukte: Anästhesiearbeitsplatz Primus (Dräger Medical GmbH); \nNarkosegaskanister CONTRAfluran (ZeoSys Medical GmbH); \nFüllstandskontrolle SENSOfluran (ZeoSys Medical GmbH); \nHydrophobe Beatmungsfilter: Ultipor 25 und Ultipor 50 (PALL Medical)"
+          ]
+        },
+        {
+          "example_text_2": "Kapitel 3: Verwendete Unterlagen \nZur Gutachtenerstellung wurde durch den Sachverständigen Markus Weise die komplette Gerichtsakte samt Anlagen zur Verfügung gestellt. Darüber hinaus wurden dem Sachverständigen unmittelbar vor Beginn des Ortsbesichtigungstermins am 11.05.2021 in den Räumen der Firma MedCare Visions eine aktualisierte Inventarliste der zu Schaden gekommenen Medizinprodukte mit deren buchhalterisch erfassten, historischen Anschaffungskosten, den zugehörigen Kosten für Fracht und Zoll sowie den entsprechenden Rechnungsbelege durch den Geschäftsführer der Klägerin überreicht. Ergänzend wurden im Anschluss an die Besichtigung noch diverse Fotos zu den Positionen 43 und 44 der Inventarliste (vgl. dazu Tabelle 1) ausgehändigt, da diese nicht mehr aufgefunden werden konnten.",
+          "example_answers_2": [
+            "A. Verwendete Unterlagen: Komplette Gerichtsakte samt Anlagen; \nAktualisierte Inventarliste mit Anschaffungskosten und Rechnungsbelegen; \nFotos zu Positionen 43 und 44 der Inventarliste"
+          ]
+        }
+      ],
+      "summary": [
+        {
+          "example_text_1": "Kapitel 4: Verwendete Literatur und Prüfgrundlagen der Begutachtung \n- Medical Device Regulation (MDR), Verordnung (EU) 2017/745.\n- DIN EN 60601-1: Medizinische elektrische Geräte. Allgemeine Festlegungen für die Sicherheit einschließlich der wesentlichen Leistungsmerkmale.\n- DIN EN 62353: Medizinische elektrische Geräte. Wiederholungsprüfungen und Prüfung nach Instandsetzung von medizinischen elektrischen Geräten.\n- DIN EN ISO 80601-2-13:2013-03 (zurückgezogen). Medizinische elektrische Geräte. Besondere Festlegungen für die Sicherheit einschließlich der wesentlichen Leistungsmerkmale für Anästhesie-Arbeitsplätze.\n- TRGS 525, September 2014: Gefahrstoffe in Einrichtungen der medizinischen Versorgung.\n- Anästhesiearbeitsplatz Primus, Firma Dräger Medical GmbH,\nGebrauchsanweisung.\n- CONTRAfluran, Narkosegaskanister, Gebrauchsanweisung.\n- SENSOfluran, Füllstandskontrolle, Gebrauchsanweisung.",
+          "example_summary_1": "Regulatorische Grundlagen: EU-Verordnung 2017/745 (MDR); \nTechnische Normen: DIN EN 60601-1 (Sicherheit medizinischer elektrischer Geräte), DIN EN 62353 (Wiederholungsprüfungen), DIN EN ISO 80601-2-13:2013-03 (Anästhesie-Arbeitsplätze); \nArbeitsschutz: TRGS 525 (Gefahrstoffe in medizinischen Einrichtungen); \nGerätespezifische Dokumentation: Gebrauchsanweisung Anästhesiearbeitsplatz Primus (Dräger Medical), Gebrauchsanweisungen für Zubehör (CONTRAfluran, SENSOfluran)"
+        },
+        {
+          "example_text_2": "Kapitel 3: Verwendete Unterlagen \nZur Gutachtenerstellung wurde durch den Sachverständigen Markus Weise die komplette Gerichtsakte samt Anlagen zur Verfügung gestellt. Darüber hinaus wurden dem Sachverständigen unmittelbar vor Beginn des Ortsbesichtigungstermins am 11.05.2021 in den Räumen der Firma MedCare Visions eine aktualisierte Inventarliste der zu Schaden gekommenen Medizinprodukte mit deren buchhalterisch erfassten, historischen Anschaffungskosten, den zugehörigen Kosten für Fracht und Zoll sowie den entsprechenden Rechnungsbelege durch den Geschäftsführer der Klägerin überreicht. Ergänzend wurden im Anschluss an die Besichtigung noch diverse Fotos zu den Positionen 43 und 44 der Inventarliste (vgl. dazu Tabelle 1) ausgehändigt, da diese nicht mehr aufgefunden werden konnten.",
+          "example_summary_2": "Sachverständiger Markus Weise erhielt die komplette Gerichtsakte zur Gutachtenerstellung; \nAm 11.05.2021 vor der Ortsbesichtigung bei Firma MedCare Visions: Übergabe einer aktualisierten Inventarliste beschädigter Medizinprodukte mit Anschaffungskosten (buchhalterisch erfasst), Fracht- und Zollkosten, Zugehörige Rechnungsbelege; \nNach der Besichtigung: Aushändigung von Fotos zu Positionen 43 und 44 der Inventarliste, da diese Gegenstände nicht mehr auffindbar waren"
+        }
+      ]
+    }
+  }
+}

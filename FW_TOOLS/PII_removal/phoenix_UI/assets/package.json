@@ -1,0 +1,21 @@
+{
+  "name": "phoenix_ui",
+  "version": "1.0.0",
+  "description": "Phoenix UI assets",
+  "main": "js/app.js",
+  "scripts": {
+    "deploy": "cd .. && mix assets.deploy && rm -f _build/esbuild*",
+    "build": "esbuild js/app.js --bundle --minify --sourcemap --outdir=../priv/static/assets --public-path=/assets"
+  },
+  "dependencies": {
+    "phoenix": "file:../deps/phoenix",
+    "phoenix_html": "file:../deps/phoenix_html",
+    "phoenix_live_view": "file:../deps/phoenix_live_view",
+    "@tailwindcss/forms": "^0.5.0",
+    "tailwindcss": "^3.0.24",
+    "jszip": "^3.10.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.14.41"
+  }
+}

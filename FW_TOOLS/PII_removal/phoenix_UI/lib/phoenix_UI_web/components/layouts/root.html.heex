@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" class="[scrollbar-gutter:stable]">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <.live_title default="Phoenix_UI" suffix=" · Phoenix Framework">
+      {assigns[:page_title]}
+    </.live_title>
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
+    </script>
+  </head>
+  <body class="bg-white">
+    <header class="px-4 sm:px-4 lg:px-6">
+      <div class="flex items-center justify-between border-b border-zinc-100 py-2 text-sm">
+        <div class="flex items-center gap-4">
+          <div class="relative">
+            <button class="dropdown-button" onclick="toggleDropdown()">Menu</button>
+            <div id="dropdown-content-root" class="dropdown-content absolute bg-white shadow-lg rounded min-w-[170px]">
+              <a href={~p"/"} class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Overview</a>
+              <a href={~p"/pii"} class="block px-4 py-2 text-gray-800 hover:bg-gray-200">PII Sanitizer</a>
+              <a href={~p"/pii/config"} class="block px-4 py-2 text-gray-800 hover:bg-gray-200">PII Configuration</a>
+                
+                <a href={~p"/pii/industrial"} class="block px-4 py-2 text-gray-800 hover:bg-gray-200">PII Industrial (for multiple files)</a>
+              <a href={~p"/tools"} class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Framework Tools</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="px-4 py-2 sm:px-4 lg:px-6">
+      <div class="mx-auto max-w-2xl">
+        <.flash_group flash={@flash} class="mb-2" />
+        {@inner_content}
+      </div>
+    </main>
+    <script>
+      function toggleDropdown() {
+        var dropdown = document.getElementById("dropdown-content-root");
+        dropdown.classList.toggle("show");
+      }
+    </script>
+  </body>
+</html>

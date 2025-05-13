@@ -1,0 +1,31 @@
+slices:
+  - sources:
+      - model: C:/Users/Paul/.cache/merged_models/llama3_german_merged_unsupervised_V1_1
+        layer_range: [0, 32]
+      - model: C:/Users/Paul/.cache/merged_models/llama3_german_merged_supervised_V2_2
+        layer_range: [0, 32]
+merge_method: slerp
+base_model: C:/Users/Paul/.cache/merged_models/llama3_german_merged_unsupervised_V1_1
+parameters:
+  t:
+    # Lower layers (0-10): 60% model1, 40% model2
+    - filter: "self_attn.*(0|1|2|3|4|5|6|7|8|9|10)"
+      value: 0.4
+    - filter: "mlp.*(0|1|2|3|4|5|6|7|8|9|10)"
+      value: 0.4
+
+    # Middle layers (11-21): 50% each
+    - filter: "self_attn.*(11|12|13|14|15|16|17|18|19|20|21)"
+      value: 0.5
+    - filter: "mlp.*(11|12|13|14|15|16|17|18|19|20|21)"
+      value: 0.5
+
+    # Upper layers (22-32): 30% model1, 70% model2
+    - filter: "self_attn.*(22|23|24|25|26|27|28|29|30|31|32)"
+      value: 0.7
+    - filter: "mlp.*(22|23|24|25|26|27|28|29|30|31|32)"
+      value: 0.7
+
+    # Default for any unmatched layers
+    - value: 0.5
+dtype: float16

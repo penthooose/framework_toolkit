@@ -1,0 +1,144 @@
+<div class="container mx-auto p-4">
+  <h2 class="text-2xl font-bold mb-6">PII Sanitization</h2>
+
+  <!-- Custom Recognizer Form -->
+  <.custom_recognizer_form
+    custom_recognizer_expanded={@custom_recognizer_expanded}
+    recognizer_type={@recognizer_type}
+    recognizer_name={@recognizer_name}
+    current_examples={@current_examples}
+    recognizer_context={@recognizer_context}
+    recognizer_language={@recognizer_language}
+    generated_regex={@generated_regex}
+    current_regex_input={@current_regex_input}
+    recognizer_valid={@recognizer_valid}
+    loading_add_recognizer={@loading_add_recognizer}
+  />
+
+  <!-- Separator -->
+  <hr class="my-6 border-gray-300" />
+
+  <!-- Labels and Label Sets Section -->
+      <.labels_section
+        label_sets_expanded={@label_sets_expanded}
+        single_labels_expanded={@single_labels_expanded}
+        all_label_sets={@all_label_sets}
+        active_label_sets={@active_label_sets}
+        all_labels={@all_labels}
+        active_labels={@active_labels}
+      />
+
+  <!-- Separator -->
+  <hr class="my-6 border-gray-300 border-t-8" />
+  
+
+  <!-- Input Text Area -->
+  <div class="mb-6">
+    <h3 class="text-lg font-semibold mb-2">Input Text</h3>
+    <div class="mb-4">
+      <textarea 
+        id="input-text"
+        phx-keyup="text_changed"
+        phx-hook="UpdateText"
+        name="text" 
+        rows="4" 
+        class="w-full p-2 border rounded"
+        placeholder="Enter text to analyze or protect"><%= @input_text %></textarea>
+      <div class="flex justify-between items-center mt-2">
+        <div class="flex items-center space-x-2">
+          <button phx-click="analyze" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            Analyze
+          </button>
+          <%= if @loading_analyze do %>
+            <div class="spinner"></div>
+          <% end %>
+        </div>
+        <form phx-change="language_changed">
+          <select          
+            class="px-4 py-2 border rounded"
+            name="language">
+            <option value="auto" selected={@selected_language == "auto"}>Auto Detection</option>
+            <option value="de" selected={@selected_language == "de"}>German</option>
+            <option value="en" selected={@selected_language == "en"}>English</option>
+            <option value="fr" selected={@selected_language == "fr"}>French</option>
+            <option value="es" selected={@selected_language == "es"}>Spanish</option>
+          </select>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Separator -->
+  <hr class="my-6 border-gray-300" />
+
+  <!-- Output Text Area with Updated Dropdown -->
+  <div class="mt-6">
+    <h3 class="text-lg font-semibold mb-2">Analysis Result</h3>
+    <div id="analysis-result" class="p-4 bg-gray-50 rounded-lg min-h-[150px] whitespace-pre-wrap break-words" phx-hook="DropdownPosition">
+      <%= for {type, content, highlight} <- get_text_segments(@display_text, @highlights, @socket) do %><%= case type do %>
+        <% :normal -> %><%= content %><% :highlight -> %><span class="relative"><span class="text-red-600 cursor-pointer hover:underline" phx-click="toggle_dropdown" phx-value-index={highlight.start} id={"highlight-#{highlight.start}"}><%= content %></span><%= if Map.get(@dropdown_visible, highlight.start) do %><div data-dropdown data-trigger={"highlight-#{highlight.start}"} class="bg-white border rounded shadow-lg max-w-md"><div class="p-2"><%= for entity <- highlight.entities do %><div class="text-sm font-semibold whitespace-pre mb-2"><div class="flex items-center justify-between gap-4"><div class="flex-grow">String: <%= entity.text %>
+Type: <%= entity.type %>
+Score: <%= entity.score %></div><div class="flex-shrink-0 self-center"><button 
+  class={"inline-flex items-center justify-center h-10 px-3 rounded text-sm #{if entity.text in @claimed_false_positives, do: 'bg-gray-400 text-gray-700 cursor-not-allowed opacity-50', else: 'bg-red-500 text-white hover:bg-red-600'}"} 
+  phx-click="add_not_recognizer" 
+  phx-value-name={entity.type} 
+  phx-value-deny_item={entity.text} 
+  phx-value-language={@selected_language}
+  disabled={entity.text in @claimed_false_positives}>{if entity.text in @claimed_false_positives, do: "Already claimed!", else: "Claim as false positive"}
+</button></div></div></div><% end %></div></div><% end %></span><% end %><% end %>
+    </div>
+  </div>
+
+  
+
+  
+
+  <!-- Flash Messages -->
+  <%= if @flash_message do %>
+    <div class={"fixed bottom-4 right-4 px-4 py-2 rounded-lg transition-all duration-500 #{if @flash_type == :error, do: "bg-red-500", else: "bg-green-500"} text-white"}>
+      <%= @flash_message %>
+    </div>
+  <% end %>
+
+  <!-- Separator -->
+  <hr class="my-6 border-gray-300" />
+
+  <!-- Anonymizer Area -->
+  <div class="mt-8 p-4 bg-gray-50 rounded-lg">
+    <h3 class="text-lg font-semibold mb-4">PII Removal</h3>
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700 mb-2">Protection Mode</label>
+      <form phx-change="update_mode">
+        <select name="value" class="w-full p-2 border rounded">
+          <option value="anonymize" selected={@current_mode == :anonymize}>Anonymize</option>
+          <option value="pseudonymize" selected={@current_mode == :pseudonymize}>Pseudonymize</option>
+        </select>
+      </form>
+      <p class="text-sm text-gray-600 mt-1">
+        Choose how to protect the identified PII data
+      </p>
+    </div>
+
+    <!-- Protected Text Output -->
+    <div class="mt-4">
+      <div class="flex justify-between items-center mb-2">
+        <div class="flex items-center">
+          <h4 class="text-md font-medium">Protected Text</h4>
+          <div class="w-4"></div>  <!-- This adds 1rem of space -->
+          <%= if @loading_protect do %>
+            <div class="spinner"></div>
+          <% end %>
+        </div>
+        <button phx-click="protect_text" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          Protect Text
+        </button>
+      </div>
+      <div class="p-4 bg-white border rounded min-h-[100px] whitespace-pre-wrap"><%= for {type, content} <- @protected_segments do %><%= case type do %><% :normal -> %><%= content %><% :protected -> %><span class="text-red-600 inline-flex items-center"><%= content %></span><% end %><% end %></div>
+
+      <!-- Separator -->
+      <hr class="my-6 border-gray-300" />
+    
+      
+    </div>
+  </div>
+</div>

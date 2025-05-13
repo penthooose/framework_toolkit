@@ -1,0 +1,180 @@
+<div class="container mx-auto p-4">
+  <h2 class="text-2xl font-bold mb-6">PII Label Set Configuration</h2>
+  
+<!-- Existing Label Sets -->
+  <div class="mb-8">
+    <h3 class="text-xl font-semibold mb-4">Existing Label Sets</h3>
+    
+    <div class="grid gap-4">
+      <%= for set <- @label_sets do %>
+        <div class="p-4 border rounded-lg bg-white shadow-sm">
+          <div class="flex justify-between items-center mb-2">
+            <h4 class="text-lg font-medium">{set["name"]}</h4>
+            
+            <button
+              phx-click="remove_label_set"
+              phx-value-name={set["name"]}
+              class="px-3 py-1 text-sm text-red-600 hover:bg-red-50 rounded"
+            >
+              Remove Set
+            </button>
+          </div>
+          
+<!-- Label Management -->
+          <div class="mt-4">
+            <h5 class="text-sm font-medium text-gray-700 mb-2">Labels</h5>
+            
+<!-- Labels List -->
+            <div class="space-y-2 mb-4">
+              <%= for entity <- set["supported_entities"] do %>
+                <div class="group flex items-center justify-between w-full px-3 py-2 bg-blue-50 text-blue-800 text-sm rounded hover:bg-blue-100">
+                  <span>{to_string(entity)}</span>
+                  <button
+                    phx-click="remove_label_from_set"
+                    phx-value-set={set["name"]}
+                    phx-value-label={to_string(entity)}
+                    class="px-3 py-1 text-sm text-red-600 hover:bg-red-50 rounded"
+                  >
+                    Remove Label
+                  </button>
+                </div>
+              <% end %>
+            </div>
+            
+<!-- Add Label Controls -->
+            <form
+              phx-submit="add_label_to_set"
+              class="flex items-center gap-4 mt-3 pt-3 border-t border-gray-200"
+            >
+              <select
+                id={"select-#{set["name"]}"}
+                name="label"
+                class="text-sm border rounded py-1 px-2 bg-white flex-grow"
+              >
+                <option value="">Select Label to Add...</option>
+                
+                <%= for label <- @all_labels do %>
+                  <%= if label not in Enum.map(set["supported_entities"], &to_string/1) do %>
+                    <option value={label}>{label}</option>
+                  <% end %>
+                <% end %>
+              </select>
+               <input type="hidden" name="set" value={set["name"]} />
+              <button
+                type="submit"
+                class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                Add Label
+              </button>
+            </form>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+<!-- Separator -->
+  <hr class="my-6 border-gray-300" />
+  
+<!-- Create New Label Set -->
+  <div class="bg-gray-50 p-6 rounded-lg">
+    <h3 class="text-xl font-semibold mb-4">Create New Label Set</h3>
+    
+    <form phx-submit="create_label_set" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Set Name</label>
+        <input
+          type="text"
+          name="name"
+          value={@new_set_name}
+          phx-change="validate_set_name"
+          class="w-full p-2 border rounded"
+          placeholder="Enter set name"
+        />
+      </div>
+      
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Select Labels</label>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <%= for label <- @all_labels do %>
+            <label class="flex items-center space-x-2 p-2 border rounded hover:bg-gray-50">
+              <input
+                type="checkbox"
+                name="labels[]"
+                value={label}
+                checked={label in @selected_labels}
+                phx-click="toggle_label_selection"
+                phx-value-label={label}
+              /> <span class="text-sm">{label}</span>
+            </label>
+          <% end %>
+        </div>
+      </div>
+      
+      <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+        Create Label Set
+      </button>
+    </form>
+  </div>
+  
+  <!-- Separator -->
+  <hr class="my-6 border-gray-300" />
+  
+  <!-- Custom Recognizer Form -->
+  <.custom_recognizer_form
+    custom_recognizer_expanded={@custom_recognizer_expanded}
+    recognizer_type={@recognizer_type}
+    recognizer_name={@recognizer_name}
+    current_examples={@current_examples}
+    recognizer_context={@recognizer_context}
+    recognizer_language={@recognizer_language}
+    generated_regex={@generated_regex}
+    current_regex_input={@current_regex_input}
+    recognizer_valid={@recognizer_valid}
+    loading_add_recognizer={@loading_add_recognizer}
+  />
+    
+<!-- Remove Custom Recognizer Section -->
+    <div class="mt-6 pt-6 border-t border-gray-200">
+      <h4 class="text-lg font-semibold mb-4">Remove Custom Recognizer</h4>
+      
+      <form phx-submit="remove_custom_recognizer" class="flex items-center gap-3">
+        <select name="recognizer_name" class="flex-grow text-sm border rounded py-2 px-3">
+          <option value="">Select Recognizer to Remove...</option>
+          
+          <option value="ALL">REMOVE ALL RECOGNIZERS</option>
+          
+          <%= for recognizer_name <- @custom_recognizers do %>
+            <option value={recognizer_name}>{recognizer_name}</option>
+          <% end %>
+        </select>
+        
+        <div class="flex items-center gap-3">
+          <button
+            type="submit"
+            class="flex items-center justify-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+          >
+            Remove Recognizer
+          </button>
+          <%= if @loading_remove_recognizer do %>
+            <div class="spinner"></div>
+          <% end %>
+        </div>
+      </form>
+    </div>
+  
+  
+<!-- Flash Messages -->
+  <%= if live_flash(@flash, :info) do %>
+    <div class="fixed bottom-4 right-4 px-4 py-2 bg-green-500 text-white rounded-lg">
+      {live_flash(@flash, :info)}
+    </div>
+  <% end %>
+  
+  <%= if live_flash(@flash, :error) do %>
+    <div class="fixed bottom-4 right-4 px-4 py-2 bg-red-500 text-white rounded-lg">
+      {live_flash(@flash, :error)}
+    </div>
+  <% end %>
+
+</div>
