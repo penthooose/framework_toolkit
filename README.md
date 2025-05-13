@@ -1,18 +1,18 @@
 # HAI-DEV-TOOLS
 
-A comprehensive toolkit for preparing data, extracting information, and fine-tuning subsymbolic AI models for integration into hybrid AI applications.
+A toolkit for preparing data, extracting information, and fine-tuning subsymbolic AI models for integration into hybrid AI applications. Contains both general-purpose tools and application-specific implementations.
 
-> Note: The tools of this framework are still under development. Many of these tools are currently customized for the development of my own application and may not all be easily generalizable.
+> Note: While some components like Model Tools, Fine-Tuning, PII Removal, and parts of Information Extraction are relatively general-purpose, the data preparation and dataset building modules are highly customized for my specific application. These customized components serve best as implementation examples rather than reusable libraries.
 
 ## Overview
 
-This framework provides a suite of specialized tools focused on the data preparation and model fine-tuning pipeline for subsymbolic AI components. The toolkit is designed to support the creation of custom language models that can later be integrated into hybrid AI systems combining both symbolic and subsymbolic approaches.
+This repository contains a mixed collection of tools across the data preparation and model fine-tuning pipeline. The more generalized components (model tools, fine-tuning, PII removal) can be adapted for various use cases, while the data preparation and dataset building modules demonstrate how I implemented these steps for my specific application needs. Together, they showcase a complete workflow from raw data to deployable fine-tuned LLMs for hybrid AI systems.
 
 ## Components
 
 ### PII Removal
 
-Tools for identifying and removing personally identifiable information (PII) from datasets:
+A more general-purpose tool for identifying and removing personally identifiable information (PII) from datasets:
 
 - Automated detection of sensitive information
 - Configurable redaction strategies
@@ -21,7 +21,7 @@ Tools for identifying and removing personally identifiable information (PII) fro
 
 ### Model Tools
 
-Utilities for working with and manipulating AI models:
+General-purpose utilities for working with and manipulating AI models:
 
 - Model conversion between different formats
 - Quantization tools for model compression
@@ -30,7 +30,7 @@ Utilities for working with and manipulating AI models:
 
 ### Data Preparation
 
-> Note: These tools are currently tightly coupled to specific application projects and may not be suitable for direct external use without adaptation.
+> Note: These tools are highly customized for my specific application and primarily serve as implementation examples. They demonstrate how I approached data preparation for my domain, but would require significant modification for other use cases.
 
 Tools for preprocessing and transforming raw data:
 
@@ -41,6 +41,8 @@ Tools for preprocessing and transforming raw data:
 
 ### Information Extraction
 
+> Note: While containing some generalizable techniques, this module is tailored to my application's specific data structures and requirements.
+
 Tools designed for creating specialized fine-tuning datasets for different tasks:
 
 - Named entity recognition data preparation
@@ -49,6 +51,8 @@ Tools designed for creating specialized fine-tuning datasets for different tasks
 - Semantic relationship extraction
 
 ### Dataset Building
+
+> Note: This module is closely tied to my application's domain and data formats. It serves best as an implementation reference rather than a reusable library.
 
 Utilities for constructing instruction-following datasets:
 
@@ -59,7 +63,7 @@ Utilities for constructing instruction-following datasets:
 
 ### Fine-Tuning
 
-An Erlang-to-PyTorch bridge for model fine-tuning:
+A more general-purpose Erlang-to-PyTorch bridge for model fine-tuning:
 
 - ErlPort integration for seamless Elixir/Python interoperability
 - JSON-based configuration for fine-tuning parameters
