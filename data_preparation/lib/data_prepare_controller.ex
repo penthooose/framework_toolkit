@@ -1,4 +1,4 @@
-defmodule DataPrepare do
+defmodule DataPrepareController do
   @moduledoc """
   This module serves as an API for the various data preparation tools that can be started from here.
 
