@@ -1,4 +1,4 @@
-# Data Preparation Tools Collection
+# Data Preparation Tools
 
 The Data Preparation module provides tools for extracting, converting, filtering, sanitizing, and organizing document data for training AI models. These tools form a processing pipeline to transform raw documents into structured training data.
 
@@ -137,7 +137,7 @@ The PII Sanitization Tool is a standalone Elixir Phoenix browser application tha
 
 #### Microsoft Presidio Integration (`presidio_service.py`)
 
-**Purpose:** Python bridge to Microsoft's Presidio framework.
+**Purpose:** Python bridge to Microsoft's Presidio framework for advanced PII detection and protection.
 
 **Functionality:**
 
@@ -148,6 +148,90 @@ The PII Sanitization Tool is a standalone Elixir Phoenix browser application tha
 - Provides NLP integration through spaCy
 - Implements custom fake data generation for pseudonymization
 - Manages YAML-based configuration persistence
+
+**Language Support:**
+
+- Implements multi-language PII detection using specialized spaCy models:
+  - English: en_core_web_lg
+  - German: de_core_news_lg
+  - French: fr_core_news_lg
+  - Spanish: es_core_news_lg
+- Features automatic language detection with confidence scoring
+- Applies language-specific context rules to improve detection accuracy
+- Falls back to English processing when language confidence is below threshold (0.8)
+- Handles text fragments up to 1,000 characters for efficient language identification
+
+**NLP Engine Configuration:**
+
+- Uses modular NLP configuration through a centralized provider
+- Implements language detection as a custom spaCy component
+- Handles text preprocessing with language-appropriate tokenization
+- Creates consistent analyzer environment across multilingual content
+- Manages model loading with appropriate error recovery
+
+**Custom Recognizer System:**
+
+- Implements two complementary recognition strategies:
+  - **Pattern Recognition:** Uses regex patterns with configurable scoring
+  - **Deny List Recognition:** Matches exact text with provided deny lists
+- Stores and loads custom recognizers using YAML configuration files:
+  - `custom_recognizers.yaml` - Standard entity recognizers
+  - `not_recognizers.yaml` - False positive prevention rules
+- Supports language-specific recognizer variants generated from base definitions
+- Automatically handles conversion between single-language and multi-language recognizers
+- Implements context-aware recognizers with word proximity detection
+- Provides intelligent pattern validation and evaluation
+
+**Protection Methods:**
+
+- **Anonymization Mode:**
+
+  - Replaces detected entities with standardized type markers (e.g., `<PERSON>`)
+  - Preserves document structure during replacement
+  - Provides detailed metrics about replaced entities
+  - Generates analysis reports with confidence scores and entity positions
+
+- **Pseudonymization Mode:**
+  - Implements realistic replacement values using Faker library
+  - Creates entity-specific replacement strategies:
+    - Names: Realistic person names
+    - Phone numbers: Valid-format phone numbers
+    - Email addresses: Properly formatted email addresses
+    - Times: Formatted time strings
+  - Maintains consistent formatting with original entities
+  - Preserves document coherence with contextually appropriate replacements
+
+**Advanced Detection Features:**
+
+- **False Positive Prevention:**
+
+  - Uses NOT_entity rules to prevent specific text from being detected
+  - Applies filtering against known false positive patterns
+  - Implements minimum score thresholds (default 0.3) for entity validation
+  - Prioritizes specific rules over general patterns
+
+- **Entity Analysis:**
+
+  - Provides detailed position information (start/end indices)
+  - Returns entity type classification with confidence scores
+  - Generates pattern matching metrics for recognition transparency
+  - Supports serialization for cross-language processing
+  - Maintains original text with protected version for verification
+
+- **Overlap Handling:**
+  - Detects and resolves overlapping entity detections
+  - Implements scoring-based prioritization for conflicting entities
+  - Preserves nested entity relationships when appropriate
+  - Handles substring detection with appropriate containment rules
+
+**Operational Features:**
+
+- Implements robust error handling for cross-language operations
+- Manages character encoding issues between Python and Elixir
+- Provides detailed logging for troubleshooting detection issues
+- Supports both stateless and context-preserving API modes
+- Implements registry management for dynamic recognizer updates
+- Features self-recovery mechanisms for service interruptions
 
 #### State Management (`pii_state.ex`)
 
@@ -201,25 +285,23 @@ The PII Sanitization Tool implements a sophisticated custom recognition system t
 - Create NOT-rules to prevent false positive detection
 - Manage recognition priorities for overlapping entities
 
-This custom recognition capability makes the tool adaptable to various domain-specific requirements beyond standard PII detection, including technical terms, project identifiers, organization-specific references, and specialized document metadata.
+## This custom recognition capability makes the tool adaptable to various domain-specific requirements beyond standard PII detection, including technical terms, project identifiers, organization-specific references, and specialized document metadata.
 
----
+## Data Transformation Submodules:
 
-## Data Preparation Modules
-
-### DataPrepareController (`data_prepare_controller.ex`)
+### DataPreparationController (`data_preparation_controller.ex`)
 
 **Purpose:** Central API that orchestrates all data preparation tools through a unified interface.
 
 **Functionality:**
 
 - Provides two access patterns:
-  - Direct function calls: `DataPrepareController.function_name()`
-  - Module import: `use DataPrepareController` to import all functions
+  - Direct function calls: `DataPreparationController.function_name()`
+  - Module import: `use DataPreparationController` to import all functions
 - Controls workflow between different data preparation steps
 - Enables both interactive and programmatic usage of tools
 
-## Extract Files (`dp_extract_files.ex`)
+### File Extraction (`DP.ExtractFiles`)
 
 **Purpose:** Locates and extracts document files from a structured database directory for further processing.
 
@@ -230,7 +312,7 @@ This custom recognition capability makes the tool adaptable to various domain-sp
 - Returns detailed statistics about the extraction process
 - Handles errors and provides logging for troubleshooting
 
-### Convert Files (`dp_convert_files.ex`)
+### File Conversion (`DP.ConvertFiles`)
 
 **Purpose:** Transforms proprietary document formats into standardized markdown format for easier text processing.
 
@@ -242,7 +324,7 @@ This custom recognition capability makes the tool adaptable to various domain-sp
 - Provides detailed logging of the conversion process
 - Includes fallback mechanisms for different execution environments
 
-### Extract MDB Data (`dp_extract_mdb_data.ex`)
+### MDB Data Extraction (`DP.ExtractMdbData`)
 
 **Purpose:** Extracts structured data from Microsoft Access databases for integration with document content.
 
@@ -255,7 +337,7 @@ This custom recognition capability makes the tool adaptable to various domain-sp
 - Exports structured data in both JSON and JSONL formats
 - Performs intelligent date and currency format conversions
 
-### Filter Files (`dp_filter_files.ex`)
+### File Filtering (`DP.FilterFiles`)
 
 **Purpose:** Identifies relevant document files based on content analysis and keyword matching.
 
@@ -267,7 +349,7 @@ This custom recognition capability makes the tool adaptable to various domain-sp
 - Organizes files into relevant and non-relevant categories
 - Preserves original files while creating a filtered subset
 
-### Partition Data (`dp_partition_data.ex`)
+### Data Partitioning (`DP.PartitionData`)
 
 **Purpose:** Breaks down documents into logical sections for granular processing and training data creation.
 
@@ -282,7 +364,7 @@ This custom recognition capability makes the tool adaptable to various domain-sp
 - Performs content cleanup and normalization
 - Preserves both individual sections and the complete document
 
-### Statistics (`statistics.ex`)
+### Statistics (`Statistics`)
 
 **Purpose:** Provides quantitative analysis of datasets to inform training strategies and identify quality issues.
 
@@ -298,7 +380,7 @@ This custom recognition capability makes the tool adaptable to various domain-sp
 - Generates structured JSON analytics for downstream processing
 - Supports both supervised and unsupervised data analysis
 
-### Revising Data (`dp_revising_data.ex`)
+### Data Revision (`DP.RevisingData`)
 
 **Purpose:** Corrects and updates processed content to address quality issues and improve training data.
 
@@ -311,7 +393,7 @@ This custom recognition capability makes the tool adaptable to various domain-sp
 - Tracks changes between original and revised content
 - Re-triggers downstream processing after revisions
 
-### Remove Overlength Files (`dp_remove_overlength_files.ex`)
+### Overlength File Removal (`DP.RemoveOverlengthFiles`)
 
 **Purpose:** Manages document length constraints to optimize model training and prevent token limit issues.
 
@@ -324,7 +406,7 @@ This custom recognition capability makes the tool adaptable to various domain-sp
 - Transfers properly sized files to training directories
 - Processes both individual chapters and complete documents
 
-### Training Data Preparation (`dp_prepare_training_data.ex`)
+### Training Data Preparation (`DP.PrepareTrainingData`)
 
 **Purpose:** Formats and structures content for optimal model training with consistent patterns.
 
@@ -338,7 +420,7 @@ This custom recognition capability makes the tool adaptable to various domain-sp
 - Creates consistent training examples from varied inputs
 - Preserves semantic structure while standardizing format
 
-### QA Data Preparation (`dp_prepare_qa_data.ex`)
+### Q&A Data Preparation (`DP.PrepareQAData`)
 
 **Purpose:** Creates structured question-answer pairs from document content for supervised learning.
 
@@ -353,7 +435,7 @@ This custom recognition capability makes the tool adaptable to various domain-sp
 - Avoids duplicate question patterns
 - Filters invalid or malformed QA content
 
-### Following Chapters (`dp_prepare_following_chapters.ex`)
+### Following Chapters Preparation (`DP.PrepareFollowingChapters`)
 
 **Purpose:** Creates contextual relationships between document sections to enhance model understanding of content flow.
 
@@ -700,9 +782,9 @@ The Dataset Building module provides specialized tools for creating, formatting,
 
 ---
 
-# Fine-Tuning Tools
+# Model Fine-Tuning Tools
 
-The Fine-Tuning module provides tools for customizing foundation models through parameter-efficient training, model merging, and inference optimization. This module enables adaptation of large language models to domain-specific knowledge while maintaining general capabilities.
+The Model Fine-Tuning module provides tools for customizing foundation models through parameter-efficient training, model merging, and inference optimization. This module enables adaptation of large language models to domain-specific knowledge while maintaining general capabilities.
 
 ## FineTuningController (`fine_tuning_controller.ex`)
 
@@ -805,9 +887,9 @@ The Fine-Tuning module provides tools for customizing foundation models through 
 
 ---
 
-# Model Tools
+# Model Integration Tools
 
-The Model Tools module provides utilities for working with large language models in different formats, optimizing them for deployment, and managing their integration with inference systems. These tools leverage the llama.cpp library to enable efficient model conversion, quantization, and deployment in Ollama.
+The Model Integration Tools module provides utilities for working with large language models in different formats, optimizing them for deployment, and managing their integration with inference systems. These tools leverage the llama.cpp library to enable efficient model conversion, quantization, and deployment in Ollama.
 
 ## ModelToolsController (`model_tools_controller.ex`)
 

@@ -1,4 +1,4 @@
-defmodule DataPrepare.DPExtractMdbData do
+defmodule DP.ExtractMdbData do
   @moduledoc """
   This module is responsible for extracting data from a Microsoft Access database (MDB) file.
   It uses the `mdb` library to read the MDB file and extract data from specified tables.
