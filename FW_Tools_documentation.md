@@ -1,6 +1,211 @@
-# Data Preparation Tools
+# Data Preparation Tools Collection
 
-The Data Preparation module provides tools for extracting, converting, filtering, and organizing document data for training AI models. These tools form a processing pipeline to transform raw documents into structured training data.
+The Data Preparation module provides tools for extracting, converting, filtering, sanitizing, and organizing document data for training AI models. These tools form a processing pipeline to transform raw documents into structured training data.
+
+## PII Sanitization Tool
+
+**Purpose:** Identifies, extracts, and sanitizes Personally Identifiable Information (PII) from document content to ensure data privacy compliance and protect sensitive information.
+
+### Architecture Overview
+
+The PII Sanitization Tool is a standalone Elixir Phoenix browser application that leverages Microsoft's Presidio framework through Python integration. It provides both interactive and batch processing capabilities for detecting and sanitizing PII in text documents.
+
+#### Core Components
+
+##### AnalyzerServer (`analyzer_server.ex`)
+
+**Purpose:** Manages the connection to Python processes running Microsoft Presidio.
+
+**Functionality:**
+
+- Creates and maintains a persistent Python process for PII analysis
+- Handles process lifecycle with restart capabilities
+- Implements error recovery mechanisms for robust operation
+- Provides synchronous API access to Presidio's capabilities
+
+##### PatternRecognizer (`pattern_recog.ex`)
+
+**Purpose:** Generates and validates regex patterns for custom PII entity recognition.
+
+**Functionality:**
+
+- Derives optimal regex patterns from example text inputs
+- Implements intelligent pattern detection algorithms
+- Performs pattern validation and optimization
+- Supports special character handling and escape sequences
+- Creates word-boundary-aware patterns for precision matching
+
+##### MainPII (`main_pii.ex`)
+
+**Purpose:** Central coordinating module that orchestrates PII detection and sanitization workflows.
+
+**Functionality:**
+
+- Provides unified API for text analysis and protection
+- Manages custom entity recognizers
+- Coordinates with Python services through ErlPort
+- Handles both direct text operations and file-based processing
+- Supports multiple language detection and processing
+
+### Key Features
+
+#### Multi-language PII Detection
+
+**Functionality:**
+
+- Supports English, German, French, and Spanish text analysis
+- Implements automatic language detection with confidence scoring
+- Provides language-specific recognizers for specialized patterns
+- Handles mixed-language content through individual language models
+- Supports custom language-specific context rules
+
+#### Customizable Entity Recognition
+
+**Functionality:**
+
+- Supports two primary recognition mechanisms:
+  - Pattern-based recognition using regex patterns
+  - Deny-list recognition using exact match listings
+- Enables context-aware entity detection
+- Provides scoring mechanisms for recognition confidence
+- Implements recognition override rules to prevent false positives
+- Supports custom entity types beyond standard PII categories
+
+#### Multiple Protection Methods
+
+**Functionality:**
+
+- Implements two primary protection modes:
+  - Anonymization: Replaces PII with generic type markers
+  - Pseudonymization: Replaces PII with realistic but fake values
+- Provides customizable formatting for protected content
+- Maintains document structure during protection
+- Generates detailed processing reports with confidence scores
+- Supports claimed false positive management
+
+#### Industrial Processing Capabilities
+
+**Functionality:**
+
+- Processes multiple files in batch operations
+- Maintains directory structures during processing
+- Creates comprehensive protection reports
+- Supports large-scale document processing through ZIP archive handling
+- Provides progress tracking for long-running operations
+- Generates detailed segment-level analysis
+
+### User Interface Components
+
+#### PIILive (`pii_live.ex`)
+
+**Purpose:** Interactive interface for testing and analyzing PII detection and protection.
+
+**Functionality:**
+
+- Provides real-time text analysis feedback
+- Displays highlighted PII entities with confidence scores
+- Shows protected text with formatting options
+- Allows manual false positive claiming
+- Supports language selection and protection mode toggling
+
+#### PIIConfigurator (`pii_configurator.ex`)
+
+**Purpose:** Interface for managing PII detection settings and custom recognizers.
+
+**Functionality:**
+
+- Enables creation and management of label sets
+- Provides custom recognizer definition tools
+- Supports entity pattern testing
+- Manages active protection entities
+- Offers regex generation from examples
+
+#### PIIIndustrial (`pii_industrial.ex`)
+
+**Purpose:** Interface for batch processing multiple documents.
+
+**Functionality:**
+
+- Handles directory uploads through ZIP archives
+- Processes multiple text files simultaneously
+- Preserves directory structures during processing
+- Generates comprehensive reports
+- Provides aggregate statistics on detected entities
+- Creates downloadable protected outputs
+
+### Technical Integration
+
+#### Microsoft Presidio Integration (`presidio_service.py`)
+
+**Purpose:** Python bridge to Microsoft's Presidio framework.
+
+**Functionality:**
+
+- Creates analyzer engine with custom configurations
+- Manages custom entity recognizer definitions
+- Processes text analysis requests
+- Handles anonymization and pseudonymization operations
+- Provides NLP integration through spaCy
+- Implements custom fake data generation for pseudonymization
+- Manages YAML-based configuration persistence
+
+#### State Management (`pii_state.ex`)
+
+**Purpose:** Persistent configuration and state management.
+
+**Functionality:**
+
+- Maintains entity type registries
+- Manages label sets and active configurations
+- Provides serialization for configuration persistence
+- Implements atomic state updates
+- Offers reset and initialization capabilities
+- Manages agent-based state synchronization
+
+### Operation Modes
+
+#### Interactive Mode
+
+**Purpose:** Analyze and protect small text samples with immediate feedback.
+
+**Functionality:**
+
+- Provides real-time entity highlighting
+- Shows confidence scores for detected entities
+- Allows protection mode selection
+- Offers entity type filtering
+- Supports manual analysis of detection accuracy
+
+#### Batch Processing Mode
+
+**Purpose:** Process multiple documents efficiently.
+
+**Functionality:**
+
+- Handles directory structures
+- Processes multiple files in parallel
+- Creates structured outputs
+- Generates aggregate statistics
+- Provides progress tracking
+- Supports large-scale document sanitization
+
+### Custom Recognition Engine
+
+The PII Sanitization Tool implements a sophisticated custom recognition system that extends beyond standard PII entities. This system allows users to:
+
+- Define custom entity types with semantic meaning
+- Create regex patterns from example texts
+- Define deny-lists for specific terms
+- Set context rules to improve detection accuracy
+- Configure language-specific recognition rules
+- Create NOT-rules to prevent false positive detection
+- Manage recognition priorities for overlapping entities
+
+This custom recognition capability makes the tool adaptable to various domain-specific requirements beyond standard PII detection, including technical terms, project identifiers, organization-specific references, and specialized document metadata.
+
+---
+
+## Data Preparation Modules
 
 ### DataPrepareController (`data_prepare_controller.ex`)
 
@@ -14,7 +219,7 @@ The Data Preparation module provides tools for extracting, converting, filtering
 - Controls workflow between different data preparation steps
 - Enables both interactive and programmatic usage of tools
 
-### Extract Files (`dp_extract_files.ex`)
+## Extract Files (`dp_extract_files.ex`)
 
 **Purpose:** Locates and extracts document files from a structured database directory for further processing.
 
