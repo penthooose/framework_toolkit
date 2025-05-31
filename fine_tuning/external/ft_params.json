@@ -1,4 +1,45 @@
 {
+  "0": {
+    "mode": "supervised",
+    "data_path": "N:/Thesis/data_prepare/datasets_ready/first_stage/combined_datasets",
+    "text_column": "input",
+    "pre_eval": true,
+    "eval_split": 0,
+    "max_length": 3000,
+    "model_path": "C:/Users/Paul/.cache/huggingface/hub/models--DiscoResearch--Llama3-DiscoLeo-Instruct-8B-v0.1/snapshots/0d7cf14a066a65f037d184d00eddc9d284225d93",
+    "output_dir": "C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_instruct_stage1",
+    "use_flash_attention": true,
+    "quantization_config": 8,
+    "training_config": {
+      "num_train_epochs": 3,
+      "learning_rate": 0.00002,
+      "per_device_train_batch_size": 1,
+      "gradient_accumulation_steps": 8,
+      "eval_accumulation_steps": 4,
+      "warmup_steps": 100,
+      "max_grad_norm": 1.0,
+      "eval_steps": 301,
+      "save_steps": 100,
+      "save_total_limit": 3,
+      "lr_scheduler_type": "cosine",
+      "weight_decay": 0.01,
+      "gradient_checkpointing": true
+    },
+    "peft_config": {
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.05,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ]
+    }
+  },
   "1": {
     "mode": "unsupervised",
     "data_path": "N:/Thesis/data_prepare/datasets_ready/unsupervised/mdb_datasets/combined_datasets",
