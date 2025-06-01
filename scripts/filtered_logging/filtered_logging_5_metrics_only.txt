@@ -1,0 +1,26 @@
+2025-04-28 07:32:36 - VALIDATION: {'eval_loss': 1.2580950260162354, 'eval_model_preparation_time': 0.017, 'eval_runtime': 306.136, 'eval_samples_per_second': 1.705, 'eval_steps_per_second': 1.705}
+2025-04-28 07:40:08 - TRAINING: {'loss': 0.57, 'grad_norm': 0.8860024809837341, 'learning_rate': 1.3845584396900316e-05, 'epoch': 0.9733767016022166}
+2025-04-28 08:09:01 - VALIDATION: {'eval_loss': 0.4520582854747772, 'eval_runtime': 942.8711, 'eval_samples_per_second': 1.649, 'eval_steps_per_second': 1.649, 'epoch': 1.0119262739428985}
+2025-04-28 09:32:05 - VALIDATION: {'eval_loss': 0.4339553415775299, 'eval_runtime': 902.55, 'eval_samples_per_second': 1.723, 'eval_steps_per_second': 1.723, 'epoch': 1.214311528731478}
+2025-04-28 10:54:09 - VALIDATION: {'eval_loss': 0.4222733676433563, 'eval_runtime': 902.2526, 'eval_samples_per_second': 1.723, 'eval_steps_per_second': 1.723, 'epoch': 1.416696783520058}
+2025-04-28 12:16:14 - VALIDATION: {'eval_loss': 0.41216111183166504, 'eval_runtime': 902.3854, 'eval_samples_per_second': 1.723, 'eval_steps_per_second': 1.723, 'epoch': 1.6190820383086375}
+2025-04-28 13:38:23 - VALIDATION: {'eval_loss': 0.40130898356437683, 'eval_runtime': 906.3415, 'eval_samples_per_second': 1.716, 'eval_steps_per_second': 1.716, 'epoch': 1.8214672930972173}
+2025-04-28 15:00:45 - VALIDATION: {'eval_loss': 0.3907662332057953, 'eval_runtime': 905.6628, 'eval_samples_per_second': 1.717, 'eval_steps_per_second': 1.717, 'epoch': 2.023852547885797}
+2025-04-28 16:26:04 - VALIDATION: {'eval_loss': 0.38458508253097534, 'eval_runtime': 1007.9487, 'eval_samples_per_second': 1.543, 'eval_steps_per_second': 1.543, 'epoch': 2.2262378026743765}
+2025-04-28 17:52:15 - VALIDATION: {'eval_loss': 0.37626591324806213, 'eval_runtime': 933.4568, 'eval_samples_per_second': 1.666, 'eval_steps_per_second': 1.666, 'epoch': 2.428623057462956}
+2025-04-28 19:16:13 - VALIDATION: {'eval_loss': 0.36883941292762756, 'eval_runtime': 922.2266, 'eval_samples_per_second': 1.686, 'eval_steps_per_second': 1.686, 'epoch': 2.631008312251536}
+2025-04-28 20:39:42 - VALIDATION: {'eval_loss': 0.3622659146785736, 'eval_runtime': 922.883, 'eval_samples_per_second': 1.685, 'eval_steps_per_second': 1.685, 'epoch': 2.833393567040116}
+2025-04-28 22:03:08 - VALIDATION: {'eval_loss': 0.35635918378829956, 'eval_runtime': 917.9915, 'eval_samples_per_second': 1.694, 'eval_steps_per_second': 1.694, 'epoch': 3.0357788218286954}
+2025-04-29 00:38:30 - VALIDATION: {'eval_loss': 0.35277318954467773, 'eval_runtime': 940.5715, 'eval_samples_per_second': 1.653, 'eval_steps_per_second': 1.653, 'epoch': 3.2399710878207446}
+2025-04-29 02:01:13 - VALIDATION: {'eval_loss': 0.3478237986564636, 'eval_runtime': 902.153, 'eval_samples_per_second': 1.724, 'eval_steps_per_second': 1.724, 'epoch': 3.442356342609324}
+2025-04-29 03:24:41 - VALIDATION: {'eval_loss': 0.3439994752407074, 'eval_runtime': 896.6825, 'eval_samples_per_second': 1.734, 'eval_steps_per_second': 1.734, 'epoch': 3.644741597397904}
+2025-04-29 04:46:58 - VALIDATION: {'eval_loss': 0.34136104583740234, 'eval_runtime': 913.6272, 'eval_samples_per_second': 1.702, 'eval_steps_per_second': 1.702, 'epoch': 3.8471268521864834}
+2025-04-29 06:09:16 - VALIDATION: {'eval_loss': 0.33917009830474854, 'eval_runtime': 905.1794, 'eval_samples_per_second': 1.718, 'eval_steps_per_second': 1.718, 'epoch': 4.0495121069750635}
+2025-04-29 07:31:34 - VALIDATION: {'eval_loss': 0.3375541567802429, 'eval_runtime': 912.0338, 'eval_samples_per_second': 1.705, 'eval_steps_per_second': 1.705, 'epoch': 4.251897361763643}
+2025-04-29 08:53:42 - VALIDATION: {'eval_loss': 0.3367793560028076, 'eval_runtime': 905.0264, 'eval_samples_per_second': 1.718, 'eval_steps_per_second': 1.718, 'epoch': 4.454282616552223}
+2025-04-29 10:17:33 - VALIDATION: {'eval_loss': 0.3362503945827484, 'eval_runtime': 908.3721, 'eval_samples_per_second': 1.712, 'eval_steps_per_second': 1.712, 'epoch': 4.656667871340803}
+2025-04-29 11:39:08 - VALIDATION: {'eval_loss': 0.33604466915130615, 'eval_runtime': 893.1637, 'eval_samples_per_second': 1.741, 'eval_steps_per_second': 1.741, 'epoch': 4.859053126129382}
+2025-04-29 12:30:13 - VALIDATION: {'eval_loss': 0.32241225242614746, 'eval_runtime': 304.3195, 'eval_samples_per_second': 1.715, 'eval_steps_per_second': 1.715, 'epoch': 4.998795325864354}
+2025-04-29 12:30:13 - FINAL TEST VALIDATION: {'eval_loss': 0.32241225242614746, 'eval_runtime': 304.3195, 'eval_samples_per_second': 1.715, 'eval_steps_per_second': 1.715, 'epoch': 4.998795325864354}
+2025-04-29 12:30:13 - FINAL TEST VALIDATION: {'eval_loss': 0.32241225242614746, 'eval_runtime': 304.3195, 'eval_samples_per_second': 1.715, 'eval_steps_per_second': 1.715, 'epoch': 4.998795325864354}
+2025-04-29 12:30:13 - FINAL TEST VALIDATION: {'eval_loss': 0.32241225242614746, 'eval_runtime': 304.3195, 'eval_samples_per_second': 1.715, 'eval_steps_per_second': 1.715, 'epoch': 4.998795325864354}
