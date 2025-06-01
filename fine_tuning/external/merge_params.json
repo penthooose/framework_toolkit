@@ -54,8 +54,14 @@
   },
   "11": {
     "base_model_path": "C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3",
-    "adapter_path": "C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence/final_model",
-    "output_path": "C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3_c1",
+    "adapter_path": "C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_1/final_model",
+    "output_path": "C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3_1",
+    "use_fp16": true
+  },
+  "12": {
+    "base_model_path": "C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3_1",
+    "adapter_path": "C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_2/final_model",
+    "output_path": "C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3_2",
     "use_fp16": true
   }
 }

@@ -3,7 +3,7 @@ defmodule FineTuningController do
   require Logger
 
   @load_params_from_file true
-  @use_param_entry "11"
+  @use_param_entry "12"
   @ft_params_file_path Path.expand(Path.join([__DIR__, "..", "external", "ft_params.json"]))
   @merge_params_file_path Path.expand(Path.join([__DIR__, "..", "external", "merge_params.json"]))
 

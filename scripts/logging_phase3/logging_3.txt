@@ -1,0 +1,1152 @@
+2025-05-05 17:50:43,908 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_supervised_V2_1\logging.txt
+2025-05-05 17:50:43,909 - INFO - 
+
+
+Starting new Fine-tuning run:
+
+
+2025-05-05 17:50:43,909 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_supervised_V2_1\logging.txt
+2025-05-05 17:50:43,909 - INFO - Starting supervised fine-tuning with parameters: {'mode': 'supervised', 'data_path': 'N:/Thesis/data_prepare/datasets_ready/supervised/multiple_chapters_format3/combined_datasets', 'text_column': 'input', 'use_checkpoint': False, 'checkpoint_path': 'C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_supervised_5/checkpoint-3200', 'max_samples': None, 'pre_eval': True, 'freeze_partly': True, 'freeze_partly_layers': 16, 'eval_split': 0, 'model_path': 'C:/Users/Paul/.cache/huggingface/hub/models--DiscoResearch--Llama3-DiscoLeo-Instruct-8B-v0.1/snapshots/0d7cf14a066a65f037d184d00eddc9d284225d93', 'output_dir': 'C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_supervised_V2_1', 'logging_dir': None, 'use_flash_attention': True, 'max_length': 3200, 'chunk_size': None, 'quantization_config': {'load_in_8bit': True}, 'peft_config': {'task_type': <TaskType.CAUSAL_LM: 'CAUSAL_LM'>, 'inference_mode': False, 'r': 32, 'lora_alpha': 64, 'lora_dropout': 0.08, 'target_modules': ['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj', 'w1', 'w2', 'w3']}, 'training_config': {'per_device_train_batch_size': 1, 'gradient_accumulation_steps': 12, 'num_train_epochs': 3, 'learning_rate': 1.2e-05, 'warmup_steps': 100, 'warmup_ratio': 0.08, 'logging_steps': 10, 'save_steps': 200, 'save_total_limit': 5, 'eval_strategy': 'steps', 'eval_steps': 210, 'per_device_eval_batch_size': 1, 'eval_accumulation_steps': 4, 'fp16': True, 'lr_scheduler_type': 'cosine_with_restarts', 'weight_decay': 0.01, 'gradient_checkpointing': True, 'report_to': 'none', 'disable_tqdm': False, 'max_grad_norm': 0.3, 'dataloader_num_workers': 2}}
+2025-05-05 17:50:43,909 - INFO - INFO: Loading datasets from individual JSONL files
+2025-05-05 17:50:43,909 - INFO - Loading datasets from individual JSONL files
+2025-05-05 17:50:44,090 - INFO - INFO: Loaded 8530 examples from N:/Thesis/data_prepare/datasets_ready/supervised/multiple_chapters_format3/combined_datasets\training_set.jsonl
+2025-05-05 17:50:44,286 - INFO - INFO: Loaded 1598 examples from N:/Thesis/data_prepare/datasets_ready/supervised/multiple_chapters_format3/combined_datasets\validation_set.jsonl
+2025-05-05 17:50:44,315 - INFO - INFO: Loaded separate validation set with 1598 examples
+2025-05-05 17:50:44,316 - INFO - Loaded separate validation set with 1598 examples
+2025-05-05 17:50:44,327 - INFO - INFO: Loaded 536 examples from N:/Thesis/data_prepare/datasets_ready/supervised/multiple_chapters_format3/combined_datasets\test_set.jsonl
+2025-05-05 17:50:44,339 - INFO - INFO: Loaded separate test set with 536 examples
+2025-05-05 17:50:44,339 - INFO - Loaded separate test set with 536 examples
+2025-05-05 17:50:44,339 - INFO - INFO: Supervised format detected, combining input and output columns
+2025-05-05 17:50:44,339 - INFO - Supervised format detected, combining input and output columns
+2025-05-05 17:50:45,040 - INFO - INFO: Tokenizer vocabulary size: 128256
+2025-05-05 17:50:45,042 - INFO - INFO: Model max length: 1000000000000000019884624838656
+2025-05-05 17:50:55,787 - INFO - INFO: Dataset prepared with 8530 examples
+2025-05-05 17:50:58,125 - INFO - INFO: Dataset prepared with 1598 examples
+2025-05-05 17:50:58,946 - INFO - INFO: Dataset prepared with 536 examples
+2025-05-05 17:50:58,956 - INFO - INFO: CUDA cache cleared
+2025-05-05 17:50:59,088 - INFO - INFO: Garbage collector freed 71 objects
+2025-05-05 17:52:23,800 - INFO - INFO: Partially freezing model: first 16 layers will be frozen
+2025-05-05 17:52:23,800 - INFO - INFO: Freezing layer 0/32
+2025-05-05 17:52:23,801 - INFO - INFO: Freezing layer 1/32
+2025-05-05 17:52:23,801 - INFO - INFO: Freezing layer 2/32
+2025-05-05 17:52:23,801 - INFO - INFO: Freezing layer 3/32
+2025-05-05 17:52:23,801 - INFO - INFO: Freezing layer 4/32
+2025-05-05 17:52:23,802 - INFO - INFO: Freezing layer 5/32
+2025-05-05 17:52:23,802 - INFO - INFO: Freezing layer 6/32
+2025-05-05 17:52:23,803 - INFO - INFO: Freezing layer 7/32
+2025-05-05 17:52:23,803 - INFO - INFO: Freezing layer 8/32
+2025-05-05 17:52:23,804 - INFO - INFO: Freezing layer 9/32
+2025-05-05 17:52:23,804 - INFO - INFO: Freezing layer 10/32
+2025-05-05 17:52:23,804 - INFO - INFO: Freezing layer 11/32
+2025-05-05 17:52:23,804 - INFO - INFO: Freezing layer 12/32
+2025-05-05 17:52:23,805 - INFO - INFO: Freezing layer 13/32
+2025-05-05 17:52:23,805 - INFO - INFO: Freezing layer 14/32
+2025-05-05 17:52:23,805 - INFO - INFO: Freezing layer 15/32
+2025-05-05 17:52:23,806 - INFO - INFO: Keeping layer 16/32 trainable
+2025-05-05 17:52:23,806 - INFO - INFO: Keeping layer 17/32 trainable
+2025-05-05 17:52:23,806 - INFO - INFO: Keeping layer 18/32 trainable
+2025-05-05 17:52:23,807 - INFO - INFO: Keeping layer 19/32 trainable
+2025-05-05 17:52:23,807 - INFO - INFO: Keeping layer 20/32 trainable
+2025-05-05 17:52:23,807 - INFO - INFO: Keeping layer 21/32 trainable
+2025-05-05 17:52:23,807 - INFO - INFO: Keeping layer 22/32 trainable
+2025-05-05 17:52:23,808 - INFO - INFO: Keeping layer 23/32 trainable
+2025-05-05 17:52:23,808 - INFO - INFO: Keeping layer 24/32 trainable
+2025-05-05 17:52:23,808 - INFO - INFO: Keeping layer 25/32 trainable
+2025-05-05 17:52:23,808 - INFO - INFO: Keeping layer 26/32 trainable
+2025-05-05 17:52:23,809 - INFO - INFO: Keeping layer 27/32 trainable
+2025-05-05 17:52:23,809 - INFO - INFO: Keeping layer 28/32 trainable
+2025-05-05 17:52:23,809 - INFO - INFO: Keeping layer 29/32 trainable
+2025-05-05 17:52:23,810 - INFO - INFO: Keeping layer 30/32 trainable
+2025-05-05 17:52:23,810 - INFO - INFO: Keeping layer 31/32 trainable
+2025-05-05 17:52:23,810 - INFO - INFO: Ensuring LM head is trainable
+2025-05-05 17:52:23,812 - INFO - INFO: Model partial freezing: 7504924672/8030261248 parameters frozen (93.46%)
+2025-05-05 17:52:23,813 - INFO - INFO: Trainable: 525336576/8030261248 parameters (6.54%)
+2025-05-05 17:52:23,813 - INFO - INFO: Frozen: first 16/32 transformer layers
+2025-05-05 17:52:23,813 - INFO - INFO: Trainable: last 16/32 transformer layers and LM head
+2025-05-05 17:52:23,814 - INFO - INFO: Model loaded from C:/Users/Paul/.cache/huggingface/hub/models--DiscoResearch--Llama3-DiscoLeo-Instruct-8B-v0.1/snapshots/0d7cf14a066a65f037d184d00eddc9d284225d93
+2025-05-05 17:52:23,815 - INFO - INFO: Model has 8030261248 parameters, 525336576 are trainable (6.54%)
+2025-05-05 17:52:24,644 - INFO - INFO: Model has 83886080 trainable parameters after PEFT configuration
+2025-05-05 17:52:24,720 - INFO - Starting model training with 8530 training examples
+2025-05-05 17:52:24,720 - INFO - Using 1598 examples for validation during training
+2025-05-05 17:52:24,720 - INFO - Using 536 examples for pre/final evaluation
+2025-05-05 17:52:24,813 - INFO - INFO: Testing evaluation with current settings...
+2025-05-05 17:52:24,813 - INFO - INFO: Test dataset size: 536
+2025-05-05 17:52:24,818 - INFO - INFO: CUDA cache cleared
+2025-05-05 17:52:24,974 - INFO - INFO: Garbage collector freed 50 objects
+2025-05-05 17:57:54,820 - INFO - INFO: Training progress: {'eval_loss': 1.7858377695083618, 'eval_model_preparation_time': 0.0058, 'eval_runtime': 329.8367, 'eval_samples_per_second': 1.625, 'eval_steps_per_second': 1.625}
+2025-05-05 17:57:54,821 - INFO - Training progress: {'eval_loss': 1.7858377695083618, 'eval_model_preparation_time': 0.0058, 'eval_runtime': 329.8367, 'eval_samples_per_second': 1.625, 'eval_steps_per_second': 1.625}
+2025-05-05 17:57:54,821 - INFO - Training metrics: {'eval_loss': 1.7858377695083618, 'eval_model_preparation_time': 0.0058, 'eval_runtime': 329.8367, 'eval_samples_per_second': 1.625, 'eval_steps_per_second': 1.625}
+2025-05-05 17:57:54,821 - INFO - INFO: CUDA cache cleared
+2025-05-05 17:57:54,961 - INFO - INFO: Garbage collector freed 19 objects
+2025-05-05 17:57:54,962 - INFO - INFO: 
+Evaluation successful!
+2025-05-05 17:57:54,962 - INFO - INFO: Metrics: {'eval_loss': 1.7858377695083618, 'eval_model_preparation_time': 0.0058, 'eval_runtime': 329.8367, 'eval_samples_per_second': 1.625, 'eval_steps_per_second': 1.625}
+2025-05-05 17:57:54,962 - INFO - INFO: Pre-training evaluation successful. Metrics: {'eval_loss': 1.7858377695083618, 'eval_model_preparation_time': 0.0058, 'eval_runtime': 329.8367, 'eval_samples_per_second': 1.625, 'eval_steps_per_second': 1.625}
+2025-05-05 17:57:54,962 - INFO - Pre-training evaluation successful. Metrics: {'eval_loss': 1.7858377695083618, 'eval_model_preparation_time': 0.0058, 'eval_runtime': 329.8367, 'eval_samples_per_second': 1.625, 'eval_steps_per_second': 1.625}
+2025-05-05 17:57:54,962 - INFO - Pre-training evaluation metrics: {'eval_loss': 1.7858377695083618, 'eval_model_preparation_time': 0.0058, 'eval_runtime': 329.8367, 'eval_samples_per_second': 1.625, 'eval_steps_per_second': 1.625}
+2025-05-05 17:57:54,963 - INFO - INFO: 
+GPU Memory Summary:
+2025-05-05 17:57:54,963 - INFO - INFO: Allocated: 10.78 GB
+2025-05-05 17:57:54,964 - INFO - INFO: Cached: 11.92 GB
+2025-05-05 17:57:54,964 - INFO - INFO: GPU Memory: Allocated 10.78 GB, Cached 11.92 GB
+2025-05-05 17:57:54,964 - INFO - GPU Memory: Allocated 10.78 GB, Cached 11.92 GB
+2025-05-05 17:57:54,964 - INFO - GPU Memory: Allocated 10.78 GB, Cached 11.92 GB
+2025-05-05 17:57:54,964 - INFO - INFO: Starting training...
+2025-05-05 17:57:54,964 - INFO - Starting training...
+2025-05-05 17:57:54,964 - INFO - Starting training...
+2025-05-05 17:57:54,964 - INFO - INFO: Registering numpy component classes as safe globals
+2025-05-05 17:57:54,965 - INFO - INFO: Registering module names in the PyTorch safe registry
+2025-05-05 17:57:54,965 - INFO - WARNING: torch.serialization.safe_registry not available, using alternative registration
+2025-05-05 17:57:54,965 - INFO - INFO: Registering specific numpy components
+2025-05-05 17:57:54,966 - INFO - INFO: Registering numpy array creation patterns
+2025-05-05 17:57:54,966 - INFO - INFO: Set up safe dtype handler for array reconstruction
+2025-05-05 17:57:54,966 - INFO - INFO: Numpy components registered as safe globals
+2025-05-05 17:57:55,148 - INFO - INFO: Starting epoch 0/3
+2025-05-05 17:57:55,149 - INFO - Starting epoch 0/3
+2025-05-05 17:57:55,149 - INFO - Starting epoch 0/3
+2025-05-05 18:04:00,949 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_supervised_V2_1\logging.txt
+2025-05-05 18:04:00,950 - INFO - 
+
+
+Starting new Fine-tuning run:
+
+
+2025-05-05 18:04:00,950 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_supervised_V2_1\logging.txt
+2025-05-05 18:04:00,950 - INFO - Starting supervised fine-tuning with parameters: {'mode': 'supervised', 'data_path': 'N:/Thesis/data_prepare/datasets_ready/supervised/multiple_chapters_format3/combined_datasets', 'text_column': 'input', 'use_checkpoint': False, 'checkpoint_path': 'C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_supervised_5/checkpoint-3200', 'max_samples': None, 'pre_eval': False, 'freeze_partly': True, 'freeze_partly_layers': 16, 'eval_split': 0, 'model_path': 'C:/Users/Paul/.cache/huggingface/hub/models--DiscoResearch--Llama3-DiscoLeo-Instruct-8B-v0.1/snapshots/0d7cf14a066a65f037d184d00eddc9d284225d93', 'output_dir': 'C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_supervised_V2_1', 'logging_dir': None, 'use_flash_attention': True, 'max_length': 3200, 'chunk_size': None, 'quantization_config': {'load_in_8bit': True}, 'peft_config': {'task_type': <TaskType.CAUSAL_LM: 'CAUSAL_LM'>, 'inference_mode': False, 'r': 32, 'lora_alpha': 72, 'lora_dropout': 0.08, 'target_modules': ['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj', 'w1', 'w2', 'w3']}, 'training_config': {'per_device_train_batch_size': 1, 'gradient_accumulation_steps': 12, 'num_train_epochs': 4, 'learning_rate': 1.2e-05, 'warmup_steps': 100, 'warmup_ratio': 0.08, 'logging_steps': 10, 'save_steps': 350, 'save_total_limit': 5, 'eval_strategy': 'steps', 'eval_steps': 175, 'per_device_eval_batch_size': 1, 'eval_accumulation_steps': 4, 'fp16': True, 'lr_scheduler_type': 'cosine_with_restarts', 'weight_decay': 0.01, 'gradient_checkpointing': True, 'report_to': 'none', 'disable_tqdm': False, 'max_grad_norm': 0.3, 'dataloader_num_workers': 2}}
+2025-05-05 18:04:00,950 - INFO - INFO: Loading datasets from individual JSONL files
+2025-05-05 18:04:00,950 - INFO - Loading datasets from individual JSONL files
+2025-05-05 18:04:01,139 - INFO - INFO: Loaded 8530 examples from N:/Thesis/data_prepare/datasets_ready/supervised/multiple_chapters_format3/combined_datasets\training_set.jsonl
+2025-05-05 18:04:01,339 - INFO - INFO: Loaded 1598 examples from N:/Thesis/data_prepare/datasets_ready/supervised/multiple_chapters_format3/combined_datasets\validation_set.jsonl
+2025-05-05 18:04:01,369 - INFO - INFO: Loaded separate validation set with 1598 examples
+2025-05-05 18:04:01,369 - INFO - Loaded separate validation set with 1598 examples
+2025-05-05 18:04:01,381 - INFO - INFO: Loaded 536 examples from N:/Thesis/data_prepare/datasets_ready/supervised/multiple_chapters_format3/combined_datasets\test_set.jsonl
+2025-05-05 18:04:01,396 - INFO - INFO: Loaded separate test set with 536 examples
+2025-05-05 18:04:01,396 - INFO - Loaded separate test set with 536 examples
+2025-05-05 18:04:01,396 - INFO - INFO: Supervised format detected, combining input and output columns
+2025-05-05 18:04:01,396 - INFO - Supervised format detected, combining input and output columns
+2025-05-05 18:04:01,995 - INFO - INFO: Tokenizer vocabulary size: 128256
+2025-05-05 18:04:01,996 - INFO - INFO: Model max length: 1000000000000000019884624838656
+2025-05-05 18:04:12,504 - INFO - INFO: Dataset prepared with 8530 examples
+2025-05-05 18:04:14,813 - INFO - INFO: Dataset prepared with 1598 examples
+2025-05-05 18:04:15,644 - INFO - INFO: Dataset prepared with 536 examples
+2025-05-05 18:04:15,648 - INFO - INFO: CUDA cache cleared
+2025-05-05 18:04:15,778 - INFO - INFO: Garbage collector freed 71 objects
+2025-05-05 18:04:22,857 - INFO - INFO: Partially freezing model: first 16 layers will be frozen
+2025-05-05 18:04:22,857 - INFO - INFO: Freezing layer 0/32
+2025-05-05 18:04:22,857 - INFO - INFO: Freezing layer 1/32
+2025-05-05 18:04:22,858 - INFO - INFO: Freezing layer 2/32
+2025-05-05 18:04:22,858 - INFO - INFO: Freezing layer 3/32
+2025-05-05 18:04:22,859 - INFO - INFO: Freezing layer 4/32
+2025-05-05 18:04:22,859 - INFO - INFO: Freezing layer 5/32
+2025-05-05 18:04:22,859 - INFO - INFO: Freezing layer 6/32
+2025-05-05 18:04:22,860 - INFO - INFO: Freezing layer 7/32
+2025-05-05 18:04:22,860 - INFO - INFO: Freezing layer 8/32
+2025-05-05 18:04:22,860 - INFO - INFO: Freezing layer 9/32
+2025-05-05 18:04:22,861 - INFO - INFO: Freezing layer 10/32
+2025-05-05 18:04:22,861 - INFO - INFO: Freezing layer 11/32
+2025-05-05 18:04:22,861 - INFO - INFO: Freezing layer 12/32
+2025-05-05 18:04:22,862 - INFO - INFO: Freezing layer 13/32
+2025-05-05 18:04:22,862 - INFO - INFO: Freezing layer 14/32
+2025-05-05 18:04:22,862 - INFO - INFO: Freezing layer 15/32
+2025-05-05 18:04:22,863 - INFO - INFO: Keeping layer 16/32 trainable
+2025-05-05 18:04:22,863 - INFO - INFO: Keeping layer 17/32 trainable
+2025-05-05 18:04:22,863 - INFO - INFO: Keeping layer 18/32 trainable
+2025-05-05 18:04:22,864 - INFO - INFO: Keeping layer 19/32 trainable
+2025-05-05 18:04:22,864 - INFO - INFO: Keeping layer 20/32 trainable
+2025-05-05 18:04:22,864 - INFO - INFO: Keeping layer 21/32 trainable
+2025-05-05 18:04:22,864 - INFO - INFO: Keeping layer 22/32 trainable
+2025-05-05 18:04:22,865 - INFO - INFO: Keeping layer 23/32 trainable
+2025-05-05 18:04:22,865 - INFO - INFO: Keeping layer 24/32 trainable
+2025-05-05 18:04:22,865 - INFO - INFO: Keeping layer 25/32 trainable
+2025-05-05 18:04:22,865 - INFO - INFO: Keeping layer 26/32 trainable
+2025-05-05 18:04:22,866 - INFO - INFO: Keeping layer 27/32 trainable
+2025-05-05 18:04:22,866 - INFO - INFO: Keeping layer 28/32 trainable
+2025-05-05 18:04:22,866 - INFO - INFO: Keeping layer 29/32 trainable
+2025-05-05 18:04:22,867 - INFO - INFO: Keeping layer 30/32 trainable
+2025-05-05 18:04:22,867 - INFO - INFO: Keeping layer 31/32 trainable
+2025-05-05 18:04:22,867 - INFO - INFO: Ensuring LM head is trainable
+2025-05-05 18:04:22,869 - INFO - INFO: Model partial freezing: 7504924672/8030261248 parameters frozen (93.46%)
+2025-05-05 18:04:22,869 - INFO - INFO: Trainable: 525336576/8030261248 parameters (6.54%)
+2025-05-05 18:04:22,870 - INFO - INFO: Frozen: first 16/32 transformer layers
+2025-05-05 18:04:22,870 - INFO - INFO: Trainable: last 16/32 transformer layers and LM head
+2025-05-05 18:04:22,870 - INFO - INFO: Model loaded from C:/Users/Paul/.cache/huggingface/hub/models--DiscoResearch--Llama3-DiscoLeo-Instruct-8B-v0.1/snapshots/0d7cf14a066a65f037d184d00eddc9d284225d93
+2025-05-05 18:04:22,872 - INFO - INFO: Model has 8030261248 parameters, 525336576 are trainable (6.54%)
+2025-05-05 18:04:23,674 - INFO - INFO: Model has 83886080 trainable parameters after PEFT configuration
+2025-05-05 18:04:23,723 - INFO - Starting model training with 8530 training examples
+2025-05-05 18:04:23,723 - INFO - Using 1598 examples for validation during training
+2025-05-05 18:04:23,723 - INFO - Using 536 examples for pre/final evaluation
+2025-05-05 18:04:23,741 - INFO - INFO: Starting training...
+2025-05-05 18:04:23,741 - INFO - Starting training...
+2025-05-05 18:04:23,741 - INFO - Starting training...
+2025-05-05 18:04:23,741 - INFO - INFO: Registering numpy component classes as safe globals
+2025-05-05 18:04:23,742 - INFO - INFO: Registering module names in the PyTorch safe registry
+2025-05-05 18:04:23,742 - INFO - WARNING: torch.serialization.safe_registry not available, using alternative registration
+2025-05-05 18:04:23,742 - INFO - INFO: Registering specific numpy components
+2025-05-05 18:04:23,743 - INFO - INFO: Registering numpy array creation patterns
+2025-05-05 18:04:23,743 - INFO - INFO: Set up safe dtype handler for array reconstruction
+2025-05-05 18:04:23,744 - INFO - INFO: Numpy components registered as safe globals
+2025-05-05 18:04:23,946 - INFO - INFO: Starting epoch 0/4
+2025-05-05 18:04:23,946 - INFO - Starting epoch 0/4
+2025-05-05 18:04:23,946 - INFO - Starting epoch 0/4
+2025-05-05 18:09:27,257 - INFO - INFO: Training progress: {'loss': 1.6363, 'grad_norm': 0.9574663639068604, 'learning_rate': 1.2000000000000002e-06, 'epoch': 0.01406799531066823}
+2025-05-05 18:09:27,258 - INFO - Training progress: {'loss': 1.6363, 'grad_norm': 0.9574663639068604, 'learning_rate': 1.2000000000000002e-06, 'epoch': 0.01406799531066823}
+2025-05-05 18:09:27,258 - INFO - Training metrics: {'loss': 1.6363, 'grad_norm': 0.9574663639068604, 'learning_rate': 1.2000000000000002e-06, 'epoch': 0.01406799531066823}
+2025-05-05 18:14:21,088 - INFO - INFO: Training progress: {'loss': 1.6499, 'grad_norm': 0.8199230432510376, 'learning_rate': 2.4000000000000003e-06, 'epoch': 0.02813599062133646}
+2025-05-05 18:14:21,089 - INFO - Training progress: {'loss': 1.6499, 'grad_norm': 0.8199230432510376, 'learning_rate': 2.4000000000000003e-06, 'epoch': 0.02813599062133646}
+2025-05-05 18:14:21,089 - INFO - Training metrics: {'loss': 1.6499, 'grad_norm': 0.8199230432510376, 'learning_rate': 2.4000000000000003e-06, 'epoch': 0.02813599062133646}
+2025-05-05 18:19:14,979 - INFO - INFO: Training progress: {'loss': 1.5745, 'grad_norm': 0.723121702671051, 'learning_rate': 3.6e-06, 'epoch': 0.04220398593200469}
+2025-05-05 18:19:14,979 - INFO - Training progress: {'loss': 1.5745, 'grad_norm': 0.723121702671051, 'learning_rate': 3.6e-06, 'epoch': 0.04220398593200469}
+2025-05-05 18:19:14,979 - INFO - Training metrics: {'loss': 1.5745, 'grad_norm': 0.723121702671051, 'learning_rate': 3.6e-06, 'epoch': 0.04220398593200469}
+2025-05-05 18:24:06,677 - INFO - INFO: Training progress: {'loss': 1.5183, 'grad_norm': 0.6964651942253113, 'learning_rate': 4.800000000000001e-06, 'epoch': 0.05627198124267292}
+2025-05-05 18:24:06,677 - INFO - Training progress: {'loss': 1.5183, 'grad_norm': 0.6964651942253113, 'learning_rate': 4.800000000000001e-06, 'epoch': 0.05627198124267292}
+2025-05-05 18:24:06,677 - INFO - Training metrics: {'loss': 1.5183, 'grad_norm': 0.6964651942253113, 'learning_rate': 4.800000000000001e-06, 'epoch': 0.05627198124267292}
+2025-05-05 18:29:01,198 - INFO - INFO: Training progress: {'loss': 1.4386, 'grad_norm': 0.6446126103401184, 'learning_rate': 6e-06, 'epoch': 0.07033997655334115}
+2025-05-05 18:29:01,198 - INFO - Training progress: {'loss': 1.4386, 'grad_norm': 0.6446126103401184, 'learning_rate': 6e-06, 'epoch': 0.07033997655334115}
+2025-05-05 18:29:01,199 - INFO - Training metrics: {'loss': 1.4386, 'grad_norm': 0.6446126103401184, 'learning_rate': 6e-06, 'epoch': 0.07033997655334115}
+2025-05-05 18:33:59,845 - INFO - INFO: Training progress: {'loss': 1.3403, 'grad_norm': 0.5244205594062805, 'learning_rate': 7.2e-06, 'epoch': 0.08440797186400938}
+2025-05-05 18:33:59,845 - INFO - Training progress: {'loss': 1.3403, 'grad_norm': 0.5244205594062805, 'learning_rate': 7.2e-06, 'epoch': 0.08440797186400938}
+2025-05-05 18:33:59,846 - INFO - Training metrics: {'loss': 1.3403, 'grad_norm': 0.5244205594062805, 'learning_rate': 7.2e-06, 'epoch': 0.08440797186400938}
+2025-05-05 18:38:52,590 - INFO - INFO: Training progress: {'loss': 1.2534, 'grad_norm': 0.7993733882904053, 'learning_rate': 8.4e-06, 'epoch': 0.0984759671746776}
+2025-05-05 18:38:52,591 - INFO - Training progress: {'loss': 1.2534, 'grad_norm': 0.7993733882904053, 'learning_rate': 8.4e-06, 'epoch': 0.0984759671746776}
+2025-05-05 18:38:52,591 - INFO - Training metrics: {'loss': 1.2534, 'grad_norm': 0.7993733882904053, 'learning_rate': 8.4e-06, 'epoch': 0.0984759671746776}
+2025-05-05 18:43:50,660 - INFO - INFO: Training progress: {'loss': 1.1262, 'grad_norm': 0.899351954460144, 'learning_rate': 9.600000000000001e-06, 'epoch': 0.11254396248534584}
+2025-05-05 18:43:50,660 - INFO - Training progress: {'loss': 1.1262, 'grad_norm': 0.899351954460144, 'learning_rate': 9.600000000000001e-06, 'epoch': 0.11254396248534584}
+2025-05-05 18:43:50,660 - INFO - Training metrics: {'loss': 1.1262, 'grad_norm': 0.899351954460144, 'learning_rate': 9.600000000000001e-06, 'epoch': 0.11254396248534584}
+2025-05-05 18:48:46,813 - INFO - INFO: Training progress: {'loss': 1.0317, 'grad_norm': 0.6466245651245117, 'learning_rate': 1.08e-05, 'epoch': 0.12661195779601406}
+2025-05-05 18:48:46,813 - INFO - Training progress: {'loss': 1.0317, 'grad_norm': 0.6466245651245117, 'learning_rate': 1.08e-05, 'epoch': 0.12661195779601406}
+2025-05-05 18:48:46,813 - INFO - Training metrics: {'loss': 1.0317, 'grad_norm': 0.6466245651245117, 'learning_rate': 1.08e-05, 'epoch': 0.12661195779601406}
+2025-05-05 18:53:42,942 - INFO - INFO: Training progress: {'loss': 0.9549, 'grad_norm': 0.673939049243927, 'learning_rate': 1.2e-05, 'epoch': 0.1406799531066823}
+2025-05-05 18:53:42,943 - INFO - Training progress: {'loss': 0.9549, 'grad_norm': 0.673939049243927, 'learning_rate': 1.2e-05, 'epoch': 0.1406799531066823}
+2025-05-05 18:53:42,943 - INFO - Training metrics: {'loss': 0.9549, 'grad_norm': 0.673939049243927, 'learning_rate': 1.2e-05, 'epoch': 0.1406799531066823}
+2025-05-05 18:58:37,807 - INFO - INFO: Training progress: {'loss': 0.9264, 'grad_norm': 0.5920394062995911, 'learning_rate': 1.1999605619787463e-05, 'epoch': 0.15474794841735054}
+2025-05-05 18:58:37,808 - INFO - Training progress: {'loss': 0.9264, 'grad_norm': 0.5920394062995911, 'learning_rate': 1.1999605619787463e-05, 'epoch': 0.15474794841735054}
+2025-05-05 18:58:37,808 - INFO - Training metrics: {'loss': 0.9264, 'grad_norm': 0.5920394062995911, 'learning_rate': 1.1999605619787463e-05, 'epoch': 0.15474794841735054}
+2025-05-05 19:03:33,337 - INFO - INFO: Training progress: {'loss': 0.8605, 'grad_norm': 0.8700227737426758, 'learning_rate': 1.1998422530995104e-05, 'epoch': 0.16881594372801875}
+2025-05-05 19:03:33,337 - INFO - Training progress: {'loss': 0.8605, 'grad_norm': 0.8700227737426758, 'learning_rate': 1.1998422530995104e-05, 'epoch': 0.16881594372801875}
+2025-05-05 19:03:33,337 - INFO - Training metrics: {'loss': 0.8605, 'grad_norm': 0.8700227737426758, 'learning_rate': 1.1998422530995104e-05, 'epoch': 0.16881594372801875}
+2025-05-05 19:08:32,016 - INFO - INFO: Training progress: {'loss': 0.8043, 'grad_norm': 0.5575953125953674, 'learning_rate': 1.1996450889151858e-05, 'epoch': 0.182883939038687}
+2025-05-05 19:08:32,017 - INFO - Training progress: {'loss': 0.8043, 'grad_norm': 0.5575953125953674, 'learning_rate': 1.1996450889151858e-05, 'epoch': 0.182883939038687}
+2025-05-05 19:08:32,017 - INFO - Training metrics: {'loss': 0.8043, 'grad_norm': 0.5575953125953674, 'learning_rate': 1.1996450889151858e-05, 'epoch': 0.182883939038687}
+2025-05-05 19:13:29,214 - INFO - INFO: Training progress: {'loss': 0.756, 'grad_norm': 0.7328094840049744, 'learning_rate': 1.19936909534499e-05, 'epoch': 0.1969519343493552}
+2025-05-05 19:13:29,214 - INFO - Training progress: {'loss': 0.756, 'grad_norm': 0.7328094840049744, 'learning_rate': 1.19936909534499e-05, 'epoch': 0.1969519343493552}
+2025-05-05 19:13:29,214 - INFO - Training metrics: {'loss': 0.756, 'grad_norm': 0.7328094840049744, 'learning_rate': 1.19936909534499e-05, 'epoch': 0.1969519343493552}
+2025-05-05 19:18:25,233 - INFO - INFO: Training progress: {'loss': 0.8142, 'grad_norm': 0.5578817129135132, 'learning_rate': 1.1990143086710578e-05, 'epoch': 0.21101992966002345}
+2025-05-05 19:18:25,234 - INFO - Training progress: {'loss': 0.8142, 'grad_norm': 0.5578817129135132, 'learning_rate': 1.1990143086710578e-05, 'epoch': 0.21101992966002345}
+2025-05-05 19:18:25,234 - INFO - Training metrics: {'loss': 0.8142, 'grad_norm': 0.5578817129135132, 'learning_rate': 1.1990143086710578e-05, 'epoch': 0.21101992966002345}
+2025-05-05 19:23:18,766 - INFO - INFO: Training progress: {'loss': 0.7766, 'grad_norm': 0.7022269368171692, 'learning_rate': 1.1985807755336701e-05, 'epoch': 0.2250879249706917}
+2025-05-05 19:23:18,766 - INFO - Training progress: {'loss': 0.7766, 'grad_norm': 0.7022269368171692, 'learning_rate': 1.1985807755336701e-05, 'epoch': 0.2250879249706917}
+2025-05-05 19:23:18,766 - INFO - Training metrics: {'loss': 0.7766, 'grad_norm': 0.7022269368171692, 'learning_rate': 1.1985807755336701e-05, 'epoch': 0.2250879249706917}
+2025-05-05 19:28:11,913 - INFO - INFO: Training progress: {'loss': 0.7716, 'grad_norm': 0.7685664892196655, 'learning_rate': 1.1980685529251237e-05, 'epoch': 0.2391559202813599}
+2025-05-05 19:28:11,913 - INFO - Training progress: {'loss': 0.7716, 'grad_norm': 0.7685664892196655, 'learning_rate': 1.1980685529251237e-05, 'epoch': 0.2391559202813599}
+2025-05-05 19:28:11,913 - INFO - Training metrics: {'loss': 0.7716, 'grad_norm': 0.7685664892196655, 'learning_rate': 1.1980685529251237e-05, 'epoch': 0.2391559202813599}
+2025-05-05 19:46:43,482 - INFO - INFO: Training progress: {'eval_loss': 0.6996996998786926, 'eval_runtime': 961.5921, 'eval_samples_per_second': 1.662, 'eval_steps_per_second': 1.662, 'epoch': 0.246189917936694}
+2025-05-05 19:46:43,482 - INFO - Training progress: {'eval_loss': 0.6996996998786926, 'eval_runtime': 961.5921, 'eval_samples_per_second': 1.662, 'eval_steps_per_second': 1.662, 'epoch': 0.246189917936694}
+2025-05-05 19:46:43,482 - INFO - Training metrics: {'eval_loss': 0.6996996998786926, 'eval_runtime': 961.5921, 'eval_samples_per_second': 1.662, 'eval_steps_per_second': 1.662, 'epoch': 0.246189917936694}
+2025-05-05 19:49:10,704 - INFO - INFO: Training progress: {'loss': 0.7298, 'grad_norm': 0.828436553478241, 'learning_rate': 1.1974777081822395e-05, 'epoch': 0.2532239155920281}
+2025-05-05 19:49:10,705 - INFO - Training progress: {'loss': 0.7298, 'grad_norm': 0.828436553478241, 'learning_rate': 1.1974777081822395e-05, 'epoch': 0.2532239155920281}
+2025-05-05 19:49:10,705 - INFO - Training metrics: {'loss': 0.7298, 'grad_norm': 0.828436553478241, 'learning_rate': 1.1974777081822395e-05, 'epoch': 0.2532239155920281}
+2025-05-05 19:54:07,572 - INFO - INFO: Training progress: {'loss': 0.8007, 'grad_norm': 0.7986260652542114, 'learning_rate': 1.1968083189775089e-05, 'epoch': 0.2672919109026964}
+2025-05-05 19:54:07,572 - INFO - Training progress: {'loss': 0.8007, 'grad_norm': 0.7986260652542114, 'learning_rate': 1.1968083189775089e-05, 'epoch': 0.2672919109026964}
+2025-05-05 19:54:07,572 - INFO - Training metrics: {'loss': 0.8007, 'grad_norm': 0.7986260652542114, 'learning_rate': 1.1968083189775089e-05, 'epoch': 0.2672919109026964}
+2025-05-05 19:58:59,672 - INFO - INFO: Training progress: {'loss': 0.7433, 'grad_norm': 0.7777431607246399, 'learning_rate': 1.1960604733088843e-05, 'epoch': 0.2813599062133646}
+2025-05-05 19:58:59,672 - INFO - Training progress: {'loss': 0.7433, 'grad_norm': 0.7777431607246399, 'learning_rate': 1.1960604733088843e-05, 'epoch': 0.2813599062133646}
+2025-05-05 19:58:59,672 - INFO - Training metrics: {'loss': 0.7433, 'grad_norm': 0.7777431607246399, 'learning_rate': 1.1960604733088843e-05, 'epoch': 0.2813599062133646}
+2025-05-05 20:03:53,427 - INFO - INFO: Training progress: {'loss': 0.7618, 'grad_norm': 0.7850169539451599, 'learning_rate': 1.1952342694882103e-05, 'epoch': 0.2954279015240328}
+2025-05-05 20:03:53,427 - INFO - Training progress: {'loss': 0.7618, 'grad_norm': 0.7850169539451599, 'learning_rate': 1.1952342694882103e-05, 'epoch': 0.2954279015240328}
+2025-05-05 20:03:53,427 - INFO - Training metrics: {'loss': 0.7618, 'grad_norm': 0.7850169539451599, 'learning_rate': 1.1952342694882103e-05, 'epoch': 0.2954279015240328}
+2025-05-05 20:08:49,360 - INFO - INFO: Training progress: {'loss': 0.7592, 'grad_norm': 1.03353750705719, 'learning_rate': 1.1943298161282995e-05, 'epoch': 0.3094958968347011}
+2025-05-05 20:08:49,360 - INFO - Training progress: {'loss': 0.7592, 'grad_norm': 1.03353750705719, 'learning_rate': 1.1943298161282995e-05, 'epoch': 0.3094958968347011}
+2025-05-05 20:08:49,360 - INFO - Training metrics: {'loss': 0.7592, 'grad_norm': 1.03353750705719, 'learning_rate': 1.1943298161282995e-05, 'epoch': 0.3094958968347011}
+2025-05-05 20:13:43,530 - INFO - INFO: Training progress: {'loss': 0.7131, 'grad_norm': 0.8289463520050049, 'learning_rate': 1.193347232128655e-05, 'epoch': 0.3235638921453693}
+2025-05-05 20:13:43,531 - INFO - Training progress: {'loss': 0.7131, 'grad_norm': 0.8289463520050049, 'learning_rate': 1.193347232128655e-05, 'epoch': 0.3235638921453693}
+2025-05-05 20:13:43,531 - INFO - Training metrics: {'loss': 0.7131, 'grad_norm': 0.8289463520050049, 'learning_rate': 1.193347232128655e-05, 'epoch': 0.3235638921453693}
+2025-05-05 20:18:38,950 - INFO - INFO: Training progress: {'loss': 0.748, 'grad_norm': 0.7068024277687073, 'learning_rate': 1.1922866466598386e-05, 'epoch': 0.3376318874560375}
+2025-05-05 20:18:38,950 - INFO - Training progress: {'loss': 0.748, 'grad_norm': 0.7068024277687073, 'learning_rate': 1.1922866466598386e-05, 'epoch': 0.3376318874560375}
+2025-05-05 20:18:38,950 - INFO - Training metrics: {'loss': 0.748, 'grad_norm': 0.7068024277687073, 'learning_rate': 1.1922866466598386e-05, 'epoch': 0.3376318874560375}
+2025-05-05 20:23:34,920 - INFO - INFO: Training progress: {'loss': 0.661, 'grad_norm': 0.773701012134552, 'learning_rate': 1.1911481991464915e-05, 'epoch': 0.3516998827667057}
+2025-05-05 20:23:34,920 - INFO - Training progress: {'loss': 0.661, 'grad_norm': 0.773701012134552, 'learning_rate': 1.1911481991464915e-05, 'epoch': 0.3516998827667057}
+2025-05-05 20:23:34,920 - INFO - Training metrics: {'loss': 0.661, 'grad_norm': 0.773701012134552, 'learning_rate': 1.1911481991464915e-05, 'epoch': 0.3516998827667057}
+2025-05-05 20:28:27,813 - INFO - INFO: Training progress: {'loss': 0.7022, 'grad_norm': 0.7999610304832458, 'learning_rate': 1.1899320392490044e-05, 'epoch': 0.365767878077374}
+2025-05-05 20:28:27,813 - INFO - Training progress: {'loss': 0.7022, 'grad_norm': 0.7999610304832458, 'learning_rate': 1.1899320392490044e-05, 'epoch': 0.365767878077374}
+2025-05-05 20:28:27,813 - INFO - Training metrics: {'loss': 0.7022, 'grad_norm': 0.7999610304832458, 'learning_rate': 1.1899320392490044e-05, 'epoch': 0.365767878077374}
+2025-05-05 20:33:18,749 - INFO - INFO: Training progress: {'loss': 0.708, 'grad_norm': 0.7334463000297546, 'learning_rate': 1.1886383268438436e-05, 'epoch': 0.3798358733880422}
+2025-05-05 20:33:18,749 - INFO - Training progress: {'loss': 0.708, 'grad_norm': 0.7334463000297546, 'learning_rate': 1.1886383268438436e-05, 'epoch': 0.3798358733880422}
+2025-05-05 20:33:18,749 - INFO - Training metrics: {'loss': 0.708, 'grad_norm': 0.7334463000297546, 'learning_rate': 1.1886383268438436e-05, 'epoch': 0.3798358733880422}
+2025-05-05 20:38:11,511 - INFO - INFO: Training progress: {'loss': 0.6757, 'grad_norm': 0.7443149089813232, 'learning_rate': 1.1872672320025333e-05, 'epoch': 0.3939038686987104}
+2025-05-05 20:38:11,511 - INFO - Training progress: {'loss': 0.6757, 'grad_norm': 0.7443149089813232, 'learning_rate': 1.1872672320025333e-05, 'epoch': 0.3939038686987104}
+2025-05-05 20:38:11,512 - INFO - Training metrics: {'loss': 0.6757, 'grad_norm': 0.7443149089813232, 'learning_rate': 1.1872672320025333e-05, 'epoch': 0.3939038686987104}
+2025-05-05 20:43:07,101 - INFO - INFO: Training progress: {'loss': 0.6531, 'grad_norm': 0.8160290718078613, 'learning_rate': 1.185818934969299e-05, 'epoch': 0.4079718640093787}
+2025-05-05 20:43:07,101 - INFO - Training progress: {'loss': 0.6531, 'grad_norm': 0.8160290718078613, 'learning_rate': 1.185818934969299e-05, 'epoch': 0.4079718640093787}
+2025-05-05 20:43:07,101 - INFO - Training metrics: {'loss': 0.6531, 'grad_norm': 0.8160290718078613, 'learning_rate': 1.185818934969299e-05, 'epoch': 0.4079718640093787}
+2025-05-05 20:48:11,984 - INFO - INFO: Training progress: {'loss': 0.6507, 'grad_norm': 0.8096330165863037, 'learning_rate': 1.1842936261373705e-05, 'epoch': 0.4220398593200469}
+2025-05-05 20:48:11,985 - INFO - Training progress: {'loss': 0.6507, 'grad_norm': 0.8096330165863037, 'learning_rate': 1.1842936261373705e-05, 'epoch': 0.4220398593200469}
+2025-05-05 20:48:11,985 - INFO - Training metrics: {'loss': 0.6507, 'grad_norm': 0.8096330165863037, 'learning_rate': 1.1842936261373705e-05, 'epoch': 0.4220398593200469}
+2025-05-05 20:53:09,029 - INFO - INFO: Training progress: {'loss': 0.7081, 'grad_norm': 1.1446287631988525, 'learning_rate': 1.1826915060239555e-05, 'epoch': 0.4361078546307151}
+2025-05-05 20:53:09,029 - INFO - Training progress: {'loss': 0.7081, 'grad_norm': 1.1446287631988525, 'learning_rate': 1.1826915060239555e-05, 'epoch': 0.4361078546307151}
+2025-05-05 20:53:09,029 - INFO - Training metrics: {'loss': 0.7081, 'grad_norm': 1.1446287631988525, 'learning_rate': 1.1826915060239555e-05, 'epoch': 0.4361078546307151}
+2025-05-05 20:58:02,211 - INFO - INFO: Training progress: {'loss': 0.6622, 'grad_norm': 0.6334291696548462, 'learning_rate': 1.1810127852438775e-05, 'epoch': 0.4501758499413834}
+2025-05-05 20:58:02,211 - INFO - Training progress: {'loss': 0.6622, 'grad_norm': 0.6334291696548462, 'learning_rate': 1.1810127852438775e-05, 'epoch': 0.4501758499413834}
+2025-05-05 20:58:02,211 - INFO - Training metrics: {'loss': 0.6622, 'grad_norm': 0.6334291696548462, 'learning_rate': 1.1810127852438775e-05, 'epoch': 0.4501758499413834}
+2025-05-05 21:02:54,320 - INFO - INFO: Training progress: {'loss': 0.6625, 'grad_norm': 0.8772621750831604, 'learning_rate': 1.1792576844818892e-05, 'epoch': 0.4642438452520516}
+2025-05-05 21:02:54,321 - INFO - Training progress: {'loss': 0.6625, 'grad_norm': 0.8772621750831604, 'learning_rate': 1.1792576844818892e-05, 'epoch': 0.4642438452520516}
+2025-05-05 21:02:54,321 - INFO - Training metrics: {'loss': 0.6625, 'grad_norm': 0.8772621750831604, 'learning_rate': 1.1792576844818892e-05, 'epoch': 0.4642438452520516}
+2025-05-05 21:07:47,218 - INFO - INFO: Training progress: {'loss': 0.6201, 'grad_norm': 0.899087131023407, 'learning_rate': 1.177426434463661e-05, 'epoch': 0.4783118405627198}
+2025-05-05 21:07:47,218 - INFO - Training progress: {'loss': 0.6201, 'grad_norm': 0.899087131023407, 'learning_rate': 1.177426434463661e-05, 'epoch': 0.4783118405627198}
+2025-05-05 21:07:47,218 - INFO - Training metrics: {'loss': 0.6201, 'grad_norm': 0.899087131023407, 'learning_rate': 1.177426434463661e-05, 'epoch': 0.4783118405627198}
+2025-05-05 21:12:39,493 - INFO - INFO: Training progress: {'loss': 0.6442, 'grad_norm': 0.8969616889953613, 'learning_rate': 1.17551927592545e-05, 'epoch': 0.492379835873388}
+2025-05-05 21:12:39,493 - INFO - Training progress: {'loss': 0.6442, 'grad_norm': 0.8969616889953613, 'learning_rate': 1.17551927592545e-05, 'epoch': 0.492379835873388}
+2025-05-05 21:12:39,493 - INFO - Training metrics: {'loss': 0.6442, 'grad_norm': 0.8969616889953613, 'learning_rate': 1.17551927592545e-05, 'epoch': 0.492379835873388}
+2025-05-05 21:28:16,630 - INFO - INFO: Training progress: {'eval_loss': 0.6105029582977295, 'eval_runtime': 937.1342, 'eval_samples_per_second': 1.705, 'eval_steps_per_second': 1.705, 'epoch': 0.492379835873388}
+2025-05-05 21:28:16,630 - INFO - Training progress: {'eval_loss': 0.6105029582977295, 'eval_runtime': 937.1342, 'eval_samples_per_second': 1.705, 'eval_steps_per_second': 1.705, 'epoch': 0.492379835873388}
+2025-05-05 21:28:16,630 - INFO - Training metrics: {'eval_loss': 0.6105029582977295, 'eval_runtime': 937.1342, 'eval_samples_per_second': 1.705, 'eval_steps_per_second': 1.705, 'epoch': 0.492379835873388}
+2025-05-05 21:28:18,265 - INFO - INFO: Saving checkpoint at step 350
+2025-05-05 21:28:18,265 - INFO - Saving checkpoint at step 350
+2025-05-05 21:28:18,266 - INFO - Saving checkpoint at step 350
+2025-05-05 21:33:14,062 - INFO - INFO: Training progress: {'loss': 0.6706, 'grad_norm': 0.8252206444740295, 'learning_rate': 1.173536459582453e-05, 'epoch': 0.5064478311840562}
+2025-05-05 21:33:14,062 - INFO - Training progress: {'loss': 0.6706, 'grad_norm': 0.8252206444740295, 'learning_rate': 1.173536459582453e-05, 'epoch': 0.5064478311840562}
+2025-05-05 21:33:14,062 - INFO - Training metrics: {'loss': 0.6706, 'grad_norm': 0.8252206444740295, 'learning_rate': 1.173536459582453e-05, 'epoch': 0.5064478311840562}
+2025-05-05 21:38:07,144 - INFO - INFO: Training progress: {'loss': 0.6614, 'grad_norm': 0.8292834758758545, 'learning_rate': 1.1714782460958466e-05, 'epoch': 0.5205158264947245}
+2025-05-05 21:38:07,144 - INFO - Training progress: {'loss': 0.6614, 'grad_norm': 0.8292834758758545, 'learning_rate': 1.1714782460958466e-05, 'epoch': 0.5205158264947245}
+2025-05-05 21:38:07,144 - INFO - Training metrics: {'loss': 0.6614, 'grad_norm': 0.8292834758758545, 'learning_rate': 1.1714782460958466e-05, 'epoch': 0.5205158264947245}
+2025-05-05 21:42:58,864 - INFO - INFO: Training progress: {'loss': 0.6374, 'grad_norm': 0.8126019835472107, 'learning_rate': 1.1693449060385217e-05, 'epoch': 0.5345838218053928}
+2025-05-05 21:42:58,864 - INFO - Training progress: {'loss': 0.6374, 'grad_norm': 0.8126019835472107, 'learning_rate': 1.1693449060385217e-05, 'epoch': 0.5345838218053928}
+2025-05-05 21:42:58,864 - INFO - Training metrics: {'loss': 0.6374, 'grad_norm': 0.8126019835472107, 'learning_rate': 1.1693449060385217e-05, 'epoch': 0.5345838218053928}
+2025-05-05 21:47:52,594 - INFO - INFO: Training progress: {'loss': 0.6533, 'grad_norm': 0.7968907356262207, 'learning_rate': 1.1671367198595136e-05, 'epoch': 0.5486518171160609}
+2025-05-05 21:47:52,594 - INFO - Training progress: {'loss': 0.6533, 'grad_norm': 0.7968907356262207, 'learning_rate': 1.1671367198595136e-05, 'epoch': 0.5486518171160609}
+2025-05-05 21:47:52,594 - INFO - Training metrics: {'loss': 0.6533, 'grad_norm': 0.7968907356262207, 'learning_rate': 1.1671367198595136e-05, 'epoch': 0.5486518171160609}
+2025-05-05 21:52:49,481 - INFO - INFO: Training progress: {'loss': 0.6066, 'grad_norm': 0.8265061378479004, 'learning_rate': 1.1648539778471334e-05, 'epoch': 0.5627198124267292}
+2025-05-05 21:52:49,482 - INFO - Training progress: {'loss': 0.6066, 'grad_norm': 0.8265061378479004, 'learning_rate': 1.1648539778471334e-05, 'epoch': 0.5627198124267292}
+2025-05-05 21:52:49,482 - INFO - Training metrics: {'loss': 0.6066, 'grad_norm': 0.8265061378479004, 'learning_rate': 1.1648539778471334e-05, 'epoch': 0.5627198124267292}
+2025-05-05 21:57:40,592 - INFO - INFO: Training progress: {'loss': 0.6486, 'grad_norm': 0.8448611497879028, 'learning_rate': 1.1624969800908083e-05, 'epoch': 0.5767878077373975}
+2025-05-05 21:57:40,593 - INFO - Training progress: {'loss': 0.6486, 'grad_norm': 0.8448611497879028, 'learning_rate': 1.1624969800908083e-05, 'epoch': 0.5767878077373975}
+2025-05-05 21:57:40,593 - INFO - Training metrics: {'loss': 0.6486, 'grad_norm': 0.8448611497879028, 'learning_rate': 1.1624969800908083e-05, 'epoch': 0.5767878077373975}
+2025-05-05 22:02:31,260 - INFO - INFO: Training progress: {'loss': 0.6424, 'grad_norm': 0.7945452928543091, 'learning_rate': 1.1600660364416298e-05, 'epoch': 0.5908558030480656}
+2025-05-05 22:02:31,260 - INFO - Training progress: {'loss': 0.6424, 'grad_norm': 0.7945452928543091, 'learning_rate': 1.1600660364416298e-05, 'epoch': 0.5908558030480656}
+2025-05-05 22:02:31,260 - INFO - Training metrics: {'loss': 0.6424, 'grad_norm': 0.7945452928543091, 'learning_rate': 1.1600660364416298e-05, 'epoch': 0.5908558030480656}
+2025-05-05 22:07:22,034 - INFO - INFO: Training progress: {'loss': 0.6279, 'grad_norm': 0.7138293981552124, 'learning_rate': 1.1575614664716225e-05, 'epoch': 0.6049237983587339}
+2025-05-05 22:07:22,034 - INFO - Training progress: {'loss': 0.6279, 'grad_norm': 0.7138293981552124, 'learning_rate': 1.1575614664716225e-05, 'epoch': 0.6049237983587339}
+2025-05-05 22:07:22,034 - INFO - Training metrics: {'loss': 0.6279, 'grad_norm': 0.7138293981552124, 'learning_rate': 1.1575614664716225e-05, 'epoch': 0.6049237983587339}
+2025-05-05 22:12:17,843 - INFO - INFO: Training progress: {'loss': 0.647, 'grad_norm': 0.7668639421463013, 'learning_rate': 1.154983599431732e-05, 'epoch': 0.6189917936694022}
+2025-05-05 22:12:17,843 - INFO - Training progress: {'loss': 0.647, 'grad_norm': 0.7668639421463013, 'learning_rate': 1.154983599431732e-05, 'epoch': 0.6189917936694022}
+2025-05-05 22:12:17,843 - INFO - Training metrics: {'loss': 0.647, 'grad_norm': 0.7668639421463013, 'learning_rate': 1.154983599431732e-05, 'epoch': 0.6189917936694022}
+2025-05-05 22:17:08,448 - INFO - INFO: Training progress: {'loss': 0.622, 'grad_norm': 0.8812457323074341, 'learning_rate': 1.1523327742085422e-05, 'epoch': 0.6330597889800703}
+2025-05-05 22:17:08,448 - INFO - Training progress: {'loss': 0.622, 'grad_norm': 0.8812457323074341, 'learning_rate': 1.1523327742085422e-05, 'epoch': 0.6330597889800703}
+2025-05-05 22:17:08,448 - INFO - Training metrics: {'loss': 0.622, 'grad_norm': 0.8812457323074341, 'learning_rate': 1.1523327742085422e-05, 'epoch': 0.6330597889800703}
+2025-05-05 22:22:02,099 - INFO - INFO: Training progress: {'loss': 0.6133, 'grad_norm': 0.81816565990448, 'learning_rate': 1.1496093392797246e-05, 'epoch': 0.6471277842907386}
+2025-05-05 22:22:02,100 - INFO - Training progress: {'loss': 0.6133, 'grad_norm': 0.81816565990448, 'learning_rate': 1.1496093392797246e-05, 'epoch': 0.6471277842907386}
+2025-05-05 22:22:02,100 - INFO - Training metrics: {'loss': 0.6133, 'grad_norm': 0.81816565990448, 'learning_rate': 1.1496093392797246e-05, 'epoch': 0.6471277842907386}
+2025-05-05 22:27:01,538 - INFO - INFO: Training progress: {'loss': 0.6853, 'grad_norm': 0.7993766665458679, 'learning_rate': 1.1468136526682278e-05, 'epoch': 0.6611957796014069}
+2025-05-05 22:27:01,539 - INFO - Training progress: {'loss': 0.6853, 'grad_norm': 0.7993766665458679, 'learning_rate': 1.1468136526682278e-05, 'epoch': 0.6611957796014069}
+2025-05-05 22:27:01,539 - INFO - Training metrics: {'loss': 0.6853, 'grad_norm': 0.7993766665458679, 'learning_rate': 1.1468136526682278e-05, 'epoch': 0.6611957796014069}
+2025-05-05 22:32:01,830 - INFO - INFO: Training progress: {'loss': 0.6137, 'grad_norm': 0.9440744519233704, 'learning_rate': 1.1439460818952116e-05, 'epoch': 0.675263774912075}
+2025-05-05 22:32:01,831 - INFO - Training progress: {'loss': 0.6137, 'grad_norm': 0.9440744519233704, 'learning_rate': 1.1439460818952116e-05, 'epoch': 0.675263774912075}
+2025-05-05 22:32:01,831 - INFO - Training metrics: {'loss': 0.6137, 'grad_norm': 0.9440744519233704, 'learning_rate': 1.1439460818952116e-05, 'epoch': 0.675263774912075}
+2025-05-05 22:37:00,783 - INFO - INFO: Training progress: {'loss': 0.646, 'grad_norm': 1.013601541519165, 'learning_rate': 1.1410070039317337e-05, 'epoch': 0.6893317702227433}
+2025-05-05 22:37:00,784 - INFO - Training progress: {'loss': 0.646, 'grad_norm': 1.013601541519165, 'learning_rate': 1.1410070039317337e-05, 'epoch': 0.6893317702227433}
+2025-05-05 22:37:00,784 - INFO - Training metrics: {'loss': 0.646, 'grad_norm': 1.013601541519165, 'learning_rate': 1.1410070039317337e-05, 'epoch': 0.6893317702227433}
+2025-05-05 22:42:00,162 - INFO - INFO: Training progress: {'loss': 0.5822, 'grad_norm': 1.018856167793274, 'learning_rate': 1.1379968051491909e-05, 'epoch': 0.7033997655334114}
+2025-05-05 22:42:00,162 - INFO - Training progress: {'loss': 0.5822, 'grad_norm': 1.018856167793274, 'learning_rate': 1.1379968051491909e-05, 'epoch': 0.7033997655334114}
+2025-05-05 22:42:00,163 - INFO - Training metrics: {'loss': 0.5822, 'grad_norm': 1.018856167793274, 'learning_rate': 1.1379968051491909e-05, 'epoch': 0.7033997655334114}
+2025-05-05 22:47:03,072 - INFO - INFO: Training progress: {'loss': 0.6169, 'grad_norm': 0.9691994786262512, 'learning_rate': 1.1349158812685283e-05, 'epoch': 0.7174677608440797}
+2025-05-05 22:47:03,072 - INFO - Training progress: {'loss': 0.6169, 'grad_norm': 0.9691994786262512, 'learning_rate': 1.1349158812685283e-05, 'epoch': 0.7174677608440797}
+2025-05-05 22:47:03,072 - INFO - Training metrics: {'loss': 0.6169, 'grad_norm': 0.9691994786262512, 'learning_rate': 1.1349158812685283e-05, 'epoch': 0.7174677608440797}
+2025-05-05 22:52:08,862 - INFO - INFO: Training progress: {'loss': 0.6316, 'grad_norm': 0.8374010920524597, 'learning_rate': 1.131764637308218e-05, 'epoch': 0.731535756154748}
+2025-05-05 22:52:08,863 - INFO - Training progress: {'loss': 0.6316, 'grad_norm': 0.8374010920524597, 'learning_rate': 1.131764637308218e-05, 'epoch': 0.731535756154748}
+2025-05-05 22:52:08,863 - INFO - Training metrics: {'loss': 0.6316, 'grad_norm': 0.8374010920524597, 'learning_rate': 1.131764637308218e-05, 'epoch': 0.731535756154748}
+2025-05-05 23:10:55,131 - INFO - INFO: Training progress: {'eval_loss': 0.5691944360733032, 'eval_runtime': 975.0287, 'eval_samples_per_second': 1.639, 'eval_steps_per_second': 1.639, 'epoch': 0.738569753810082}
+2025-05-05 23:10:55,132 - INFO - Training progress: {'eval_loss': 0.5691944360733032, 'eval_runtime': 975.0287, 'eval_samples_per_second': 1.639, 'eval_steps_per_second': 1.639, 'epoch': 0.738569753810082}
+2025-05-05 23:10:55,132 - INFO - Training metrics: {'eval_loss': 0.5691944360733032, 'eval_runtime': 975.0287, 'eval_samples_per_second': 1.639, 'eval_steps_per_second': 1.639, 'epoch': 0.738569753810082}
+2025-05-05 23:13:32,277 - INFO - INFO: Training progress: {'loss': 0.61, 'grad_norm': 0.9631035923957825, 'learning_rate': 1.1285434875310136e-05, 'epoch': 0.7456037514654161}
+2025-05-05 23:13:32,277 - INFO - Training progress: {'loss': 0.61, 'grad_norm': 0.9631035923957825, 'learning_rate': 1.1285434875310136e-05, 'epoch': 0.7456037514654161}
+2025-05-05 23:13:32,277 - INFO - Training metrics: {'loss': 0.61, 'grad_norm': 0.9631035923957825, 'learning_rate': 1.1285434875310136e-05, 'epoch': 0.7456037514654161}
+2025-05-05 23:18:47,503 - INFO - INFO: Training progress: {'loss': 0.6195, 'grad_norm': 0.8789438605308533, 'learning_rate': 1.1252528553894937e-05, 'epoch': 0.7596717467760844}
+2025-05-05 23:18:47,503 - INFO - Training progress: {'loss': 0.6195, 'grad_norm': 0.8789438605308533, 'learning_rate': 1.1252528553894937e-05, 'epoch': 0.7596717467760844}
+2025-05-05 23:18:47,503 - INFO - Training metrics: {'loss': 0.6195, 'grad_norm': 0.8789438605308533, 'learning_rate': 1.1252528553894937e-05, 'epoch': 0.7596717467760844}
+2025-05-05 23:23:50,902 - INFO - INFO: Training progress: {'loss': 0.6176, 'grad_norm': 1.21254563331604, 'learning_rate': 1.1218931734703922e-05, 'epoch': 0.7737397420867527}
+2025-05-05 23:23:50,903 - INFO - Training progress: {'loss': 0.6176, 'grad_norm': 1.21254563331604, 'learning_rate': 1.1218931734703922e-05, 'epoch': 0.7737397420867527}
+2025-05-05 23:23:50,903 - INFO - Training metrics: {'loss': 0.6176, 'grad_norm': 1.21254563331604, 'learning_rate': 1.1218931734703922e-05, 'epoch': 0.7737397420867527}
+2025-05-05 23:28:51,801 - INFO - INFO: Training progress: {'loss': 0.6022, 'grad_norm': 0.8309303522109985, 'learning_rate': 1.1184648834377327e-05, 'epoch': 0.7878077373974208}
+2025-05-05 23:28:51,801 - INFO - Training progress: {'loss': 0.6022, 'grad_norm': 0.8309303522109985, 'learning_rate': 1.1184648834377327e-05, 'epoch': 0.7878077373974208}
+2025-05-05 23:28:51,801 - INFO - Training metrics: {'loss': 0.6022, 'grad_norm': 0.8309303522109985, 'learning_rate': 1.1184648834377327e-05, 'epoch': 0.7878077373974208}
+2025-05-05 23:33:53,566 - INFO - INFO: Training progress: {'loss': 0.6236, 'grad_norm': 0.9257186055183411, 'learning_rate': 1.1149684359747655e-05, 'epoch': 0.8018757327080891}
+2025-05-05 23:33:53,567 - INFO - Training progress: {'loss': 0.6236, 'grad_norm': 0.9257186055183411, 'learning_rate': 1.1149684359747655e-05, 'epoch': 0.8018757327080891}
+2025-05-05 23:33:53,567 - INFO - Training metrics: {'loss': 0.6236, 'grad_norm': 0.9257186055183411, 'learning_rate': 1.1149684359747655e-05, 'epoch': 0.8018757327080891}
+2025-05-05 23:38:54,130 - INFO - INFO: Training progress: {'loss': 0.6005, 'grad_norm': 0.9492084383964539, 'learning_rate': 1.1114042907247216e-05, 'epoch': 0.8159437280187574}
+2025-05-05 23:38:54,131 - INFO - Training progress: {'loss': 0.6005, 'grad_norm': 0.9492084383964539, 'learning_rate': 1.1114042907247216e-05, 'epoch': 0.8159437280187574}
+2025-05-05 23:38:54,131 - INFO - Training metrics: {'loss': 0.6005, 'grad_norm': 0.9492084383964539, 'learning_rate': 1.1114042907247216e-05, 'epoch': 0.8159437280187574}
+2025-05-05 23:43:46,731 - INFO - INFO: Training progress: {'loss': 0.6007, 'grad_norm': 0.9380381107330322, 'learning_rate': 1.1077729162303884e-05, 'epoch': 0.8300117233294255}
+2025-05-05 23:43:46,731 - INFO - Training progress: {'loss': 0.6007, 'grad_norm': 0.9380381107330322, 'learning_rate': 1.1077729162303884e-05, 'epoch': 0.8300117233294255}
+2025-05-05 23:43:46,731 - INFO - Training metrics: {'loss': 0.6007, 'grad_norm': 0.9380381107330322, 'learning_rate': 1.1077729162303884e-05, 'epoch': 0.8300117233294255}
+2025-05-05 23:48:43,754 - INFO - INFO: Training progress: {'loss': 0.6364, 'grad_norm': 0.9932247996330261, 'learning_rate': 1.1040747898725141e-05, 'epoch': 0.8440797186400938}
+2025-05-05 23:48:43,754 - INFO - Training progress: {'loss': 0.6364, 'grad_norm': 0.9932247996330261, 'learning_rate': 1.1040747898725141e-05, 'epoch': 0.8440797186400938}
+2025-05-05 23:48:43,754 - INFO - Training metrics: {'loss': 0.6364, 'grad_norm': 0.9932247996330261, 'learning_rate': 1.1040747898725141e-05, 'epoch': 0.8440797186400938}
+2025-05-05 23:53:51,912 - INFO - INFO: Training progress: {'loss': 0.6, 'grad_norm': 1.0622766017913818, 'learning_rate': 1.1003103978070518e-05, 'epoch': 0.8581477139507621}
+2025-05-05 23:53:51,912 - INFO - Training progress: {'loss': 0.6, 'grad_norm': 1.0622766017913818, 'learning_rate': 1.1003103978070518e-05, 'epoch': 0.8581477139507621}
+2025-05-05 23:53:51,912 - INFO - Training metrics: {'loss': 0.6, 'grad_norm': 1.0622766017913818, 'learning_rate': 1.1003103978070518e-05, 'epoch': 0.8581477139507621}
+2025-05-05 23:58:51,038 - INFO - INFO: Training progress: {'loss': 0.6096, 'grad_norm': 0.9671998620033264, 'learning_rate': 1.0964802349012488e-05, 'epoch': 0.8722157092614302}
+2025-05-05 23:58:51,038 - INFO - Training progress: {'loss': 0.6096, 'grad_norm': 0.9671998620033264, 'learning_rate': 1.0964802349012488e-05, 'epoch': 0.8722157092614302}
+2025-05-05 23:58:51,038 - INFO - Training metrics: {'loss': 0.6096, 'grad_norm': 0.9671998620033264, 'learning_rate': 1.0964802349012488e-05, 'epoch': 0.8722157092614302}
+2025-05-06 00:03:52,409 - INFO - INFO: Training progress: {'loss': 0.6086, 'grad_norm': 0.973530650138855, 'learning_rate': 1.0925848046685923e-05, 'epoch': 0.8862837045720985}
+2025-05-06 00:03:52,409 - INFO - Training progress: {'loss': 0.6086, 'grad_norm': 0.973530650138855, 'learning_rate': 1.0925848046685923e-05, 'epoch': 0.8862837045720985}
+2025-05-06 00:03:52,409 - INFO - Training metrics: {'loss': 0.6086, 'grad_norm': 0.973530650138855, 'learning_rate': 1.0925848046685923e-05, 'epoch': 0.8862837045720985}
+2025-05-06 00:08:56,815 - INFO - INFO: Training progress: {'loss': 0.5729, 'grad_norm': 0.9632365703582764, 'learning_rate': 1.0886246192026166e-05, 'epoch': 0.9003516998827668}
+2025-05-06 00:08:56,815 - INFO - Training progress: {'loss': 0.5729, 'grad_norm': 0.9632365703582764, 'learning_rate': 1.0886246192026166e-05, 'epoch': 0.9003516998827668}
+2025-05-06 00:08:56,815 - INFO - Training metrics: {'loss': 0.5729, 'grad_norm': 0.9632365703582764, 'learning_rate': 1.0886246192026166e-05, 'epoch': 0.9003516998827668}
+2025-05-06 00:13:57,220 - INFO - INFO: Training progress: {'loss': 0.5529, 'grad_norm': 0.9551154375076294, 'learning_rate': 1.0846001991095835e-05, 'epoch': 0.9144196951934349}
+2025-05-06 00:13:57,220 - INFO - Training progress: {'loss': 0.5529, 'grad_norm': 0.9551154375076294, 'learning_rate': 1.0846001991095835e-05, 'epoch': 0.9144196951934349}
+2025-05-06 00:13:57,220 - INFO - Training metrics: {'loss': 0.5529, 'grad_norm': 0.9551154375076294, 'learning_rate': 1.0846001991095835e-05, 'epoch': 0.9144196951934349}
+2025-05-06 00:19:02,576 - INFO - INFO: Training progress: {'loss': 0.6285, 'grad_norm': 0.8919740319252014, 'learning_rate': 1.080512073440044e-05, 'epoch': 0.9284876905041032}
+2025-05-06 00:19:02,576 - INFO - Training progress: {'loss': 0.6285, 'grad_norm': 0.8919740319252014, 'learning_rate': 1.080512073440044e-05, 'epoch': 0.9284876905041032}
+2025-05-06 00:19:02,576 - INFO - Training metrics: {'loss': 0.6285, 'grad_norm': 0.8919740319252014, 'learning_rate': 1.080512073440044e-05, 'epoch': 0.9284876905041032}
+2025-05-06 00:23:56,885 - INFO - INFO: Training progress: {'loss': 0.6022, 'grad_norm': 1.2460294961929321, 'learning_rate': 1.0763607796192877e-05, 'epoch': 0.9425556858147714}
+2025-05-06 00:23:56,885 - INFO - Training progress: {'loss': 0.6022, 'grad_norm': 1.2460294961929321, 'learning_rate': 1.0763607796192877e-05, 'epoch': 0.9425556858147714}
+2025-05-06 00:23:56,885 - INFO - Training metrics: {'loss': 0.6022, 'grad_norm': 1.2460294961929321, 'learning_rate': 1.0763607796192877e-05, 'epoch': 0.9425556858147714}
+2025-05-06 00:28:56,724 - INFO - INFO: Training progress: {'loss': 0.6088, 'grad_norm': 1.032863974571228, 'learning_rate': 1.0721468633766944e-05, 'epoch': 0.9566236811254396}
+2025-05-06 00:28:56,724 - INFO - Training progress: {'loss': 0.6088, 'grad_norm': 1.032863974571228, 'learning_rate': 1.0721468633766944e-05, 'epoch': 0.9566236811254396}
+2025-05-06 00:28:56,724 - INFO - Training metrics: {'loss': 0.6088, 'grad_norm': 1.032863974571228, 'learning_rate': 1.0721468633766944e-05, 'epoch': 0.9566236811254396}
+2025-05-06 00:33:55,017 - INFO - INFO: Training progress: {'loss': 0.5824, 'grad_norm': 1.0304449796676636, 'learning_rate': 1.0678708786739924e-05, 'epoch': 0.9706916764361079}
+2025-05-06 00:33:55,017 - INFO - Training progress: {'loss': 0.5824, 'grad_norm': 1.0304449796676636, 'learning_rate': 1.0678708786739924e-05, 'epoch': 0.9706916764361079}
+2025-05-06 00:33:55,018 - INFO - Training metrics: {'loss': 0.5824, 'grad_norm': 1.0304449796676636, 'learning_rate': 1.0678708786739924e-05, 'epoch': 0.9706916764361079}
+2025-05-06 00:39:03,844 - INFO - INFO: Training progress: {'loss': 0.5929, 'grad_norm': 1.0170687437057495, 'learning_rate': 1.063533387632433e-05, 'epoch': 0.984759671746776}
+2025-05-06 00:39:03,844 - INFO - Training progress: {'loss': 0.5929, 'grad_norm': 1.0170687437057495, 'learning_rate': 1.063533387632433e-05, 'epoch': 0.984759671746776}
+2025-05-06 00:39:03,844 - INFO - Training metrics: {'loss': 0.5929, 'grad_norm': 1.0170687437057495, 'learning_rate': 1.063533387632433e-05, 'epoch': 0.984759671746776}
+2025-05-06 00:54:48,211 - INFO - INFO: Training progress: {'eval_loss': 0.5406585931777954, 'eval_runtime': 944.3637, 'eval_samples_per_second': 1.692, 'eval_steps_per_second': 1.692, 'epoch': 0.984759671746776}
+2025-05-06 00:54:48,211 - INFO - Training progress: {'eval_loss': 0.5406585931777954, 'eval_runtime': 944.3637, 'eval_samples_per_second': 1.692, 'eval_steps_per_second': 1.692, 'epoch': 0.984759671746776}
+2025-05-06 00:54:48,211 - INFO - Training metrics: {'eval_loss': 0.5406585931777954, 'eval_runtime': 944.3637, 'eval_samples_per_second': 1.692, 'eval_steps_per_second': 1.692, 'epoch': 0.984759671746776}
+2025-05-06 00:54:49,479 - INFO - INFO: Saving checkpoint at step 700
+2025-05-06 00:54:49,479 - INFO - Saving checkpoint at step 700
+2025-05-06 00:54:49,479 - INFO - Saving checkpoint at step 700
+2025-05-06 00:59:38,930 - INFO - INFO: Training progress: {'loss': 0.6286, 'grad_norm': 1.0323915481567383, 'learning_rate': 1.0591349604588964e-05, 'epoch': 0.9988276670574443}
+2025-05-06 00:59:38,930 - INFO - Training progress: {'loss': 0.6286, 'grad_norm': 1.0323915481567383, 'learning_rate': 1.0591349604588964e-05, 'epoch': 0.9988276670574443}
+2025-05-06 00:59:38,930 - INFO - Training metrics: {'loss': 0.6286, 'grad_norm': 1.0323915481567383, 'learning_rate': 1.0591349604588964e-05, 'epoch': 0.9988276670574443}
+2025-05-06 01:00:03,965 - INFO - INFO: Starting epoch 0.9988276670574443/4
+2025-05-06 01:00:03,965 - INFO - Starting epoch 0.9988276670574443/4
+2025-05-06 01:00:03,965 - INFO - Starting epoch 0.9988276670574443/4
+2025-05-06 01:04:54,471 - INFO - INFO: Training progress: {'loss': 0.6113, 'grad_norm': 1.2568987607955933, 'learning_rate': 1.05467617537093e-05, 'epoch': 1.0128956623681125}
+2025-05-06 01:04:54,471 - INFO - Training progress: {'loss': 0.6113, 'grad_norm': 1.2568987607955933, 'learning_rate': 1.05467617537093e-05, 'epoch': 1.0128956623681125}
+2025-05-06 01:04:54,471 - INFO - Training metrics: {'loss': 0.6113, 'grad_norm': 1.2568987607955933, 'learning_rate': 1.05467617537093e-05, 'epoch': 1.0128956623681125}
+2025-05-06 01:09:50,635 - INFO - INFO: Training progress: {'loss': 0.5821, 'grad_norm': 1.2242776155471802, 'learning_rate': 1.0501576185207376e-05, 'epoch': 1.0269636576787808}
+2025-05-06 01:09:50,635 - INFO - Training progress: {'loss': 0.5821, 'grad_norm': 1.2242776155471802, 'learning_rate': 1.0501576185207376e-05, 'epoch': 1.0269636576787808}
+2025-05-06 01:09:50,635 - INFO - Training metrics: {'loss': 0.5821, 'grad_norm': 1.2242776155471802, 'learning_rate': 1.0501576185207376e-05, 'epoch': 1.0269636576787808}
+2025-05-06 01:14:44,740 - INFO - INFO: Training progress: {'loss': 0.5655, 'grad_norm': 1.0611289739608765, 'learning_rate': 1.0455798839181228e-05, 'epoch': 1.041031652989449}
+2025-05-06 01:14:44,740 - INFO - Training progress: {'loss': 0.5655, 'grad_norm': 1.0611289739608765, 'learning_rate': 1.0455798839181228e-05, 'epoch': 1.041031652989449}
+2025-05-06 01:14:44,741 - INFO - Training metrics: {'loss': 0.5655, 'grad_norm': 1.0611289739608765, 'learning_rate': 1.0455798839181228e-05, 'epoch': 1.041031652989449}
+2025-05-06 01:19:43,695 - INFO - INFO: Training progress: {'loss': 0.5403, 'grad_norm': 1.0345587730407715, 'learning_rate': 1.0409435733524008e-05, 'epoch': 1.0550996483001172}
+2025-05-06 01:19:43,695 - INFO - Training progress: {'loss': 0.5403, 'grad_norm': 1.0345587730407715, 'learning_rate': 1.0409435733524008e-05, 'epoch': 1.0550996483001172}
+2025-05-06 01:19:43,695 - INFO - Training metrics: {'loss': 0.5403, 'grad_norm': 1.0345587730407715, 'learning_rate': 1.0409435733524008e-05, 'epoch': 1.0550996483001172}
+2025-05-06 01:24:37,523 - INFO - INFO: Training progress: {'loss': 0.5414, 'grad_norm': 1.1080988645553589, 'learning_rate': 1.0362492963132868e-05, 'epoch': 1.0691676436107855}
+2025-05-06 01:24:37,524 - INFO - Training progress: {'loss': 0.5414, 'grad_norm': 1.1080988645553589, 'learning_rate': 1.0362492963132868e-05, 'epoch': 1.0691676436107855}
+2025-05-06 01:24:37,524 - INFO - Training metrics: {'loss': 0.5414, 'grad_norm': 1.1080988645553589, 'learning_rate': 1.0362492963132868e-05, 'epoch': 1.0691676436107855}
+2025-05-06 01:29:40,450 - INFO - INFO: Training progress: {'loss': 0.5858, 'grad_norm': 1.0591974258422852, 'learning_rate': 1.0314976699107735e-05, 'epoch': 1.0832356389214537}
+2025-05-06 01:29:40,451 - INFO - Training progress: {'loss': 0.5858, 'grad_norm': 1.0591974258422852, 'learning_rate': 1.0314976699107735e-05, 'epoch': 1.0832356389214537}
+2025-05-06 01:29:40,451 - INFO - Training metrics: {'loss': 0.5858, 'grad_norm': 1.0591974258422852, 'learning_rate': 1.0314976699107735e-05, 'epoch': 1.0832356389214537}
+2025-05-06 01:34:32,720 - INFO - INFO: Training progress: {'loss': 0.6142, 'grad_norm': 1.182939052581787, 'learning_rate': 1.0266893187940035e-05, 'epoch': 1.0973036342321218}
+2025-05-06 01:34:32,720 - INFO - Training progress: {'loss': 0.6142, 'grad_norm': 1.182939052581787, 'learning_rate': 1.0266893187940035e-05, 'epoch': 1.0973036342321218}
+2025-05-06 01:34:32,721 - INFO - Training metrics: {'loss': 0.6142, 'grad_norm': 1.182939052581787, 'learning_rate': 1.0266893187940035e-05, 'epoch': 1.0973036342321218}
+2025-05-06 01:39:43,020 - INFO - INFO: Training progress: {'loss': 0.602, 'grad_norm': 1.0093262195587158, 'learning_rate': 1.0218248750691562e-05, 'epoch': 1.1113716295427902}
+2025-05-06 01:39:43,020 - INFO - Training progress: {'loss': 0.602, 'grad_norm': 1.0093262195587158, 'learning_rate': 1.0218248750691562e-05, 'epoch': 1.1113716295427902}
+2025-05-06 01:39:43,020 - INFO - Training metrics: {'loss': 0.602, 'grad_norm': 1.0093262195587158, 'learning_rate': 1.0218248750691562e-05, 'epoch': 1.1113716295427902}
+2025-05-06 01:44:42,487 - INFO - INFO: Training progress: {'loss': 0.5717, 'grad_norm': 1.0235971212387085, 'learning_rate': 1.0169049782163476e-05, 'epoch': 1.1254396248534584}
+2025-05-06 01:44:42,487 - INFO - Training progress: {'loss': 0.5717, 'grad_norm': 1.0235971212387085, 'learning_rate': 1.0169049782163476e-05, 'epoch': 1.1254396248534584}
+2025-05-06 01:44:42,487 - INFO - Training metrics: {'loss': 0.5717, 'grad_norm': 1.0235971212387085, 'learning_rate': 1.0169049782163476e-05, 'epoch': 1.1254396248534584}
+2025-05-06 01:49:38,402 - INFO - INFO: Training progress: {'loss': 0.5941, 'grad_norm': 1.200684666633606, 'learning_rate': 1.011930275005567e-05, 'epoch': 1.1395076201641265}
+2025-05-06 01:49:38,403 - INFO - Training progress: {'loss': 0.5941, 'grad_norm': 1.200684666633606, 'learning_rate': 1.011930275005567e-05, 'epoch': 1.1395076201641265}
+2025-05-06 01:49:38,403 - INFO - Training metrics: {'loss': 0.5941, 'grad_norm': 1.200684666633606, 'learning_rate': 1.011930275005567e-05, 'epoch': 1.1395076201641265}
+2025-05-06 01:54:46,407 - INFO - INFO: Training progress: {'loss': 0.5688, 'grad_norm': 1.041163682937622, 'learning_rate': 1.0069014194116505e-05, 'epoch': 1.153575615474795}
+2025-05-06 01:54:46,407 - INFO - Training progress: {'loss': 0.5688, 'grad_norm': 1.041163682937622, 'learning_rate': 1.0069014194116505e-05, 'epoch': 1.153575615474795}
+2025-05-06 01:54:46,407 - INFO - Training metrics: {'loss': 0.5688, 'grad_norm': 1.041163682937622, 'learning_rate': 1.0069014194116505e-05, 'epoch': 1.153575615474795}
+2025-05-06 01:59:45,996 - INFO - INFO: Training progress: {'loss': 0.5374, 'grad_norm': 1.1367552280426025, 'learning_rate': 1.0018190725283112e-05, 'epoch': 1.167643610785463}
+2025-05-06 01:59:45,996 - INFO - Training progress: {'loss': 0.5374, 'grad_norm': 1.1367552280426025, 'learning_rate': 1.0018190725283112e-05, 'epoch': 1.167643610785463}
+2025-05-06 01:59:45,996 - INFO - Training metrics: {'loss': 0.5374, 'grad_norm': 1.1367552280426025, 'learning_rate': 1.0018190725283112e-05, 'epoch': 1.167643610785463}
+2025-05-06 02:04:40,840 - INFO - INFO: Training progress: {'loss': 0.5276, 'grad_norm': 1.0266958475112915, 'learning_rate': 9.966839024812301e-06, 'epoch': 1.1817116060961312}
+2025-05-06 02:04:40,841 - INFO - Training progress: {'loss': 0.5276, 'grad_norm': 1.0266958475112915, 'learning_rate': 9.966839024812301e-06, 'epoch': 1.1817116060961312}
+2025-05-06 02:04:40,841 - INFO - Training metrics: {'loss': 0.5276, 'grad_norm': 1.0266958475112915, 'learning_rate': 9.966839024812301e-06, 'epoch': 1.1817116060961312}
+2025-05-06 02:09:35,394 - INFO - INFO: Training progress: {'loss': 0.4883, 'grad_norm': 1.0158820152282715, 'learning_rate': 9.914965843402256e-06, 'epoch': 1.1957796014067996}
+2025-05-06 02:09:35,394 - INFO - Training progress: {'loss': 0.4883, 'grad_norm': 1.0158820152282715, 'learning_rate': 9.914965843402256e-06, 'epoch': 1.1957796014067996}
+2025-05-06 02:09:35,394 - INFO - Training metrics: {'loss': 0.4883, 'grad_norm': 1.0158820152282715, 'learning_rate': 9.914965843402256e-06, 'epoch': 1.1957796014067996}
+2025-05-06 02:14:49,060 - INFO - INFO: Training progress: {'loss': 0.5541, 'grad_norm': 1.2684234380722046, 'learning_rate': 9.862578000305078e-06, 'epoch': 1.2098475967174678}
+2025-05-06 02:14:49,061 - INFO - Training progress: {'loss': 0.5541, 'grad_norm': 1.2684234380722046, 'learning_rate': 9.862578000305078e-06, 'epoch': 1.2098475967174678}
+2025-05-06 02:14:49,061 - INFO - Training metrics: {'loss': 0.5541, 'grad_norm': 1.2684234380722046, 'learning_rate': 9.862578000305078e-06, 'epoch': 1.2098475967174678}
+2025-05-06 02:20:14,005 - INFO - INFO: Training progress: {'loss': 0.5581, 'grad_norm': 0.9784125685691833, 'learning_rate': 9.809682382430334e-06, 'epoch': 1.223915592028136}
+2025-05-06 02:20:14,005 - INFO - Training progress: {'loss': 0.5581, 'grad_norm': 0.9784125685691833, 'learning_rate': 9.809682382430334e-06, 'epoch': 1.223915592028136}
+2025-05-06 02:20:14,005 - INFO - Training metrics: {'loss': 0.5581, 'grad_norm': 0.9784125685691833, 'learning_rate': 9.809682382430334e-06, 'epoch': 1.223915592028136}
+2025-05-06 02:39:12,252 - INFO - INFO: Training progress: {'eval_loss': 0.5193649530410767, 'eval_runtime': 985.5129, 'eval_samples_per_second': 1.621, 'eval_steps_per_second': 1.621, 'epoch': 1.2309495896834701}
+2025-05-06 02:39:12,253 - INFO - Training progress: {'eval_loss': 0.5193649530410767, 'eval_runtime': 985.5129, 'eval_samples_per_second': 1.621, 'eval_steps_per_second': 1.621, 'epoch': 1.2309495896834701}
+2025-05-06 02:39:12,253 - INFO - Training metrics: {'eval_loss': 0.5193649530410767, 'eval_runtime': 985.5129, 'eval_samples_per_second': 1.621, 'eval_steps_per_second': 1.621, 'epoch': 1.2309495896834701}
+2025-05-06 02:41:44,189 - INFO - INFO: Training progress: {'loss': 0.5586, 'grad_norm': 1.3326352834701538, 'learning_rate': 9.756285943439697e-06, 'epoch': 1.2379835873388043}
+2025-05-06 02:41:44,189 - INFO - Training progress: {'loss': 0.5586, 'grad_norm': 1.3326352834701538, 'learning_rate': 9.756285943439697e-06, 'epoch': 1.2379835873388043}
+2025-05-06 02:41:44,189 - INFO - Training metrics: {'loss': 0.5586, 'grad_norm': 1.3326352834701538, 'learning_rate': 9.756285943439697e-06, 'epoch': 1.2379835873388043}
+2025-05-06 02:46:45,171 - INFO - INFO: Training progress: {'loss': 0.574, 'grad_norm': 1.1139748096466064, 'learning_rate': 9.702395702832818e-06, 'epoch': 1.2520515826494725}
+2025-05-06 02:46:45,171 - INFO - Training progress: {'loss': 0.574, 'grad_norm': 1.1139748096466064, 'learning_rate': 9.702395702832818e-06, 'epoch': 1.2520515826494725}
+2025-05-06 02:46:45,171 - INFO - Training metrics: {'loss': 0.574, 'grad_norm': 1.1139748096466064, 'learning_rate': 9.702395702832818e-06, 'epoch': 1.2520515826494725}
+2025-05-06 02:51:48,234 - INFO - INFO: Training progress: {'loss': 0.5953, 'grad_norm': 1.361660361289978, 'learning_rate': 9.648018745024547e-06, 'epoch': 1.2661195779601406}
+2025-05-06 02:51:48,235 - INFO - Training progress: {'loss': 0.5953, 'grad_norm': 1.361660361289978, 'learning_rate': 9.648018745024547e-06, 'epoch': 1.2661195779601406}
+2025-05-06 02:51:48,235 - INFO - Training metrics: {'loss': 0.5953, 'grad_norm': 1.361660361289978, 'learning_rate': 9.648018745024547e-06, 'epoch': 1.2661195779601406}
+2025-05-06 02:56:42,096 - INFO - INFO: Training progress: {'loss': 0.5307, 'grad_norm': 0.9892162680625916, 'learning_rate': 9.593162218413606e-06, 'epoch': 1.2801875732708088}
+2025-05-06 02:56:42,096 - INFO - Training progress: {'loss': 0.5307, 'grad_norm': 0.9892162680625916, 'learning_rate': 9.593162218413606e-06, 'epoch': 1.2801875732708088}
+2025-05-06 02:56:42,096 - INFO - Training metrics: {'loss': 0.5307, 'grad_norm': 0.9892162680625916, 'learning_rate': 9.593162218413606e-06, 'epoch': 1.2801875732708088}
+2025-05-06 03:01:52,518 - INFO - INFO: Training progress: {'loss': 0.51, 'grad_norm': 1.053062915802002, 'learning_rate': 9.537833334442876e-06, 'epoch': 1.2942555685814772}
+2025-05-06 03:01:52,518 - INFO - Training progress: {'loss': 0.51, 'grad_norm': 1.053062915802002, 'learning_rate': 9.537833334442876e-06, 'epoch': 1.2942555685814772}
+2025-05-06 03:01:52,518 - INFO - Training metrics: {'loss': 0.51, 'grad_norm': 1.053062915802002, 'learning_rate': 9.537833334442876e-06, 'epoch': 1.2942555685814772}
+2025-05-06 03:06:40,749 - INFO - INFO: Training progress: {'loss': 0.5206, 'grad_norm': 1.1034436225891113, 'learning_rate': 9.48203936665136e-06, 'epoch': 1.3083235638921453}
+2025-05-06 03:06:40,749 - INFO - Training progress: {'loss': 0.5206, 'grad_norm': 1.1034436225891113, 'learning_rate': 9.48203936665136e-06, 'epoch': 1.3083235638921453}
+2025-05-06 03:06:40,749 - INFO - Training metrics: {'loss': 0.5206, 'grad_norm': 1.1034436225891113, 'learning_rate': 9.48203936665136e-06, 'epoch': 1.3083235638921453}
+2025-05-06 03:11:27,390 - INFO - INFO: Training progress: {'loss': 0.5121, 'grad_norm': 1.3707594871520996, 'learning_rate': 9.425787649718016e-06, 'epoch': 1.3223915592028135}
+2025-05-06 03:11:27,392 - INFO - Training progress: {'loss': 0.5121, 'grad_norm': 1.3707594871520996, 'learning_rate': 9.425787649718016e-06, 'epoch': 1.3223915592028135}
+2025-05-06 03:11:27,392 - INFO - Training metrics: {'loss': 0.5121, 'grad_norm': 1.3707594871520996, 'learning_rate': 9.425787649718016e-06, 'epoch': 1.3223915592028135}
+2025-05-06 03:16:14,137 - INFO - INFO: Training progress: {'loss': 0.5379, 'grad_norm': 1.3584392070770264, 'learning_rate': 9.369085578497537e-06, 'epoch': 1.3364595545134819}
+2025-05-06 03:16:14,137 - INFO - Training progress: {'loss': 0.5379, 'grad_norm': 1.3584392070770264, 'learning_rate': 9.369085578497537e-06, 'epoch': 1.3364595545134819}
+2025-05-06 03:16:14,137 - INFO - Training metrics: {'loss': 0.5379, 'grad_norm': 1.3584392070770264, 'learning_rate': 9.369085578497537e-06, 'epoch': 1.3364595545134819}
+2025-05-06 03:21:01,647 - INFO - INFO: Training progress: {'loss': 0.5561, 'grad_norm': 1.3367828130722046, 'learning_rate': 9.311940607048226e-06, 'epoch': 1.35052754982415}
+2025-05-06 03:21:01,647 - INFO - Training progress: {'loss': 0.5561, 'grad_norm': 1.3367828130722046, 'learning_rate': 9.311940607048226e-06, 'epoch': 1.35052754982415}
+2025-05-06 03:21:01,648 - INFO - Training metrics: {'loss': 0.5561, 'grad_norm': 1.3367828130722046, 'learning_rate': 9.311940607048226e-06, 'epoch': 1.35052754982415}
+2025-05-06 03:25:48,746 - INFO - INFO: Training progress: {'loss': 0.5354, 'grad_norm': 1.1789751052856445, 'learning_rate': 9.254360247652076e-06, 'epoch': 1.3645955451348182}
+2025-05-06 03:25:48,746 - INFO - Training progress: {'loss': 0.5354, 'grad_norm': 1.1789751052856445, 'learning_rate': 9.254360247652076e-06, 'epoch': 1.3645955451348182}
+2025-05-06 03:25:48,747 - INFO - Training metrics: {'loss': 0.5354, 'grad_norm': 1.1789751052856445, 'learning_rate': 9.254360247652076e-06, 'epoch': 1.3645955451348182}
+2025-05-06 03:30:36,039 - INFO - INFO: Training progress: {'loss': 0.5811, 'grad_norm': 1.1305609941482544, 'learning_rate': 9.196352069827212e-06, 'epoch': 1.3786635404454866}
+2025-05-06 03:30:36,039 - INFO - Training progress: {'loss': 0.5811, 'grad_norm': 1.1305609941482544, 'learning_rate': 9.196352069827212e-06, 'epoch': 1.3786635404454866}
+2025-05-06 03:30:36,039 - INFO - Training metrics: {'loss': 0.5811, 'grad_norm': 1.1305609941482544, 'learning_rate': 9.196352069827212e-06, 'epoch': 1.3786635404454866}
+2025-05-06 03:35:23,165 - INFO - INFO: Training progress: {'loss': 0.5146, 'grad_norm': 1.41120445728302, 'learning_rate': 9.1379236993328e-06, 'epoch': 1.3927315357561547}
+2025-05-06 03:35:23,165 - INFO - Training progress: {'loss': 0.5146, 'grad_norm': 1.41120445728302, 'learning_rate': 9.1379236993328e-06, 'epoch': 1.3927315357561547}
+2025-05-06 03:35:23,166 - INFO - Training metrics: {'loss': 0.5146, 'grad_norm': 1.41120445728302, 'learning_rate': 9.1379236993328e-06, 'epoch': 1.3927315357561547}
+2025-05-06 03:40:10,732 - INFO - INFO: Training progress: {'loss': 0.5245, 'grad_norm': 1.1406108140945435, 'learning_rate': 9.079082817166567e-06, 'epoch': 1.4067995310668229}
+2025-05-06 03:40:10,732 - INFO - Training progress: {'loss': 0.5245, 'grad_norm': 1.1406108140945435, 'learning_rate': 9.079082817166567e-06, 'epoch': 1.4067995310668229}
+2025-05-06 03:40:10,732 - INFO - Training metrics: {'loss': 0.5245, 'grad_norm': 1.1406108140945435, 'learning_rate': 9.079082817166567e-06, 'epoch': 1.4067995310668229}
+2025-05-06 03:44:57,921 - INFO - INFO: Training progress: {'loss': 0.5237, 'grad_norm': 1.2906911373138428, 'learning_rate': 9.019837158555048e-06, 'epoch': 1.4208675263774913}
+2025-05-06 03:44:57,921 - INFO - Training progress: {'loss': 0.5237, 'grad_norm': 1.2906911373138428, 'learning_rate': 9.019837158555048e-06, 'epoch': 1.4208675263774913}
+2025-05-06 03:44:57,921 - INFO - Training metrics: {'loss': 0.5237, 'grad_norm': 1.2906911373138428, 'learning_rate': 9.019837158555048e-06, 'epoch': 1.4208675263774913}
+2025-05-06 03:49:45,166 - INFO - INFO: Training progress: {'loss': 0.5552, 'grad_norm': 1.3352067470550537, 'learning_rate': 8.960194511936725e-06, 'epoch': 1.4349355216881594}
+2025-05-06 03:49:45,166 - INFO - Training progress: {'loss': 0.5552, 'grad_norm': 1.3352067470550537, 'learning_rate': 8.960194511936725e-06, 'epoch': 1.4349355216881594}
+2025-05-06 03:49:45,166 - INFO - Training metrics: {'loss': 0.5552, 'grad_norm': 1.3352067470550537, 'learning_rate': 8.960194511936725e-06, 'epoch': 1.4349355216881594}
+2025-05-06 03:54:32,181 - INFO - INFO: Training progress: {'loss': 0.5132, 'grad_norm': 1.2258391380310059, 'learning_rate': 8.900162717938146e-06, 'epoch': 1.4490035169988276}
+2025-05-06 03:54:32,181 - INFO - Training progress: {'loss': 0.5132, 'grad_norm': 1.2258391380310059, 'learning_rate': 8.900162717938146e-06, 'epoch': 1.4490035169988276}
+2025-05-06 03:54:32,181 - INFO - Training metrics: {'loss': 0.5132, 'grad_norm': 1.2258391380310059, 'learning_rate': 8.900162717938146e-06, 'epoch': 1.4490035169988276}
+2025-05-06 03:59:19,490 - INFO - INFO: Training progress: {'loss': 0.4962, 'grad_norm': 1.3641505241394043, 'learning_rate': 8.8397496683432e-06, 'epoch': 1.463071512309496}
+2025-05-06 03:59:19,491 - INFO - Training progress: {'loss': 0.4962, 'grad_norm': 1.3641505241394043, 'learning_rate': 8.8397496683432e-06, 'epoch': 1.463071512309496}
+2025-05-06 03:59:19,491 - INFO - Training metrics: {'loss': 0.4962, 'grad_norm': 1.3641505241394043, 'learning_rate': 8.8397496683432e-06, 'epoch': 1.463071512309496}
+2025-05-06 04:04:06,406 - INFO - INFO: Training progress: {'loss': 0.5604, 'grad_norm': 1.291452169418335, 'learning_rate': 8.778963305055674e-06, 'epoch': 1.477139507620164}
+2025-05-06 04:04:06,406 - INFO - Training progress: {'loss': 0.5604, 'grad_norm': 1.291452169418335, 'learning_rate': 8.778963305055674e-06, 'epoch': 1.477139507620164}
+2025-05-06 04:04:06,406 - INFO - Training metrics: {'loss': 0.5604, 'grad_norm': 1.291452169418335, 'learning_rate': 8.778963305055674e-06, 'epoch': 1.477139507620164}
+2025-05-06 04:19:36,507 - INFO - INFO: Training progress: {'eval_loss': 0.5005924105644226, 'eval_runtime': 930.0985, 'eval_samples_per_second': 1.718, 'eval_steps_per_second': 1.718, 'epoch': 1.477139507620164}
+2025-05-06 04:19:36,507 - INFO - Training progress: {'eval_loss': 0.5005924105644226, 'eval_runtime': 930.0985, 'eval_samples_per_second': 1.718, 'eval_steps_per_second': 1.718, 'epoch': 1.477139507620164}
+2025-05-06 04:19:36,508 - INFO - Training metrics: {'eval_loss': 0.5005924105644226, 'eval_runtime': 930.0985, 'eval_samples_per_second': 1.718, 'eval_steps_per_second': 1.718, 'epoch': 1.477139507620164}
+2025-05-06 04:19:37,743 - INFO - INFO: Saving checkpoint at step 1050
+2025-05-06 04:19:37,743 - INFO - Saving checkpoint at step 1050
+2025-05-06 04:19:37,743 - INFO - Saving checkpoint at step 1050
+2025-05-06 04:24:25,203 - INFO - INFO: Training progress: {'loss': 0.5314, 'grad_norm': 1.3729819059371948, 'learning_rate': 8.717811619055185e-06, 'epoch': 1.4912075029308323}
+2025-05-06 04:24:25,204 - INFO - Training progress: {'loss': 0.5314, 'grad_norm': 1.3729819059371948, 'learning_rate': 8.717811619055185e-06, 'epoch': 1.4912075029308323}
+2025-05-06 04:24:25,204 - INFO - Training metrics: {'loss': 0.5314, 'grad_norm': 1.3729819059371948, 'learning_rate': 8.717811619055185e-06, 'epoch': 1.4912075029308323}
+2025-05-06 04:29:11,946 - INFO - INFO: Training progress: {'loss': 0.5243, 'grad_norm': 1.1245219707489014, 'learning_rate': 8.656302649346712e-06, 'epoch': 1.5052754982415006}
+2025-05-06 04:29:11,946 - INFO - Training progress: {'loss': 0.5243, 'grad_norm': 1.1245219707489014, 'learning_rate': 8.656302649346712e-06, 'epoch': 1.5052754982415006}
+2025-05-06 04:29:11,946 - INFO - Training metrics: {'loss': 0.5243, 'grad_norm': 1.1245219707489014, 'learning_rate': 8.656302649346712e-06, 'epoch': 1.5052754982415006}
+2025-05-06 04:33:59,158 - INFO - INFO: Training progress: {'loss': 0.5133, 'grad_norm': 1.6545568704605103, 'learning_rate': 8.59444448190377e-06, 'epoch': 1.5193434935521688}
+2025-05-06 04:33:59,158 - INFO - Training progress: {'loss': 0.5133, 'grad_norm': 1.6545568704605103, 'learning_rate': 8.59444448190377e-06, 'epoch': 1.5193434935521688}
+2025-05-06 04:33:59,158 - INFO - Training metrics: {'loss': 0.5133, 'grad_norm': 1.6545568704605103, 'learning_rate': 8.59444448190377e-06, 'epoch': 1.5193434935521688}
+2025-05-06 04:38:46,203 - INFO - INFO: Training progress: {'loss': 0.5165, 'grad_norm': 1.3706406354904175, 'learning_rate': 8.532245248605428e-06, 'epoch': 1.533411488862837}
+2025-05-06 04:38:46,204 - INFO - Training progress: {'loss': 0.5165, 'grad_norm': 1.3706406354904175, 'learning_rate': 8.532245248605428e-06, 'epoch': 1.533411488862837}
+2025-05-06 04:38:46,204 - INFO - Training metrics: {'loss': 0.5165, 'grad_norm': 1.3706406354904175, 'learning_rate': 8.532245248605428e-06, 'epoch': 1.533411488862837}
+2025-05-06 04:43:34,127 - INFO - INFO: Training progress: {'loss': 0.5393, 'grad_norm': 1.3180302381515503, 'learning_rate': 8.469713126167308e-06, 'epoch': 1.5474794841735053}
+2025-05-06 04:43:34,127 - INFO - Training progress: {'loss': 0.5393, 'grad_norm': 1.3180302381515503, 'learning_rate': 8.469713126167308e-06, 'epoch': 1.5474794841735053}
+2025-05-06 04:43:34,127 - INFO - Training metrics: {'loss': 0.5393, 'grad_norm': 1.3180302381515503, 'learning_rate': 8.469713126167308e-06, 'epoch': 1.5474794841735053}
+2025-05-06 04:48:21,440 - INFO - INFO: Training progress: {'loss': 0.5186, 'grad_norm': 1.199748158454895, 'learning_rate': 8.406856335066654e-06, 'epoch': 1.5615474794841735}
+2025-05-06 04:48:21,440 - INFO - Training progress: {'loss': 0.5186, 'grad_norm': 1.199748158454895, 'learning_rate': 8.406856335066654e-06, 'epoch': 1.5615474794841735}
+2025-05-06 04:48:21,440 - INFO - Training metrics: {'loss': 0.5186, 'grad_norm': 1.199748158454895, 'learning_rate': 8.406856335066654e-06, 'epoch': 1.5615474794841735}
+2025-05-06 04:53:09,111 - INFO - INFO: Training progress: {'loss': 0.5154, 'grad_norm': 1.0893847942352295, 'learning_rate': 8.343683138461675e-06, 'epoch': 1.5756154747948417}
+2025-05-06 04:53:09,111 - INFO - Training progress: {'loss': 0.5154, 'grad_norm': 1.0893847942352295, 'learning_rate': 8.343683138461675e-06, 'epoch': 1.5756154747948417}
+2025-05-06 04:53:09,111 - INFO - Training metrics: {'loss': 0.5154, 'grad_norm': 1.0893847942352295, 'learning_rate': 8.343683138461675e-06, 'epoch': 1.5756154747948417}
+2025-05-06 04:57:56,390 - INFO - INFO: Training progress: {'loss': 0.5316, 'grad_norm': 1.498070478439331, 'learning_rate': 8.280201841105277e-06, 'epoch': 1.58968347010551}
+2025-05-06 04:57:56,390 - INFO - Training progress: {'loss': 0.5316, 'grad_norm': 1.498070478439331, 'learning_rate': 8.280201841105277e-06, 'epoch': 1.58968347010551}
+2025-05-06 04:57:56,390 - INFO - Training metrics: {'loss': 0.5316, 'grad_norm': 1.498070478439331, 'learning_rate': 8.280201841105277e-06, 'epoch': 1.58968347010551}
+2025-05-06 05:02:43,769 - INFO - INFO: Training progress: {'loss': 0.5217, 'grad_norm': 1.5004702806472778, 'learning_rate': 8.216420788253304e-06, 'epoch': 1.6037514654161782}
+2025-05-06 05:02:43,769 - INFO - Training progress: {'loss': 0.5217, 'grad_norm': 1.5004702806472778, 'learning_rate': 8.216420788253304e-06, 'epoch': 1.6037514654161782}
+2025-05-06 05:02:43,769 - INFO - Training metrics: {'loss': 0.5217, 'grad_norm': 1.5004702806472778, 'learning_rate': 8.216420788253304e-06, 'epoch': 1.6037514654161782}
+2025-05-06 05:07:30,899 - INFO - INFO: Training progress: {'loss': 0.5149, 'grad_norm': 1.6852059364318848, 'learning_rate': 8.152348364567485e-06, 'epoch': 1.6178194607268463}
+2025-05-06 05:07:30,899 - INFO - Training progress: {'loss': 0.5149, 'grad_norm': 1.6852059364318848, 'learning_rate': 8.152348364567485e-06, 'epoch': 1.6178194607268463}
+2025-05-06 05:07:30,899 - INFO - Training metrics: {'loss': 0.5149, 'grad_norm': 1.6852059364318848, 'learning_rate': 8.152348364567485e-06, 'epoch': 1.6178194607268463}
+2025-05-06 05:12:18,114 - INFO - INFO: Training progress: {'loss': 0.5541, 'grad_norm': 1.4465538263320923, 'learning_rate': 8.087992993013171e-06, 'epoch': 1.6318874560375147}
+2025-05-06 05:12:18,114 - INFO - Training progress: {'loss': 0.5541, 'grad_norm': 1.4465538263320923, 'learning_rate': 8.087992993013171e-06, 'epoch': 1.6318874560375147}
+2025-05-06 05:12:18,114 - INFO - Training metrics: {'loss': 0.5541, 'grad_norm': 1.4465538263320923, 'learning_rate': 8.087992993013171e-06, 'epoch': 1.6318874560375147}
+2025-05-06 05:17:05,426 - INFO - INFO: Training progress: {'loss': 0.5459, 'grad_norm': 1.4520343542099, 'learning_rate': 8.023363133752073e-06, 'epoch': 1.6459554513481829}
+2025-05-06 05:17:05,426 - INFO - Training progress: {'loss': 0.5459, 'grad_norm': 1.4520343542099, 'learning_rate': 8.023363133752073e-06, 'epoch': 1.6459554513481829}
+2025-05-06 05:17:05,426 - INFO - Training metrics: {'loss': 0.5459, 'grad_norm': 1.4520343542099, 'learning_rate': 8.023363133752073e-06, 'epoch': 1.6459554513481829}
+2025-05-06 05:21:52,381 - INFO - INFO: Training progress: {'loss': 0.5011, 'grad_norm': 1.2345198392868042, 'learning_rate': 7.958467283030067e-06, 'epoch': 1.660023446658851}
+2025-05-06 05:21:52,381 - INFO - Training progress: {'loss': 0.5011, 'grad_norm': 1.2345198392868042, 'learning_rate': 7.958467283030067e-06, 'epoch': 1.660023446658851}
+2025-05-06 05:21:52,381 - INFO - Training metrics: {'loss': 0.5011, 'grad_norm': 1.2345198392868042, 'learning_rate': 7.958467283030067e-06, 'epoch': 1.660023446658851}
+2025-05-06 05:26:39,404 - INFO - INFO: Training progress: {'loss': 0.5289, 'grad_norm': 1.1889677047729492, 'learning_rate': 7.893313972060284e-06, 'epoch': 1.6740914419695194}
+2025-05-06 05:26:39,404 - INFO - Training progress: {'loss': 0.5289, 'grad_norm': 1.1889677047729492, 'learning_rate': 7.893313972060284e-06, 'epoch': 1.6740914419695194}
+2025-05-06 05:26:39,404 - INFO - Training metrics: {'loss': 0.5289, 'grad_norm': 1.1889677047729492, 'learning_rate': 7.893313972060284e-06, 'epoch': 1.6740914419695194}
+2025-05-06 05:31:26,158 - INFO - INFO: Training progress: {'loss': 0.5503, 'grad_norm': 1.7219330072402954, 'learning_rate': 7.8279117659016e-06, 'epoch': 1.6881594372801876}
+2025-05-06 05:31:26,159 - INFO - Training progress: {'loss': 0.5503, 'grad_norm': 1.7219330072402954, 'learning_rate': 7.8279117659016e-06, 'epoch': 1.6881594372801876}
+2025-05-06 05:31:26,159 - INFO - Training metrics: {'loss': 0.5503, 'grad_norm': 1.7219330072402954, 'learning_rate': 7.8279117659016e-06, 'epoch': 1.6881594372801876}
+2025-05-06 05:36:13,390 - INFO - INFO: Training progress: {'loss': 0.5258, 'grad_norm': 1.4442180395126343, 'learning_rate': 7.76226926233267e-06, 'epoch': 1.7022274325908557}
+2025-05-06 05:36:13,390 - INFO - Training progress: {'loss': 0.5258, 'grad_norm': 1.4442180395126343, 'learning_rate': 7.76226926233267e-06, 'epoch': 1.7022274325908557}
+2025-05-06 05:36:13,391 - INFO - Training metrics: {'loss': 0.5258, 'grad_norm': 1.4442180395126343, 'learning_rate': 7.76226926233267e-06, 'epoch': 1.7022274325908557}
+2025-05-06 05:41:00,855 - INFO - INFO: Training progress: {'loss': 0.5064, 'grad_norm': 1.2713403701782227, 'learning_rate': 7.69639509072167e-06, 'epoch': 1.7162954279015241}
+2025-05-06 05:41:00,855 - INFO - Training progress: {'loss': 0.5064, 'grad_norm': 1.2713403701782227, 'learning_rate': 7.69639509072167e-06, 'epoch': 1.7162954279015241}
+2025-05-06 05:41:00,855 - INFO - Training metrics: {'loss': 0.5064, 'grad_norm': 1.2713403701782227, 'learning_rate': 7.69639509072167e-06, 'epoch': 1.7162954279015241}
+2025-05-06 05:58:45,351 - INFO - INFO: Training progress: {'eval_loss': 0.48380085825920105, 'eval_runtime': 920.7945, 'eval_samples_per_second': 1.735, 'eval_steps_per_second': 1.735, 'epoch': 1.7233294255568583}
+2025-05-06 05:58:45,351 - INFO - Training progress: {'eval_loss': 0.48380085825920105, 'eval_runtime': 920.7945, 'eval_samples_per_second': 1.735, 'eval_steps_per_second': 1.735, 'epoch': 1.7233294255568583}
+2025-05-06 05:58:45,351 - INFO - Training metrics: {'eval_loss': 0.48380085825920105, 'eval_runtime': 920.7945, 'eval_samples_per_second': 1.735, 'eval_steps_per_second': 1.735, 'epoch': 1.7233294255568583}
+2025-05-06 06:01:08,947 - INFO - INFO: Training progress: {'loss': 0.509, 'grad_norm': 1.4205880165100098, 'learning_rate': 7.630297910891856e-06, 'epoch': 1.7303634232121923}
+2025-05-06 06:01:08,947 - INFO - Training progress: {'loss': 0.509, 'grad_norm': 1.4205880165100098, 'learning_rate': 7.630297910891856e-06, 'epoch': 1.7303634232121923}
+2025-05-06 06:01:08,949 - INFO - Training metrics: {'loss': 0.509, 'grad_norm': 1.4205880165100098, 'learning_rate': 7.630297910891856e-06, 'epoch': 1.7303634232121923}
+2025-05-06 06:05:56,124 - INFO - INFO: Training progress: {'loss': 0.5366, 'grad_norm': 1.3978759050369263, 'learning_rate': 7.56398641198318e-06, 'epoch': 1.7444314185228604}
+2025-05-06 06:05:56,124 - INFO - Training progress: {'loss': 0.5366, 'grad_norm': 1.3978759050369263, 'learning_rate': 7.56398641198318e-06, 'epoch': 1.7444314185228604}
+2025-05-06 06:05:56,124 - INFO - Training metrics: {'loss': 0.5366, 'grad_norm': 1.3978759050369263, 'learning_rate': 7.56398641198318e-06, 'epoch': 1.7444314185228604}
+2025-05-06 06:10:43,378 - INFO - INFO: Training progress: {'loss': 0.5926, 'grad_norm': 1.4047731161117554, 'learning_rate': 7.497469311309983e-06, 'epoch': 1.7584994138335288}
+2025-05-06 06:10:43,379 - INFO - Training progress: {'loss': 0.5926, 'grad_norm': 1.4047731161117554, 'learning_rate': 7.497469311309983e-06, 'epoch': 1.7584994138335288}
+2025-05-06 06:10:43,379 - INFO - Training metrics: {'loss': 0.5926, 'grad_norm': 1.4047731161117554, 'learning_rate': 7.497469311309983e-06, 'epoch': 1.7584994138335288}
+2025-05-06 06:15:30,450 - INFO - INFO: Training progress: {'loss': 0.5003, 'grad_norm': 1.3630157709121704, 'learning_rate': 7.4307553532150305e-06, 'epoch': 1.772567409144197}
+2025-05-06 06:15:30,450 - INFO - Training progress: {'loss': 0.5003, 'grad_norm': 1.3630157709121704, 'learning_rate': 7.4307553532150305e-06, 'epoch': 1.772567409144197}
+2025-05-06 06:15:30,450 - INFO - Training metrics: {'loss': 0.5003, 'grad_norm': 1.3630157709121704, 'learning_rate': 7.4307553532150305e-06, 'epoch': 1.772567409144197}
+2025-05-06 06:20:17,528 - INFO - INFO: Training progress: {'loss': 0.4796, 'grad_norm': 1.4983187913894653, 'learning_rate': 7.363853307919981e-06, 'epoch': 1.7866354044548651}
+2025-05-06 06:20:17,528 - INFO - Training progress: {'loss': 0.4796, 'grad_norm': 1.4983187913894653, 'learning_rate': 7.363853307919981e-06, 'epoch': 1.7866354044548651}
+2025-05-06 06:20:17,528 - INFO - Training metrics: {'loss': 0.4796, 'grad_norm': 1.4983187913894653, 'learning_rate': 7.363853307919981e-06, 'epoch': 1.7866354044548651}
+2025-05-06 06:25:04,737 - INFO - INFO: Training progress: {'loss': 0.4851, 'grad_norm': 1.2410305738449097, 'learning_rate': 7.296771970372451e-06, 'epoch': 1.8007033997655335}
+2025-05-06 06:25:04,737 - INFO - Training progress: {'loss': 0.4851, 'grad_norm': 1.2410305738449097, 'learning_rate': 7.296771970372451e-06, 'epoch': 1.8007033997655335}
+2025-05-06 06:25:04,737 - INFO - Training metrics: {'loss': 0.4851, 'grad_norm': 1.2410305738449097, 'learning_rate': 7.296771970372451e-06, 'epoch': 1.8007033997655335}
+2025-05-06 06:29:52,154 - INFO - INFO: Training progress: {'loss': 0.4898, 'grad_norm': 1.6823004484176636, 'learning_rate': 7.229520159089825e-06, 'epoch': 1.8147713950762017}
+2025-05-06 06:29:52,154 - INFO - Training progress: {'loss': 0.4898, 'grad_norm': 1.6823004484176636, 'learning_rate': 7.229520159089825e-06, 'epoch': 1.8147713950762017}
+2025-05-06 06:29:52,154 - INFO - Training metrics: {'loss': 0.4898, 'grad_norm': 1.6823004484176636, 'learning_rate': 7.229520159089825e-06, 'epoch': 1.8147713950762017}
+2025-05-06 06:34:39,235 - INFO - INFO: Training progress: {'loss': 0.4783, 'grad_norm': 1.9863263368606567, 'learning_rate': 7.162106714999979e-06, 'epoch': 1.8288393903868698}
+2025-05-06 06:34:39,235 - INFO - Training progress: {'loss': 0.4783, 'grad_norm': 1.9863263368606567, 'learning_rate': 7.162106714999979e-06, 'epoch': 1.8288393903868698}
+2025-05-06 06:34:39,235 - INFO - Training metrics: {'loss': 0.4783, 'grad_norm': 1.9863263368606567, 'learning_rate': 7.162106714999979e-06, 'epoch': 1.8288393903868698}
+2025-05-06 06:39:26,926 - INFO - INFO: Training progress: {'loss': 0.5191, 'grad_norm': 1.3195858001708984, 'learning_rate': 7.094540500279048e-06, 'epoch': 1.8429073856975382}
+2025-05-06 06:39:26,927 - INFO - Training progress: {'loss': 0.5191, 'grad_norm': 1.3195858001708984, 'learning_rate': 7.094540500279048e-06, 'epoch': 1.8429073856975382}
+2025-05-06 06:39:26,927 - INFO - Training metrics: {'loss': 0.5191, 'grad_norm': 1.3195858001708984, 'learning_rate': 7.094540500279048e-06, 'epoch': 1.8429073856975382}
+2025-05-06 06:44:13,946 - INFO - INFO: Training progress: {'loss': 0.5074, 'grad_norm': 1.733815312385559, 'learning_rate': 7.0268303971864085e-06, 'epoch': 1.8569753810082064}
+2025-05-06 06:44:13,946 - INFO - Training progress: {'loss': 0.5074, 'grad_norm': 1.733815312385559, 'learning_rate': 7.0268303971864085e-06, 'epoch': 1.8569753810082064}
+2025-05-06 06:44:13,946 - INFO - Training metrics: {'loss': 0.5074, 'grad_norm': 1.733815312385559, 'learning_rate': 7.0268303971864085e-06, 'epoch': 1.8569753810082064}
+2025-05-06 06:49:01,222 - INFO - INFO: Training progress: {'loss': 0.5046, 'grad_norm': 2.0409672260284424, 'learning_rate': 6.958985306897008e-06, 'epoch': 1.8710433763188745}
+2025-05-06 06:49:01,222 - INFO - Training progress: {'loss': 0.5046, 'grad_norm': 2.0409672260284424, 'learning_rate': 6.958985306897008e-06, 'epoch': 1.8710433763188745}
+2025-05-06 06:49:01,222 - INFO - Training metrics: {'loss': 0.5046, 'grad_norm': 2.0409672260284424, 'learning_rate': 6.958985306897008e-06, 'epoch': 1.8710433763188745}
+2025-05-06 06:53:48,312 - INFO - INFO: Training progress: {'loss': 0.4358, 'grad_norm': 1.8961552381515503, 'learning_rate': 6.891014148331224e-06, 'epoch': 1.885111371629543}
+2025-05-06 06:53:48,312 - INFO - Training progress: {'loss': 0.4358, 'grad_norm': 1.8961552381515503, 'learning_rate': 6.891014148331224e-06, 'epoch': 1.885111371629543}
+2025-05-06 06:53:48,312 - INFO - Training metrics: {'loss': 0.4358, 'grad_norm': 1.8961552381515503, 'learning_rate': 6.891014148331224e-06, 'epoch': 1.885111371629543}
+2025-05-06 06:58:35,581 - INFO - INFO: Training progress: {'loss': 0.5093, 'grad_norm': 1.6150116920471191, 'learning_rate': 6.822925856982374e-06, 'epoch': 1.899179366940211}
+2025-05-06 06:58:35,581 - INFO - Training progress: {'loss': 0.5093, 'grad_norm': 1.6150116920471191, 'learning_rate': 6.822925856982374e-06, 'epoch': 1.899179366940211}
+2025-05-06 06:58:35,581 - INFO - Training metrics: {'loss': 0.5093, 'grad_norm': 1.6150116920471191, 'learning_rate': 6.822925856982374e-06, 'epoch': 1.899179366940211}
+2025-05-06 07:03:22,987 - INFO - INFO: Training progress: {'loss': 0.5274, 'grad_norm': 1.5767323970794678, 'learning_rate': 6.7547293837420655e-06, 'epoch': 1.9132473622508792}
+2025-05-06 07:03:22,987 - INFO - Training progress: {'loss': 0.5274, 'grad_norm': 1.5767323970794678, 'learning_rate': 6.7547293837420655e-06, 'epoch': 1.9132473622508792}
+2025-05-06 07:03:22,987 - INFO - Training metrics: {'loss': 0.5274, 'grad_norm': 1.5767323970794678, 'learning_rate': 6.7547293837420655e-06, 'epoch': 1.9132473622508792}
+2025-05-06 07:08:09,874 - INFO - INFO: Training progress: {'loss': 0.5421, 'grad_norm': 1.4385087490081787, 'learning_rate': 6.6864336937235e-06, 'epoch': 1.9273153575615476}
+2025-05-06 07:08:09,874 - INFO - Training progress: {'loss': 0.5421, 'grad_norm': 1.4385087490081787, 'learning_rate': 6.6864336937235e-06, 'epoch': 1.9273153575615476}
+2025-05-06 07:08:09,874 - INFO - Training metrics: {'loss': 0.5421, 'grad_norm': 1.4385087490081787, 'learning_rate': 6.6864336937235e-06, 'epoch': 1.9273153575615476}
+2025-05-06 07:12:56,649 - INFO - INFO: Training progress: {'loss': 0.4824, 'grad_norm': 1.6098196506500244, 'learning_rate': 6.618047765082927e-06, 'epoch': 1.9413833528722158}
+2025-05-06 07:12:56,649 - INFO - Training progress: {'loss': 0.4824, 'grad_norm': 1.6098196506500244, 'learning_rate': 6.618047765082927e-06, 'epoch': 1.9413833528722158}
+2025-05-06 07:12:56,649 - INFO - Training metrics: {'loss': 0.4824, 'grad_norm': 1.6098196506500244, 'learning_rate': 6.618047765082927e-06, 'epoch': 1.9413833528722158}
+2025-05-06 07:17:44,104 - INFO - INFO: Training progress: {'loss': 0.4915, 'grad_norm': 1.5915669202804565, 'learning_rate': 6.54958058783937e-06, 'epoch': 1.955451348182884}
+2025-05-06 07:17:44,104 - INFO - Training progress: {'loss': 0.4915, 'grad_norm': 1.5915669202804565, 'learning_rate': 6.54958058783937e-06, 'epoch': 1.955451348182884}
+2025-05-06 07:17:44,104 - INFO - Training metrics: {'loss': 0.4915, 'grad_norm': 1.5915669202804565, 'learning_rate': 6.54958058783937e-06, 'epoch': 1.955451348182884}
+2025-05-06 07:22:31,265 - INFO - INFO: Training progress: {'loss': 0.4714, 'grad_norm': 1.4365530014038086, 'learning_rate': 6.481041162692801e-06, 'epoch': 1.9695193434935523}
+2025-05-06 07:22:31,265 - INFO - Training progress: {'loss': 0.4714, 'grad_norm': 1.4365530014038086, 'learning_rate': 6.481041162692801e-06, 'epoch': 1.9695193434935523}
+2025-05-06 07:22:31,265 - INFO - Training metrics: {'loss': 0.4714, 'grad_norm': 1.4365530014038086, 'learning_rate': 6.481041162692801e-06, 'epoch': 1.9695193434935523}
+2025-05-06 07:37:52,034 - INFO - INFO: Training progress: {'eval_loss': 0.46921199560165405, 'eval_runtime': 920.7649, 'eval_samples_per_second': 1.736, 'eval_steps_per_second': 1.736, 'epoch': 1.9695193434935523}
+2025-05-06 07:37:52,034 - INFO - Training progress: {'eval_loss': 0.46921199560165405, 'eval_runtime': 920.7649, 'eval_samples_per_second': 1.736, 'eval_steps_per_second': 1.736, 'epoch': 1.9695193434935523}
+2025-05-06 07:37:52,034 - INFO - Training metrics: {'eval_loss': 0.46921199560165405, 'eval_runtime': 920.7649, 'eval_samples_per_second': 1.736, 'eval_steps_per_second': 1.736, 'epoch': 1.9695193434935523}
+2025-05-06 07:37:53,258 - INFO - INFO: Saving checkpoint at step 1400
+2025-05-06 07:37:53,258 - INFO - Saving checkpoint at step 1400
+2025-05-06 07:37:53,259 - INFO - Saving checkpoint at step 1400
+2025-05-06 07:42:40,378 - INFO - INFO: Training progress: {'loss': 0.4625, 'grad_norm': 1.3425992727279663, 'learning_rate': 6.4124384998409045e-06, 'epoch': 1.9835873388042204}
+2025-05-06 07:42:40,378 - INFO - Training progress: {'loss': 0.4625, 'grad_norm': 1.3425992727279663, 'learning_rate': 6.4124384998409045e-06, 'epoch': 1.9835873388042204}
+2025-05-06 07:42:40,378 - INFO - Training metrics: {'loss': 0.4625, 'grad_norm': 1.3425992727279663, 'learning_rate': 6.4124384998409045e-06, 'epoch': 1.9835873388042204}
+2025-05-06 07:47:27,671 - INFO - INFO: Training progress: {'loss': 0.5293, 'grad_norm': 1.5483182668685913, 'learning_rate': 6.343781617794599e-06, 'epoch': 1.9976553341148886}
+2025-05-06 07:47:27,672 - INFO - Training progress: {'loss': 0.5293, 'grad_norm': 1.5483182668685913, 'learning_rate': 6.343781617794599e-06, 'epoch': 1.9976553341148886}
+2025-05-06 07:47:27,672 - INFO - Training metrics: {'loss': 0.5293, 'grad_norm': 1.5483182668685913, 'learning_rate': 6.343781617794599e-06, 'epoch': 1.9976553341148886}
+2025-05-06 07:48:16,104 - INFO - INFO: Starting epoch 1.9990621336459555/4
+2025-05-06 07:48:16,105 - INFO - Starting epoch 1.9990621336459555/4
+2025-05-06 07:48:16,105 - INFO - Starting epoch 1.9990621336459555/4
+2025-05-06 07:52:24,077 - INFO - INFO: Training progress: {'loss': 0.4999, 'grad_norm': 1.4807156324386597, 'learning_rate': 6.275079542192464e-06, 'epoch': 2.011723329425557}
+2025-05-06 07:52:24,078 - INFO - Training progress: {'loss': 0.4999, 'grad_norm': 1.4807156324386597, 'learning_rate': 6.275079542192464e-06, 'epoch': 2.011723329425557}
+2025-05-06 07:52:24,078 - INFO - Training metrics: {'loss': 0.4999, 'grad_norm': 1.4807156324386597, 'learning_rate': 6.275079542192464e-06, 'epoch': 2.011723329425557}
+2025-05-06 07:57:11,264 - INFO - INFO: Training progress: {'loss': 0.4876, 'grad_norm': 1.8400835990905762, 'learning_rate': 6.206341304614223e-06, 'epoch': 2.025791324736225}
+2025-05-06 07:57:11,264 - INFO - Training progress: {'loss': 0.4876, 'grad_norm': 1.8400835990905762, 'learning_rate': 6.206341304614223e-06, 'epoch': 2.025791324736225}
+2025-05-06 07:57:11,264 - INFO - Training metrics: {'loss': 0.4876, 'grad_norm': 1.8400835990905762, 'learning_rate': 6.206341304614223e-06, 'epoch': 2.025791324736225}
+2025-05-06 08:01:58,434 - INFO - INFO: Training progress: {'loss': 0.4396, 'grad_norm': 1.515505075454712, 'learning_rate': 6.1375759413934605e-06, 'epoch': 2.0398593200468933}
+2025-05-06 08:01:58,434 - INFO - Training progress: {'loss': 0.4396, 'grad_norm': 1.515505075454712, 'learning_rate': 6.1375759413934605e-06, 'epoch': 2.0398593200468933}
+2025-05-06 08:01:58,434 - INFO - Training metrics: {'loss': 0.4396, 'grad_norm': 1.515505075454712, 'learning_rate': 6.1375759413934605e-06, 'epoch': 2.0398593200468933}
+2025-05-06 08:06:45,590 - INFO - INFO: Training progress: {'loss': 0.479, 'grad_norm': 1.9258016347885132, 'learning_rate': 6.0687924924296936e-06, 'epoch': 2.0539273153575617}
+2025-05-06 08:06:45,590 - INFO - Training progress: {'loss': 0.479, 'grad_norm': 1.9258016347885132, 'learning_rate': 6.0687924924296936e-06, 'epoch': 2.0539273153575617}
+2025-05-06 08:06:45,590 - INFO - Training metrics: {'loss': 0.479, 'grad_norm': 1.9258016347885132, 'learning_rate': 6.0687924924296936e-06, 'epoch': 2.0539273153575617}
+2025-05-06 08:11:32,605 - INFO - INFO: Training progress: {'loss': 0.4698, 'grad_norm': 1.407624363899231, 'learning_rate': 6e-06, 'epoch': 2.0679953106682296}
+2025-05-06 08:11:32,605 - INFO - Training progress: {'loss': 0.4698, 'grad_norm': 1.407624363899231, 'learning_rate': 6e-06, 'epoch': 2.0679953106682296}
+2025-05-06 08:11:32,605 - INFO - Training metrics: {'loss': 0.4698, 'grad_norm': 1.407624363899231, 'learning_rate': 6e-06, 'epoch': 2.0679953106682296}
+2025-05-06 08:16:19,523 - INFO - INFO: Training progress: {'loss': 0.4836, 'grad_norm': 1.6883795261383057, 'learning_rate': 5.931207507570306e-06, 'epoch': 2.082063305978898}
+2025-05-06 08:16:19,523 - INFO - Training progress: {'loss': 0.4836, 'grad_norm': 1.6883795261383057, 'learning_rate': 5.931207507570306e-06, 'epoch': 2.082063305978898}
+2025-05-06 08:16:19,523 - INFO - Training metrics: {'loss': 0.4836, 'grad_norm': 1.6883795261383057, 'learning_rate': 5.931207507570306e-06, 'epoch': 2.082063305978898}
+2025-05-06 08:21:06,270 - INFO - INFO: Training progress: {'loss': 0.4488, 'grad_norm': 1.4834398031234741, 'learning_rate': 5.862424058606541e-06, 'epoch': 2.0961313012895664}
+2025-05-06 08:21:06,270 - INFO - Training progress: {'loss': 0.4488, 'grad_norm': 1.4834398031234741, 'learning_rate': 5.862424058606541e-06, 'epoch': 2.0961313012895664}
+2025-05-06 08:21:06,270 - INFO - Training metrics: {'loss': 0.4488, 'grad_norm': 1.4834398031234741, 'learning_rate': 5.862424058606541e-06, 'epoch': 2.0961313012895664}
+2025-05-06 08:25:53,257 - INFO - INFO: Training progress: {'loss': 0.452, 'grad_norm': 2.1271841526031494, 'learning_rate': 5.793658695385776e-06, 'epoch': 2.1101992966002343}
+2025-05-06 08:25:53,257 - INFO - Training progress: {'loss': 0.452, 'grad_norm': 2.1271841526031494, 'learning_rate': 5.793658695385776e-06, 'epoch': 2.1101992966002343}
+2025-05-06 08:25:53,257 - INFO - Training metrics: {'loss': 0.452, 'grad_norm': 2.1271841526031494, 'learning_rate': 5.793658695385776e-06, 'epoch': 2.1101992966002343}
+2025-05-06 08:30:40,038 - INFO - INFO: Training progress: {'loss': 0.4644, 'grad_norm': 1.4123886823654175, 'learning_rate': 5.7249204578075375e-06, 'epoch': 2.1242672919109027}
+2025-05-06 08:30:40,038 - INFO - Training progress: {'loss': 0.4644, 'grad_norm': 1.4123886823654175, 'learning_rate': 5.7249204578075375e-06, 'epoch': 2.1242672919109027}
+2025-05-06 08:30:40,038 - INFO - Training metrics: {'loss': 0.4644, 'grad_norm': 1.4123886823654175, 'learning_rate': 5.7249204578075375e-06, 'epoch': 2.1242672919109027}
+2025-05-06 08:35:27,363 - INFO - INFO: Training progress: {'loss': 0.4694, 'grad_norm': 1.5560314655303955, 'learning_rate': 5.656218382205401e-06, 'epoch': 2.138335287221571}
+2025-05-06 08:35:27,363 - INFO - Training progress: {'loss': 0.4694, 'grad_norm': 1.5560314655303955, 'learning_rate': 5.656218382205401e-06, 'epoch': 2.138335287221571}
+2025-05-06 08:35:27,363 - INFO - Training metrics: {'loss': 0.4694, 'grad_norm': 1.5560314655303955, 'learning_rate': 5.656218382205401e-06, 'epoch': 2.138335287221571}
+2025-05-06 08:40:14,703 - INFO - INFO: Training progress: {'loss': 0.4705, 'grad_norm': 1.9739701747894287, 'learning_rate': 5.587561500159097e-06, 'epoch': 2.152403282532239}
+2025-05-06 08:40:14,704 - INFO - Training progress: {'loss': 0.4705, 'grad_norm': 1.9739701747894287, 'learning_rate': 5.587561500159097e-06, 'epoch': 2.152403282532239}
+2025-05-06 08:40:14,704 - INFO - Training metrics: {'loss': 0.4705, 'grad_norm': 1.9739701747894287, 'learning_rate': 5.587561500159097e-06, 'epoch': 2.152403282532239}
+2025-05-06 08:45:01,989 - INFO - INFO: Training progress: {'loss': 0.4575, 'grad_norm': 1.7088069915771484, 'learning_rate': 5.518958837307199e-06, 'epoch': 2.1664712778429074}
+2025-05-06 08:45:01,989 - INFO - Training progress: {'loss': 0.4575, 'grad_norm': 1.7088069915771484, 'learning_rate': 5.518958837307199e-06, 'epoch': 2.1664712778429074}
+2025-05-06 08:45:01,989 - INFO - Training metrics: {'loss': 0.4575, 'grad_norm': 1.7088069915771484, 'learning_rate': 5.518958837307199e-06, 'epoch': 2.1664712778429074}
+2025-05-06 08:49:48,858 - INFO - INFO: Training progress: {'loss': 0.4737, 'grad_norm': 1.612535834312439, 'learning_rate': 5.450419412160631e-06, 'epoch': 2.1805392731535758}
+2025-05-06 08:49:48,858 - INFO - Training progress: {'loss': 0.4737, 'grad_norm': 1.612535834312439, 'learning_rate': 5.450419412160631e-06, 'epoch': 2.1805392731535758}
+2025-05-06 08:49:48,858 - INFO - Training metrics: {'loss': 0.4737, 'grad_norm': 1.612535834312439, 'learning_rate': 5.450419412160631e-06, 'epoch': 2.1805392731535758}
+2025-05-06 08:54:36,117 - INFO - INFO: Training progress: {'loss': 0.4212, 'grad_norm': 1.9337869882583618, 'learning_rate': 5.3819522349170746e-06, 'epoch': 2.1946072684642437}
+2025-05-06 08:54:36,117 - INFO - Training progress: {'loss': 0.4212, 'grad_norm': 1.9337869882583618, 'learning_rate': 5.3819522349170746e-06, 'epoch': 2.1946072684642437}
+2025-05-06 08:54:36,118 - INFO - Training metrics: {'loss': 0.4212, 'grad_norm': 1.9337869882583618, 'learning_rate': 5.3819522349170746e-06, 'epoch': 2.1946072684642437}
+2025-05-06 08:59:23,348 - INFO - INFO: Training progress: {'loss': 0.4765, 'grad_norm': 1.638534426689148, 'learning_rate': 5.313566306276503e-06, 'epoch': 2.208675263774912}
+2025-05-06 08:59:23,348 - INFO - Training progress: {'loss': 0.4765, 'grad_norm': 1.638534426689148, 'learning_rate': 5.313566306276503e-06, 'epoch': 2.208675263774912}
+2025-05-06 08:59:23,348 - INFO - Training metrics: {'loss': 0.4765, 'grad_norm': 1.638534426689148, 'learning_rate': 5.313566306276503e-06, 'epoch': 2.208675263774912}
+2025-05-06 09:17:08,102 - INFO - INFO: Training progress: {'eval_loss': 0.45778849720954895, 'eval_runtime': 921.1675, 'eval_samples_per_second': 1.735, 'eval_steps_per_second': 1.735, 'epoch': 2.2157092614302463}
+2025-05-06 09:17:08,103 - INFO - Training progress: {'eval_loss': 0.45778849720954895, 'eval_runtime': 921.1675, 'eval_samples_per_second': 1.735, 'eval_steps_per_second': 1.735, 'epoch': 2.2157092614302463}
+2025-05-06 09:17:08,103 - INFO - Training metrics: {'eval_loss': 0.45778849720954895, 'eval_runtime': 921.1675, 'eval_samples_per_second': 1.735, 'eval_steps_per_second': 1.735, 'epoch': 2.2157092614302463}
+2025-05-06 09:19:31,885 - INFO - INFO: Training progress: {'loss': 0.4853, 'grad_norm': 1.5076050758361816, 'learning_rate': 5.2452706162579365e-06, 'epoch': 2.2227432590855805}
+2025-05-06 09:19:31,885 - INFO - Training progress: {'loss': 0.4853, 'grad_norm': 1.5076050758361816, 'learning_rate': 5.2452706162579365e-06, 'epoch': 2.2227432590855805}
+2025-05-06 09:19:31,885 - INFO - Training metrics: {'loss': 0.4853, 'grad_norm': 1.5076050758361816, 'learning_rate': 5.2452706162579365e-06, 'epoch': 2.2227432590855805}
+2025-05-06 09:24:19,271 - INFO - INFO: Training progress: {'loss': 0.4789, 'grad_norm': 1.7112197875976562, 'learning_rate': 5.17707414301763e-06, 'epoch': 2.2368112543962484}
+2025-05-06 09:24:19,271 - INFO - Training progress: {'loss': 0.4789, 'grad_norm': 1.7112197875976562, 'learning_rate': 5.17707414301763e-06, 'epoch': 2.2368112543962484}
+2025-05-06 09:24:19,272 - INFO - Training metrics: {'loss': 0.4789, 'grad_norm': 1.7112197875976562, 'learning_rate': 5.17707414301763e-06, 'epoch': 2.2368112543962484}
+2025-05-06 09:29:10,363 - INFO - INFO: Training progress: {'loss': 0.5422, 'grad_norm': 1.6921629905700684, 'learning_rate': 5.1089858516687776e-06, 'epoch': 2.2508792497069168}
+2025-05-06 09:29:10,363 - INFO - Training progress: {'loss': 0.5422, 'grad_norm': 1.6921629905700684, 'learning_rate': 5.1089858516687776e-06, 'epoch': 2.2508792497069168}
+2025-05-06 09:29:10,363 - INFO - Training metrics: {'loss': 0.5422, 'grad_norm': 1.6921629905700684, 'learning_rate': 5.1089858516687776e-06, 'epoch': 2.2508792497069168}
+2025-05-06 09:34:00,870 - INFO - INFO: Training progress: {'loss': 0.4713, 'grad_norm': 2.1847188472747803, 'learning_rate': 5.041014693102991e-06, 'epoch': 2.264947245017585}
+2025-05-06 09:34:00,870 - INFO - Training progress: {'loss': 0.4713, 'grad_norm': 2.1847188472747803, 'learning_rate': 5.041014693102991e-06, 'epoch': 2.264947245017585}
+2025-05-06 09:34:00,870 - INFO - Training metrics: {'loss': 0.4713, 'grad_norm': 2.1847188472747803, 'learning_rate': 5.041014693102991e-06, 'epoch': 2.264947245017585}
+2025-05-06 09:38:52,469 - INFO - INFO: Training progress: {'loss': 0.4358, 'grad_norm': 1.8237651586532593, 'learning_rate': 4.973169602813592e-06, 'epoch': 2.279015240328253}
+2025-05-06 09:38:52,470 - INFO - Training progress: {'loss': 0.4358, 'grad_norm': 1.8237651586532593, 'learning_rate': 4.973169602813592e-06, 'epoch': 2.279015240328253}
+2025-05-06 09:38:52,470 - INFO - Training metrics: {'loss': 0.4358, 'grad_norm': 1.8237651586532593, 'learning_rate': 4.973169602813592e-06, 'epoch': 2.279015240328253}
+2025-05-06 09:43:48,657 - INFO - INFO: Training progress: {'loss': 0.4753, 'grad_norm': 1.222865104675293, 'learning_rate': 4.905459499720951e-06, 'epoch': 2.2930832356389215}
+2025-05-06 09:43:48,657 - INFO - Training progress: {'loss': 0.4753, 'grad_norm': 1.222865104675293, 'learning_rate': 4.905459499720951e-06, 'epoch': 2.2930832356389215}
+2025-05-06 09:43:48,657 - INFO - Training metrics: {'loss': 0.4753, 'grad_norm': 1.222865104675293, 'learning_rate': 4.905459499720951e-06, 'epoch': 2.2930832356389215}
+2025-05-06 09:48:37,884 - INFO - INFO: Training progress: {'loss': 0.4958, 'grad_norm': 1.6396121978759766, 'learning_rate': 4.837893285000021e-06, 'epoch': 2.30715123094959}
+2025-05-06 09:48:37,884 - INFO - Training progress: {'loss': 0.4958, 'grad_norm': 1.6396121978759766, 'learning_rate': 4.837893285000021e-06, 'epoch': 2.30715123094959}
+2025-05-06 09:48:37,884 - INFO - Training metrics: {'loss': 0.4958, 'grad_norm': 1.6396121978759766, 'learning_rate': 4.837893285000021e-06, 'epoch': 2.30715123094959}
+2025-05-06 09:53:27,959 - INFO - INFO: Training progress: {'loss': 0.4474, 'grad_norm': 1.7215265035629272, 'learning_rate': 4.770479840910175e-06, 'epoch': 2.321219226260258}
+2025-05-06 09:53:27,960 - INFO - Training progress: {'loss': 0.4474, 'grad_norm': 1.7215265035629272, 'learning_rate': 4.770479840910175e-06, 'epoch': 2.321219226260258}
+2025-05-06 09:53:27,960 - INFO - Training metrics: {'loss': 0.4474, 'grad_norm': 1.7215265035629272, 'learning_rate': 4.770479840910175e-06, 'epoch': 2.321219226260258}
+2025-05-06 09:58:15,445 - INFO - INFO: Training progress: {'loss': 0.5215, 'grad_norm': 1.8319432735443115, 'learning_rate': 4.70322802962755e-06, 'epoch': 2.335287221570926}
+2025-05-06 09:58:15,445 - INFO - Training progress: {'loss': 0.5215, 'grad_norm': 1.8319432735443115, 'learning_rate': 4.70322802962755e-06, 'epoch': 2.335287221570926}
+2025-05-06 09:58:15,445 - INFO - Training metrics: {'loss': 0.5215, 'grad_norm': 1.8319432735443115, 'learning_rate': 4.70322802962755e-06, 'epoch': 2.335287221570926}
+2025-05-06 10:03:03,146 - INFO - INFO: Training progress: {'loss': 0.5041, 'grad_norm': 1.4989361763000488, 'learning_rate': 4.636146692080019e-06, 'epoch': 2.3493552168815945}
+2025-05-06 10:03:03,146 - INFO - Training progress: {'loss': 0.5041, 'grad_norm': 1.4989361763000488, 'learning_rate': 4.636146692080019e-06, 'epoch': 2.3493552168815945}
+2025-05-06 10:03:03,146 - INFO - Training metrics: {'loss': 0.5041, 'grad_norm': 1.4989361763000488, 'learning_rate': 4.636146692080019e-06, 'epoch': 2.3493552168815945}
+2025-05-06 10:07:48,753 - INFO - INFO: Training progress: {'loss': 0.4292, 'grad_norm': 1.6915911436080933, 'learning_rate': 4.569244646784971e-06, 'epoch': 2.3634232121922625}
+2025-05-06 10:07:48,753 - INFO - Training progress: {'loss': 0.4292, 'grad_norm': 1.6915911436080933, 'learning_rate': 4.569244646784971e-06, 'epoch': 2.3634232121922625}
+2025-05-06 10:07:48,753 - INFO - Training metrics: {'loss': 0.4292, 'grad_norm': 1.6915911436080933, 'learning_rate': 4.569244646784971e-06, 'epoch': 2.3634232121922625}
+2025-05-06 10:12:34,163 - INFO - INFO: Training progress: {'loss': 0.4516, 'grad_norm': 1.7724920511245728, 'learning_rate': 4.5025306886900185e-06, 'epoch': 2.377491207502931}
+2025-05-06 10:12:34,164 - INFO - Training progress: {'loss': 0.4516, 'grad_norm': 1.7724920511245728, 'learning_rate': 4.5025306886900185e-06, 'epoch': 2.377491207502931}
+2025-05-06 10:12:34,164 - INFO - Training metrics: {'loss': 0.4516, 'grad_norm': 1.7724920511245728, 'learning_rate': 4.5025306886900185e-06, 'epoch': 2.377491207502931}
+2025-05-06 10:17:19,517 - INFO - INFO: Training progress: {'loss': 0.5136, 'grad_norm': 1.9049088954925537, 'learning_rate': 4.436013588016823e-06, 'epoch': 2.3915592028135992}
+2025-05-06 10:17:19,517 - INFO - Training progress: {'loss': 0.5136, 'grad_norm': 1.9049088954925537, 'learning_rate': 4.436013588016823e-06, 'epoch': 2.3915592028135992}
+2025-05-06 10:17:19,517 - INFO - Training metrics: {'loss': 0.5136, 'grad_norm': 1.9049088954925537, 'learning_rate': 4.436013588016823e-06, 'epoch': 2.3915592028135992}
+2025-05-06 10:22:05,986 - INFO - INFO: Training progress: {'loss': 0.4355, 'grad_norm': 1.7788668870925903, 'learning_rate': 4.369702089108144e-06, 'epoch': 2.405627198124267}
+2025-05-06 10:22:05,986 - INFO - Training progress: {'loss': 0.4355, 'grad_norm': 1.7788668870925903, 'learning_rate': 4.369702089108144e-06, 'epoch': 2.405627198124267}
+2025-05-06 10:22:05,986 - INFO - Training metrics: {'loss': 0.4355, 'grad_norm': 1.7788668870925903, 'learning_rate': 4.369702089108144e-06, 'epoch': 2.405627198124267}
+2025-05-06 10:26:51,123 - INFO - INFO: Training progress: {'loss': 0.4552, 'grad_norm': 2.15085768699646, 'learning_rate': 4.303604909278331e-06, 'epoch': 2.4196951934349356}
+2025-05-06 10:26:51,123 - INFO - Training progress: {'loss': 0.4552, 'grad_norm': 2.15085768699646, 'learning_rate': 4.303604909278331e-06, 'epoch': 2.4196951934349356}
+2025-05-06 10:26:51,123 - INFO - Training metrics: {'loss': 0.4552, 'grad_norm': 2.15085768699646, 'learning_rate': 4.303604909278331e-06, 'epoch': 2.4196951934349356}
+2025-05-06 10:31:36,339 - INFO - INFO: Training progress: {'loss': 0.4265, 'grad_norm': 1.5917696952819824, 'learning_rate': 4.237730737667329e-06, 'epoch': 2.433763188745604}
+2025-05-06 10:31:36,339 - INFO - Training progress: {'loss': 0.4265, 'grad_norm': 1.5917696952819824, 'learning_rate': 4.237730737667329e-06, 'epoch': 2.433763188745604}
+2025-05-06 10:31:36,339 - INFO - Training metrics: {'loss': 0.4265, 'grad_norm': 1.5917696952819824, 'learning_rate': 4.237730737667329e-06, 'epoch': 2.433763188745604}
+2025-05-06 10:36:21,647 - INFO - INFO: Training progress: {'loss': 0.4687, 'grad_norm': 1.7048189640045166, 'learning_rate': 4.1720882340983995e-06, 'epoch': 2.447831184056272}
+2025-05-06 10:36:21,647 - INFO - Training progress: {'loss': 0.4687, 'grad_norm': 1.7048189640045166, 'learning_rate': 4.1720882340983995e-06, 'epoch': 2.447831184056272}
+2025-05-06 10:36:21,647 - INFO - Training metrics: {'loss': 0.4687, 'grad_norm': 1.7048189640045166, 'learning_rate': 4.1720882340983995e-06, 'epoch': 2.447831184056272}
+2025-05-06 10:41:07,542 - INFO - INFO: Training progress: {'loss': 0.4792, 'grad_norm': 1.4812837839126587, 'learning_rate': 4.106686027939717e-06, 'epoch': 2.4618991793669402}
+2025-05-06 10:41:07,542 - INFO - Training progress: {'loss': 0.4792, 'grad_norm': 1.4812837839126587, 'learning_rate': 4.106686027939717e-06, 'epoch': 2.4618991793669402}
+2025-05-06 10:41:07,542 - INFO - Training metrics: {'loss': 0.4792, 'grad_norm': 1.4812837839126587, 'learning_rate': 4.106686027939717e-06, 'epoch': 2.4618991793669402}
+2025-05-06 10:56:26,134 - INFO - INFO: Training progress: {'eval_loss': 0.447544127702713, 'eval_runtime': 918.5906, 'eval_samples_per_second': 1.74, 'eval_steps_per_second': 1.74, 'epoch': 2.4618991793669402}
+2025-05-06 10:56:26,135 - INFO - Training progress: {'eval_loss': 0.447544127702713, 'eval_runtime': 918.5906, 'eval_samples_per_second': 1.74, 'eval_steps_per_second': 1.74, 'epoch': 2.4618991793669402}
+2025-05-06 10:56:26,135 - INFO - Training metrics: {'eval_loss': 0.447544127702713, 'eval_runtime': 918.5906, 'eval_samples_per_second': 1.74, 'eval_steps_per_second': 1.74, 'epoch': 2.4618991793669402}
+2025-05-06 10:56:27,315 - INFO - INFO: Saving checkpoint at step 1750
+2025-05-06 10:56:27,315 - INFO - Saving checkpoint at step 1750
+2025-05-06 10:56:27,315 - INFO - Saving checkpoint at step 1750
+2025-05-06 11:01:12,497 - INFO - INFO: Training progress: {'loss': 0.4904, 'grad_norm': 2.1046769618988037, 'learning_rate': 4.041532716969933e-06, 'epoch': 2.4759671746776086}
+2025-05-06 11:01:12,497 - INFO - Training progress: {'loss': 0.4904, 'grad_norm': 2.1046769618988037, 'learning_rate': 4.041532716969933e-06, 'epoch': 2.4759671746776086}
+2025-05-06 11:01:12,497 - INFO - Training metrics: {'loss': 0.4904, 'grad_norm': 2.1046769618988037, 'learning_rate': 4.041532716969933e-06, 'epoch': 2.4759671746776086}
+2025-05-06 11:05:58,002 - INFO - INFO: Training progress: {'loss': 0.4426, 'grad_norm': 1.9792943000793457, 'learning_rate': 3.976636866247928e-06, 'epoch': 2.4900351699882766}
+2025-05-06 11:05:58,002 - INFO - Training progress: {'loss': 0.4426, 'grad_norm': 1.9792943000793457, 'learning_rate': 3.976636866247928e-06, 'epoch': 2.4900351699882766}
+2025-05-06 11:05:58,002 - INFO - Training metrics: {'loss': 0.4426, 'grad_norm': 1.9792943000793457, 'learning_rate': 3.976636866247928e-06, 'epoch': 2.4900351699882766}
+2025-05-06 11:10:43,417 - INFO - INFO: Training progress: {'loss': 0.4242, 'grad_norm': 2.0138657093048096, 'learning_rate': 3.912007006986829e-06, 'epoch': 2.504103165298945}
+2025-05-06 11:10:43,418 - INFO - Training progress: {'loss': 0.4242, 'grad_norm': 2.0138657093048096, 'learning_rate': 3.912007006986829e-06, 'epoch': 2.504103165298945}
+2025-05-06 11:10:43,418 - INFO - Training metrics: {'loss': 0.4242, 'grad_norm': 2.0138657093048096, 'learning_rate': 3.912007006986829e-06, 'epoch': 2.504103165298945}
+2025-05-06 11:15:29,110 - INFO - INFO: Training progress: {'loss': 0.4775, 'grad_norm': 1.8280138969421387, 'learning_rate': 3.847651635432518e-06, 'epoch': 2.5181711606096133}
+2025-05-06 11:15:29,110 - INFO - Training progress: {'loss': 0.4775, 'grad_norm': 1.8280138969421387, 'learning_rate': 3.847651635432518e-06, 'epoch': 2.5181711606096133}
+2025-05-06 11:15:29,112 - INFO - Training metrics: {'loss': 0.4775, 'grad_norm': 1.8280138969421387, 'learning_rate': 3.847651635432518e-06, 'epoch': 2.5181711606096133}
+2025-05-06 11:20:14,791 - INFO - INFO: Training progress: {'loss': 0.451, 'grad_norm': 2.036515235900879, 'learning_rate': 3.783579211746697e-06, 'epoch': 2.5322391559202813}
+2025-05-06 11:20:14,792 - INFO - Training progress: {'loss': 0.451, 'grad_norm': 2.036515235900879, 'learning_rate': 3.783579211746697e-06, 'epoch': 2.5322391559202813}
+2025-05-06 11:20:14,792 - INFO - Training metrics: {'loss': 0.451, 'grad_norm': 2.036515235900879, 'learning_rate': 3.783579211746697e-06, 'epoch': 2.5322391559202813}
+2025-05-06 11:25:00,452 - INFO - INFO: Training progress: {'loss': 0.4993, 'grad_norm': 1.8495421409606934, 'learning_rate': 3.7197981588947254e-06, 'epoch': 2.5463071512309496}
+2025-05-06 11:25:00,452 - INFO - Training progress: {'loss': 0.4993, 'grad_norm': 1.8495421409606934, 'learning_rate': 3.7197981588947254e-06, 'epoch': 2.5463071512309496}
+2025-05-06 11:25:00,452 - INFO - Training metrics: {'loss': 0.4993, 'grad_norm': 1.8495421409606934, 'learning_rate': 3.7197981588947254e-06, 'epoch': 2.5463071512309496}
+2025-05-06 11:29:45,987 - INFO - INFO: Training progress: {'loss': 0.495, 'grad_norm': 1.457134485244751, 'learning_rate': 3.6563168615383247e-06, 'epoch': 2.5603751465416176}
+2025-05-06 11:29:45,987 - INFO - Training progress: {'loss': 0.495, 'grad_norm': 1.457134485244751, 'learning_rate': 3.6563168615383247e-06, 'epoch': 2.5603751465416176}
+2025-05-06 11:29:45,987 - INFO - Training metrics: {'loss': 0.495, 'grad_norm': 1.457134485244751, 'learning_rate': 3.6563168615383247e-06, 'epoch': 2.5603751465416176}
+2025-05-06 11:34:31,683 - INFO - INFO: Training progress: {'loss': 0.4225, 'grad_norm': 1.817838191986084, 'learning_rate': 3.5931436649333477e-06, 'epoch': 2.574443141852286}
+2025-05-06 11:34:31,683 - INFO - Training progress: {'loss': 0.4225, 'grad_norm': 1.817838191986084, 'learning_rate': 3.5931436649333477e-06, 'epoch': 2.574443141852286}
+2025-05-06 11:34:31,683 - INFO - Training metrics: {'loss': 0.4225, 'grad_norm': 1.817838191986084, 'learning_rate': 3.5931436649333477e-06, 'epoch': 2.574443141852286}
+2025-05-06 11:39:17,680 - INFO - INFO: Training progress: {'loss': 0.4164, 'grad_norm': 1.9206335544586182, 'learning_rate': 3.5302868738326927e-06, 'epoch': 2.5885111371629543}
+2025-05-06 11:39:17,681 - INFO - Training progress: {'loss': 0.4164, 'grad_norm': 1.9206335544586182, 'learning_rate': 3.5302868738326927e-06, 'epoch': 2.5885111371629543}
+2025-05-06 11:39:17,681 - INFO - Training metrics: {'loss': 0.4164, 'grad_norm': 1.9206335544586182, 'learning_rate': 3.5302868738326927e-06, 'epoch': 2.5885111371629543}
+2025-05-06 11:44:03,327 - INFO - INFO: Training progress: {'loss': 0.4854, 'grad_norm': 1.845450520515442, 'learning_rate': 3.467754751394571e-06, 'epoch': 2.6025791324736227}
+2025-05-06 11:44:03,327 - INFO - Training progress: {'loss': 0.4854, 'grad_norm': 1.845450520515442, 'learning_rate': 3.467754751394571e-06, 'epoch': 2.6025791324736227}
+2025-05-06 11:44:03,327 - INFO - Training metrics: {'loss': 0.4854, 'grad_norm': 1.845450520515442, 'learning_rate': 3.467754751394571e-06, 'epoch': 2.6025791324736227}
+2025-05-06 11:48:48,891 - INFO - INFO: Training progress: {'loss': 0.4376, 'grad_norm': 2.272953987121582, 'learning_rate': 3.4055555180962325e-06, 'epoch': 2.6166471277842906}
+2025-05-06 11:48:48,891 - INFO - Training progress: {'loss': 0.4376, 'grad_norm': 2.272953987121582, 'learning_rate': 3.4055555180962325e-06, 'epoch': 2.6166471277842906}
+2025-05-06 11:48:48,891 - INFO - Training metrics: {'loss': 0.4376, 'grad_norm': 2.272953987121582, 'learning_rate': 3.4055555180962325e-06, 'epoch': 2.6166471277842906}
+2025-05-06 11:53:34,651 - INFO - INFO: Training progress: {'loss': 0.4324, 'grad_norm': 1.4937604665756226, 'learning_rate': 3.3436973506532883e-06, 'epoch': 2.630715123094959}
+2025-05-06 11:53:34,652 - INFO - Training progress: {'loss': 0.4324, 'grad_norm': 1.4937604665756226, 'learning_rate': 3.3436973506532883e-06, 'epoch': 2.630715123094959}
+2025-05-06 11:53:34,652 - INFO - Training metrics: {'loss': 0.4324, 'grad_norm': 1.4937604665756226, 'learning_rate': 3.3436973506532883e-06, 'epoch': 2.630715123094959}
+2025-05-06 11:58:19,929 - INFO - INFO: Training progress: {'loss': 0.4336, 'grad_norm': 1.5650324821472168, 'learning_rate': 3.282188380944815e-06, 'epoch': 2.644783118405627}
+2025-05-06 11:58:19,930 - INFO - Training progress: {'loss': 0.4336, 'grad_norm': 1.5650324821472168, 'learning_rate': 3.282188380944815e-06, 'epoch': 2.644783118405627}
+2025-05-06 11:58:19,930 - INFO - Training metrics: {'loss': 0.4336, 'grad_norm': 1.5650324821472168, 'learning_rate': 3.282188380944815e-06, 'epoch': 2.644783118405627}
+2025-05-06 12:03:05,279 - INFO - INFO: Training progress: {'loss': 0.4126, 'grad_norm': 1.831354022026062, 'learning_rate': 3.2210366949443253e-06, 'epoch': 2.6588511137162953}
+2025-05-06 12:03:05,280 - INFO - Training progress: {'loss': 0.4126, 'grad_norm': 1.831354022026062, 'learning_rate': 3.2210366949443253e-06, 'epoch': 2.6588511137162953}
+2025-05-06 12:03:05,280 - INFO - Training metrics: {'loss': 0.4126, 'grad_norm': 1.831354022026062, 'learning_rate': 3.2210366949443253e-06, 'epoch': 2.6588511137162953}
+2025-05-06 12:07:51,009 - INFO - INFO: Training progress: {'loss': 0.4353, 'grad_norm': 1.3614362478256226, 'learning_rate': 3.1602503316568008e-06, 'epoch': 2.6729191090269637}
+2025-05-06 12:07:51,009 - INFO - Training progress: {'loss': 0.4353, 'grad_norm': 1.3614362478256226, 'learning_rate': 3.1602503316568008e-06, 'epoch': 2.6729191090269637}
+2025-05-06 12:07:51,010 - INFO - Training metrics: {'loss': 0.4353, 'grad_norm': 1.3614362478256226, 'learning_rate': 3.1602503316568008e-06, 'epoch': 2.6729191090269637}
+2025-05-06 12:12:36,631 - INFO - INFO: Training progress: {'loss': 0.4643, 'grad_norm': 1.7425681352615356, 'learning_rate': 3.099837282061855e-06, 'epoch': 2.686987104337632}
+2025-05-06 12:12:36,631 - INFO - Training progress: {'loss': 0.4643, 'grad_norm': 1.7425681352615356, 'learning_rate': 3.099837282061855e-06, 'epoch': 2.686987104337632}
+2025-05-06 12:12:36,631 - INFO - Training metrics: {'loss': 0.4643, 'grad_norm': 1.7425681352615356, 'learning_rate': 3.099837282061855e-06, 'epoch': 2.686987104337632}
+2025-05-06 12:17:22,130 - INFO - INFO: Training progress: {'loss': 0.426, 'grad_norm': 1.789686918258667, 'learning_rate': 3.0398054880632756e-06, 'epoch': 2.7010550996483}
+2025-05-06 12:17:22,131 - INFO - Training progress: {'loss': 0.426, 'grad_norm': 1.789686918258667, 'learning_rate': 3.0398054880632756e-06, 'epoch': 2.7010550996483}
+2025-05-06 12:17:22,131 - INFO - Training metrics: {'loss': 0.426, 'grad_norm': 1.789686918258667, 'learning_rate': 3.0398054880632756e-06, 'epoch': 2.7010550996483}
+2025-05-06 12:34:54,853 - INFO - INFO: Training progress: {'eval_loss': 0.43886980414390564, 'eval_runtime': 909.8215, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 2.7080890973036342}
+2025-05-06 12:34:54,853 - INFO - Training progress: {'eval_loss': 0.43886980414390564, 'eval_runtime': 909.8215, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 2.7080890973036342}
+2025-05-06 12:34:54,853 - INFO - Training metrics: {'eval_loss': 0.43886980414390564, 'eval_runtime': 909.8215, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 2.7080890973036342}
+2025-05-06 12:37:17,728 - INFO - INFO: Training progress: {'loss': 0.4411, 'grad_norm': 2.1829445362091064, 'learning_rate': 2.980162841444953e-06, 'epoch': 2.7151230949589684}
+2025-05-06 12:37:17,728 - INFO - Training progress: {'loss': 0.4411, 'grad_norm': 2.1829445362091064, 'learning_rate': 2.980162841444953e-06, 'epoch': 2.7151230949589684}
+2025-05-06 12:37:17,728 - INFO - Training metrics: {'loss': 0.4411, 'grad_norm': 2.1829445362091064, 'learning_rate': 2.980162841444953e-06, 'epoch': 2.7151230949589684}
+2025-05-06 12:42:03,197 - INFO - INFO: Training progress: {'loss': 0.4799, 'grad_norm': 2.0290048122406006, 'learning_rate': 2.920917182833435e-06, 'epoch': 2.7291910902696364}
+2025-05-06 12:42:03,198 - INFO - Training progress: {'loss': 0.4799, 'grad_norm': 2.0290048122406006, 'learning_rate': 2.920917182833435e-06, 'epoch': 2.7291910902696364}
+2025-05-06 12:42:03,198 - INFO - Training metrics: {'loss': 0.4799, 'grad_norm': 2.0290048122406006, 'learning_rate': 2.920917182833435e-06, 'epoch': 2.7291910902696364}
+2025-05-06 12:46:48,772 - INFO - INFO: Training progress: {'loss': 0.4452, 'grad_norm': 1.8490264415740967, 'learning_rate': 2.8620763006672016e-06, 'epoch': 2.7432590855803047}
+2025-05-06 12:46:48,772 - INFO - Training progress: {'loss': 0.4452, 'grad_norm': 1.8490264415740967, 'learning_rate': 2.8620763006672016e-06, 'epoch': 2.7432590855803047}
+2025-05-06 12:46:48,772 - INFO - Training metrics: {'loss': 0.4452, 'grad_norm': 1.8490264415740967, 'learning_rate': 2.8620763006672016e-06, 'epoch': 2.7432590855803047}
+2025-05-06 12:51:34,190 - INFO - INFO: Training progress: {'loss': 0.4562, 'grad_norm': 1.9192743301391602, 'learning_rate': 2.803647930172791e-06, 'epoch': 2.757327080890973}
+2025-05-06 12:51:34,191 - INFO - Training progress: {'loss': 0.4562, 'grad_norm': 1.9192743301391602, 'learning_rate': 2.803647930172791e-06, 'epoch': 2.757327080890973}
+2025-05-06 12:51:34,191 - INFO - Training metrics: {'loss': 0.4562, 'grad_norm': 1.9192743301391602, 'learning_rate': 2.803647930172791e-06, 'epoch': 2.757327080890973}
+2025-05-06 12:56:19,569 - INFO - INFO: Training progress: {'loss': 0.4407, 'grad_norm': 1.7021188735961914, 'learning_rate': 2.745639752347925e-06, 'epoch': 2.7713950762016415}
+2025-05-06 12:56:19,570 - INFO - Training progress: {'loss': 0.4407, 'grad_norm': 1.7021188735961914, 'learning_rate': 2.745639752347925e-06, 'epoch': 2.7713950762016415}
+2025-05-06 12:56:19,570 - INFO - Training metrics: {'loss': 0.4407, 'grad_norm': 1.7021188735961914, 'learning_rate': 2.745639752347925e-06, 'epoch': 2.7713950762016415}
+2025-05-06 13:01:04,827 - INFO - INFO: Training progress: {'loss': 0.475, 'grad_norm': 1.6301504373550415, 'learning_rate': 2.6880593929517743e-06, 'epoch': 2.7854630715123094}
+2025-05-06 13:01:04,827 - INFO - Training progress: {'loss': 0.475, 'grad_norm': 1.6301504373550415, 'learning_rate': 2.6880593929517743e-06, 'epoch': 2.7854630715123094}
+2025-05-06 13:01:04,827 - INFO - Training metrics: {'loss': 0.475, 'grad_norm': 1.6301504373550415, 'learning_rate': 2.6880593929517743e-06, 'epoch': 2.7854630715123094}
+2025-05-06 13:05:50,290 - INFO - INFO: Training progress: {'loss': 0.442, 'grad_norm': 1.695680022239685, 'learning_rate': 2.630914421502463e-06, 'epoch': 2.799531066822978}
+2025-05-06 13:05:50,290 - INFO - Training progress: {'loss': 0.442, 'grad_norm': 1.695680022239685, 'learning_rate': 2.630914421502463e-06, 'epoch': 2.799531066822978}
+2025-05-06 13:05:50,290 - INFO - Training metrics: {'loss': 0.442, 'grad_norm': 1.695680022239685, 'learning_rate': 2.630914421502463e-06, 'epoch': 2.799531066822978}
+2025-05-06 13:10:35,995 - INFO - INFO: Training progress: {'loss': 0.4707, 'grad_norm': 2.04351806640625, 'learning_rate': 2.5742123502819836e-06, 'epoch': 2.8135990621336457}
+2025-05-06 13:10:35,996 - INFO - Training progress: {'loss': 0.4707, 'grad_norm': 2.04351806640625, 'learning_rate': 2.5742123502819836e-06, 'epoch': 2.8135990621336457}
+2025-05-06 13:10:35,996 - INFO - Training metrics: {'loss': 0.4707, 'grad_norm': 2.04351806640625, 'learning_rate': 2.5742123502819836e-06, 'epoch': 2.8135990621336457}
+2025-05-06 13:15:21,505 - INFO - INFO: Training progress: {'loss': 0.479, 'grad_norm': 1.6415321826934814, 'learning_rate': 2.517960633348642e-06, 'epoch': 2.827667057444314}
+2025-05-06 13:15:21,505 - INFO - Training progress: {'loss': 0.479, 'grad_norm': 1.6415321826934814, 'learning_rate': 2.517960633348642e-06, 'epoch': 2.827667057444314}
+2025-05-06 13:15:21,506 - INFO - Training metrics: {'loss': 0.479, 'grad_norm': 1.6415321826934814, 'learning_rate': 2.517960633348642e-06, 'epoch': 2.827667057444314}
+2025-05-06 13:20:07,033 - INFO - INFO: Training progress: {'loss': 0.4143, 'grad_norm': 1.7964805364608765, 'learning_rate': 2.4621666655571232e-06, 'epoch': 2.8417350527549825}
+2025-05-06 13:20:07,033 - INFO - Training progress: {'loss': 0.4143, 'grad_norm': 1.7964805364608765, 'learning_rate': 2.4621666655571232e-06, 'epoch': 2.8417350527549825}
+2025-05-06 13:20:07,033 - INFO - Training metrics: {'loss': 0.4143, 'grad_norm': 1.7964805364608765, 'learning_rate': 2.4621666655571232e-06, 'epoch': 2.8417350527549825}
+2025-05-06 13:24:52,579 - INFO - INFO: Training progress: {'loss': 0.4487, 'grad_norm': 2.0941336154937744, 'learning_rate': 2.406837781586393e-06, 'epoch': 2.855803048065651}
+2025-05-06 13:24:52,580 - INFO - Training progress: {'loss': 0.4487, 'grad_norm': 2.0941336154937744, 'learning_rate': 2.406837781586393e-06, 'epoch': 2.855803048065651}
+2025-05-06 13:24:52,580 - INFO - Training metrics: {'loss': 0.4487, 'grad_norm': 2.0941336154937744, 'learning_rate': 2.406837781586393e-06, 'epoch': 2.855803048065651}
+2025-05-06 13:29:38,035 - INFO - INFO: Training progress: {'loss': 0.4115, 'grad_norm': 1.9155056476593018, 'learning_rate': 2.351981254975455e-06, 'epoch': 2.869871043376319}
+2025-05-06 13:29:38,037 - INFO - Training progress: {'loss': 0.4115, 'grad_norm': 1.9155056476593018, 'learning_rate': 2.351981254975455e-06, 'epoch': 2.869871043376319}
+2025-05-06 13:29:38,037 - INFO - Training metrics: {'loss': 0.4115, 'grad_norm': 1.9155056476593018, 'learning_rate': 2.351981254975455e-06, 'epoch': 2.869871043376319}
+2025-05-06 13:34:23,463 - INFO - INFO: Training progress: {'loss': 0.4415, 'grad_norm': 2.2620339393615723, 'learning_rate': 2.2976042971671836e-06, 'epoch': 2.883939038686987}
+2025-05-06 13:34:23,464 - INFO - Training progress: {'loss': 0.4415, 'grad_norm': 2.2620339393615723, 'learning_rate': 2.2976042971671836e-06, 'epoch': 2.883939038686987}
+2025-05-06 13:34:23,464 - INFO - Training metrics: {'loss': 0.4415, 'grad_norm': 2.2620339393615723, 'learning_rate': 2.2976042971671836e-06, 'epoch': 2.883939038686987}
+2025-05-06 13:39:09,228 - INFO - INFO: Training progress: {'loss': 0.4433, 'grad_norm': 1.8545366525650024, 'learning_rate': 2.243714056560305e-06, 'epoch': 2.898007033997655}
+2025-05-06 13:39:09,229 - INFO - Training progress: {'loss': 0.4433, 'grad_norm': 1.8545366525650024, 'learning_rate': 2.243714056560305e-06, 'epoch': 2.898007033997655}
+2025-05-06 13:39:09,229 - INFO - Training metrics: {'loss': 0.4433, 'grad_norm': 1.8545366525650024, 'learning_rate': 2.243714056560305e-06, 'epoch': 2.898007033997655}
+2025-05-06 13:43:54,769 - INFO - INFO: Training progress: {'loss': 0.4287, 'grad_norm': 2.139613389968872, 'learning_rate': 2.1903176175696676e-06, 'epoch': 2.9120750293083235}
+2025-05-06 13:43:54,769 - INFO - Training progress: {'loss': 0.4287, 'grad_norm': 2.139613389968872, 'learning_rate': 2.1903176175696676e-06, 'epoch': 2.9120750293083235}
+2025-05-06 13:43:54,769 - INFO - Training metrics: {'loss': 0.4287, 'grad_norm': 2.139613389968872, 'learning_rate': 2.1903176175696676e-06, 'epoch': 2.9120750293083235}
+2025-05-06 13:48:40,303 - INFO - INFO: Training progress: {'loss': 0.4404, 'grad_norm': 1.9721108675003052, 'learning_rate': 2.1374219996949214e-06, 'epoch': 2.926143024618992}
+2025-05-06 13:48:40,303 - INFO - Training progress: {'loss': 0.4404, 'grad_norm': 1.9721108675003052, 'learning_rate': 2.1374219996949214e-06, 'epoch': 2.926143024618992}
+2025-05-06 13:48:40,303 - INFO - Training metrics: {'loss': 0.4404, 'grad_norm': 1.9721108675003052, 'learning_rate': 2.1374219996949214e-06, 'epoch': 2.926143024618992}
+2025-05-06 13:53:25,789 - INFO - INFO: Training progress: {'loss': 0.4032, 'grad_norm': 1.8760250806808472, 'learning_rate': 2.085034156597747e-06, 'epoch': 2.9402110199296603}
+2025-05-06 13:53:25,790 - INFO - Training progress: {'loss': 0.4032, 'grad_norm': 1.8760250806808472, 'learning_rate': 2.085034156597747e-06, 'epoch': 2.9402110199296603}
+2025-05-06 13:53:25,790 - INFO - Training metrics: {'loss': 0.4032, 'grad_norm': 1.8760250806808472, 'learning_rate': 2.085034156597747e-06, 'epoch': 2.9402110199296603}
+2025-05-06 13:58:11,320 - INFO - INFO: Training progress: {'loss': 0.4327, 'grad_norm': 1.8138736486434937, 'learning_rate': 2.0331609751877e-06, 'epoch': 2.954279015240328}
+2025-05-06 13:58:11,320 - INFO - Training progress: {'loss': 0.4327, 'grad_norm': 1.8138736486434937, 'learning_rate': 2.0331609751877e-06, 'epoch': 2.954279015240328}
+2025-05-06 13:58:11,320 - INFO - Training metrics: {'loss': 0.4327, 'grad_norm': 1.8138736486434937, 'learning_rate': 2.0331609751877e-06, 'epoch': 2.954279015240328}
+2025-05-06 14:13:20,992 - INFO - INFO: Training progress: {'eval_loss': 0.4324900507926941, 'eval_runtime': 909.6707, 'eval_samples_per_second': 1.757, 'eval_steps_per_second': 1.757, 'epoch': 2.954279015240328}
+2025-05-06 14:13:20,993 - INFO - Training progress: {'eval_loss': 0.4324900507926941, 'eval_runtime': 909.6707, 'eval_samples_per_second': 1.757, 'eval_steps_per_second': 1.757, 'epoch': 2.954279015240328}
+2025-05-06 14:13:20,993 - INFO - Training metrics: {'eval_loss': 0.4324900507926941, 'eval_runtime': 909.6707, 'eval_samples_per_second': 1.757, 'eval_steps_per_second': 1.757, 'epoch': 2.954279015240328}
+2025-05-06 14:13:22,166 - INFO - INFO: Saving checkpoint at step 2100
+2025-05-06 14:13:22,166 - INFO - Saving checkpoint at step 2100
+2025-05-06 14:13:22,166 - INFO - Saving checkpoint at step 2100
+2025-05-06 14:18:07,690 - INFO - INFO: Training progress: {'loss': 0.43, 'grad_norm': 1.9533586502075195, 'learning_rate': 1.981809274716887e-06, 'epoch': 2.9683470105509966}
+2025-05-06 14:18:07,690 - INFO - Training progress: {'loss': 0.43, 'grad_norm': 1.9533586502075195, 'learning_rate': 1.981809274716887e-06, 'epoch': 2.9683470105509966}
+2025-05-06 14:18:07,691 - INFO - Training metrics: {'loss': 0.43, 'grad_norm': 1.9533586502075195, 'learning_rate': 1.981809274716887e-06, 'epoch': 2.9683470105509966}
+2025-05-06 14:22:53,627 - INFO - INFO: Training progress: {'loss': 0.3911, 'grad_norm': 1.770283579826355, 'learning_rate': 1.930985805883495e-06, 'epoch': 2.9824150058616645}
+2025-05-06 14:22:53,627 - INFO - Training progress: {'loss': 0.3911, 'grad_norm': 1.770283579826355, 'learning_rate': 1.930985805883495e-06, 'epoch': 2.9824150058616645}
+2025-05-06 14:22:53,627 - INFO - Training metrics: {'loss': 0.3911, 'grad_norm': 1.770283579826355, 'learning_rate': 1.930985805883495e-06, 'epoch': 2.9824150058616645}
+2025-05-06 14:27:39,426 - INFO - INFO: Training progress: {'loss': 0.4498, 'grad_norm': 1.8492645025253296, 'learning_rate': 1.8806972499443303e-06, 'epoch': 2.996483001172333}
+2025-05-06 14:27:39,426 - INFO - Training progress: {'loss': 0.4498, 'grad_norm': 1.8492645025253296, 'learning_rate': 1.8806972499443303e-06, 'epoch': 2.996483001172333}
+2025-05-06 14:27:39,426 - INFO - Training metrics: {'loss': 0.4498, 'grad_norm': 1.8492645025253296, 'learning_rate': 1.8806972499443303e-06, 'epoch': 2.996483001172333}
+2025-05-06 14:28:51,449 - INFO - INFO: Starting epoch 2.9992966002344668/4
+2025-05-06 14:28:51,449 - INFO - Starting epoch 2.9992966002344668/4
+2025-05-06 14:28:51,449 - INFO - Starting epoch 2.9992966002344668/4
+2025-05-06 14:32:34,855 - INFO - INFO: Training progress: {'loss': 0.4405, 'grad_norm': 1.859086036682129, 'learning_rate': 1.8309502178365235e-06, 'epoch': 3.0105509964830013}
+2025-05-06 14:32:34,855 - INFO - Training progress: {'loss': 0.4405, 'grad_norm': 1.859086036682129, 'learning_rate': 1.8309502178365235e-06, 'epoch': 3.0105509964830013}
+2025-05-06 14:32:34,855 - INFO - Training metrics: {'loss': 0.4405, 'grad_norm': 1.859086036682129, 'learning_rate': 1.8309502178365235e-06, 'epoch': 3.0105509964830013}
+2025-05-06 14:37:20,986 - INFO - INFO: Training progress: {'loss': 0.4165, 'grad_norm': 2.3719685077667236, 'learning_rate': 1.7817512493084387e-06, 'epoch': 3.024618991793669}
+2025-05-06 14:37:20,986 - INFO - Training progress: {'loss': 0.4165, 'grad_norm': 2.3719685077667236, 'learning_rate': 1.7817512493084387e-06, 'epoch': 3.024618991793669}
+2025-05-06 14:37:20,986 - INFO - Training metrics: {'loss': 0.4165, 'grad_norm': 2.3719685077667236, 'learning_rate': 1.7817512493084387e-06, 'epoch': 3.024618991793669}
+2025-05-06 14:42:06,924 - INFO - INFO: Training progress: {'loss': 0.4379, 'grad_norm': 2.0731046199798584, 'learning_rate': 1.7331068120599652e-06, 'epoch': 3.0386869871043376}
+2025-05-06 14:42:06,925 - INFO - Training progress: {'loss': 0.4379, 'grad_norm': 2.0731046199798584, 'learning_rate': 1.7331068120599652e-06, 'epoch': 3.0386869871043376}
+2025-05-06 14:42:06,925 - INFO - Training metrics: {'loss': 0.4379, 'grad_norm': 2.0731046199798584, 'learning_rate': 1.7331068120599652e-06, 'epoch': 3.0386869871043376}
+2025-05-06 14:46:52,786 - INFO - INFO: Training progress: {'loss': 0.4316, 'grad_norm': 1.770625114440918, 'learning_rate': 1.6850233008922679e-06, 'epoch': 3.052754982415006}
+2025-05-06 14:46:52,786 - INFO - Training progress: {'loss': 0.4316, 'grad_norm': 1.770625114440918, 'learning_rate': 1.6850233008922679e-06, 'epoch': 3.052754982415006}
+2025-05-06 14:46:52,786 - INFO - Training metrics: {'loss': 0.4316, 'grad_norm': 1.770625114440918, 'learning_rate': 1.6850233008922679e-06, 'epoch': 3.052754982415006}
+2025-05-06 14:51:38,530 - INFO - INFO: Training progress: {'loss': 0.4362, 'grad_norm': 1.9160739183425903, 'learning_rate': 1.6375070368671325e-06, 'epoch': 3.066822977725674}
+2025-05-06 14:51:38,530 - INFO - Training progress: {'loss': 0.4362, 'grad_norm': 1.9160739183425903, 'learning_rate': 1.6375070368671325e-06, 'epoch': 3.066822977725674}
+2025-05-06 14:51:38,530 - INFO - Training metrics: {'loss': 0.4362, 'grad_norm': 1.9160739183425903, 'learning_rate': 1.6375070368671325e-06, 'epoch': 3.066822977725674}
+2025-05-06 14:56:24,337 - INFO - INFO: Training progress: {'loss': 0.477, 'grad_norm': 2.1114919185638428, 'learning_rate': 1.5905642664759923e-06, 'epoch': 3.0808909730363423}
+2025-05-06 14:56:24,338 - INFO - Training progress: {'loss': 0.477, 'grad_norm': 2.1114919185638428, 'learning_rate': 1.5905642664759923e-06, 'epoch': 3.0808909730363423}
+2025-05-06 14:56:24,338 - INFO - Training metrics: {'loss': 0.477, 'grad_norm': 2.1114919185638428, 'learning_rate': 1.5905642664759923e-06, 'epoch': 3.0808909730363423}
+2025-05-06 15:01:10,203 - INFO - INFO: Training progress: {'loss': 0.4343, 'grad_norm': 2.1920621395111084, 'learning_rate': 1.5442011608187735e-06, 'epoch': 3.0949589683470107}
+2025-05-06 15:01:10,204 - INFO - Training progress: {'loss': 0.4343, 'grad_norm': 2.1920621395111084, 'learning_rate': 1.5442011608187735e-06, 'epoch': 3.0949589683470107}
+2025-05-06 15:01:10,204 - INFO - Training metrics: {'loss': 0.4343, 'grad_norm': 2.1920621395111084, 'learning_rate': 1.5442011608187735e-06, 'epoch': 3.0949589683470107}
+2025-05-06 15:05:56,125 - INFO - INFO: Training progress: {'loss': 0.4403, 'grad_norm': 2.0860798358917236, 'learning_rate': 1.4984238147926241e-06, 'epoch': 3.1090269636576786}
+2025-05-06 15:05:56,125 - INFO - Training progress: {'loss': 0.4403, 'grad_norm': 2.0860798358917236, 'learning_rate': 1.4984238147926241e-06, 'epoch': 3.1090269636576786}
+2025-05-06 15:05:56,125 - INFO - Training metrics: {'loss': 0.4403, 'grad_norm': 2.0860798358917236, 'learning_rate': 1.4984238147926241e-06, 'epoch': 3.1090269636576786}
+2025-05-06 15:10:41,856 - INFO - INFO: Training progress: {'loss': 0.4105, 'grad_norm': 2.135999917984009, 'learning_rate': 1.4532382462906991e-06, 'epoch': 3.123094958968347}
+2025-05-06 15:10:41,856 - INFO - Training progress: {'loss': 0.4105, 'grad_norm': 2.135999917984009, 'learning_rate': 1.4532382462906991e-06, 'epoch': 3.123094958968347}
+2025-05-06 15:10:41,856 - INFO - Training metrics: {'loss': 0.4105, 'grad_norm': 2.135999917984009, 'learning_rate': 1.4532382462906991e-06, 'epoch': 3.123094958968347}
+2025-05-06 15:15:27,813 - INFO - INFO: Training progress: {'loss': 0.4161, 'grad_norm': 1.8078827857971191, 'learning_rate': 1.4086503954110383e-06, 'epoch': 3.1371629542790154}
+2025-05-06 15:15:27,813 - INFO - Training progress: {'loss': 0.4161, 'grad_norm': 1.8078827857971191, 'learning_rate': 1.4086503954110383e-06, 'epoch': 3.1371629542790154}
+2025-05-06 15:15:27,813 - INFO - Training metrics: {'loss': 0.4161, 'grad_norm': 1.8078827857971191, 'learning_rate': 1.4086503954110383e-06, 'epoch': 3.1371629542790154}
+2025-05-06 15:20:13,391 - INFO - INFO: Training progress: {'loss': 0.4299, 'grad_norm': 1.8739681243896484, 'learning_rate': 1.36466612367567e-06, 'epoch': 3.1512309495896833}
+2025-05-06 15:20:13,391 - INFO - Training progress: {'loss': 0.4299, 'grad_norm': 1.8739681243896484, 'learning_rate': 1.36466612367567e-06, 'epoch': 3.1512309495896833}
+2025-05-06 15:20:13,391 - INFO - Training metrics: {'loss': 0.4299, 'grad_norm': 1.8739681243896484, 'learning_rate': 1.36466612367567e-06, 'epoch': 3.1512309495896833}
+2025-05-06 15:24:59,332 - INFO - INFO: Training progress: {'loss': 0.4598, 'grad_norm': 1.8509124517440796, 'learning_rate': 1.321291213260078e-06, 'epoch': 3.1652989449003517}
+2025-05-06 15:24:59,332 - INFO - Training progress: {'loss': 0.4598, 'grad_norm': 1.8509124517440796, 'learning_rate': 1.321291213260078e-06, 'epoch': 3.1652989449003517}
+2025-05-06 15:24:59,332 - INFO - Training metrics: {'loss': 0.4598, 'grad_norm': 1.8509124517440796, 'learning_rate': 1.321291213260078e-06, 'epoch': 3.1652989449003517}
+2025-05-06 15:29:45,106 - INFO - INFO: Training progress: {'loss': 0.3673, 'grad_norm': 1.7376049757003784, 'learning_rate': 1.2785313662330566e-06, 'epoch': 3.17936694021102}
+2025-05-06 15:29:45,106 - INFO - Training progress: {'loss': 0.3673, 'grad_norm': 1.7376049757003784, 'learning_rate': 1.2785313662330566e-06, 'epoch': 3.17936694021102}
+2025-05-06 15:29:45,106 - INFO - Training metrics: {'loss': 0.3673, 'grad_norm': 1.7376049757003784, 'learning_rate': 1.2785313662330566e-06, 'epoch': 3.17936694021102}
+2025-05-06 15:34:30,911 - INFO - INFO: Training progress: {'loss': 0.3984, 'grad_norm': 2.0199332237243652, 'learning_rate': 1.2363922038071258e-06, 'epoch': 3.193434935521688}
+2025-05-06 15:34:30,911 - INFO - Training progress: {'loss': 0.3984, 'grad_norm': 2.0199332237243652, 'learning_rate': 1.2363922038071258e-06, 'epoch': 3.193434935521688}
+2025-05-06 15:34:30,911 - INFO - Training metrics: {'loss': 0.3984, 'grad_norm': 2.0199332237243652, 'learning_rate': 1.2363922038071258e-06, 'epoch': 3.193434935521688}
+2025-05-06 15:52:17,861 - INFO - INFO: Training progress: {'eval_loss': 0.42858466506004333, 'eval_runtime': 924.0841, 'eval_samples_per_second': 1.729, 'eval_steps_per_second': 1.729, 'epoch': 3.200468933177022}
+2025-05-06 15:52:17,862 - INFO - Training progress: {'eval_loss': 0.42858466506004333, 'eval_runtime': 924.0841, 'eval_samples_per_second': 1.729, 'eval_steps_per_second': 1.729, 'epoch': 3.200468933177022}
+2025-05-06 15:52:17,862 - INFO - Training metrics: {'eval_loss': 0.42858466506004333, 'eval_runtime': 924.0841, 'eval_samples_per_second': 1.729, 'eval_steps_per_second': 1.729, 'epoch': 3.200468933177022}
+2025-05-06 15:54:40,643 - INFO - INFO: Training progress: {'loss': 0.4327, 'grad_norm': 1.7215176820755005, 'learning_rate': 1.1948792655995624e-06, 'epoch': 3.2075029308323564}
+2025-05-06 15:54:40,643 - INFO - Training progress: {'loss': 0.4327, 'grad_norm': 1.7215176820755005, 'learning_rate': 1.1948792655995624e-06, 'epoch': 3.2075029308323564}
+2025-05-06 15:54:40,643 - INFO - Training metrics: {'loss': 0.4327, 'grad_norm': 1.7215176820755005, 'learning_rate': 1.1948792655995624e-06, 'epoch': 3.2075029308323564}
+2025-05-06 15:59:25,930 - INFO - INFO: Training progress: {'loss': 0.4479, 'grad_norm': 1.8560106754302979, 'learning_rate': 1.153998008904166e-06, 'epoch': 3.2215709261430248}
+2025-05-06 15:59:25,932 - INFO - Training progress: {'loss': 0.4479, 'grad_norm': 1.8560106754302979, 'learning_rate': 1.153998008904166e-06, 'epoch': 3.2215709261430248}
+2025-05-06 15:59:25,932 - INFO - Training metrics: {'loss': 0.4479, 'grad_norm': 1.8560106754302979, 'learning_rate': 1.153998008904166e-06, 'epoch': 3.2215709261430248}
+2025-05-06 16:04:11,231 - INFO - INFO: Training progress: {'loss': 0.44, 'grad_norm': 1.889945387840271, 'learning_rate': 1.1137538079738345e-06, 'epoch': 3.2356389214536927}
+2025-05-06 16:04:11,231 - INFO - Training progress: {'loss': 0.44, 'grad_norm': 1.889945387840271, 'learning_rate': 1.1137538079738345e-06, 'epoch': 3.2356389214536927}
+2025-05-06 16:04:11,231 - INFO - Training metrics: {'loss': 0.44, 'grad_norm': 1.889945387840271, 'learning_rate': 1.1137538079738345e-06, 'epoch': 3.2356389214536927}
+2025-05-06 16:08:57,341 - INFO - INFO: Training progress: {'loss': 0.4359, 'grad_norm': 2.03731369972229, 'learning_rate': 1.074151953314079e-06, 'epoch': 3.249706916764361}
+2025-05-06 16:08:57,341 - INFO - Training progress: {'loss': 0.4359, 'grad_norm': 2.03731369972229, 'learning_rate': 1.074151953314079e-06, 'epoch': 3.249706916764361}
+2025-05-06 16:08:57,341 - INFO - Training metrics: {'loss': 0.4359, 'grad_norm': 2.03731369972229, 'learning_rate': 1.074151953314079e-06, 'epoch': 3.249706916764361}
+2025-05-06 16:13:44,320 - INFO - INFO: Training progress: {'loss': 0.4009, 'grad_norm': 2.426713228225708, 'learning_rate': 1.0351976509875134e-06, 'epoch': 3.2637749120750295}
+2025-05-06 16:13:44,320 - INFO - Training progress: {'loss': 0.4009, 'grad_norm': 2.426713228225708, 'learning_rate': 1.0351976509875134e-06, 'epoch': 3.2637749120750295}
+2025-05-06 16:13:44,320 - INFO - Training metrics: {'loss': 0.4009, 'grad_norm': 2.426713228225708, 'learning_rate': 1.0351976509875134e-06, 'epoch': 3.2637749120750295}
+2025-05-06 16:18:47,211 - INFO - INFO: Training progress: {'loss': 0.4153, 'grad_norm': 1.8980634212493896, 'learning_rate': 9.968960219294838e-07, 'epoch': 3.2778429073856974}
+2025-05-06 16:18:47,211 - INFO - Training progress: {'loss': 0.4153, 'grad_norm': 1.8980634212493896, 'learning_rate': 9.968960219294838e-07, 'epoch': 3.2778429073856974}
+2025-05-06 16:18:47,211 - INFO - Training metrics: {'loss': 0.4153, 'grad_norm': 1.8980634212493896, 'learning_rate': 9.968960219294838e-07, 'epoch': 3.2778429073856974}
+2025-05-06 16:23:48,696 - INFO - INFO: Training progress: {'loss': 0.3861, 'grad_norm': 2.526139497756958, 'learning_rate': 9.592521012748595e-07, 'epoch': 3.2919109026963658}
+2025-05-06 16:23:48,696 - INFO - Training progress: {'loss': 0.3861, 'grad_norm': 2.526139497756958, 'learning_rate': 9.592521012748595e-07, 'epoch': 3.2919109026963658}
+2025-05-06 16:23:48,696 - INFO - Training metrics: {'loss': 0.3861, 'grad_norm': 2.526139497756958, 'learning_rate': 9.592521012748595e-07, 'epoch': 3.2919109026963658}
+2025-05-06 16:28:58,891 - INFO - INFO: Training progress: {'loss': 0.407, 'grad_norm': 2.059922456741333, 'learning_rate': 9.222708376961153e-07, 'epoch': 3.305978898007034}
+2025-05-06 16:28:58,892 - INFO - Training progress: {'loss': 0.407, 'grad_norm': 2.059922456741333, 'learning_rate': 9.222708376961153e-07, 'epoch': 3.305978898007034}
+2025-05-06 16:28:58,892 - INFO - Training metrics: {'loss': 0.407, 'grad_norm': 2.059922456741333, 'learning_rate': 9.222708376961153e-07, 'epoch': 3.305978898007034}
+2025-05-06 16:34:08,503 - INFO - INFO: Training progress: {'loss': 0.396, 'grad_norm': 1.9540916681289673, 'learning_rate': 8.859570927527838e-07, 'epoch': 3.320046893317702}
+2025-05-06 16:34:08,504 - INFO - Training progress: {'loss': 0.396, 'grad_norm': 1.9540916681289673, 'learning_rate': 8.859570927527838e-07, 'epoch': 3.320046893317702}
+2025-05-06 16:34:08,504 - INFO - Training metrics: {'loss': 0.396, 'grad_norm': 1.9540916681289673, 'learning_rate': 8.859570927527838e-07, 'epoch': 3.320046893317702}
+2025-05-06 16:39:18,324 - INFO - INFO: Training progress: {'loss': 0.4485, 'grad_norm': 1.9289249181747437, 'learning_rate': 8.503156402523462e-07, 'epoch': 3.3341148886283705}
+2025-05-06 16:39:18,324 - INFO - Training progress: {'loss': 0.4485, 'grad_norm': 1.9289249181747437, 'learning_rate': 8.503156402523462e-07, 'epoch': 3.3341148886283705}
+2025-05-06 16:39:18,324 - INFO - Training metrics: {'loss': 0.4485, 'grad_norm': 1.9289249181747437, 'learning_rate': 8.503156402523462e-07, 'epoch': 3.3341148886283705}
+2025-05-06 16:44:23,097 - INFO - INFO: Training progress: {'loss': 0.3757, 'grad_norm': 1.8825608491897583, 'learning_rate': 8.153511656226736e-07, 'epoch': 3.348182883939039}
+2025-05-06 16:44:23,098 - INFO - Training progress: {'loss': 0.3757, 'grad_norm': 1.8825608491897583, 'learning_rate': 8.153511656226736e-07, 'epoch': 3.348182883939039}
+2025-05-06 16:44:23,098 - INFO - Training metrics: {'loss': 0.3757, 'grad_norm': 1.8825608491897583, 'learning_rate': 8.153511656226736e-07, 'epoch': 3.348182883939039}
+2025-05-06 16:49:19,917 - INFO - INFO: Training progress: {'loss': 0.4067, 'grad_norm': 2.004189968109131, 'learning_rate': 7.810682652960772e-07, 'epoch': 3.362250879249707}
+2025-05-06 16:49:19,917 - INFO - Training progress: {'loss': 0.4067, 'grad_norm': 2.004189968109131, 'learning_rate': 7.810682652960772e-07, 'epoch': 3.362250879249707}
+2025-05-06 16:49:19,917 - INFO - Training metrics: {'loss': 0.4067, 'grad_norm': 2.004189968109131, 'learning_rate': 7.810682652960772e-07, 'epoch': 3.362250879249707}
+2025-05-06 16:54:15,302 - INFO - INFO: Training progress: {'loss': 0.3884, 'grad_norm': 1.9455517530441284, 'learning_rate': 7.474714461050645e-07, 'epoch': 3.376318874560375}
+2025-05-06 16:54:15,302 - INFO - Training progress: {'loss': 0.3884, 'grad_norm': 1.9455517530441284, 'learning_rate': 7.474714461050645e-07, 'epoch': 3.376318874560375}
+2025-05-06 16:54:15,302 - INFO - Training metrics: {'loss': 0.3884, 'grad_norm': 1.9455517530441284, 'learning_rate': 7.474714461050645e-07, 'epoch': 3.376318874560375}
+2025-05-06 16:59:05,169 - INFO - INFO: Training progress: {'loss': 0.443, 'grad_norm': 2.066164970397949, 'learning_rate': 7.145651246898628e-07, 'epoch': 3.3903868698710435}
+2025-05-06 16:59:05,169 - INFO - Training progress: {'loss': 0.443, 'grad_norm': 2.066164970397949, 'learning_rate': 7.145651246898628e-07, 'epoch': 3.3903868698710435}
+2025-05-06 16:59:05,169 - INFO - Training metrics: {'loss': 0.443, 'grad_norm': 2.066164970397949, 'learning_rate': 7.145651246898628e-07, 'epoch': 3.3903868698710435}
+2025-05-06 17:03:59,388 - INFO - INFO: Training progress: {'loss': 0.4594, 'grad_norm': 2.126105308532715, 'learning_rate': 6.823536269178225e-07, 'epoch': 3.4044548651817115}
+2025-05-06 17:03:59,389 - INFO - Training progress: {'loss': 0.4594, 'grad_norm': 2.126105308532715, 'learning_rate': 6.823536269178225e-07, 'epoch': 3.4044548651817115}
+2025-05-06 17:03:59,389 - INFO - Training metrics: {'loss': 0.4594, 'grad_norm': 2.126105308532715, 'learning_rate': 6.823536269178225e-07, 'epoch': 3.4044548651817115}
+2025-05-06 17:08:55,505 - INFO - INFO: Training progress: {'loss': 0.416, 'grad_norm': 1.798841118812561, 'learning_rate': 6.508411873147171e-07, 'epoch': 3.41852286049238}
+2025-05-06 17:08:55,505 - INFO - Training progress: {'loss': 0.416, 'grad_norm': 1.798841118812561, 'learning_rate': 6.508411873147171e-07, 'epoch': 3.41852286049238}
+2025-05-06 17:08:55,505 - INFO - Training metrics: {'loss': 0.416, 'grad_norm': 1.798841118812561, 'learning_rate': 6.508411873147171e-07, 'epoch': 3.41852286049238}
+2025-05-06 17:13:55,139 - INFO - INFO: Training progress: {'loss': 0.4649, 'grad_norm': 1.9090033769607544, 'learning_rate': 6.200319485080921e-07, 'epoch': 3.4325908558030482}
+2025-05-06 17:13:55,140 - INFO - Training progress: {'loss': 0.4649, 'grad_norm': 1.9090033769607544, 'learning_rate': 6.200319485080921e-07, 'epoch': 3.4325908558030482}
+2025-05-06 17:13:55,140 - INFO - Training metrics: {'loss': 0.4649, 'grad_norm': 1.9090033769607544, 'learning_rate': 6.200319485080921e-07, 'epoch': 3.4325908558030482}
+2025-05-06 17:19:10,724 - INFO - INFO: Training progress: {'loss': 0.4596, 'grad_norm': 1.9037094116210938, 'learning_rate': 5.899299606826638e-07, 'epoch': 3.446658851113716}
+2025-05-06 17:19:10,724 - INFO - Training progress: {'loss': 0.4596, 'grad_norm': 1.9037094116210938, 'learning_rate': 5.899299606826638e-07, 'epoch': 3.446658851113716}
+2025-05-06 17:19:10,724 - INFO - Training metrics: {'loss': 0.4596, 'grad_norm': 1.9037094116210938, 'learning_rate': 5.899299606826638e-07, 'epoch': 3.446658851113716}
+2025-05-06 17:36:03,508 - INFO - INFO: Training progress: {'eval_loss': 0.4257202446460724, 'eval_runtime': 1012.7809, 'eval_samples_per_second': 1.578, 'eval_steps_per_second': 1.578, 'epoch': 3.446658851113716}
+2025-05-06 17:36:03,509 - INFO - Training progress: {'eval_loss': 0.4257202446460724, 'eval_runtime': 1012.7809, 'eval_samples_per_second': 1.578, 'eval_steps_per_second': 1.578, 'epoch': 3.446658851113716}
+2025-05-06 17:36:03,509 - INFO - Training metrics: {'eval_loss': 0.4257202446460724, 'eval_runtime': 1012.7809, 'eval_samples_per_second': 1.578, 'eval_steps_per_second': 1.578, 'epoch': 3.446658851113716}
+2025-05-06 17:36:04,686 - INFO - INFO: Saving checkpoint at step 2450
+2025-05-06 17:36:04,686 - INFO - Saving checkpoint at step 2450
+2025-05-06 17:36:04,686 - INFO - Saving checkpoint at step 2450
+2025-05-06 17:41:15,015 - INFO - INFO: Training progress: {'loss': 0.4581, 'grad_norm': 2.0124664306640625, 'learning_rate': 5.605391810478837e-07, 'epoch': 3.4607268464243846}
+2025-05-06 17:41:15,015 - INFO - Training progress: {'loss': 0.4581, 'grad_norm': 2.0124664306640625, 'learning_rate': 5.605391810478837e-07, 'epoch': 3.4607268464243846}
+2025-05-06 17:41:15,015 - INFO - Training metrics: {'loss': 0.4581, 'grad_norm': 2.0124664306640625, 'learning_rate': 5.605391810478837e-07, 'epoch': 3.4607268464243846}
+2025-05-06 17:46:24,300 - INFO - INFO: Training progress: {'loss': 0.4231, 'grad_norm': 2.023014545440674, 'learning_rate': 5.318634733177239e-07, 'epoch': 3.474794841735053}
+2025-05-06 17:46:24,300 - INFO - Training progress: {'loss': 0.4231, 'grad_norm': 2.023014545440674, 'learning_rate': 5.318634733177239e-07, 'epoch': 3.474794841735053}
+2025-05-06 17:46:24,300 - INFO - Training metrics: {'loss': 0.4231, 'grad_norm': 2.023014545440674, 'learning_rate': 5.318634733177239e-07, 'epoch': 3.474794841735053}
+2025-05-06 17:51:31,595 - INFO - INFO: Training progress: {'loss': 0.403, 'grad_norm': 1.8813165426254272, 'learning_rate': 5.039066072027561e-07, 'epoch': 3.488862837045721}
+2025-05-06 17:51:31,596 - INFO - Training progress: {'loss': 0.403, 'grad_norm': 1.8813165426254272, 'learning_rate': 5.039066072027561e-07, 'epoch': 3.488862837045721}
+2025-05-06 17:51:31,596 - INFO - Training metrics: {'loss': 0.403, 'grad_norm': 1.8813165426254272, 'learning_rate': 5.039066072027561e-07, 'epoch': 3.488862837045721}
+2025-05-06 17:56:43,830 - INFO - INFO: Training progress: {'loss': 0.431, 'grad_norm': 1.886682391166687, 'learning_rate': 4.7667225791457993e-07, 'epoch': 3.5029308323563892}
+2025-05-06 17:56:43,831 - INFO - Training progress: {'loss': 0.431, 'grad_norm': 1.886682391166687, 'learning_rate': 4.7667225791457993e-07, 'epoch': 3.5029308323563892}
+2025-05-06 17:56:43,831 - INFO - Training metrics: {'loss': 0.431, 'grad_norm': 1.886682391166687, 'learning_rate': 4.7667225791457993e-07, 'epoch': 3.5029308323563892}
+2025-05-06 18:01:53,191 - INFO - INFO: Training progress: {'loss': 0.4352, 'grad_norm': 1.881019115447998, 'learning_rate': 4.50164005682681e-07, 'epoch': 3.5169988276670576}
+2025-05-06 18:01:53,193 - INFO - Training progress: {'loss': 0.4352, 'grad_norm': 1.881019115447998, 'learning_rate': 4.50164005682681e-07, 'epoch': 3.5169988276670576}
+2025-05-06 18:01:53,193 - INFO - Training metrics: {'loss': 0.4352, 'grad_norm': 1.881019115447998, 'learning_rate': 4.50164005682681e-07, 'epoch': 3.5169988276670576}
+2025-05-06 18:07:05,426 - INFO - INFO: Training progress: {'loss': 0.4553, 'grad_norm': 2.0222902297973633, 'learning_rate': 4.2438533528377724e-07, 'epoch': 3.5310668229777256}
+2025-05-06 18:07:05,426 - INFO - Training progress: {'loss': 0.4553, 'grad_norm': 2.0222902297973633, 'learning_rate': 4.2438533528377724e-07, 'epoch': 3.5310668229777256}
+2025-05-06 18:07:05,426 - INFO - Training metrics: {'loss': 0.4553, 'grad_norm': 2.0222902297973633, 'learning_rate': 4.2438533528377724e-07, 'epoch': 3.5310668229777256}
+2025-05-06 18:12:21,276 - INFO - INFO: Training progress: {'loss': 0.437, 'grad_norm': 1.8723076581954956, 'learning_rate': 3.9933963558370314e-07, 'epoch': 3.545134818288394}
+2025-05-06 18:12:21,276 - INFO - Training progress: {'loss': 0.437, 'grad_norm': 1.8723076581954956, 'learning_rate': 3.9933963558370314e-07, 'epoch': 3.545134818288394}
+2025-05-06 18:12:21,276 - INFO - Training metrics: {'loss': 0.437, 'grad_norm': 1.8723076581954956, 'learning_rate': 3.9933963558370314e-07, 'epoch': 3.545134818288394}
+2025-05-06 18:17:38,362 - INFO - INFO: Training progress: {'loss': 0.4248, 'grad_norm': 2.746583938598633, 'learning_rate': 3.7503019909191983e-07, 'epoch': 3.559202813599062}
+2025-05-06 18:17:38,362 - INFO - Training progress: {'loss': 0.4248, 'grad_norm': 2.746583938598633, 'learning_rate': 3.7503019909191983e-07, 'epoch': 3.559202813599062}
+2025-05-06 18:17:38,362 - INFO - Training metrics: {'loss': 0.4248, 'grad_norm': 2.746583938598633, 'learning_rate': 3.7503019909191983e-07, 'epoch': 3.559202813599062}
+2025-05-06 18:23:04,262 - INFO - INFO: Training progress: {'loss': 0.4562, 'grad_norm': 2.157809257507324, 'learning_rate': 3.5146022152866577e-07, 'epoch': 3.5732708089097303}
+2025-05-06 18:23:04,263 - INFO - Training progress: {'loss': 0.4562, 'grad_norm': 2.157809257507324, 'learning_rate': 3.5146022152866577e-07, 'epoch': 3.5732708089097303}
+2025-05-06 18:23:04,263 - INFO - Training metrics: {'loss': 0.4562, 'grad_norm': 2.157809257507324, 'learning_rate': 3.5146022152866577e-07, 'epoch': 3.5732708089097303}
+2025-05-06 18:28:26,103 - INFO - INFO: Training progress: {'loss': 0.4216, 'grad_norm': 2.396770477294922, 'learning_rate': 3.2863280140486475e-07, 'epoch': 3.5873388042203986}
+2025-05-06 18:28:26,103 - INFO - Training progress: {'loss': 0.4216, 'grad_norm': 2.396770477294922, 'learning_rate': 3.2863280140486475e-07, 'epoch': 3.5873388042203986}
+2025-05-06 18:28:26,103 - INFO - Training metrics: {'loss': 0.4216, 'grad_norm': 2.396770477294922, 'learning_rate': 3.2863280140486475e-07, 'epoch': 3.5873388042203986}
+2025-05-06 18:33:33,372 - INFO - INFO: Training progress: {'loss': 0.4121, 'grad_norm': 1.9148435592651367, 'learning_rate': 3.065509396147832e-07, 'epoch': 3.601406799531067}
+2025-05-06 18:33:33,372 - INFO - Training progress: {'loss': 0.4121, 'grad_norm': 1.9148435592651367, 'learning_rate': 3.065509396147832e-07, 'epoch': 3.601406799531067}
+2025-05-06 18:33:33,372 - INFO - Training metrics: {'loss': 0.4121, 'grad_norm': 1.9148435592651367, 'learning_rate': 3.065509396147832e-07, 'epoch': 3.601406799531067}
+2025-05-06 18:38:25,678 - INFO - INFO: Training progress: {'loss': 0.4228, 'grad_norm': 1.8963714838027954, 'learning_rate': 2.8521753904153503e-07, 'epoch': 3.615474794841735}
+2025-05-06 18:38:25,678 - INFO - Training progress: {'loss': 0.4228, 'grad_norm': 1.8963714838027954, 'learning_rate': 2.8521753904153503e-07, 'epoch': 3.615474794841735}
+2025-05-06 18:38:25,678 - INFO - Training metrics: {'loss': 0.4228, 'grad_norm': 1.8963714838027954, 'learning_rate': 2.8521753904153503e-07, 'epoch': 3.615474794841735}
+2025-05-06 18:43:18,224 - INFO - INFO: Training progress: {'loss': 0.4407, 'grad_norm': 2.2802371978759766, 'learning_rate': 2.646354041754715e-07, 'epoch': 3.6295427901524033}
+2025-05-06 18:43:18,225 - INFO - Training progress: {'loss': 0.4407, 'grad_norm': 2.2802371978759766, 'learning_rate': 2.646354041754715e-07, 'epoch': 3.6295427901524033}
+2025-05-06 18:43:18,225 - INFO - Training metrics: {'loss': 0.4407, 'grad_norm': 2.2802371978759766, 'learning_rate': 2.646354041754715e-07, 'epoch': 3.6295427901524033}
+2025-05-06 18:48:14,091 - INFO - INFO: Training progress: {'loss': 0.4468, 'grad_norm': 2.4360415935516357, 'learning_rate': 2.448072407455009e-07, 'epoch': 3.6436107854630713}
+2025-05-06 18:48:14,091 - INFO - Training progress: {'loss': 0.4468, 'grad_norm': 2.4360415935516357, 'learning_rate': 2.448072407455009e-07, 'epoch': 3.6436107854630713}
+2025-05-06 18:48:14,091 - INFO - Training metrics: {'loss': 0.4468, 'grad_norm': 2.4360415935516357, 'learning_rate': 2.448072407455009e-07, 'epoch': 3.6436107854630713}
+2025-05-06 18:53:10,845 - INFO - INFO: Training progress: {'loss': 0.44, 'grad_norm': 2.2998149394989014, 'learning_rate': 2.2573565536339092e-07, 'epoch': 3.6576787807737396}
+2025-05-06 18:53:10,845 - INFO - Training progress: {'loss': 0.44, 'grad_norm': 2.2998149394989014, 'learning_rate': 2.2573565536339092e-07, 'epoch': 3.6576787807737396}
+2025-05-06 18:53:10,845 - INFO - Training metrics: {'loss': 0.44, 'grad_norm': 2.2998149394989014, 'learning_rate': 2.2573565536339092e-07, 'epoch': 3.6576787807737396}
+2025-05-06 18:58:08,154 - INFO - INFO: Training progress: {'loss': 0.3706, 'grad_norm': 2.090630531311035, 'learning_rate': 2.0742315518110898e-07, 'epoch': 3.671746776084408}
+2025-05-06 18:58:08,154 - INFO - Training progress: {'loss': 0.3706, 'grad_norm': 2.090630531311035, 'learning_rate': 2.0742315518110898e-07, 'epoch': 3.671746776084408}
+2025-05-06 18:58:08,154 - INFO - Training metrics: {'loss': 0.3706, 'grad_norm': 2.090630531311035, 'learning_rate': 2.0742315518110898e-07, 'epoch': 3.671746776084408}
+2025-05-06 19:03:03,206 - INFO - INFO: Training progress: {'loss': 0.4808, 'grad_norm': 2.043100357055664, 'learning_rate': 1.8987214756122574e-07, 'epoch': 3.6858147713950764}
+2025-05-06 19:03:03,206 - INFO - Training progress: {'loss': 0.4808, 'grad_norm': 2.043100357055664, 'learning_rate': 1.8987214756122574e-07, 'epoch': 3.6858147713950764}
+2025-05-06 19:03:03,206 - INFO - Training metrics: {'loss': 0.4808, 'grad_norm': 2.043100357055664, 'learning_rate': 1.8987214756122574e-07, 'epoch': 3.6858147713950764}
+2025-05-06 19:21:07,918 - INFO - INFO: Training progress: {'eval_loss': 0.4246521294116974, 'eval_runtime': 937.0906, 'eval_samples_per_second': 1.705, 'eval_steps_per_second': 1.705, 'epoch': 3.69284876905041}
+2025-05-06 19:21:07,919 - INFO - Training progress: {'eval_loss': 0.4246521294116974, 'eval_runtime': 937.0906, 'eval_samples_per_second': 1.705, 'eval_steps_per_second': 1.705, 'epoch': 3.69284876905041}
+2025-05-06 19:21:07,919 - INFO - Training metrics: {'eval_loss': 0.4246521294116974, 'eval_runtime': 937.0906, 'eval_samples_per_second': 1.705, 'eval_steps_per_second': 1.705, 'epoch': 3.69284876905041}
+2025-05-06 19:23:33,894 - INFO - INFO: Training progress: {'loss': 0.4011, 'grad_norm': 2.6948115825653076, 'learning_rate': 1.7308493976044483e-07, 'epoch': 3.6998827667057443}
+2025-05-06 19:23:33,894 - INFO - Training progress: {'loss': 0.4011, 'grad_norm': 2.6948115825653076, 'learning_rate': 1.7308493976044483e-07, 'epoch': 3.6998827667057443}
+2025-05-06 19:23:33,894 - INFO - Training metrics: {'loss': 0.4011, 'grad_norm': 2.6948115825653076, 'learning_rate': 1.7308493976044483e-07, 'epoch': 3.6998827667057443}
+2025-05-06 19:28:26,084 - INFO - INFO: Training progress: {'loss': 0.4029, 'grad_norm': 2.208279848098755, 'learning_rate': 1.5706373862629564e-07, 'epoch': 3.7139507620164127}
+2025-05-06 19:28:26,084 - INFO - Training progress: {'loss': 0.4029, 'grad_norm': 2.208279848098755, 'learning_rate': 1.5706373862629564e-07, 'epoch': 3.7139507620164127}
+2025-05-06 19:28:26,084 - INFO - Training metrics: {'loss': 0.4029, 'grad_norm': 2.208279848098755, 'learning_rate': 1.5706373862629564e-07, 'epoch': 3.7139507620164127}
+2025-05-06 19:33:19,045 - INFO - INFO: Training progress: {'loss': 0.397, 'grad_norm': 1.977767825126648, 'learning_rate': 1.4181065030701201e-07, 'epoch': 3.7280187573270807}
+2025-05-06 19:33:19,045 - INFO - Training progress: {'loss': 0.397, 'grad_norm': 1.977767825126648, 'learning_rate': 1.4181065030701201e-07, 'epoch': 3.7280187573270807}
+2025-05-06 19:33:19,046 - INFO - Training metrics: {'loss': 0.397, 'grad_norm': 1.977767825126648, 'learning_rate': 1.4181065030701201e-07, 'epoch': 3.7280187573270807}
+2025-05-06 19:38:10,938 - INFO - INFO: Training progress: {'loss': 0.3708, 'grad_norm': 2.113842725753784, 'learning_rate': 1.2732767997466698e-07, 'epoch': 3.742086752637749}
+2025-05-06 19:38:10,939 - INFO - Training progress: {'loss': 0.3708, 'grad_norm': 2.113842725753784, 'learning_rate': 1.2732767997466698e-07, 'epoch': 3.742086752637749}
+2025-05-06 19:38:10,939 - INFO - Training metrics: {'loss': 0.3708, 'grad_norm': 2.113842725753784, 'learning_rate': 1.2732767997466698e-07, 'epoch': 3.742086752637749}
+2025-05-06 19:43:15,501 - INFO - INFO: Training progress: {'loss': 0.4437, 'grad_norm': 1.6531355381011963, 'learning_rate': 1.1361673156156505e-07, 'epoch': 3.7561547479484174}
+2025-05-06 19:43:15,501 - INFO - Training progress: {'loss': 0.4437, 'grad_norm': 1.6531355381011963, 'learning_rate': 1.1361673156156505e-07, 'epoch': 3.7561547479484174}
+2025-05-06 19:43:15,501 - INFO - Training metrics: {'loss': 0.4437, 'grad_norm': 1.6531355381011963, 'learning_rate': 1.1361673156156505e-07, 'epoch': 3.7561547479484174}
+2025-05-06 19:48:19,188 - INFO - INFO: Training progress: {'loss': 0.4164, 'grad_norm': 2.0488808155059814, 'learning_rate': 1.0067960750995631e-07, 'epoch': 3.770222743259086}
+2025-05-06 19:48:19,188 - INFO - Training progress: {'loss': 0.4164, 'grad_norm': 2.0488808155059814, 'learning_rate': 1.0067960750995631e-07, 'epoch': 3.770222743259086}
+2025-05-06 19:48:19,188 - INFO - Training metrics: {'loss': 0.4164, 'grad_norm': 2.0488808155059814, 'learning_rate': 1.0067960750995631e-07, 'epoch': 3.770222743259086}
+2025-05-06 19:53:06,369 - INFO - INFO: Training progress: {'loss': 0.3753, 'grad_norm': 2.3691325187683105, 'learning_rate': 8.851800853508474e-08, 'epoch': 3.7842907385697537}
+2025-05-06 19:53:06,369 - INFO - Training progress: {'loss': 0.3753, 'grad_norm': 2.3691325187683105, 'learning_rate': 8.851800853508474e-08, 'epoch': 3.7842907385697537}
+2025-05-06 19:53:06,370 - INFO - Training metrics: {'loss': 0.3753, 'grad_norm': 2.3691325187683105, 'learning_rate': 8.851800853508474e-08, 'epoch': 3.7842907385697537}
+2025-05-06 19:57:52,545 - INFO - INFO: Training progress: {'loss': 0.4206, 'grad_norm': 2.421560049057007, 'learning_rate': 7.713353340161433e-08, 'epoch': 3.798358733880422}
+2025-05-06 19:57:52,545 - INFO - Training progress: {'loss': 0.4206, 'grad_norm': 2.421560049057007, 'learning_rate': 7.713353340161433e-08, 'epoch': 3.798358733880422}
+2025-05-06 19:57:52,545 - INFO - Training metrics: {'loss': 0.4206, 'grad_norm': 2.421560049057007, 'learning_rate': 7.713353340161433e-08, 'epoch': 3.798358733880422}
+2025-05-06 20:02:39,802 - INFO - INFO: Training progress: {'loss': 0.4276, 'grad_norm': 2.669055461883545, 'learning_rate': 6.652767871345123e-08, 'epoch': 3.81242672919109}
+2025-05-06 20:02:39,802 - INFO - Training progress: {'loss': 0.4276, 'grad_norm': 2.669055461883545, 'learning_rate': 6.652767871345123e-08, 'epoch': 3.81242672919109}
+2025-05-06 20:02:39,803 - INFO - Training metrics: {'loss': 0.4276, 'grad_norm': 2.669055461883545, 'learning_rate': 6.652767871345123e-08, 'epoch': 3.81242672919109}
+2025-05-06 20:07:26,275 - INFO - INFO: Training progress: {'loss': 0.4362, 'grad_norm': 2.2805981636047363, 'learning_rate': 5.6701838717005073e-08, 'epoch': 3.8264947245017584}
+2025-05-06 20:07:26,275 - INFO - Training progress: {'loss': 0.4362, 'grad_norm': 2.2805981636047363, 'learning_rate': 5.6701838717005073e-08, 'epoch': 3.8264947245017584}
+2025-05-06 20:07:26,275 - INFO - Training metrics: {'loss': 0.4362, 'grad_norm': 2.2805981636047363, 'learning_rate': 5.6701838717005073e-08, 'epoch': 3.8264947245017584}
+2025-05-06 20:12:12,730 - INFO - INFO: Training progress: {'loss': 0.4114, 'grad_norm': 1.7252031564712524, 'learning_rate': 4.765730511789834e-08, 'epoch': 3.840562719812427}
+2025-05-06 20:12:12,730 - INFO - Training progress: {'loss': 0.4114, 'grad_norm': 1.7252031564712524, 'learning_rate': 4.765730511789834e-08, 'epoch': 3.840562719812427}
+2025-05-06 20:12:12,730 - INFO - Training metrics: {'loss': 0.4114, 'grad_norm': 1.7252031564712524, 'learning_rate': 4.765730511789834e-08, 'epoch': 3.840562719812427}
+2025-05-06 20:16:58,743 - INFO - INFO: Training progress: {'loss': 0.4309, 'grad_norm': 1.8024168014526367, 'learning_rate': 3.9395266911157466e-08, 'epoch': 3.854630715123095}
+2025-05-06 20:16:58,744 - INFO - Training progress: {'loss': 0.4309, 'grad_norm': 1.8024168014526367, 'learning_rate': 3.9395266911157466e-08, 'epoch': 3.854630715123095}
+2025-05-06 20:16:58,744 - INFO - Training metrics: {'loss': 0.4309, 'grad_norm': 1.8024168014526367, 'learning_rate': 3.9395266911157466e-08, 'epoch': 3.854630715123095}
+2025-05-06 20:21:45,289 - INFO - INFO: Training progress: {'loss': 0.4271, 'grad_norm': 2.1767563819885254, 'learning_rate': 3.191681022491122e-08, 'epoch': 3.868698710433763}
+2025-05-06 20:21:45,289 - INFO - Training progress: {'loss': 0.4271, 'grad_norm': 2.1767563819885254, 'learning_rate': 3.191681022491122e-08, 'epoch': 3.868698710433763}
+2025-05-06 20:21:45,289 - INFO - Training metrics: {'loss': 0.4271, 'grad_norm': 2.1767563819885254, 'learning_rate': 3.191681022491122e-08, 'epoch': 3.868698710433763}
+2025-05-06 20:26:31,707 - INFO - INFO: Training progress: {'loss': 0.4554, 'grad_norm': 2.3338370323181152, 'learning_rate': 2.5222918177604916e-08, 'epoch': 3.8827667057444315}
+2025-05-06 20:26:31,708 - INFO - Training progress: {'loss': 0.4554, 'grad_norm': 2.3338370323181152, 'learning_rate': 2.5222918177604916e-08, 'epoch': 3.8827667057444315}
+2025-05-06 20:26:31,708 - INFO - Training metrics: {'loss': 0.4554, 'grad_norm': 2.3338370323181152, 'learning_rate': 2.5222918177604916e-08, 'epoch': 3.8827667057444315}
+2025-05-06 20:31:18,185 - INFO - INFO: Training progress: {'loss': 0.4135, 'grad_norm': 1.873797059059143, 'learning_rate': 1.931447074876247e-08, 'epoch': 3.8968347010550994}
+2025-05-06 20:31:18,185 - INFO - Training progress: {'loss': 0.4135, 'grad_norm': 1.873797059059143, 'learning_rate': 1.931447074876247e-08, 'epoch': 3.8968347010550994}
+2025-05-06 20:31:18,185 - INFO - Training metrics: {'loss': 0.4135, 'grad_norm': 1.873797059059143, 'learning_rate': 1.931447074876247e-08, 'epoch': 3.8968347010550994}
+2025-05-06 20:36:04,359 - INFO - INFO: Training progress: {'loss': 0.4595, 'grad_norm': 1.7664724588394165, 'learning_rate': 1.4192244663299603e-08, 'epoch': 3.910902696365768}
+2025-05-06 20:36:04,360 - INFO - Training progress: {'loss': 0.4595, 'grad_norm': 1.7664724588394165, 'learning_rate': 1.4192244663299603e-08, 'epoch': 3.910902696365768}
+2025-05-06 20:36:04,360 - INFO - Training metrics: {'loss': 0.4595, 'grad_norm': 1.7664724588394165, 'learning_rate': 1.4192244663299603e-08, 'epoch': 3.910902696365768}
+2025-05-06 20:40:50,850 - INFO - INFO: Training progress: {'loss': 0.4134, 'grad_norm': 2.1759073734283447, 'learning_rate': 9.856913289422175e-09, 'epoch': 3.924970691676436}
+2025-05-06 20:40:50,850 - INFO - Training progress: {'loss': 0.4134, 'grad_norm': 2.1759073734283447, 'learning_rate': 9.856913289422175e-09, 'epoch': 3.924970691676436}
+2025-05-06 20:40:50,850 - INFO - Training metrics: {'loss': 0.4134, 'grad_norm': 2.1759073734283447, 'learning_rate': 9.856913289422175e-09, 'epoch': 3.924970691676436}
+2025-05-06 20:45:37,500 - INFO - INFO: Training progress: {'loss': 0.3952, 'grad_norm': 1.7645423412322998, 'learning_rate': 6.309046550099007e-09, 'epoch': 3.9390386869871046}
+2025-05-06 20:45:37,500 - INFO - Training progress: {'loss': 0.3952, 'grad_norm': 1.7645423412322998, 'learning_rate': 6.309046550099007e-09, 'epoch': 3.9390386869871046}
+2025-05-06 20:45:37,500 - INFO - Training metrics: {'loss': 0.3952, 'grad_norm': 1.7645423412322998, 'learning_rate': 6.309046550099007e-09, 'epoch': 3.9390386869871046}
+2025-05-06 21:00:51,159 - INFO - INFO: Training progress: {'eval_loss': 0.42442387342453003, 'eval_runtime': 913.6561, 'eval_samples_per_second': 1.749, 'eval_steps_per_second': 1.749, 'epoch': 3.9390386869871046}
+2025-05-06 21:00:51,160 - INFO - Training progress: {'eval_loss': 0.42442387342453003, 'eval_runtime': 913.6561, 'eval_samples_per_second': 1.749, 'eval_steps_per_second': 1.749, 'epoch': 3.9390386869871046}
+2025-05-06 21:00:51,160 - INFO - Training metrics: {'eval_loss': 0.42442387342453003, 'eval_runtime': 913.6561, 'eval_samples_per_second': 1.749, 'eval_steps_per_second': 1.749, 'epoch': 3.9390386869871046}
+2025-05-06 21:00:52,485 - INFO - INFO: Saving checkpoint at step 2800
+2025-05-06 21:00:52,485 - INFO - Saving checkpoint at step 2800
+2025-05-06 21:00:52,485 - INFO - Saving checkpoint at step 2800
+2025-05-06 21:05:38,990 - INFO - INFO: Training progress: {'loss': 0.4509, 'grad_norm': 1.722535490989685, 'learning_rate': 3.5491108481424673e-09, 'epoch': 3.9531066822977725}
+2025-05-06 21:05:38,990 - INFO - Training progress: {'loss': 0.4509, 'grad_norm': 1.722535490989685, 'learning_rate': 3.5491108481424673e-09, 'epoch': 3.9531066822977725}
+2025-05-06 21:05:38,991 - INFO - Training metrics: {'loss': 0.4509, 'grad_norm': 1.722535490989685, 'learning_rate': 3.5491108481424673e-09, 'epoch': 3.9531066822977725}
+2025-05-06 21:10:25,416 - INFO - INFO: Training progress: {'loss': 0.4331, 'grad_norm': 1.856837272644043, 'learning_rate': 1.5774690048961927e-09, 'epoch': 3.967174677608441}
+2025-05-06 21:10:25,416 - INFO - Training progress: {'loss': 0.4331, 'grad_norm': 1.856837272644043, 'learning_rate': 1.5774690048961927e-09, 'epoch': 3.967174677608441}
+2025-05-06 21:10:25,416 - INFO - Training metrics: {'loss': 0.4331, 'grad_norm': 1.856837272644043, 'learning_rate': 1.5774690048961927e-09, 'epoch': 3.967174677608441}
+2025-05-06 21:15:11,860 - INFO - INFO: Training progress: {'loss': 0.3964, 'grad_norm': 1.934690237045288, 'learning_rate': 3.943802125365714e-10, 'epoch': 3.981242672919109}
+2025-05-06 21:15:11,860 - INFO - Training progress: {'loss': 0.3964, 'grad_norm': 1.934690237045288, 'learning_rate': 3.943802125365714e-10, 'epoch': 3.981242672919109}
+2025-05-06 21:15:11,860 - INFO - Training metrics: {'loss': 0.3964, 'grad_norm': 1.934690237045288, 'learning_rate': 3.943802125365714e-10, 'epoch': 3.981242672919109}
+2025-05-06 21:19:58,161 - INFO - INFO: Training progress: {'loss': 0.405, 'grad_norm': 1.9905784130096436, 'learning_rate': 0.0, 'epoch': 3.995310668229777}
+2025-05-06 21:19:58,161 - INFO - Training progress: {'loss': 0.405, 'grad_norm': 1.9905784130096436, 'learning_rate': 0.0, 'epoch': 3.995310668229777}
+2025-05-06 21:19:58,161 - INFO - Training metrics: {'loss': 0.405, 'grad_norm': 1.9905784130096436, 'learning_rate': 0.0, 'epoch': 3.995310668229777}
+2025-05-06 21:20:00,032 - INFO - INFO: Saving checkpoint at step 2840
+2025-05-06 21:20:00,032 - INFO - Saving checkpoint at step 2840
+2025-05-06 21:20:00,032 - INFO - Saving checkpoint at step 2840
+2025-05-06 21:20:00,032 - INFO - INFO: Training progress: {'train_runtime': 98136.0903, 'train_samples_per_second': 0.348, 'train_steps_per_second': 0.029, 'total_flos': 4.965632072220672e+18, 'train_loss': 0.5438787113612806, 'epoch': 3.995310668229777}
+2025-05-06 21:20:00,032 - INFO - Training progress: {'train_runtime': 98136.0903, 'train_samples_per_second': 0.348, 'train_steps_per_second': 0.029, 'total_flos': 4.965632072220672e+18, 'train_loss': 0.5438787113612806, 'epoch': 3.995310668229777}
+2025-05-06 21:20:00,032 - INFO - Training metrics: {'train_runtime': 98136.0903, 'train_samples_per_second': 0.348, 'train_steps_per_second': 0.029, 'total_flos': 4.965632072220672e+18, 'train_loss': 0.5438787113612806, 'epoch': 3.995310668229777}
+2025-05-06 21:20:00,715 - INFO - INFO: Training complete, saving model to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_supervised_V2_1\final_model
+2025-05-06 21:20:00,715 - INFO - Training complete, saving model to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_supervised_V2_1\final_model
+2025-05-06 21:20:00,715 - INFO - Training complete, saving model to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_supervised_V2_1\final_model
+2025-05-06 21:20:01,424 - INFO - INFO: CUDA cache cleared
+2025-05-06 21:20:01,558 - INFO - INFO: Garbage collector freed 1777 objects
+2025-05-06 21:20:01,558 - INFO - INFO: Training completed successfully! Model saved to: C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_supervised_V2_1\final_model
+2025-05-06 21:20:01,559 - INFO - INFO: Training metrics: {'train_runtime': 98136.0903, 'train_samples_per_second': 0.348, 'train_steps_per_second': 0.029, 'total_flos': 4.965632072220672e+18, 'train_loss': 0.5438787113612806, 'epoch': 3.995310668229777}
+2025-05-06 21:20:01,559 - INFO - INFO: Final training metrics: {'train_runtime': 98136.0903, 'train_samples_per_second': 0.348, 'train_steps_per_second': 0.029, 'total_flos': 4.965632072220672e+18, 'train_loss': 0.5438787113612806, 'epoch': 3.995310668229777}
+2025-05-06 21:20:01,559 - INFO - Final training metrics: {'train_runtime': 98136.0903, 'train_samples_per_second': 0.348, 'train_steps_per_second': 0.029, 'total_flos': 4.965632072220672e+18, 'train_loss': 0.5438787113612806, 'epoch': 3.995310668229777}
+2025-05-06 21:20:01,559 - INFO - Final training metrics: {'train_runtime': 98136.0903, 'train_samples_per_second': 0.348, 'train_steps_per_second': 0.029, 'total_flos': 4.965632072220672e+18, 'train_loss': 0.5438787113612806, 'epoch': 3.995310668229777}
+2025-05-06 21:20:01,559 - INFO - INFO: Running final evaluation on test dataset...
+2025-05-06 21:20:01,559 - INFO - Running final evaluation on test dataset...
+2025-05-06 21:20:01,559 - INFO - Running final evaluation on test dataset...
+2025-05-06 21:25:13,125 - INFO - INFO: Training progress: {'eval_loss': 0.43070733547210693, 'eval_runtime': 311.5628, 'eval_samples_per_second': 1.72, 'eval_steps_per_second': 1.72, 'epoch': 3.995310668229777}
+2025-05-06 21:25:13,125 - INFO - Training progress: {'eval_loss': 0.43070733547210693, 'eval_runtime': 311.5628, 'eval_samples_per_second': 1.72, 'eval_steps_per_second': 1.72, 'epoch': 3.995310668229777}
+2025-05-06 21:25:13,126 - INFO - Training metrics: {'eval_loss': 0.43070733547210693, 'eval_runtime': 311.5628, 'eval_samples_per_second': 1.72, 'eval_steps_per_second': 1.72, 'epoch': 3.995310668229777}
+2025-05-06 21:25:13,126 - INFO - INFO: CUDA cache cleared
+2025-05-06 21:25:13,253 - INFO - INFO: Garbage collector freed 9 objects
+2025-05-06 21:25:13,253 - INFO - INFO: Final test metrics: {'eval_loss': 0.43070733547210693, 'eval_runtime': 311.5628, 'eval_samples_per_second': 1.72, 'eval_steps_per_second': 1.72, 'epoch': 3.995310668229777}
+2025-05-06 21:25:13,254 - INFO - INFO: Final test metrics: {'eval_loss': 0.43070733547210693, 'eval_runtime': 311.5628, 'eval_samples_per_second': 1.72, 'eval_steps_per_second': 1.72, 'epoch': 3.995310668229777}
+2025-05-06 21:25:13,254 - INFO - Final test metrics: {'eval_loss': 0.43070733547210693, 'eval_runtime': 311.5628, 'eval_samples_per_second': 1.72, 'eval_steps_per_second': 1.72, 'epoch': 3.995310668229777}
+2025-05-06 21:25:13,254 - INFO - Final test metrics: {'eval_loss': 0.43070733547210693, 'eval_runtime': 311.5628, 'eval_samples_per_second': 1.72, 'eval_steps_per_second': 1.72, 'epoch': 3.995310668229777}
+2025-05-06 21:25:13,254 - INFO - Training complete!

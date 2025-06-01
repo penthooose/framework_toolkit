@@ -164,8 +164,8 @@ if __name__ == "__main__":
     os.chdir(script_dir)
     print(f"Working directory set to: {os.getcwd()}")
 
-    logging_dir = os.path.join(script_dir, "./logging")
-    output_dir = os.path.join(script_dir, "./filtered_logging")
+    logging_dir = os.path.join(script_dir, "./logging_phase1")
+    output_dir = os.path.join(script_dir, "./filtered_logging_phase1")
 
     # Create output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)

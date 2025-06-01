@@ -1,0 +1,9 @@
+2025-05-09 17:56:35 - TRAINING: {'loss': 0.6919, 'grad_norm': 0.5987952351570129, 'learning_rate': 5.000000000000001e-07, 'epoch': 0.03986710963455149}
+2025-05-09 18:22:41 - VALIDATION: {'eval_loss': nan, 'eval_runtime': 441.3058, 'eval_samples_per_second': 1.754, 'eval_steps_per_second': 1.754, 'epoch': 0.19933554817275748}
+2025-05-09 18:53:39 - VALIDATION: {'eval_loss': nan, 'eval_runtime': 444.3616, 'eval_samples_per_second': 1.742, 'eval_steps_per_second': 1.742, 'epoch': 0.39867109634551495}
+2025-05-09 19:28:09 - VALIDATION: {'eval_loss': nan, 'eval_runtime': 497.7438, 'eval_samples_per_second': 1.555, 'eval_steps_per_second': 1.555, 'epoch': 0.5980066445182725}
+2025-05-09 20:01:33 - VALIDATION: {'eval_loss': nan, 'eval_runtime': 485.3598, 'eval_samples_per_second': 1.595, 'eval_steps_per_second': 1.595, 'epoch': 0.7973421926910299}
+2025-05-09 20:33:26 - VALIDATION: {'eval_loss': nan, 'eval_runtime': 439.6981, 'eval_samples_per_second': 1.76, 'eval_steps_per_second': 1.76, 'epoch': 0.9966777408637874}
+2025-05-09 20:38:21 - VALIDATION: {'eval_loss': nan, 'eval_runtime': 293.8235, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 0.9966777408637874}
+2025-05-09 20:38:21 - FINAL TEST VALIDATION: {'eval_loss': nan, 'eval_runtime': 293.8235, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 0.9966777408637874}
+2025-05-09 20:38:21 - FINAL TEST VALIDATION: {'eval_loss': nan, 'eval_runtime': 293.8235, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 0.9966777408637874}

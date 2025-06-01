@@ -29,6 +29,17 @@ import torch.serialization
 from contextlib import contextmanager
 import numpy as np
 
+# Try to import 8-bit optimizer support
+try:
+    import bitsandbytes as bnb
+
+    BITSANDBYTES_AVAILABLE = True
+    print("bitsandbytes available for 8-bit optimization")
+except ImportError:
+    BITSANDBYTES_AVAILABLE = False
+    print("bitsandbytes not available - 8-bit optimization disabled")
+
+
 # Import specific numpy components that might be in checkpoints
 from numpy.core.multiarray import _reconstruct
 from numpy import ndarray, dtype, generic
@@ -741,6 +752,7 @@ def setup_training_args(
         "per_device_eval_batch_size": 1,
         "eval_accumulation_steps": 4,
         "fp16": True,
+        "bf16": False,  # Add bf16 support
         "lr_scheduler_type": "cosine",
         "weight_decay": 0.01,
         "gradient_checkpointing": True,
@@ -748,11 +760,88 @@ def setup_training_args(
         "disable_tqdm": False,
         "max_grad_norm": 1.0,
         "dataloader_num_workers": 2,
+        "optim": "adamw_torch",  # Default optimizer
     }
 
     # Update with user-provided config
     if training_config:
         default_config.update(training_config)
+
+    # Handle bf16 and fp16 mutual exclusivity
+    if default_config.get("bf16", False):
+        logger.info("Using bf16 (bfloat16) mixed precision training")
+        # Disable fp16 if bf16 is enabled
+        default_config["fp16"] = False
+
+        # Check if bf16 is supported
+        if torch.cuda.is_available():
+            device_capability = torch.cuda.get_device_capability()
+            if device_capability[0] >= 8:  # Ampere architecture or newer
+                logger.info(
+                    f"BF16 supported on device with compute capability {device_capability}"
+                )
+            else:
+                logger.warning(
+                    f"BF16 may not be fully supported on device with compute capability {device_capability}"
+                )
+                logger.warning("Consider using fp16 instead for better compatibility")
+        else:
+            logger.warning("CUDA not available - bf16 training may not work properly")
+
+    elif default_config.get("fp16", False):
+        logger.info("Using fp16 (float16) mixed precision training")
+        # Ensure bf16 is disabled when fp16 is used
+        default_config["bf16"] = False
+    else:
+        logger.info("Using full precision (fp32) training")
+        default_config["fp16"] = False
+        default_config["bf16"] = False
+
+    # Handle 8-bit optimizer configuration
+    if default_config.get("optim") == "adamw_8bit":
+        if not BITSANDBYTES_AVAILABLE:
+            logger.error(
+                "8-bit AdamW optimizer requested but bitsandbytes is not available"
+            )
+            logger.error("Please install bitsandbytes: pip install bitsandbytes")
+            raise ImportError(
+                "bitsandbytes is required for 8-bit optimization but is not installed"
+            )
+
+        logger.info("Using 8-bit AdamW optimizer from bitsandbytes")
+        # Keep the optim setting as is - transformers will handle it
+
+        # Log optimizer configuration
+        logger.info("8-bit AdamW optimizer configuration:")
+        logger.info(f"  - Learning rate: {default_config['learning_rate']}")
+        logger.info(f"  - Weight decay: {default_config['weight_decay']}")
+        if default_config.get("warmup_ratio"):
+            logger.info(f"  - Warmup ratio: {default_config['warmup_ratio']}")
+        else:
+            logger.info(f"  - Warmup steps: {default_config['warmup_steps']}")
+
+    elif default_config.get("optim") not in [None, "adamw_torch", "adamw_hf"]:
+        # Validate other optimizer choices
+        valid_optimizers = [
+            "adamw_hf",
+            "adamw_torch",
+            "adamw_torch_fused",
+            "adamw_torch_xla",
+            "adamw_apex_fused",
+            "adafactor",
+            "adamw_anyprecision",
+            "sgd",
+            "adagrad",
+            "adamw_bnb_8bit",
+            "adamw_8bit",
+            "lion_8bit",
+            "lion_32bit",
+        ]
+        if default_config["optim"] not in valid_optimizers:
+            logger.warning(
+                f"Unknown optimizer '{default_config['optim']}', using default 'adamw_torch'"
+            )
+            default_config["optim"] = "adamw_torch"
 
     # Create TrainingArguments object
     training_args = TrainingArguments(output_dir=output_dir, **default_config)
@@ -1235,6 +1324,7 @@ def initiate_finetuning(params: Dict[str, Any] = None) -> Dict[str, Any]:
             "per_device_eval_batch_size": 1,
             "eval_accumulation_steps": 4,
             "fp16": True,
+            "bf16": False,  # Add bf16 support
             "lr_scheduler_type": "cosine",
             "weight_decay": 0.01,
             "gradient_checkpointing": True,
@@ -1242,6 +1332,7 @@ def initiate_finetuning(params: Dict[str, Any] = None) -> Dict[str, Any]:
             "disable_tqdm": False,
             "max_grad_norm": 1.0,
             "dataloader_num_workers": 2,
+            "optim": "adamw_torch",  # Default optimizer
         },
     }
 

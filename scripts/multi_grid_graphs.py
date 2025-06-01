@@ -6,6 +6,28 @@ import matplotlib.pyplot as plt
 import argparse
 from pathlib import Path
 
+path_logging = "logging_phase3"
+output_path = path_logging + "_curves"
+description = {
+    # "logging_phase1": {1: "Initial Test"},
+    "logging_phase2": {
+        1: "Evaluation Performance: Stage A",
+        2: "Evaluation Performance: Stage B",
+        3: "Evaluation Performance: Stage C",
+        4: "Evaluation Performance: Stage D",
+        5: "Evaluation Performance: Stage E",
+    },
+    "logging_phase3": {
+        1: "Evaluation Performance: V1-A",
+        2: "Evaluation Performance: V1-B",
+        3: "Evaluation Performance: V2-A",
+        4: "Evaluation Performance: V2-B",
+        5: "Evaluation Performance: V3-C1",
+        6: "Evaluation Performance: V3-C2",
+    },
+}
+cut_entries = 6
+
 
 def find_logging_files(logging_dir="./logging"):
     """Find and sort logging files by their numeric suffix."""
@@ -60,9 +82,16 @@ def extract_data_from_log(log_file):
 
             # Extract evaluation data
             eval_pattern = re.compile(r"{'eval_loss': ([\d\.]+).*?'epoch': ([\d\.]+)}")
+            temp_eval_data = set()  # Use a set to store unique (epoch, loss) tuples
             for match in eval_pattern.finditer(content):
-                data["eval_losses"].append(float(match.group(1)))
-                data["eval_epochs"].append(float(match.group(2)))
+                epoch = float(match.group(2))
+                loss = float(match.group(1))
+                temp_eval_data.add((epoch, loss))
+
+            # Convert back to lists and sort by epoch
+            sorted_eval_data = sorted(temp_eval_data)
+            data["eval_epochs"] = [item[0] for item in sorted_eval_data]
+            data["eval_losses"] = [item[1] for item in sorted_eval_data]
 
             # Extract learning rate data
             lr_pattern = re.compile(
@@ -91,15 +120,15 @@ def get_loss_info(train_losses, eval_losses):
         first_loss = train_losses[0]
         last_loss = train_losses[-1]
         train_reduction = 100 * (1 - last_loss / first_loss)
-        loss_info += f"Train: {last_loss:.4f} (-{train_reduction:.1f}%)"
+        loss_info += f" - Train: {last_loss:.4f} (-{train_reduction:.1f}%)"
 
     if eval_losses:
         if loss_info:
-            loss_info += ", "
+            loss_info += ""
         first_eval = eval_losses[0]
         last_eval = eval_losses[-1]
         eval_reduction = 100 * (1 - last_eval / first_eval)
-        loss_info += f"Eval: {last_eval:.4f} (-{eval_reduction:.1f}%)"
+        loss_info += f"\n - Eval: {last_eval:.4f} (-{eval_reduction:.1f}%)\n"
 
     return loss_info
 
@@ -111,10 +140,13 @@ def plot_loss_curves(ax, data, stage_name):
     eval_epochs = data["eval_epochs"]
     eval_losses = data["eval_losses"]
 
+    # Debug information
+    print(f"Processing evaluation points: {len(eval_losses)} points found")
+
     # Set axis labels and title
-    ax.set_xlabel("Epoch", fontsize=12)
-    ax.set_ylabel("Loss", fontsize=12)
-    ax.set_title(f"{stage_name}: Loss Curves", fontsize=13)
+    ax.set_xlabel("Epoch", fontsize=12, labelpad=10)
+    ax.set_ylabel("Loss", fontsize=12, labelpad=10)
+    ax.set_title(f"Loss Curves", fontsize=13, pad=10)
 
     # Plot training loss with points and moving average
     if train_losses:
@@ -141,20 +173,103 @@ def plot_loss_curves(ax, data, stage_name):
     if eval_losses:
         ax.plot(eval_epochs, eval_losses, "ro", markersize=6, label="Eval")
 
-        # Add annotations for eval loss values
-        for i, val in enumerate(eval_losses):
-            ax.annotate(
-                f"{val:.4f}",
-                (eval_epochs[i], eval_losses[i]),
-                xytext=(0, 10),
-                textcoords="offset points",
-                ha="center",
-            )
+        # Debug the extracted data
+        print(f"Evaluation points data: {list(zip(eval_epochs, eval_losses))[:5]}...")
+
+        # Handle different cases based on actual number of points, not filtered
+        total_points = len(eval_losses)
+        print(f"Number of eval points to annotate: {total_points}")
+
+        if total_points <= 5:
+            # For 5 or fewer points, use simple logic
+            # Skip the point right before the last one if we have exactly 5 points
+            if total_points == 5:
+                indices_to_annotate = [0, 1, 2, 4]
+            else:
+                indices_to_annotate = list(range(total_points))
+        else:
+            # For more than 5 points, use the complex logic
+            last_idx = total_points - 1
+
+            # Define indices that should NEVER be annotated (to avoid overlap with last point)
+            excluded_indices = set([last_idx - 1, last_idx - 2, last_idx - 3])
+
+            # Define target number of annotations (including first and last)
+            target_annotations = min(6, len(eval_losses) // 3)
+
+            # Create initial set with first and last point
+            indices_to_annotate = [0, last_idx]
+
+            if last_idx > 4:
+                # Use a more deterministic approach to select evenly spaced points
+                # This ensures better distribution and prevents adjacency
+                if target_annotations > 2:
+                    # Calculate how many points to add between first and last
+                    middle_points = target_annotations - 2
+
+                    # Divide the range evenly
+                    step = last_idx / (middle_points + 1)
+
+                    for i in range(1, middle_points + 1):
+                        # Calculate the position
+                        pos = int(i * step)
+                        # Make sure it's not in the excluded range (points near the end)
+                        if pos not in excluded_indices and pos > 0 and pos < last_idx:
+                            indices_to_annotate.append(pos)
+
+                # Always try to add a point near 80% of the way through if not already covered
+                percentage_pos = int(last_idx * 0.8)
+                if (
+                    percentage_pos not in indices_to_annotate
+                    and percentage_pos not in excluded_indices
+                ):
+                    indices_to_annotate.append(percentage_pos)
+
+                # Sort indices to maintain consistency
+                indices_to_annotate = sorted(indices_to_annotate)
+
+                # Ensure no consecutive points (final check)
+                final_indices = [indices_to_annotate[0]]  # Always include first point
+                for idx in indices_to_annotate[1:]:
+                    # Only add point if it's at least 2 positions away from the last added point
+                    if idx - final_indices[-1] >= 2:
+                        final_indices.append(idx)
+
+                indices_to_annotate = final_indices
+
+        # For few points, annotate all except potentially overlapping ones
+        if len(eval_losses) <= 3:
+            indices_to_annotate = [
+                i
+                for i in range(len(eval_losses))
+                if i == 0 or i == len(eval_losses) - 1 or i < len(eval_losses) - 4
+            ]
+
+        # Create annotations
+        for i in indices_to_annotate:
+            if i < len(eval_losses):
+                ax.annotate(
+                    f"{eval_losses[i]:.4f}",
+                    (eval_epochs[i], eval_losses[i]),
+                    xytext=(0, 10),
+                    textcoords="offset points",
+                    ha="center",
+                )
 
     # Add grid and legend
     ax.grid(True, linestyle="--", alpha=0.7)
     loss_info = get_loss_info(train_losses, eval_losses)
-    ax.legend(title=f"Final: {loss_info}")
+
+    # Create legend with adjusted line spacing
+    legend = ax.legend(title=f"Final Results:")
+
+    # Access the legend's title and set line spacing property
+    title = legend.get_title()
+    title.set_text(f"Final Results:\n{loss_info}")
+
+    # Set line spacing - increase the value for more spacing
+    plt.setp(legend.get_texts(), linespacing=1.7)
+    plt.setp(title, linespacing=1.7)
 
 
 def plot_learning_rate(ax, data):
@@ -163,9 +278,9 @@ def plot_learning_rate(ax, data):
     learning_rates = data["learning_rates"]
 
     # Set axis labels and title
-    ax.set_xlabel("Epoch", fontsize=12)
-    ax.set_ylabel("Learning Rate", fontsize=12)
-    ax.set_title("Learning Rate Schedule", fontsize=13)
+    ax.set_xlabel("Epoch", fontsize=12, labelpad=10)
+    ax.set_ylabel("Learning Rate", fontsize=12, labelpad=10)
+    ax.set_title("Learning Rate Curve", fontsize=13, pad=10)
 
     # Plot learning rate with points and moving average
     if learning_rates:
@@ -193,8 +308,30 @@ def plot_learning_rate(ax, data):
     ax.grid(True, linestyle="--", alpha=0.7)
 
 
+def get_stage_name_from_file(log_file, logging_dir, description_dict):
+    """Extract stage name from log file using description dictionary."""
+    # Get the logging directory name to match with description keys
+    logging_dir_name = os.path.basename(logging_dir.rstrip(os.sep))
+
+    # Get the appropriate description mapping for this logging directory
+    if logging_dir_name in description_dict:
+        phase_descriptions = description_dict[logging_dir_name]
+    else:
+        phase_descriptions = {}
+
+    # Extract number from filename
+    match = re.search(r"(\d+)", os.path.basename(log_file))
+    if match:
+        file_number = int(match.group(1))
+        if file_number in phase_descriptions:
+            return phase_descriptions[file_number]
+
+    # Fallback to filename if no description found
+    return f"Stage: {os.path.basename(log_file)}"
+
+
 def create_multi_stage_loss_curve(
-    log_files, output_path="fine_tuning_stages.png", stage_names=None
+    log_files, output_path="fine_tuning_stages.png", stage_names=None, logging_dir=None
 ):
     """Generate loss and learning rate curves for multiple fine-tuning stages."""
 
@@ -203,12 +340,24 @@ def create_multi_stage_loss_curve(
 
     if stage_names is None:
         stage_names = [
-            f"Stage {i+1}: {os.path.basename(f)}" for i, f in enumerate(log_files)
+            get_stage_name_from_file(f, logging_dir, description) for f in log_files
         ]
 
-    # Create a figure with grid of subplots (stages × metrics)
-    fig, axes = plt.subplots(len(log_files), 2, figsize=(15, 5 * len(log_files)))
-    fig.suptitle("Fine-Tuning Stages Metrics", fontsize=16)
+    # Create a figure with grid of subplots (stages × metrics) - add extra height for title
+    fig, axes = plt.subplots(len(log_files), 2, figsize=(15, 5 * len(log_files) + 1))
+
+    # Only set main title for single stage with valid description
+    if len(log_files) == 1:
+        # Only create main title if we have a valid description (not fallback)
+        if stage_names[0] != f"Stage: {os.path.basename(log_files[0])}":
+            main_title = f"Fine-Tuning Metrics: {stage_names[0]}"
+            fig.suptitle(main_title, fontsize=16, y=0.95)
+
+    # Adjust layout
+    plt.tight_layout()
+    fig.subplots_adjust(
+        top=0.85, wspace=0.3
+    )  # Reduce top to 0.85 to create more space above plots
 
     # Track min/max values for consistent y-axis scaling
     loss_min, loss_max = float("inf"), float("-inf")
@@ -238,8 +387,21 @@ def create_multi_stage_loss_curve(
         else:
             ax1, ax2 = axes[stage_idx]
 
-        # Plot loss curves
-        plot_loss_curves(ax1, data, stage_names[stage_idx])
+        # For multiple stages, add stage title above each pair of plots
+        if len(log_files) > 1:
+            # Add stage title above the pair of plots
+            fig.text(
+                0.5,
+                1 - (stage_idx + 0.5) / len(log_files) + 0.08,
+                stage_names[stage_idx],
+                fontsize=14,
+                ha="center",
+                weight="bold",
+            )
+
+        # Plot loss curves - use simplified title for individual plots
+        simplified_name = "Loss Curves"
+        plot_loss_curves(ax1, data, simplified_name)
 
         # Plot learning rate
         plot_learning_rate(ax2, data)
@@ -247,11 +409,12 @@ def create_multi_stage_loss_curve(
         # Set consistent y-axis for loss plots
         ax1.set_ylim([max(0, loss_min * 0.9), loss_max * 1.1])
 
-    # Adjust layout
+    # Adjust layout with more top space
     plt.tight_layout()
-    fig.subplots_adjust(
-        top=0.95, wspace=0.3
-    )  # Make room for suptitle and add space between plots
+    if len(log_files) == 1:
+        fig.subplots_adjust(top=0.85, wspace=0.4, hspace=0.4)
+    else:
+        fig.subplots_adjust(top=0.95, wspace=0.4, hspace=0.5)
 
     # Create output directory if it doesn't exist
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
@@ -269,17 +432,23 @@ if __name__ == "__main__":
     os.chdir(script_dir)
     print(f"Working directory set to: {os.getcwd()}")
 
+    # Set default paths relative to script directory
+    default_logging_dir = os.path.join(script_dir, path_logging)
+    default_output_path = os.path.join(
+        script_dir, output_path, "fine_tuning_stages.png"
+    )
+
     parser = argparse.ArgumentParser(
         description="Generate multi-stage loss curves from training logs"
     )
     parser.add_argument(
         "--dir",
         type=str,
-        default="./logging",
-        help="Directory containing logging files (default: ./logging)",
+        default=default_logging_dir,
+        help=f"Directory containing logging files (default: {path_logging})",
     )
     parser.add_argument(
-        "--output", type=str, default="fine_tuning_stages.png", help="Output image path"
+        "--output", type=str, default=default_output_path, help="Output image path"
     )
     parser.add_argument(
         "--stages", type=str, nargs="+", help="Custom names for each fine-tuning stage"
@@ -291,7 +460,30 @@ if __name__ == "__main__":
     log_files = find_logging_files(args.dir)
 
     if log_files:
-        # Create the visualization
-        create_multi_stage_loss_curve(log_files, args.output, args.stages)
+        # Process files in batches based on cut_entries
+        total_files = len(log_files)
+        batch_count = 0
+
+        for i in range(0, total_files, cut_entries):
+            batch_files = log_files[i : i + cut_entries]
+            batch_count += 1
+
+            # Generate output filename for this batch
+            if total_files <= cut_entries:
+                # Single batch - use original filename
+                batch_output_path = args.output
+            else:
+                # Multiple batches - add batch number to filename
+                base_name = os.path.splitext(args.output)[0]
+                extension = os.path.splitext(args.output)[1]
+                batch_output_path = f"{base_name}_batch_{batch_count}{extension}"
+
+            print(f"\nProcessing batch {batch_count}: {len(batch_files)} files")
+            print(f"Files: {[os.path.basename(f) for f in batch_files]}")
+
+            # Create the visualization for this batch
+            create_multi_stage_loss_curve(
+                batch_files, batch_output_path, None, args.dir
+            )
     else:
         print("No log files found to process.")

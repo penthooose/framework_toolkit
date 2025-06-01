@@ -18,12 +18,12 @@
     }
   },
   "3": {
-    "path_safetensors_model": "C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3_c1",
+    "path_safetensors_model": "C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3_2",
     "path_output_gguf": "C:/Users/Paul/.cache/gguf_models/llama3_german_V3.gguf",
     "integrate_in_ollama": true,
     "quantization": "f16",
     "modelfile_contents": {
-      "PARAMETER_1": "temperature 0.0",
+      "PARAMETER_1": "temperature 0.1",
       "PARAMETER_2": "top_p 0.5",
       "PARAMETER_3": "top_k 60",
       "PARAMETER_4": "num_predict 4096",

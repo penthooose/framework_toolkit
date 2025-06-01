@@ -13,6 +13,8 @@ defmodule Statistics do
   @dataset_supervised "N:/Thesis/data_prepare/datasets_ready/supervised/multiple_chapters_format4/combined_datasets"
   @dataset_supervised_qa "N:/Thesis/data_prepare/datasets_ready/supervised/questions_and_answers/combined_datasets"
   @dataset_unsupervised "N:/Thesis/data_prepare/datasets_ready/unsupervised/mixed_chapters/combined_datasets"
+  @dataset_coherence_us "N:/Thesis/data_prepare/datasets_ready/unsupervised_coherence/combined_datasets"
+  @dataset_coherence_sp "N:/Thesis/data_prepare/datasets_ready/supervised_coherence/combined_datasets"
   @path_statistics "N:/Thesis/data_prepare/statistics"
   @temp "N:/Thesis/data_prepare/temp"
 
