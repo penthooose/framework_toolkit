@@ -564,8 +564,8 @@
       "warmup_ratio": 0.15,
       "lr_scheduler_type": "constant_with_warmup",
       "max_grad_norm": 0.3,
-      "save_steps": 80,
-      "eval_steps": 40,
+      "save_steps": 100,
+      "eval_steps": 50,
       "weight_decay": 0.005,
       "gradient_checkpointing": true
     },

@@ -389,10 +389,11 @@ def create_multi_stage_loss_curve(
 
         # For multiple stages, add stage title above each pair of plots
         if len(log_files) > 1:
-            # Add stage title above the pair of plots
+            # Add stage title above the pair of plots - adjusted positioning
+            title_y_position = 1 - (stage_idx / len(log_files)) - 0.02
             fig.text(
                 0.5,
-                1 - (stage_idx + 0.5) / len(log_files) + 0.08,
+                title_y_position,
                 stage_names[stage_idx],
                 fontsize=14,
                 ha="center",

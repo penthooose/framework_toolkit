@@ -1,6 +1,8 @@
 import re, os
 from collections import OrderedDict
 
+INPUT = "logging_phase3"
+
 
 def extract_training_metrics(log_file_path, output_file_path=None):
     """
@@ -91,11 +93,11 @@ def extract_training_metrics(log_file_path, output_file_path=None):
             print(line)
 
         # Save to file if output path provided
-        if output_file_path:
-            with open(output_file_path, "w", encoding="utf-8") as output_file:
-                for line in filtered_lines:
-                    output_file.write(line + "\n")
-            print(f"\nResults saved to: {output_file_path}")
+        # if output_file_path:
+        #     with open(output_file_path, "w", encoding="utf-8") as output_file:
+        #         for line in filtered_lines:
+        #             output_file.write(line + "\n")
+        #     print(f"\nResults saved to: {output_file_path}")
 
         return filtered_lines
 
@@ -164,8 +166,10 @@ if __name__ == "__main__":
     os.chdir(script_dir)
     print(f"Working directory set to: {os.getcwd()}")
 
-    logging_dir = os.path.join(script_dir, "./logging_phase1")
-    output_dir = os.path.join(script_dir, "./filtered_logging_phase1")
+    input_folder = "./" + INPUT
+    logging_dir = os.path.join(script_dir, input_folder)
+    output_folder = "./filtered_" + INPUT
+    output_dir = os.path.join(script_dir, output_folder)
 
     # Create output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)

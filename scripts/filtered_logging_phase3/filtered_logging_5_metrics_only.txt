@@ -1,9 +1,9 @@
-2025-05-09 17:56:35 - TRAINING: {'loss': 0.6919, 'grad_norm': 0.5987952351570129, 'learning_rate': 5.000000000000001e-07, 'epoch': 0.03986710963455149}
-2025-05-09 18:22:41 - VALIDATION: {'eval_loss': nan, 'eval_runtime': 441.3058, 'eval_samples_per_second': 1.754, 'eval_steps_per_second': 1.754, 'epoch': 0.19933554817275748}
-2025-05-09 18:53:39 - VALIDATION: {'eval_loss': nan, 'eval_runtime': 444.3616, 'eval_samples_per_second': 1.742, 'eval_steps_per_second': 1.742, 'epoch': 0.39867109634551495}
-2025-05-09 19:28:09 - VALIDATION: {'eval_loss': nan, 'eval_runtime': 497.7438, 'eval_samples_per_second': 1.555, 'eval_steps_per_second': 1.555, 'epoch': 0.5980066445182725}
-2025-05-09 20:01:33 - VALIDATION: {'eval_loss': nan, 'eval_runtime': 485.3598, 'eval_samples_per_second': 1.595, 'eval_steps_per_second': 1.595, 'epoch': 0.7973421926910299}
-2025-05-09 20:33:26 - VALIDATION: {'eval_loss': nan, 'eval_runtime': 439.6981, 'eval_samples_per_second': 1.76, 'eval_steps_per_second': 1.76, 'epoch': 0.9966777408637874}
-2025-05-09 20:38:21 - VALIDATION: {'eval_loss': nan, 'eval_runtime': 293.8235, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 0.9966777408637874}
-2025-05-09 20:38:21 - FINAL TEST VALIDATION: {'eval_loss': nan, 'eval_runtime': 293.8235, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 0.9966777408637874}
-2025-05-09 20:38:21 - FINAL TEST VALIDATION: {'eval_loss': nan, 'eval_runtime': 293.8235, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 0.9966777408637874}
+2025-06-02 01:17:30 - VALIDATION: {'eval_loss': 0.7485164403915405, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.8658, 'eval_samples_per_second': 1.821, 'eval_steps_per_second': 1.821}
+2025-06-02 01:20:32 - TRAINING: {'loss': 0.6758, 'grad_norm': 0.5326417088508606, 'learning_rate': 5.000000000000001e-07, 'epoch': 0.048721071863580996}
+2025-06-02 01:36:10 - VALIDATION: {'eval_loss': 0.7262356281280518, 'eval_model_preparation_time': 0.0, 'eval_runtime': 231.166, 'eval_samples_per_second': 1.826, 'eval_steps_per_second': 1.826, 'epoch': 0.243605359317905}
+2025-06-02 01:55:03 - VALIDATION: {'eval_loss': 0.7031646370887756, 'eval_model_preparation_time': 0.0, 'eval_runtime': 233.7194, 'eval_samples_per_second': 1.806, 'eval_steps_per_second': 1.806, 'epoch': 0.48721071863581}
+2025-06-02 02:13:45 - VALIDATION: {'eval_loss': 0.6862279772758484, 'eval_model_preparation_time': 0.0, 'eval_runtime': 230.5272, 'eval_samples_per_second': 1.831, 'eval_steps_per_second': 1.831, 'epoch': 0.730816077953715}
+2025-06-02 02:32:18 - VALIDATION: {'eval_loss': 0.6761478185653687, 'eval_model_preparation_time': 0.0, 'eval_runtime': 237.1095, 'eval_samples_per_second': 1.78, 'eval_steps_per_second': 1.78, 'epoch': 0.97442143727162}
+2025-06-02 02:36:20 - VALIDATION: {'eval_loss': 0.6936748027801514, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.1685, 'eval_samples_per_second': 1.829, 'eval_steps_per_second': 1.829, 'epoch': 0.9987819732034104}
+2025-06-02 02:36:20 - FINAL TEST VALIDATION: {'eval_loss': 0.6936748027801514, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.1685, 'eval_samples_per_second': 1.829, 'eval_steps_per_second': 1.829, 'epoch': 0.9987819732034104}
+2025-06-02 02:36:20 - FINAL TEST VALIDATION: {'eval_loss': 0.6936748027801514, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.1685, 'eval_samples_per_second': 1.829, 'eval_steps_per_second': 1.829, 'epoch': 0.9987819732034104}

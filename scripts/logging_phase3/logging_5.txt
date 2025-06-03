@@ -1,338 +1,210 @@
-2025-05-09 17:41:05,896 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\logging.txt
-2025-05-09 17:41:05,896 - INFO - 
 
 
 Starting new Fine-tuning run:
 
 
-2025-05-09 17:41:05,896 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\logging.txt
-2025-05-09 17:41:05,897 - INFO - Starting mixed fine-tuning with parameters: {'mode': 'mixed', 'data_path': 'N:/Thesis/data_prepare/datasets_ready/coherence_dataset', 'text_column': ['text', 'input'], 'use_checkpoint': False, 'checkpoint_path': None, 'max_samples': None, 'pre_eval': False, 'freeze_partly': False, 'freeze_partly_layers': 0, 'unfreeze_specific': True, 'unfreeze_specific_layers': '\x08\t\n\x0b\x0c\r\x0e\x14\x15\x16\x17\x18\x19', 'eval_split': 0.05, 'model_path': 'C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3', 'output_dir': 'C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence', 'logging_dir': None, 'use_flash_attention': True, 'max_length': 3100, 'chunk_size': None, 'quantization_config': {'load_in_8bit': True}, 'peft_config': {'task_type': <TaskType.CAUSAL_LM: 'CAUSAL_LM'>, 'inference_mode': False, 'r': 8, 'lora_alpha': 16, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj', 'w1', 'w2', 'w3']}, 'training_config': {'per_device_train_batch_size': 1, 'gradient_accumulation_steps': 12, 'num_train_epochs': 1, 'learning_rate': 5e-06, 'warmup_steps': 100, 'warmup_ratio': 0.15, 'logging_steps': 10, 'save_steps': 200, 'save_total_limit': 5, 'eval_strategy': 'steps', 'eval_steps': 200, 'per_device_eval_batch_size': 1, 'eval_accumulation_steps': 4, 'fp16': True, 'lr_scheduler_type': 'constant_with_warmup', 'weight_decay': 0.005, 'gradient_checkpointing': True, 'report_to': 'none', 'disable_tqdm': False, 'max_grad_norm': 0.3, 'dataloader_num_workers': 2}}
-2025-05-09 17:41:05,897 - INFO - INFO: No specific dataset files found. Loading from N:/Thesis/data_prepare/datasets_ready/coherence_dataset and splitting
-2025-05-09 17:41:05,897 - INFO - No specific dataset files found. Loading from N:/Thesis/data_prepare/datasets_ready/coherence_dataset and splitting
-2025-05-09 17:41:05,898 - INFO - ERROR: Error loading dataset from N:/Thesis/data_prepare/datasets_ready/coherence_dataset: Couldn't find any data file at N:\Thesis\data_prepare\datasets_ready\coherence_dataset.
-2025-05-09 17:41:41,915 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\logging.txt
-2025-05-09 17:41:41,915 - INFO - 
-
-
-Starting new Fine-tuning run:
-
-
-2025-05-09 17:41:41,915 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\logging.txt
-2025-05-09 17:41:41,915 - INFO - Starting mixed fine-tuning with parameters: {'mode': 'mixed', 'data_path': 'N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets', 'text_column': ['text', 'input'], 'use_checkpoint': False, 'checkpoint_path': None, 'max_samples': None, 'pre_eval': False, 'freeze_partly': False, 'freeze_partly_layers': 0, 'unfreeze_specific': True, 'unfreeze_specific_layers': '\x08\t\n\x0b\x0c\r\x0e\x14\x15\x16\x17\x18\x19', 'eval_split': 0.05, 'model_path': 'C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3', 'output_dir': 'C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence', 'logging_dir': None, 'use_flash_attention': True, 'max_length': 3100, 'chunk_size': None, 'quantization_config': {'load_in_8bit': True}, 'peft_config': {'task_type': <TaskType.CAUSAL_LM: 'CAUSAL_LM'>, 'inference_mode': False, 'r': 8, 'lora_alpha': 16, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj', 'w1', 'w2', 'w3']}, 'training_config': {'per_device_train_batch_size': 1, 'gradient_accumulation_steps': 12, 'num_train_epochs': 1, 'learning_rate': 5e-06, 'warmup_steps': 100, 'warmup_ratio': 0.15, 'logging_steps': 10, 'save_steps': 200, 'save_total_limit': 5, 'eval_strategy': 'steps', 'eval_steps': 200, 'per_device_eval_batch_size': 1, 'eval_accumulation_steps': 4, 'fp16': True, 'lr_scheduler_type': 'constant_with_warmup', 'weight_decay': 0.005, 'gradient_checkpointing': True, 'report_to': 'none', 'disable_tqdm': False, 'max_grad_norm': 0.3, 'dataloader_num_workers': 2}}
-2025-05-09 17:41:41,916 - INFO - INFO: Loading datasets from individual JSONL files
-2025-05-09 17:41:41,916 - INFO - Loading datasets from individual JSONL files
-2025-05-09 17:41:42,011 - INFO - INFO: Loaded 3010 examples from N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets\training_set.jsonl
-2025-05-09 17:41:42,131 - INFO - INFO: Loaded 774 examples from N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets\validation_set.jsonl
-2025-05-09 17:41:42,142 - INFO - INFO: Loaded separate validation set with 774 examples
-2025-05-09 17:41:42,142 - INFO - Loaded separate validation set with 774 examples
-2025-05-09 17:41:42,160 - INFO - INFO: Loaded 516 examples from N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets\test_set.jsonl
-2025-05-09 17:41:42,164 - INFO - INFO: Loaded separate test set with 516 examples
-2025-05-09 17:41:42,164 - INFO - Loaded separate test set with 516 examples
-2025-05-09 17:41:42,708 - INFO - INFO: Tokenizer vocabulary size: 128256
-2025-05-09 17:41:42,709 - INFO - INFO: Model max length: 1000000000000000019884624838656
-2025-05-09 17:41:42,709 - INFO - INFO: Found text column: 'input'
-2025-05-09 17:41:42,784 - INFO - INFO: Created combined 'text' column from ['input']
-2025-05-09 17:41:46,072 - INFO - INFO: Dataset prepared with 3010 examples
-2025-05-09 17:41:46,072 - INFO - INFO: Found text column: 'input'
-2025-05-09 17:41:46,089 - INFO - INFO: Created combined 'text' column from ['input']
-2025-05-09 17:41:47,036 - INFO - INFO: Dataset prepared with 774 examples
-2025-05-09 17:41:47,036 - INFO - INFO: Found text column: 'text'
-2025-05-09 17:41:47,044 - INFO - INFO: Created combined 'text' column from ['text']
-2025-05-09 17:41:47,660 - INFO - INFO: Dataset prepared with 516 examples
-2025-05-09 17:41:47,668 - INFO - INFO: CUDA cache cleared
-2025-05-09 17:41:47,790 - INFO - INFO: Garbage collector freed 85 objects
-2025-05-09 17:41:59,851 - INFO - INFO: Freezing all 32 layers first
-2025-05-09 17:46:18,706 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\logging.txt
-2025-05-09 17:46:18,706 - INFO - 
-
-
-Starting new Fine-tuning run:
-
-
-2025-05-09 17:46:18,706 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\logging.txt
-2025-05-09 17:46:18,706 - INFO - Starting mixed fine-tuning with parameters: {'mode': 'mixed', 'data_path': 'N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets', 'text_column': ['text', 'input'], 'use_checkpoint': False, 'checkpoint_path': None, 'max_samples': None, 'pre_eval': False, 'freeze_partly': False, 'freeze_partly_layers': 0, 'unfreeze_specific': True, 'unfreeze_specific_layers': '\x08\t\n\x0b\x0c\r\x0e\x14\x15\x16\x17\x18\x19', 'eval_split': 0.05, 'model_path': 'C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3', 'output_dir': 'C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence', 'logging_dir': None, 'use_flash_attention': True, 'max_length': 3100, 'chunk_size': None, 'quantization_config': {'load_in_8bit': True}, 'peft_config': {'task_type': <TaskType.CAUSAL_LM: 'CAUSAL_LM'>, 'inference_mode': False, 'r': 8, 'lora_alpha': 16, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj', 'w1', 'w2', 'w3']}, 'training_config': {'per_device_train_batch_size': 1, 'gradient_accumulation_steps': 12, 'num_train_epochs': 1, 'learning_rate': 5e-06, 'warmup_steps': 100, 'warmup_ratio': 0.15, 'logging_steps': 10, 'save_steps': 200, 'save_total_limit': 5, 'eval_strategy': 'steps', 'eval_steps': 200, 'per_device_eval_batch_size': 1, 'eval_accumulation_steps': 4, 'fp16': True, 'lr_scheduler_type': 'constant_with_warmup', 'weight_decay': 0.005, 'gradient_checkpointing': True, 'report_to': 'none', 'disable_tqdm': False, 'max_grad_norm': 0.3, 'dataloader_num_workers': 2}}
-2025-05-09 17:46:18,706 - INFO - INFO: Loading datasets from individual JSONL files
-2025-05-09 17:46:18,706 - INFO - Loading datasets from individual JSONL files
-2025-05-09 17:46:18,755 - INFO - INFO: Loaded 3010 examples from N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets\training_set.jsonl
-2025-05-09 17:46:18,807 - INFO - INFO: Loaded 774 examples from N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets\validation_set.jsonl
-2025-05-09 17:46:18,820 - INFO - INFO: Loaded separate validation set with 774 examples
-2025-05-09 17:46:18,820 - INFO - Loaded separate validation set with 774 examples
-2025-05-09 17:46:18,827 - INFO - INFO: Loaded 516 examples from N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets\test_set.jsonl
-2025-05-09 17:46:18,830 - INFO - INFO: Loaded separate test set with 516 examples
-2025-05-09 17:46:18,831 - INFO - Loaded separate test set with 516 examples
-2025-05-09 17:46:19,322 - INFO - INFO: Tokenizer vocabulary size: 128256
-2025-05-09 17:46:19,322 - INFO - INFO: Model max length: 1000000000000000019884624838656
-2025-05-09 17:46:19,323 - INFO - INFO: Found text column: 'input'
-2025-05-09 17:46:19,368 - INFO - INFO: Created combined 'text' column from ['input']
-2025-05-09 17:46:22,731 - INFO - INFO: Dataset prepared with 3010 examples
-2025-05-09 17:46:22,732 - INFO - INFO: Found text column: 'input'
-2025-05-09 17:46:22,748 - INFO - INFO: Created combined 'text' column from ['input']
-2025-05-09 17:46:23,718 - INFO - INFO: Dataset prepared with 774 examples
-2025-05-09 17:46:23,719 - INFO - INFO: Found text column: 'text'
-2025-05-09 17:46:23,727 - INFO - INFO: Created combined 'text' column from ['text']
-2025-05-09 17:46:24,336 - INFO - INFO: Dataset prepared with 516 examples
-2025-05-09 17:46:24,340 - INFO - INFO: CUDA cache cleared
-2025-05-09 17:46:24,467 - INFO - INFO: Garbage collector freed 85 objects
-2025-05-09 17:46:33,527 - INFO - INFO: Freezing all 32 layers first
-2025-05-09 17:48:15,978 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\logging.txt
-2025-05-09 17:48:15,978 - INFO - 
-
-
-Starting new Fine-tuning run:
-
-
-2025-05-09 17:48:15,978 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\logging.txt
-2025-05-09 17:48:15,978 - INFO - Starting mixed fine-tuning with parameters: {'mode': 'mixed', 'data_path': 'N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets', 'text_column': ['text', 'input'], 'use_checkpoint': False, 'checkpoint_path': None, 'max_samples': None, 'pre_eval': False, 'freeze_partly': False, 'freeze_partly_layers': 0, 'unfreeze_specific': True, 'unfreeze_specific_layers': '\x08\t\n\x0b\x0c\r\x0e\x14\x15\x16\x17\x18\x19', 'eval_split': 0.05, 'model_path': 'C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3', 'output_dir': 'C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence', 'logging_dir': None, 'use_flash_attention': True, 'max_length': 3100, 'chunk_size': None, 'quantization_config': {'load_in_8bit': True}, 'peft_config': {'task_type': <TaskType.CAUSAL_LM: 'CAUSAL_LM'>, 'inference_mode': False, 'r': 8, 'lora_alpha': 16, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj', 'w1', 'w2', 'w3']}, 'training_config': {'per_device_train_batch_size': 1, 'gradient_accumulation_steps': 12, 'num_train_epochs': 1, 'learning_rate': 5e-06, 'warmup_steps': 100, 'warmup_ratio': 0.15, 'logging_steps': 10, 'save_steps': 200, 'save_total_limit': 5, 'eval_strategy': 'steps', 'eval_steps': 200, 'per_device_eval_batch_size': 1, 'eval_accumulation_steps': 4, 'fp16': True, 'lr_scheduler_type': 'constant_with_warmup', 'weight_decay': 0.005, 'gradient_checkpointing': True, 'report_to': 'none', 'disable_tqdm': False, 'max_grad_norm': 0.3, 'dataloader_num_workers': 2}}
-2025-05-09 17:48:15,979 - INFO - INFO: Loading datasets from individual JSONL files
-2025-05-09 17:48:15,979 - INFO - Loading datasets from individual JSONL files
-2025-05-09 17:48:16,030 - INFO - INFO: Loaded 3010 examples from N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets\training_set.jsonl
-2025-05-09 17:48:16,085 - INFO - INFO: Loaded 774 examples from N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets\validation_set.jsonl
-2025-05-09 17:48:16,097 - INFO - INFO: Loaded separate validation set with 774 examples
-2025-05-09 17:48:16,097 - INFO - Loaded separate validation set with 774 examples
-2025-05-09 17:48:16,105 - INFO - INFO: Loaded 516 examples from N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets\test_set.jsonl
-2025-05-09 17:48:16,109 - INFO - INFO: Loaded separate test set with 516 examples
-2025-05-09 17:48:16,109 - INFO - Loaded separate test set with 516 examples
-2025-05-09 17:48:16,673 - INFO - INFO: Tokenizer vocabulary size: 128256
-2025-05-09 17:48:16,673 - INFO - INFO: Model max length: 1000000000000000019884624838656
-2025-05-09 17:48:16,673 - INFO - INFO: Found text column: 'input'
-2025-05-09 17:48:16,719 - INFO - INFO: Created combined 'text' column from ['input']
-2025-05-09 17:48:20,166 - INFO - INFO: Dataset prepared with 3010 examples
-2025-05-09 17:48:20,166 - INFO - INFO: Found text column: 'input'
-2025-05-09 17:48:20,184 - INFO - INFO: Created combined 'text' column from ['input']
-2025-05-09 17:48:21,134 - INFO - INFO: Dataset prepared with 774 examples
-2025-05-09 17:48:21,134 - INFO - INFO: Found text column: 'text'
-2025-05-09 17:48:21,144 - INFO - INFO: Created combined 'text' column from ['text']
-2025-05-09 17:48:21,806 - INFO - INFO: Dataset prepared with 516 examples
-2025-05-09 17:48:21,810 - INFO - INFO: CUDA cache cleared
-2025-05-09 17:48:21,945 - INFO - INFO: Garbage collector freed 85 objects
-2025-05-09 17:48:30,967 - INFO - INFO: Freezing all 32 layers first
-2025-05-09 17:48:30,969 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:48:30,969 - INFO - WARNING: Invalid layer index: 	, skipping
-2025-05-09 17:48:30,969 - INFO - WARNING: Invalid layer index: 
-, skipping
-2025-05-09 17:48:30,970 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:48:30,970 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:48:30,970 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:48:30,970 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:48:30,970 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:48:30,970 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:48:30,972 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:48:30,972 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:48:30,972 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:48:30,972 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:48:30,972 - INFO - INFO: Ensuring LM head is trainable
-2025-05-09 17:48:30,974 - INFO - INFO: Specific layer unfreezing: 7504924672/8030261248 parameters frozen (93.46%)
-2025-05-09 17:48:30,974 - INFO - INFO: Trainable: 525336576/8030261248 parameters (6.54%)
-2025-05-09 17:48:30,974 - INFO - INFO: Unfrozen layers: 	
- out of 32 layers plus LM head
-2025-05-09 17:48:30,975 - INFO - INFO: Model loaded from C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3
-2025-05-09 17:48:30,976 - INFO - INFO: Model has 8030261248 parameters, 525336576 are trainable (6.54%)
-2025-05-09 17:48:31,348 - INFO - INFO: Model has 20971520 trainable parameters after PEFT configuration
-2025-05-09 17:48:31,416 - INFO - Starting model training with 3010 training examples
-2025-05-09 17:48:31,417 - INFO - Using 774 examples for validation during training
-2025-05-09 17:48:31,417 - INFO - Using 516 examples for pre/final evaluation
-2025-05-09 17:48:31,488 - INFO - INFO: Starting training...
-2025-05-09 17:48:31,488 - INFO - Starting training...
-2025-05-09 17:48:31,488 - INFO - Starting training...
-2025-05-09 17:48:31,488 - INFO - INFO: Registering numpy component classes as safe globals
-2025-05-09 17:48:31,489 - INFO - INFO: Registering module names in the PyTorch safe registry
-2025-05-09 17:48:31,489 - INFO - WARNING: torch.serialization.safe_registry not available, using alternative registration
-2025-05-09 17:48:31,489 - INFO - INFO: Registering specific numpy components
-2025-05-09 17:48:31,490 - INFO - INFO: Registering numpy array creation patterns
-2025-05-09 17:48:31,490 - INFO - INFO: Set up safe dtype handler for array reconstruction
-2025-05-09 17:48:31,490 - INFO - INFO: Numpy components registered as safe globals
-2025-05-09 17:48:31,679 - INFO - INFO: Starting epoch 0/1
-2025-05-09 17:48:31,679 - INFO - Starting epoch 0/1
-2025-05-09 17:48:31,680 - INFO - Starting epoch 0/1
-2025-05-09 17:51:29,273 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\logging.txt
-2025-05-09 17:51:29,273 - INFO - 
-
-
-Starting new Fine-tuning run:
-
-
-2025-05-09 17:51:29,273 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\logging.txt
-2025-05-09 17:51:29,273 - INFO - Starting mixed fine-tuning with parameters: {'mode': 'mixed', 'data_path': 'N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets', 'text_column': ['text', 'input'], 'use_checkpoint': False, 'checkpoint_path': None, 'max_samples': None, 'pre_eval': False, 'freeze_partly': False, 'freeze_partly_layers': 0, 'unfreeze_specific': True, 'unfreeze_specific_layers': '\x08\t\n\x0b\x0c\r\x0e\x14\x15\x16\x17\x18\x19', 'eval_split': 0.05, 'model_path': 'C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3', 'output_dir': 'C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence', 'logging_dir': None, 'use_flash_attention': True, 'max_length': 3100, 'chunk_size': None, 'quantization_config': {'load_in_8bit': True}, 'peft_config': {'task_type': <TaskType.CAUSAL_LM: 'CAUSAL_LM'>, 'inference_mode': False, 'r': 8, 'lora_alpha': 16, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj', 'w1', 'w2', 'w3']}, 'training_config': {'per_device_train_batch_size': 1, 'gradient_accumulation_steps': 12, 'num_train_epochs': 1, 'learning_rate': 5e-06, 'warmup_steps': 100, 'warmup_ratio': 0.15, 'logging_steps': 10, 'save_steps': 125, 'save_total_limit': 5, 'eval_strategy': 'steps', 'eval_steps': 50, 'per_device_eval_batch_size': 1, 'eval_accumulation_steps': 4, 'fp16': True, 'lr_scheduler_type': 'constant_with_warmup', 'weight_decay': 0.005, 'gradient_checkpointing': True, 'report_to': 'none', 'disable_tqdm': False, 'max_grad_norm': 0.3, 'dataloader_num_workers': 2}}
-2025-05-09 17:51:29,273 - INFO - INFO: Loading datasets from individual JSONL files
-2025-05-09 17:51:29,274 - INFO - Loading datasets from individual JSONL files
-2025-05-09 17:51:29,325 - INFO - INFO: Loaded 3010 examples from N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets\training_set.jsonl
-2025-05-09 17:51:29,379 - INFO - INFO: Loaded 774 examples from N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets\validation_set.jsonl
-2025-05-09 17:51:29,390 - INFO - INFO: Loaded separate validation set with 774 examples
-2025-05-09 17:51:29,390 - INFO - Loaded separate validation set with 774 examples
-2025-05-09 17:51:29,398 - INFO - INFO: Loaded 516 examples from N:/Thesis/data_prepare/datasets_ready/mixed_coherence/combined_datasets\test_set.jsonl
-2025-05-09 17:51:29,401 - INFO - INFO: Loaded separate test set with 516 examples
-2025-05-09 17:51:29,401 - INFO - Loaded separate test set with 516 examples
-2025-05-09 17:51:29,907 - INFO - INFO: Tokenizer vocabulary size: 128256
-2025-05-09 17:51:29,907 - INFO - INFO: Model max length: 1000000000000000019884624838656
-2025-05-09 17:51:29,907 - INFO - INFO: Found text column: 'input'
-2025-05-09 17:51:29,953 - INFO - INFO: Created combined 'text' column from ['input']
-2025-05-09 17:51:33,160 - INFO - INFO: Dataset prepared with 3010 examples
-2025-05-09 17:51:33,160 - INFO - INFO: Found text column: 'input'
-2025-05-09 17:51:33,177 - INFO - INFO: Created combined 'text' column from ['input']
-2025-05-09 17:51:34,102 - INFO - INFO: Dataset prepared with 774 examples
-2025-05-09 17:51:34,102 - INFO - INFO: Found text column: 'text'
-2025-05-09 17:51:34,112 - INFO - INFO: Created combined 'text' column from ['text']
-2025-05-09 17:51:34,717 - INFO - INFO: Dataset prepared with 516 examples
-2025-05-09 17:51:34,720 - INFO - INFO: CUDA cache cleared
-2025-05-09 17:51:34,853 - INFO - INFO: Garbage collector freed 85 objects
-2025-05-09 17:51:44,310 - INFO - INFO: Freezing all 32 layers first
-2025-05-09 17:51:44,311 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:51:44,311 - INFO - WARNING: Invalid layer index: 	, skipping
-2025-05-09 17:51:44,312 - INFO - WARNING: Invalid layer index: 
-, skipping
-2025-05-09 17:51:44,312 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:51:44,312 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:51:44,312 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:51:44,313 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:51:44,313 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:51:44,313 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:51:44,313 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:51:44,314 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:51:44,314 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:51:44,314 - INFO - WARNING: Invalid layer index: , skipping
-2025-05-09 17:51:44,315 - INFO - INFO: Ensuring LM head is trainable
-2025-05-09 17:51:44,316 - INFO - INFO: Specific layer unfreezing: 7504924672/8030261248 parameters frozen (93.46%)
-2025-05-09 17:51:44,316 - INFO - INFO: Trainable: 525336576/8030261248 parameters (6.54%)
-2025-05-09 17:51:44,316 - INFO - INFO: Unfrozen layers: 	
- out of 32 layers plus LM head
-2025-05-09 17:51:44,317 - INFO - INFO: Model loaded from C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3
-2025-05-09 17:51:44,318 - INFO - INFO: Model has 8030261248 parameters, 525336576 are trainable (6.54%)
-2025-05-09 17:51:44,817 - INFO - INFO: Model has 20971520 trainable parameters after PEFT configuration
-2025-05-09 17:51:44,875 - INFO - Starting model training with 3010 training examples
-2025-05-09 17:51:44,875 - INFO - Using 774 examples for validation during training
-2025-05-09 17:51:44,875 - INFO - Using 516 examples for pre/final evaluation
-2025-05-09 17:51:44,892 - INFO - INFO: Starting training...
-2025-05-09 17:51:44,892 - INFO - Starting training...
-2025-05-09 17:51:44,892 - INFO - Starting training...
-2025-05-09 17:51:44,893 - INFO - INFO: Registering numpy component classes as safe globals
-2025-05-09 17:51:44,893 - INFO - INFO: Registering module names in the PyTorch safe registry
-2025-05-09 17:51:44,893 - INFO - WARNING: torch.serialization.safe_registry not available, using alternative registration
-2025-05-09 17:51:44,893 - INFO - INFO: Registering specific numpy components
-2025-05-09 17:51:44,893 - INFO - INFO: Registering numpy array creation patterns
-2025-05-09 17:51:44,894 - INFO - INFO: Set up safe dtype handler for array reconstruction
-2025-05-09 17:51:44,894 - INFO - INFO: Numpy components registered as safe globals
-2025-05-09 17:51:45,107 - INFO - INFO: Starting epoch 0/1
-2025-05-09 17:51:45,107 - INFO - Starting epoch 0/1
-2025-05-09 17:51:45,107 - INFO - Starting epoch 0/1
-2025-05-09 17:56:35,712 - INFO - INFO: Training progress: {'loss': 0.6919, 'grad_norm': 0.5987952351570129, 'learning_rate': 5.000000000000001e-07, 'epoch': 0.03986710963455149}
-2025-05-09 17:56:35,712 - INFO - Training progress: {'loss': 0.6919, 'grad_norm': 0.5987952351570129, 'learning_rate': 5.000000000000001e-07, 'epoch': 0.03986710963455149}
-2025-05-09 17:56:35,712 - INFO - Training metrics: {'loss': 0.6919, 'grad_norm': 0.5987952351570129, 'learning_rate': 5.000000000000001e-07, 'epoch': 0.03986710963455149}
-2025-05-09 18:01:16,656 - INFO - INFO: Training progress: {'loss': 0.7204, 'grad_norm': 0.9223730564117432, 'learning_rate': 1.0000000000000002e-06, 'epoch': 0.07973421926910298}
-2025-05-09 18:01:16,658 - INFO - Training progress: {'loss': 0.7204, 'grad_norm': 0.9223730564117432, 'learning_rate': 1.0000000000000002e-06, 'epoch': 0.07973421926910298}
-2025-05-09 18:01:16,658 - INFO - Training metrics: {'loss': 0.7204, 'grad_norm': 0.9223730564117432, 'learning_rate': 1.0000000000000002e-06, 'epoch': 0.07973421926910298}
-2025-05-09 18:05:57,496 - INFO - INFO: Training progress: {'loss': 0.6738, 'grad_norm': 0.6602886319160461, 'learning_rate': 1.5e-06, 'epoch': 0.11960132890365449}
-2025-05-09 18:05:57,496 - INFO - Training progress: {'loss': 0.6738, 'grad_norm': 0.6602886319160461, 'learning_rate': 1.5e-06, 'epoch': 0.11960132890365449}
-2025-05-09 18:05:57,496 - INFO - Training metrics: {'loss': 0.6738, 'grad_norm': 0.6602886319160461, 'learning_rate': 1.5e-06, 'epoch': 0.11960132890365449}
-2025-05-09 18:10:39,161 - INFO - INFO: Training progress: {'loss': 0.6964, 'grad_norm': 0.7509801387786865, 'learning_rate': 2.0000000000000003e-06, 'epoch': 0.15946843853820597}
-2025-05-09 18:10:39,161 - INFO - Training progress: {'loss': 0.6964, 'grad_norm': 0.7509801387786865, 'learning_rate': 2.0000000000000003e-06, 'epoch': 0.15946843853820597}
-2025-05-09 18:10:39,161 - INFO - Training metrics: {'loss': 0.6964, 'grad_norm': 0.7509801387786865, 'learning_rate': 2.0000000000000003e-06, 'epoch': 0.15946843853820597}
-2025-05-09 18:15:20,064 - INFO - INFO: Training progress: {'loss': 0.6647, 'grad_norm': 0.7739607095718384, 'learning_rate': 2.5e-06, 'epoch': 0.19933554817275748}
-2025-05-09 18:15:20,065 - INFO - Training progress: {'loss': 0.6647, 'grad_norm': 0.7739607095718384, 'learning_rate': 2.5e-06, 'epoch': 0.19933554817275748}
-2025-05-09 18:15:20,065 - INFO - Training metrics: {'loss': 0.6647, 'grad_norm': 0.7739607095718384, 'learning_rate': 2.5e-06, 'epoch': 0.19933554817275748}
-2025-05-09 18:22:41,373 - INFO - INFO: Training progress: {'eval_loss': nan, 'eval_runtime': 441.3058, 'eval_samples_per_second': 1.754, 'eval_steps_per_second': 1.754, 'epoch': 0.19933554817275748}
-2025-05-09 18:22:41,373 - INFO - Training progress: {'eval_loss': nan, 'eval_runtime': 441.3058, 'eval_samples_per_second': 1.754, 'eval_steps_per_second': 1.754, 'epoch': 0.19933554817275748}
-2025-05-09 18:22:41,373 - INFO - Training metrics: {'eval_loss': nan, 'eval_runtime': 441.3058, 'eval_samples_per_second': 1.754, 'eval_steps_per_second': 1.754, 'epoch': 0.19933554817275748}
-2025-05-09 18:27:22,550 - INFO - INFO: Training progress: {'loss': 0.6598, 'grad_norm': 0.5512930750846863, 'learning_rate': 3e-06, 'epoch': 0.23920265780730898}
-2025-05-09 18:27:22,550 - INFO - Training progress: {'loss': 0.6598, 'grad_norm': 0.5512930750846863, 'learning_rate': 3e-06, 'epoch': 0.23920265780730898}
-2025-05-09 18:27:22,550 - INFO - Training metrics: {'loss': 0.6598, 'grad_norm': 0.5512930750846863, 'learning_rate': 3e-06, 'epoch': 0.23920265780730898}
-2025-05-09 18:32:03,819 - INFO - INFO: Training progress: {'loss': 0.59, 'grad_norm': 0.6428389549255371, 'learning_rate': 3.5e-06, 'epoch': 0.27906976744186046}
-2025-05-09 18:32:03,819 - INFO - Training progress: {'loss': 0.59, 'grad_norm': 0.6428389549255371, 'learning_rate': 3.5e-06, 'epoch': 0.27906976744186046}
-2025-05-09 18:32:03,819 - INFO - Training metrics: {'loss': 0.59, 'grad_norm': 0.6428389549255371, 'learning_rate': 3.5e-06, 'epoch': 0.27906976744186046}
-2025-05-09 18:36:44,965 - INFO - INFO: Training progress: {'loss': 0.6044, 'grad_norm': 0.6280791759490967, 'learning_rate': 4.000000000000001e-06, 'epoch': 0.31893687707641194}
-2025-05-09 18:36:44,965 - INFO - Training progress: {'loss': 0.6044, 'grad_norm': 0.6280791759490967, 'learning_rate': 4.000000000000001e-06, 'epoch': 0.31893687707641194}
-2025-05-09 18:36:44,966 - INFO - Training metrics: {'loss': 0.6044, 'grad_norm': 0.6280791759490967, 'learning_rate': 4.000000000000001e-06, 'epoch': 0.31893687707641194}
-2025-05-09 18:41:27,102 - INFO - INFO: Training progress: {'loss': 0.5971, 'grad_norm': 0.6455179452896118, 'learning_rate': 4.5e-06, 'epoch': 0.3588039867109635}
-2025-05-09 18:41:27,102 - INFO - Training progress: {'loss': 0.5971, 'grad_norm': 0.6455179452896118, 'learning_rate': 4.5e-06, 'epoch': 0.3588039867109635}
-2025-05-09 18:41:27,103 - INFO - Training metrics: {'loss': 0.5971, 'grad_norm': 0.6455179452896118, 'learning_rate': 4.5e-06, 'epoch': 0.3588039867109635}
-2025-05-09 18:46:14,930 - INFO - INFO: Training progress: {'loss': 0.565, 'grad_norm': 0.5282589793205261, 'learning_rate': 5e-06, 'epoch': 0.39867109634551495}
-2025-05-09 18:46:14,931 - INFO - Training progress: {'loss': 0.565, 'grad_norm': 0.5282589793205261, 'learning_rate': 5e-06, 'epoch': 0.39867109634551495}
-2025-05-09 18:46:14,931 - INFO - Training metrics: {'loss': 0.565, 'grad_norm': 0.5282589793205261, 'learning_rate': 5e-06, 'epoch': 0.39867109634551495}
-2025-05-09 18:53:39,294 - INFO - INFO: Training progress: {'eval_loss': nan, 'eval_runtime': 444.3616, 'eval_samples_per_second': 1.742, 'eval_steps_per_second': 1.742, 'epoch': 0.39867109634551495}
-2025-05-09 18:53:39,294 - INFO - Training progress: {'eval_loss': nan, 'eval_runtime': 444.3616, 'eval_samples_per_second': 1.742, 'eval_steps_per_second': 1.742, 'epoch': 0.39867109634551495}
-2025-05-09 18:53:39,294 - INFO - Training metrics: {'eval_loss': nan, 'eval_runtime': 444.3616, 'eval_samples_per_second': 1.742, 'eval_steps_per_second': 1.742, 'epoch': 0.39867109634551495}
-2025-05-09 18:58:39,349 - INFO - INFO: Training progress: {'loss': 0.5214, 'grad_norm': 0.5129532217979431, 'learning_rate': 5e-06, 'epoch': 0.43853820598006643}
-2025-05-09 18:58:39,349 - INFO - Training progress: {'loss': 0.5214, 'grad_norm': 0.5129532217979431, 'learning_rate': 5e-06, 'epoch': 0.43853820598006643}
-2025-05-09 18:58:39,349 - INFO - Training metrics: {'loss': 0.5214, 'grad_norm': 0.5129532217979431, 'learning_rate': 5e-06, 'epoch': 0.43853820598006643}
-2025-05-09 19:03:57,626 - INFO - INFO: Training progress: {'loss': 0.5108, 'grad_norm': 0.4034920334815979, 'learning_rate': 5e-06, 'epoch': 0.47840531561461797}
-2025-05-09 19:03:57,626 - INFO - Training progress: {'loss': 0.5108, 'grad_norm': 0.4034920334815979, 'learning_rate': 5e-06, 'epoch': 0.47840531561461797}
-2025-05-09 19:03:57,626 - INFO - Training metrics: {'loss': 0.5108, 'grad_norm': 0.4034920334815979, 'learning_rate': 5e-06, 'epoch': 0.47840531561461797}
-2025-05-09 19:06:37,377 - INFO - INFO: Saving checkpoint at step 125
-2025-05-09 19:06:37,379 - INFO - Saving checkpoint at step 125
-2025-05-09 19:06:37,379 - INFO - Saving checkpoint at step 125
-2025-05-09 19:09:16,496 - INFO - INFO: Training progress: {'loss': 0.5551, 'grad_norm': 0.4832417964935303, 'learning_rate': 5e-06, 'epoch': 0.5182724252491694}
-2025-05-09 19:09:16,497 - INFO - Training progress: {'loss': 0.5551, 'grad_norm': 0.4832417964935303, 'learning_rate': 5e-06, 'epoch': 0.5182724252491694}
-2025-05-09 19:09:16,497 - INFO - Training metrics: {'loss': 0.5551, 'grad_norm': 0.4832417964935303, 'learning_rate': 5e-06, 'epoch': 0.5182724252491694}
-2025-05-09 19:14:34,209 - INFO - INFO: Training progress: {'loss': 0.4874, 'grad_norm': 0.5869520306587219, 'learning_rate': 5e-06, 'epoch': 0.5581395348837209}
-2025-05-09 19:14:34,209 - INFO - Training progress: {'loss': 0.4874, 'grad_norm': 0.5869520306587219, 'learning_rate': 5e-06, 'epoch': 0.5581395348837209}
-2025-05-09 19:14:34,209 - INFO - Training metrics: {'loss': 0.4874, 'grad_norm': 0.5869520306587219, 'learning_rate': 5e-06, 'epoch': 0.5581395348837209}
-2025-05-09 19:19:52,151 - INFO - INFO: Training progress: {'loss': 0.5419, 'grad_norm': 0.37394338846206665, 'learning_rate': 5e-06, 'epoch': 0.5980066445182725}
-2025-05-09 19:19:52,151 - INFO - Training progress: {'loss': 0.5419, 'grad_norm': 0.37394338846206665, 'learning_rate': 5e-06, 'epoch': 0.5980066445182725}
-2025-05-09 19:19:52,151 - INFO - Training metrics: {'loss': 0.5419, 'grad_norm': 0.37394338846206665, 'learning_rate': 5e-06, 'epoch': 0.5980066445182725}
-2025-05-09 19:28:09,899 - INFO - INFO: Training progress: {'eval_loss': nan, 'eval_runtime': 497.7438, 'eval_samples_per_second': 1.555, 'eval_steps_per_second': 1.555, 'epoch': 0.5980066445182725}
-2025-05-09 19:28:09,900 - INFO - Training progress: {'eval_loss': nan, 'eval_runtime': 497.7438, 'eval_samples_per_second': 1.555, 'eval_steps_per_second': 1.555, 'epoch': 0.5980066445182725}
-2025-05-09 19:28:09,900 - INFO - Training metrics: {'eval_loss': nan, 'eval_runtime': 497.7438, 'eval_samples_per_second': 1.555, 'eval_steps_per_second': 1.555, 'epoch': 0.5980066445182725}
-2025-05-09 19:33:08,252 - INFO - INFO: Training progress: {'loss': 0.505, 'grad_norm': 0.4014507830142975, 'learning_rate': 5e-06, 'epoch': 0.6378737541528239}
-2025-05-09 19:33:08,252 - INFO - Training progress: {'loss': 0.505, 'grad_norm': 0.4014507830142975, 'learning_rate': 5e-06, 'epoch': 0.6378737541528239}
-2025-05-09 19:33:08,252 - INFO - Training metrics: {'loss': 0.505, 'grad_norm': 0.4014507830142975, 'learning_rate': 5e-06, 'epoch': 0.6378737541528239}
-2025-05-09 19:38:12,923 - INFO - INFO: Training progress: {'loss': 0.5012, 'grad_norm': 0.3441201150417328, 'learning_rate': 5e-06, 'epoch': 0.6777408637873754}
-2025-05-09 19:38:12,923 - INFO - Training progress: {'loss': 0.5012, 'grad_norm': 0.3441201150417328, 'learning_rate': 5e-06, 'epoch': 0.6777408637873754}
-2025-05-09 19:38:12,923 - INFO - Training metrics: {'loss': 0.5012, 'grad_norm': 0.3441201150417328, 'learning_rate': 5e-06, 'epoch': 0.6777408637873754}
-2025-05-09 19:43:17,839 - INFO - INFO: Training progress: {'loss': 0.4972, 'grad_norm': 0.36085090041160583, 'learning_rate': 5e-06, 'epoch': 0.717607973421927}
-2025-05-09 19:43:17,840 - INFO - Training progress: {'loss': 0.4972, 'grad_norm': 0.36085090041160583, 'learning_rate': 5e-06, 'epoch': 0.717607973421927}
-2025-05-09 19:43:17,840 - INFO - Training metrics: {'loss': 0.4972, 'grad_norm': 0.36085090041160583, 'learning_rate': 5e-06, 'epoch': 0.717607973421927}
-2025-05-09 19:48:23,282 - INFO - INFO: Training progress: {'loss': 0.4881, 'grad_norm': 0.43745896220207214, 'learning_rate': 5e-06, 'epoch': 0.7574750830564784}
-2025-05-09 19:48:23,283 - INFO - Training progress: {'loss': 0.4881, 'grad_norm': 0.43745896220207214, 'learning_rate': 5e-06, 'epoch': 0.7574750830564784}
-2025-05-09 19:48:23,283 - INFO - Training metrics: {'loss': 0.4881, 'grad_norm': 0.43745896220207214, 'learning_rate': 5e-06, 'epoch': 0.7574750830564784}
-2025-05-09 19:53:28,218 - INFO - INFO: Training progress: {'loss': 0.4747, 'grad_norm': 0.9449570775032043, 'learning_rate': 5e-06, 'epoch': 0.7973421926910299}
-2025-05-09 19:53:28,219 - INFO - Training progress: {'loss': 0.4747, 'grad_norm': 0.9449570775032043, 'learning_rate': 5e-06, 'epoch': 0.7973421926910299}
-2025-05-09 19:53:28,219 - INFO - Training metrics: {'loss': 0.4747, 'grad_norm': 0.9449570775032043, 'learning_rate': 5e-06, 'epoch': 0.7973421926910299}
-2025-05-09 20:01:33,581 - INFO - INFO: Training progress: {'eval_loss': nan, 'eval_runtime': 485.3598, 'eval_samples_per_second': 1.595, 'eval_steps_per_second': 1.595, 'epoch': 0.7973421926910299}
-2025-05-09 20:01:33,581 - INFO - Training progress: {'eval_loss': nan, 'eval_runtime': 485.3598, 'eval_samples_per_second': 1.595, 'eval_steps_per_second': 1.595, 'epoch': 0.7973421926910299}
-2025-05-09 20:01:33,581 - INFO - Training metrics: {'eval_loss': nan, 'eval_runtime': 485.3598, 'eval_samples_per_second': 1.595, 'eval_steps_per_second': 1.595, 'epoch': 0.7973421926910299}
-2025-05-09 20:06:47,424 - INFO - INFO: Training progress: {'loss': 0.4779, 'grad_norm': 0.39325347542762756, 'learning_rate': 5e-06, 'epoch': 0.8372093023255814}
-2025-05-09 20:06:47,425 - INFO - Training progress: {'loss': 0.4779, 'grad_norm': 0.39325347542762756, 'learning_rate': 5e-06, 'epoch': 0.8372093023255814}
-2025-05-09 20:06:47,425 - INFO - Training metrics: {'loss': 0.4779, 'grad_norm': 0.39325347542762756, 'learning_rate': 5e-06, 'epoch': 0.8372093023255814}
-2025-05-09 20:11:47,474 - INFO - INFO: Training progress: {'loss': 0.4758, 'grad_norm': 0.4877730906009674, 'learning_rate': 5e-06, 'epoch': 0.8770764119601329}
-2025-05-09 20:11:47,475 - INFO - Training progress: {'loss': 0.4758, 'grad_norm': 0.4877730906009674, 'learning_rate': 5e-06, 'epoch': 0.8770764119601329}
-2025-05-09 20:11:47,475 - INFO - Training metrics: {'loss': 0.4758, 'grad_norm': 0.4877730906009674, 'learning_rate': 5e-06, 'epoch': 0.8770764119601329}
-2025-05-09 20:16:42,189 - INFO - INFO: Training progress: {'loss': 0.4536, 'grad_norm': 0.4569079875946045, 'learning_rate': 5e-06, 'epoch': 0.9169435215946844}
-2025-05-09 20:16:42,189 - INFO - Training progress: {'loss': 0.4536, 'grad_norm': 0.4569079875946045, 'learning_rate': 5e-06, 'epoch': 0.9169435215946844}
-2025-05-09 20:16:42,189 - INFO - Training metrics: {'loss': 0.4536, 'grad_norm': 0.4569079875946045, 'learning_rate': 5e-06, 'epoch': 0.9169435215946844}
-2025-05-09 20:21:25,659 - INFO - INFO: Training progress: {'loss': 0.454, 'grad_norm': 0.5145145058631897, 'learning_rate': 5e-06, 'epoch': 0.9568106312292359}
-2025-05-09 20:21:25,659 - INFO - Training progress: {'loss': 0.454, 'grad_norm': 0.5145145058631897, 'learning_rate': 5e-06, 'epoch': 0.9568106312292359}
-2025-05-09 20:21:25,659 - INFO - Training metrics: {'loss': 0.454, 'grad_norm': 0.5145145058631897, 'learning_rate': 5e-06, 'epoch': 0.9568106312292359}
-2025-05-09 20:26:06,676 - INFO - INFO: Training progress: {'loss': 0.4501, 'grad_norm': 0.421972393989563, 'learning_rate': 5e-06, 'epoch': 0.9966777408637874}
-2025-05-09 20:26:06,677 - INFO - Training progress: {'loss': 0.4501, 'grad_norm': 0.421972393989563, 'learning_rate': 5e-06, 'epoch': 0.9966777408637874}
-2025-05-09 20:26:06,677 - INFO - Training metrics: {'loss': 0.4501, 'grad_norm': 0.421972393989563, 'learning_rate': 5e-06, 'epoch': 0.9966777408637874}
-2025-05-09 20:33:26,377 - INFO - INFO: Training progress: {'eval_loss': nan, 'eval_runtime': 439.6981, 'eval_samples_per_second': 1.76, 'eval_steps_per_second': 1.76, 'epoch': 0.9966777408637874}
-2025-05-09 20:33:26,377 - INFO - Training progress: {'eval_loss': nan, 'eval_runtime': 439.6981, 'eval_samples_per_second': 1.76, 'eval_steps_per_second': 1.76, 'epoch': 0.9966777408637874}
-2025-05-09 20:33:26,377 - INFO - Training metrics: {'eval_loss': nan, 'eval_runtime': 439.6981, 'eval_samples_per_second': 1.76, 'eval_steps_per_second': 1.76, 'epoch': 0.9966777408637874}
-2025-05-09 20:33:26,872 - INFO - INFO: Saving checkpoint at step 250
-2025-05-09 20:33:26,872 - INFO - Saving checkpoint at step 250
-2025-05-09 20:33:26,872 - INFO - Saving checkpoint at step 250
-2025-05-09 20:33:26,872 - INFO - INFO: Training progress: {'train_runtime': 9701.7697, 'train_samples_per_second': 0.31, 'train_steps_per_second': 0.026, 'total_flos': 4.199450075136e+17, 'train_loss': 0.5543106460571289, 'epoch': 0.9966777408637874}
-2025-05-09 20:33:26,872 - INFO - Training progress: {'train_runtime': 9701.7697, 'train_samples_per_second': 0.31, 'train_steps_per_second': 0.026, 'total_flos': 4.199450075136e+17, 'train_loss': 0.5543106460571289, 'epoch': 0.9966777408637874}
-2025-05-09 20:33:26,872 - INFO - Training metrics: {'train_runtime': 9701.7697, 'train_samples_per_second': 0.31, 'train_steps_per_second': 0.026, 'total_flos': 4.199450075136e+17, 'train_loss': 0.5543106460571289, 'epoch': 0.9966777408637874}
-2025-05-09 20:33:27,428 - INFO - INFO: Training complete, saving model to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\final_model
-2025-05-09 20:33:27,428 - INFO - Training complete, saving model to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\final_model
-2025-05-09 20:33:27,428 - INFO - Training complete, saving model to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\final_model
-2025-05-09 20:33:27,844 - INFO - INFO: CUDA cache cleared
-2025-05-09 20:33:27,982 - INFO - INFO: Garbage collector freed 1771 objects
-2025-05-09 20:33:27,983 - INFO - INFO: Training completed successfully! Model saved to: C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_coherence\final_model
-2025-05-09 20:33:27,983 - INFO - INFO: Training metrics: {'train_runtime': 9701.7697, 'train_samples_per_second': 0.31, 'train_steps_per_second': 0.026, 'total_flos': 4.199450075136e+17, 'train_loss': 0.5543106460571289, 'epoch': 0.9966777408637874}
-2025-05-09 20:33:27,983 - INFO - INFO: Final training metrics: {'train_runtime': 9701.7697, 'train_samples_per_second': 0.31, 'train_steps_per_second': 0.026, 'total_flos': 4.199450075136e+17, 'train_loss': 0.5543106460571289, 'epoch': 0.9966777408637874}
-2025-05-09 20:33:27,984 - INFO - Final training metrics: {'train_runtime': 9701.7697, 'train_samples_per_second': 0.31, 'train_steps_per_second': 0.026, 'total_flos': 4.199450075136e+17, 'train_loss': 0.5543106460571289, 'epoch': 0.9966777408637874}
-2025-05-09 20:33:27,984 - INFO - Final training metrics: {'train_runtime': 9701.7697, 'train_samples_per_second': 0.31, 'train_steps_per_second': 0.026, 'total_flos': 4.199450075136e+17, 'train_loss': 0.5543106460571289, 'epoch': 0.9966777408637874}
-2025-05-09 20:33:27,984 - INFO - INFO: Running final evaluation on test dataset...
-2025-05-09 20:33:27,984 - INFO - Running final evaluation on test dataset...
-2025-05-09 20:33:27,984 - INFO - Running final evaluation on test dataset...
-2025-05-09 20:38:21,811 - INFO - INFO: Training progress: {'eval_loss': nan, 'eval_runtime': 293.8235, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 0.9966777408637874}
-2025-05-09 20:38:21,811 - INFO - Training progress: {'eval_loss': nan, 'eval_runtime': 293.8235, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 0.9966777408637874}
-2025-05-09 20:38:21,811 - INFO - Training metrics: {'eval_loss': nan, 'eval_runtime': 293.8235, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 0.9966777408637874}
-2025-05-09 20:38:21,811 - INFO - INFO: CUDA cache cleared
-2025-05-09 20:38:21,938 - INFO - INFO: Garbage collector freed 9 objects
-2025-05-09 20:38:21,939 - INFO - INFO: Final test metrics: {'eval_loss': nan, 'eval_runtime': 293.8235, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 0.9966777408637874}
-2025-05-09 20:38:21,939 - INFO - INFO: Final test metrics: {'eval_loss': nan, 'eval_runtime': 293.8235, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 0.9966777408637874}
-2025-05-09 20:38:21,939 - INFO - Final test metrics: {'eval_loss': nan, 'eval_runtime': 293.8235, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 0.9966777408637874}
-2025-05-09 20:38:21,939 - INFO - Final test metrics: {'eval_loss': nan, 'eval_runtime': 293.8235, 'eval_samples_per_second': 1.756, 'eval_steps_per_second': 1.756, 'epoch': 0.9966777408637874}
-2025-05-09 20:38:21,939 - INFO - Training complete!
+2025-06-02 01:14:43,632 - INFO - INFO: File logger setup to write to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_1\logging.txt
+2025-06-02 01:14:43,632 - INFO - Starting unsupervised fine-tuning with parameters: {'mode': 'unsupervised', 'data_path': 'N:/Thesis/data_prepare/datasets_ready/unsupervised_coherence/combined_datasets', 'text_column': 'text', 'use_checkpoint': False, 'checkpoint_path': None, 'max_samples': None, 'pre_eval': True, 'freeze_partly': False, 'freeze_partly_layers': 0, 'unfreeze_specific': True, 'unfreeze_specific_layers': [8, 9, 10, 11, 12, 13, 14, 20, 21, 22, 23, 24, 25], 'eval_split': 0.05, 'model_path': 'C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3', 'output_dir': 'C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_1', 'logging_dir': None, 'use_flash_attention': True, 'max_length': 2900, 'chunk_size': None, 'quantization_config': {'load_in_8bit': True}, 'peft_config': {'task_type': <TaskType.CAUSAL_LM: 'CAUSAL_LM'>, 'inference_mode': False, 'r': 8, 'lora_alpha': 16, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj', 'w1', 'w2', 'w3']}, 'training_config': {'per_device_train_batch_size': 1, 'gradient_accumulation_steps': 8, 'num_train_epochs': 1, 'learning_rate': 5e-06, 'warmup_steps': 100, 'warmup_ratio': 0.15, 'logging_steps': 10, 'save_steps': 100, 'save_total_limit': 5, 'eval_strategy': 'steps', 'eval_steps': 50, 'per_device_eval_batch_size': 1, 'eval_accumulation_steps': 4, 'fp16': True, 'bf16': False, 'lr_scheduler_type': 'constant_with_warmup', 'weight_decay': 0.005, 'gradient_checkpointing': True, 'report_to': 'none', 'disable_tqdm': False, 'max_grad_norm': 0.3, 'dataloader_num_workers': 2, 'optim': 'adamw_torch'}}
+2025-06-02 01:14:43,632 - INFO - INFO: Loading datasets from individual JSONL files
+2025-06-02 01:14:43,632 - INFO - Loading datasets from individual JSONL files
+2025-06-02 01:14:43,660 - INFO - INFO: Loaded 1642 examples from N:/Thesis/data_prepare/datasets_ready/unsupervised_coherence/combined_datasets\training_set.jsonl
+2025-06-02 01:14:43,675 - INFO - INFO: Loaded 422 examples from N:/Thesis/data_prepare/datasets_ready/unsupervised_coherence/combined_datasets\validation_set.jsonl
+2025-06-02 01:14:43,675 - INFO - INFO: Loaded separate validation set with 422 examples
+2025-06-02 01:14:43,675 - INFO - Loaded separate validation set with 422 examples
+2025-06-02 01:14:43,682 - INFO - INFO: Loaded 282 examples from N:/Thesis/data_prepare/datasets_ready/unsupervised_coherence/combined_datasets\test_set.jsonl
+2025-06-02 01:14:43,685 - INFO - INFO: Loaded separate test set with 282 examples
+2025-06-02 01:14:43,685 - INFO - Loaded separate test set with 282 examples
+2025-06-02 01:14:44,169 - INFO - INFO: Tokenizer vocabulary size: 128256
+2025-06-02 01:14:44,169 - INFO - INFO: Model max length: 1000000000000000019884624838656
+2025-06-02 01:14:45,792 - INFO - INFO: Dataset prepared with 1642 examples
+2025-06-02 01:14:46,282 - INFO - INFO: Dataset prepared with 422 examples
+2025-06-02 01:14:46,674 - INFO - INFO: Dataset prepared with 282 examples
+2025-06-02 01:14:46,674 - INFO - INFO: CUDA cache cleared
+2025-06-02 01:14:46,795 - INFO - INFO: Garbage collector freed 55 objects
+2025-06-02 01:14:55,094 - INFO - INFO: Total transformer layers in model: 32
+2025-06-02 01:14:55,094 - INFO - INFO: Keeping only specified layers trainable: [8, 9, 10, 11, 12, 13, 14, 20, 21, 22, 23, 24, 25]
+2025-06-02 01:14:55,094 - INFO - INFO: Freezing layer 0/32
+2025-06-02 01:14:55,094 - INFO - INFO: Freezing layer 1/32
+2025-06-02 01:14:55,094 - INFO - INFO: Freezing layer 2/32
+2025-06-02 01:14:55,094 - INFO - INFO: Freezing layer 3/32
+2025-06-02 01:14:55,094 - INFO - INFO: Freezing layer 4/32
+2025-06-02 01:14:55,097 - INFO - INFO: Freezing layer 5/32
+2025-06-02 01:14:55,097 - INFO - INFO: Freezing layer 6/32
+2025-06-02 01:14:55,097 - INFO - INFO: Freezing layer 7/32
+2025-06-02 01:14:55,098 - INFO - INFO: Keeping layer 8/32 trainable
+2025-06-02 01:14:55,098 - INFO - INFO: Keeping layer 9/32 trainable
+2025-06-02 01:14:55,098 - INFO - INFO: Keeping layer 10/32 trainable
+2025-06-02 01:14:55,098 - INFO - INFO: Keeping layer 11/32 trainable
+2025-06-02 01:14:55,099 - INFO - INFO: Keeping layer 12/32 trainable
+2025-06-02 01:14:55,099 - INFO - INFO: Keeping layer 13/32 trainable
+2025-06-02 01:14:55,099 - INFO - INFO: Keeping layer 14/32 trainable
+2025-06-02 01:14:55,099 - INFO - INFO: Freezing layer 15/32
+2025-06-02 01:14:55,100 - INFO - INFO: Freezing layer 16/32
+2025-06-02 01:14:55,101 - INFO - INFO: Freezing layer 17/32
+2025-06-02 01:14:55,101 - INFO - INFO: Freezing layer 18/32
+2025-06-02 01:14:55,101 - INFO - INFO: Freezing layer 19/32
+2025-06-02 01:14:55,101 - INFO - INFO: Keeping layer 20/32 trainable
+2025-06-02 01:14:55,102 - INFO - INFO: Keeping layer 21/32 trainable
+2025-06-02 01:14:55,102 - INFO - INFO: Keeping layer 22/32 trainable
+2025-06-02 01:14:55,102 - INFO - INFO: Keeping layer 23/32 trainable
+2025-06-02 01:14:55,102 - INFO - INFO: Keeping layer 24/32 trainable
+2025-06-02 01:14:55,102 - INFO - INFO: Keeping layer 25/32 trainable
+2025-06-02 01:14:55,102 - INFO - INFO: Freezing layer 26/32
+2025-06-02 01:14:55,102 - INFO - INFO: Freezing layer 27/32
+2025-06-02 01:14:55,103 - INFO - INFO: Freezing layer 28/32
+2025-06-02 01:14:55,103 - INFO - INFO: Freezing layer 29/32
+2025-06-02 01:14:55,103 - INFO - INFO: Freezing layer 30/32
+2025-06-02 01:14:55,104 - INFO - INFO: Freezing layer 31/32
+2025-06-02 01:14:55,104 - INFO - INFO: Ensuring LM head is trainable
+2025-06-02 01:14:55,106 - INFO - INFO: Selective layer training: 7504924672/8030261248 parameters frozen (93.46%)
+2025-06-02 01:14:55,106 - INFO - INFO: Trainable: 525336576/8030261248 parameters (6.54%)
+2025-06-02 01:14:55,107 - INFO - INFO: Trainable layers: [8, 9, 10, 11, 12, 13, 14, 20, 21, 22, 23, 24, 25] out of 32 layers plus LM head
+2025-06-02 01:14:55,107 - INFO - INFO: Model loaded from C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3
+2025-06-02 01:14:55,108 - INFO - INFO: Model has 8030261248 parameters, 525336576 are trainable (6.54%)
+2025-06-02 01:14:55,563 - INFO - INFO: Model has 20971520 trainable parameters after PEFT configuration
+2025-06-02 01:14:55,563 - INFO - INFO: Using fp16 (float16) mixed precision training
+2025-06-02 01:14:55,618 - INFO - Starting model training with 1642 training examples
+2025-06-02 01:14:55,618 - INFO - Using 422 examples for validation during training
+2025-06-02 01:14:55,618 - INFO - Using 282 examples for pre/final evaluation
+2025-06-02 01:14:55,641 - INFO - INFO: Testing evaluation with current settings...
+2025-06-02 01:14:55,641 - INFO - INFO: Test dataset size: 282
+2025-06-02 01:14:55,656 - INFO - INFO: CUDA cache cleared
+2025-06-02 01:14:55,799 - INFO - INFO: Garbage collector freed 50 objects
+2025-06-02 01:17:30,665 - INFO - INFO: Training progress: {'eval_loss': 0.7485164403915405, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.8658, 'eval_samples_per_second': 1.821, 'eval_steps_per_second': 1.821}
+2025-06-02 01:17:30,665 - INFO - Training progress: {'eval_loss': 0.7485164403915405, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.8658, 'eval_samples_per_second': 1.821, 'eval_steps_per_second': 1.821}
+2025-06-02 01:17:30,665 - INFO - Training metrics: {'eval_loss': 0.7485164403915405, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.8658, 'eval_samples_per_second': 1.821, 'eval_steps_per_second': 1.821}
+2025-06-02 01:17:30,698 - INFO - INFO: CUDA cache cleared
+2025-06-02 01:17:30,828 - INFO - INFO: Garbage collector freed 19 objects
+2025-06-02 01:17:30,828 - INFO - INFO: 
+Evaluation successful!
+2025-06-02 01:17:30,828 - INFO - INFO: Metrics: {'eval_loss': 0.7485164403915405, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.8658, 'eval_samples_per_second': 1.821, 'eval_steps_per_second': 1.821}
+2025-06-02 01:17:30,828 - INFO - INFO: Pre-training evaluation successful. Metrics: {'eval_loss': 0.7485164403915405, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.8658, 'eval_samples_per_second': 1.821, 'eval_steps_per_second': 1.821}
+2025-06-02 01:17:30,828 - INFO - Pre-training evaluation successful. Metrics: {'eval_loss': 0.7485164403915405, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.8658, 'eval_samples_per_second': 1.821, 'eval_steps_per_second': 1.821}
+2025-06-02 01:17:30,828 - INFO - Pre-training evaluation metrics: {'eval_loss': 0.7485164403915405, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.8658, 'eval_samples_per_second': 1.821, 'eval_steps_per_second': 1.821}
+2025-06-02 01:17:30,828 - INFO - INFO: 
+GPU Memory Summary:
+2025-06-02 01:17:30,828 - INFO - INFO: Allocated: 10.53 GB
+2025-06-02 01:17:30,828 - INFO - INFO: Cached: 10.60 GB
+2025-06-02 01:17:30,828 - INFO - INFO: GPU Memory: Allocated 10.53 GB, Cached 10.60 GB
+2025-06-02 01:17:30,828 - INFO - GPU Memory: Allocated 10.53 GB, Cached 10.60 GB
+2025-06-02 01:17:30,828 - INFO - GPU Memory: Allocated 10.53 GB, Cached 10.60 GB
+2025-06-02 01:17:30,828 - INFO - INFO: Starting training...
+2025-06-02 01:17:30,828 - INFO - Starting training...
+2025-06-02 01:17:30,828 - INFO - Starting training...
+2025-06-02 01:17:30,828 - INFO - INFO: Registering numpy component classes as safe globals
+2025-06-02 01:17:30,828 - INFO - INFO: Registering module names in the PyTorch safe registry
+2025-06-02 01:17:30,828 - INFO - WARNING: torch.serialization.safe_registry not available, using alternative registration
+2025-06-02 01:17:30,828 - INFO - INFO: Registering specific numpy components
+2025-06-02 01:17:30,828 - INFO - INFO: Registering numpy array creation patterns
+2025-06-02 01:17:30,828 - INFO - INFO: Set up safe dtype handler for array reconstruction
+2025-06-02 01:17:30,828 - INFO - INFO: Numpy components registered as safe globals
+2025-06-02 01:17:30,998 - INFO - INFO: Starting epoch 0/1
+2025-06-02 01:17:30,998 - INFO - Starting epoch 0/1
+2025-06-02 01:17:30,998 - INFO - Starting epoch 0/1
+2025-06-02 01:20:32,072 - INFO - INFO: Training progress: {'loss': 0.6758, 'grad_norm': 0.5326417088508606, 'learning_rate': 5.000000000000001e-07, 'epoch': 0.048721071863580996}
+2025-06-02 01:20:32,072 - INFO - Training progress: {'loss': 0.6758, 'grad_norm': 0.5326417088508606, 'learning_rate': 5.000000000000001e-07, 'epoch': 0.048721071863580996}
+2025-06-02 01:20:32,072 - INFO - Training metrics: {'loss': 0.6758, 'grad_norm': 0.5326417088508606, 'learning_rate': 5.000000000000001e-07, 'epoch': 0.048721071863580996}
+2025-06-02 01:23:28,389 - INFO - INFO: Training progress: {'loss': 0.6583, 'grad_norm': 0.931710958480835, 'learning_rate': 1.0000000000000002e-06, 'epoch': 0.09744214372716199}
+2025-06-02 01:23:28,389 - INFO - Training progress: {'loss': 0.6583, 'grad_norm': 0.931710958480835, 'learning_rate': 1.0000000000000002e-06, 'epoch': 0.09744214372716199}
+2025-06-02 01:23:28,389 - INFO - Training metrics: {'loss': 0.6583, 'grad_norm': 0.931710958480835, 'learning_rate': 1.0000000000000002e-06, 'epoch': 0.09744214372716199}
+2025-06-02 01:26:27,577 - INFO - INFO: Training progress: {'loss': 0.7325, 'grad_norm': 1.0639370679855347, 'learning_rate': 1.5e-06, 'epoch': 0.146163215590743}
+2025-06-02 01:26:27,578 - INFO - Training progress: {'loss': 0.7325, 'grad_norm': 1.0639370679855347, 'learning_rate': 1.5e-06, 'epoch': 0.146163215590743}
+2025-06-02 01:26:27,578 - INFO - Training metrics: {'loss': 0.7325, 'grad_norm': 1.0639370679855347, 'learning_rate': 1.5e-06, 'epoch': 0.146163215590743}
+2025-06-02 01:29:24,111 - INFO - INFO: Training progress: {'loss': 0.652, 'grad_norm': 1.332992672920227, 'learning_rate': 2.0000000000000003e-06, 'epoch': 0.19488428745432398}
+2025-06-02 01:29:24,111 - INFO - Training progress: {'loss': 0.652, 'grad_norm': 1.332992672920227, 'learning_rate': 2.0000000000000003e-06, 'epoch': 0.19488428745432398}
+2025-06-02 01:29:24,111 - INFO - Training metrics: {'loss': 0.652, 'grad_norm': 1.332992672920227, 'learning_rate': 2.0000000000000003e-06, 'epoch': 0.19488428745432398}
+2025-06-02 01:32:19,614 - INFO - INFO: Training progress: {'loss': 0.7038, 'grad_norm': 0.8304914236068726, 'learning_rate': 2.5e-06, 'epoch': 0.243605359317905}
+2025-06-02 01:32:19,614 - INFO - Training progress: {'loss': 0.7038, 'grad_norm': 0.8304914236068726, 'learning_rate': 2.5e-06, 'epoch': 0.243605359317905}
+2025-06-02 01:32:19,614 - INFO - Training metrics: {'loss': 0.7038, 'grad_norm': 0.8304914236068726, 'learning_rate': 2.5e-06, 'epoch': 0.243605359317905}
+2025-06-02 01:36:10,781 - INFO - INFO: Training progress: {'eval_loss': 0.7262356281280518, 'eval_model_preparation_time': 0.0, 'eval_runtime': 231.166, 'eval_samples_per_second': 1.826, 'eval_steps_per_second': 1.826, 'epoch': 0.243605359317905}
+2025-06-02 01:36:10,781 - INFO - Training progress: {'eval_loss': 0.7262356281280518, 'eval_model_preparation_time': 0.0, 'eval_runtime': 231.166, 'eval_samples_per_second': 1.826, 'eval_steps_per_second': 1.826, 'epoch': 0.243605359317905}
+2025-06-02 01:36:10,781 - INFO - Training metrics: {'eval_loss': 0.7262356281280518, 'eval_model_preparation_time': 0.0, 'eval_runtime': 231.166, 'eval_samples_per_second': 1.826, 'eval_steps_per_second': 1.826, 'epoch': 0.243605359317905}
+2025-06-02 01:39:11,577 - INFO - INFO: Training progress: {'loss': 0.6954, 'grad_norm': 0.668192446231842, 'learning_rate': 3e-06, 'epoch': 0.292326431181486}
+2025-06-02 01:39:11,577 - INFO - Training progress: {'loss': 0.6954, 'grad_norm': 0.668192446231842, 'learning_rate': 3e-06, 'epoch': 0.292326431181486}
+2025-06-02 01:39:11,577 - INFO - Training metrics: {'loss': 0.6954, 'grad_norm': 0.668192446231842, 'learning_rate': 3e-06, 'epoch': 0.292326431181486}
+2025-06-02 01:42:08,837 - INFO - INFO: Training progress: {'loss': 0.7957, 'grad_norm': 1.4574304819107056, 'learning_rate': 3.5e-06, 'epoch': 0.341047503045067}
+2025-06-02 01:42:08,837 - INFO - Training progress: {'loss': 0.7957, 'grad_norm': 1.4574304819107056, 'learning_rate': 3.5e-06, 'epoch': 0.341047503045067}
+2025-06-02 01:42:08,837 - INFO - Training metrics: {'loss': 0.7957, 'grad_norm': 1.4574304819107056, 'learning_rate': 3.5e-06, 'epoch': 0.341047503045067}
+2025-06-02 01:45:09,775 - INFO - INFO: Training progress: {'loss': 0.6194, 'grad_norm': 0.5295535922050476, 'learning_rate': 4.000000000000001e-06, 'epoch': 0.38976857490864797}
+2025-06-02 01:45:09,775 - INFO - Training progress: {'loss': 0.6194, 'grad_norm': 0.5295535922050476, 'learning_rate': 4.000000000000001e-06, 'epoch': 0.38976857490864797}
+2025-06-02 01:45:09,775 - INFO - Training metrics: {'loss': 0.6194, 'grad_norm': 0.5295535922050476, 'learning_rate': 4.000000000000001e-06, 'epoch': 0.38976857490864797}
+2025-06-02 01:48:12,089 - INFO - INFO: Training progress: {'loss': 0.7002, 'grad_norm': 0.6040249466896057, 'learning_rate': 4.5e-06, 'epoch': 0.438489646772229}
+2025-06-02 01:48:12,089 - INFO - Training progress: {'loss': 0.7002, 'grad_norm': 0.6040249466896057, 'learning_rate': 4.5e-06, 'epoch': 0.438489646772229}
+2025-06-02 01:48:12,089 - INFO - Training metrics: {'loss': 0.7002, 'grad_norm': 0.6040249466896057, 'learning_rate': 4.5e-06, 'epoch': 0.438489646772229}
+2025-06-02 01:51:10,043 - INFO - INFO: Training progress: {'loss': 0.6935, 'grad_norm': 0.5651093125343323, 'learning_rate': 5e-06, 'epoch': 0.48721071863581}
+2025-06-02 01:51:10,043 - INFO - Training progress: {'loss': 0.6935, 'grad_norm': 0.5651093125343323, 'learning_rate': 5e-06, 'epoch': 0.48721071863581}
+2025-06-02 01:51:10,043 - INFO - Training metrics: {'loss': 0.6935, 'grad_norm': 0.5651093125343323, 'learning_rate': 5e-06, 'epoch': 0.48721071863581}
+2025-06-02 01:55:03,762 - INFO - INFO: Training progress: {'eval_loss': 0.7031646370887756, 'eval_model_preparation_time': 0.0, 'eval_runtime': 233.7194, 'eval_samples_per_second': 1.806, 'eval_steps_per_second': 1.806, 'epoch': 0.48721071863581}
+2025-06-02 01:55:03,762 - INFO - Training progress: {'eval_loss': 0.7031646370887756, 'eval_model_preparation_time': 0.0, 'eval_runtime': 233.7194, 'eval_samples_per_second': 1.806, 'eval_steps_per_second': 1.806, 'epoch': 0.48721071863581}
+2025-06-02 01:55:03,762 - INFO - Training metrics: {'eval_loss': 0.7031646370887756, 'eval_model_preparation_time': 0.0, 'eval_runtime': 233.7194, 'eval_samples_per_second': 1.806, 'eval_steps_per_second': 1.806, 'epoch': 0.48721071863581}
+2025-06-02 01:55:04,277 - INFO - INFO: Saving checkpoint at step 100
+2025-06-02 01:55:04,277 - INFO - Saving checkpoint at step 100
+2025-06-02 01:55:04,277 - INFO - Saving checkpoint at step 100
+2025-06-02 01:57:59,736 - INFO - INFO: Training progress: {'loss': 0.6712, 'grad_norm': 0.7529845237731934, 'learning_rate': 5e-06, 'epoch': 0.535931790499391}
+2025-06-02 01:57:59,737 - INFO - Training progress: {'loss': 0.6712, 'grad_norm': 0.7529845237731934, 'learning_rate': 5e-06, 'epoch': 0.535931790499391}
+2025-06-02 01:57:59,737 - INFO - Training metrics: {'loss': 0.6712, 'grad_norm': 0.7529845237731934, 'learning_rate': 5e-06, 'epoch': 0.535931790499391}
+2025-06-02 02:00:58,105 - INFO - INFO: Training progress: {'loss': 0.7209, 'grad_norm': 0.9310052990913391, 'learning_rate': 5e-06, 'epoch': 0.584652862362972}
+2025-06-02 02:00:58,105 - INFO - Training progress: {'loss': 0.7209, 'grad_norm': 0.9310052990913391, 'learning_rate': 5e-06, 'epoch': 0.584652862362972}
+2025-06-02 02:00:58,105 - INFO - Training metrics: {'loss': 0.7209, 'grad_norm': 0.9310052990913391, 'learning_rate': 5e-06, 'epoch': 0.584652862362972}
+2025-06-02 02:03:56,359 - INFO - INFO: Training progress: {'loss': 0.7467, 'grad_norm': 0.5589004755020142, 'learning_rate': 5e-06, 'epoch': 0.633373934226553}
+2025-06-02 02:03:56,359 - INFO - Training progress: {'loss': 0.7467, 'grad_norm': 0.5589004755020142, 'learning_rate': 5e-06, 'epoch': 0.633373934226553}
+2025-06-02 02:03:56,359 - INFO - Training metrics: {'loss': 0.7467, 'grad_norm': 0.5589004755020142, 'learning_rate': 5e-06, 'epoch': 0.633373934226553}
+2025-06-02 02:06:54,968 - INFO - INFO: Training progress: {'loss': 0.6172, 'grad_norm': 0.6525139808654785, 'learning_rate': 5e-06, 'epoch': 0.682095006090134}
+2025-06-02 02:06:54,968 - INFO - Training progress: {'loss': 0.6172, 'grad_norm': 0.6525139808654785, 'learning_rate': 5e-06, 'epoch': 0.682095006090134}
+2025-06-02 02:06:54,968 - INFO - Training metrics: {'loss': 0.6172, 'grad_norm': 0.6525139808654785, 'learning_rate': 5e-06, 'epoch': 0.682095006090134}
+2025-06-02 02:09:54,550 - INFO - INFO: Training progress: {'loss': 0.6774, 'grad_norm': 0.7514328956604004, 'learning_rate': 5e-06, 'epoch': 0.730816077953715}
+2025-06-02 02:09:54,550 - INFO - Training progress: {'loss': 0.6774, 'grad_norm': 0.7514328956604004, 'learning_rate': 5e-06, 'epoch': 0.730816077953715}
+2025-06-02 02:09:54,550 - INFO - Training metrics: {'loss': 0.6774, 'grad_norm': 0.7514328956604004, 'learning_rate': 5e-06, 'epoch': 0.730816077953715}
+2025-06-02 02:13:45,078 - INFO - INFO: Training progress: {'eval_loss': 0.6862279772758484, 'eval_model_preparation_time': 0.0, 'eval_runtime': 230.5272, 'eval_samples_per_second': 1.831, 'eval_steps_per_second': 1.831, 'epoch': 0.730816077953715}
+2025-06-02 02:13:45,078 - INFO - Training progress: {'eval_loss': 0.6862279772758484, 'eval_model_preparation_time': 0.0, 'eval_runtime': 230.5272, 'eval_samples_per_second': 1.831, 'eval_steps_per_second': 1.831, 'epoch': 0.730816077953715}
+2025-06-02 02:13:45,093 - INFO - Training metrics: {'eval_loss': 0.6862279772758484, 'eval_model_preparation_time': 0.0, 'eval_runtime': 230.5272, 'eval_samples_per_second': 1.831, 'eval_steps_per_second': 1.831, 'epoch': 0.730816077953715}
+2025-06-02 02:16:41,392 - INFO - INFO: Training progress: {'loss': 0.6699, 'grad_norm': 0.7523427605628967, 'learning_rate': 5e-06, 'epoch': 0.7795371498172959}
+2025-06-02 02:16:41,392 - INFO - Training progress: {'loss': 0.6699, 'grad_norm': 0.7523427605628967, 'learning_rate': 5e-06, 'epoch': 0.7795371498172959}
+2025-06-02 02:16:41,392 - INFO - Training metrics: {'loss': 0.6699, 'grad_norm': 0.7523427605628967, 'learning_rate': 5e-06, 'epoch': 0.7795371498172959}
+2025-06-02 02:19:35,012 - INFO - INFO: Training progress: {'loss': 0.5877, 'grad_norm': 0.4358753561973572, 'learning_rate': 5e-06, 'epoch': 0.8282582216808769}
+2025-06-02 02:19:35,012 - INFO - Training progress: {'loss': 0.5877, 'grad_norm': 0.4358753561973572, 'learning_rate': 5e-06, 'epoch': 0.8282582216808769}
+2025-06-02 02:19:35,012 - INFO - Training metrics: {'loss': 0.5877, 'grad_norm': 0.4358753561973572, 'learning_rate': 5e-06, 'epoch': 0.8282582216808769}
+2025-06-02 02:22:28,524 - INFO - INFO: Training progress: {'loss': 0.678, 'grad_norm': 0.5390971899032593, 'learning_rate': 5e-06, 'epoch': 0.876979293544458}
+2025-06-02 02:22:28,524 - INFO - Training progress: {'loss': 0.678, 'grad_norm': 0.5390971899032593, 'learning_rate': 5e-06, 'epoch': 0.876979293544458}
+2025-06-02 02:22:28,524 - INFO - Training metrics: {'loss': 0.678, 'grad_norm': 0.5390971899032593, 'learning_rate': 5e-06, 'epoch': 0.876979293544458}
+2025-06-02 02:25:25,478 - INFO - INFO: Training progress: {'loss': 0.6502, 'grad_norm': 0.45471012592315674, 'learning_rate': 5e-06, 'epoch': 0.925700365408039}
+2025-06-02 02:25:25,478 - INFO - Training progress: {'loss': 0.6502, 'grad_norm': 0.45471012592315674, 'learning_rate': 5e-06, 'epoch': 0.925700365408039}
+2025-06-02 02:25:25,478 - INFO - Training metrics: {'loss': 0.6502, 'grad_norm': 0.45471012592315674, 'learning_rate': 5e-06, 'epoch': 0.925700365408039}
+2025-06-02 02:28:21,298 - INFO - INFO: Training progress: {'loss': 0.6674, 'grad_norm': 0.9237067103385925, 'learning_rate': 5e-06, 'epoch': 0.97442143727162}
+2025-06-02 02:28:21,298 - INFO - Training progress: {'loss': 0.6674, 'grad_norm': 0.9237067103385925, 'learning_rate': 5e-06, 'epoch': 0.97442143727162}
+2025-06-02 02:28:21,298 - INFO - Training metrics: {'loss': 0.6674, 'grad_norm': 0.9237067103385925, 'learning_rate': 5e-06, 'epoch': 0.97442143727162}
+2025-06-02 02:32:18,407 - INFO - INFO: Training progress: {'eval_loss': 0.6761478185653687, 'eval_model_preparation_time': 0.0, 'eval_runtime': 237.1095, 'eval_samples_per_second': 1.78, 'eval_steps_per_second': 1.78, 'epoch': 0.97442143727162}
+2025-06-02 02:32:18,407 - INFO - Training progress: {'eval_loss': 0.6761478185653687, 'eval_model_preparation_time': 0.0, 'eval_runtime': 237.1095, 'eval_samples_per_second': 1.78, 'eval_steps_per_second': 1.78, 'epoch': 0.97442143727162}
+2025-06-02 02:32:18,407 - INFO - Training metrics: {'eval_loss': 0.6761478185653687, 'eval_model_preparation_time': 0.0, 'eval_runtime': 237.1095, 'eval_samples_per_second': 1.78, 'eval_steps_per_second': 1.78, 'epoch': 0.97442143727162}
+2025-06-02 02:32:18,896 - INFO - INFO: Saving checkpoint at step 200
+2025-06-02 02:32:18,896 - INFO - Saving checkpoint at step 200
+2025-06-02 02:32:18,896 - INFO - Saving checkpoint at step 200
+2025-06-02 02:33:45,475 - INFO - INFO: Saving checkpoint at step 205
+2025-06-02 02:33:45,475 - INFO - Saving checkpoint at step 205
+2025-06-02 02:33:45,475 - INFO - Saving checkpoint at step 205
+2025-06-02 02:33:45,482 - INFO - INFO: Training progress: {'train_runtime': 4574.4774, 'train_samples_per_second': 0.359, 'train_steps_per_second': 0.045, 'total_flos': 2.14758973734912e+17, 'train_loss': 0.6809714154499333, 'epoch': 0.9987819732034104}
+2025-06-02 02:33:45,482 - INFO - Training progress: {'train_runtime': 4574.4774, 'train_samples_per_second': 0.359, 'train_steps_per_second': 0.045, 'total_flos': 2.14758973734912e+17, 'train_loss': 0.6809714154499333, 'epoch': 0.9987819732034104}
+2025-06-02 02:33:45,482 - INFO - Training metrics: {'train_runtime': 4574.4774, 'train_samples_per_second': 0.359, 'train_steps_per_second': 0.045, 'total_flos': 2.14758973734912e+17, 'train_loss': 0.6809714154499333, 'epoch': 0.9987819732034104}
+2025-06-02 02:33:46,022 - INFO - INFO: Training complete, saving model to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_1\final_model
+2025-06-02 02:33:46,022 - INFO - Training complete, saving model to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_1\final_model
+2025-06-02 02:33:46,022 - INFO - Training complete, saving model to C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_1\final_model
+2025-06-02 02:33:46,467 - INFO - INFO: CUDA cache cleared
+2025-06-02 02:33:46,605 - INFO - INFO: Garbage collector freed 1787 objects
+2025-06-02 02:33:46,605 - INFO - INFO: Training completed successfully! Model saved to: C:/Users/Paul/.cache/training_output/checkpoints_llama3_german_V3_1\final_model
+2025-06-02 02:33:46,605 - INFO - INFO: Training metrics: {'train_runtime': 4574.4774, 'train_samples_per_second': 0.359, 'train_steps_per_second': 0.045, 'total_flos': 2.14758973734912e+17, 'train_loss': 0.6809714154499333, 'epoch': 0.9987819732034104}
+2025-06-02 02:33:46,605 - INFO - INFO: Final training metrics: {'train_runtime': 4574.4774, 'train_samples_per_second': 0.359, 'train_steps_per_second': 0.045, 'total_flos': 2.14758973734912e+17, 'train_loss': 0.6809714154499333, 'epoch': 0.9987819732034104}
+2025-06-02 02:33:46,605 - INFO - Final training metrics: {'train_runtime': 4574.4774, 'train_samples_per_second': 0.359, 'train_steps_per_second': 0.045, 'total_flos': 2.14758973734912e+17, 'train_loss': 0.6809714154499333, 'epoch': 0.9987819732034104}
+2025-06-02 02:33:46,605 - INFO - Final training metrics: {'train_runtime': 4574.4774, 'train_samples_per_second': 0.359, 'train_steps_per_second': 0.045, 'total_flos': 2.14758973734912e+17, 'train_loss': 0.6809714154499333, 'epoch': 0.9987819732034104}
+2025-06-02 02:33:46,605 - INFO - INFO: Running final evaluation on test dataset...
+2025-06-02 02:33:46,605 - INFO - Running final evaluation on test dataset...
+2025-06-02 02:33:46,605 - INFO - Running final evaluation on test dataset...
+2025-06-02 02:36:20,774 - INFO - INFO: Training progress: {'eval_loss': 0.6936748027801514, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.1685, 'eval_samples_per_second': 1.829, 'eval_steps_per_second': 1.829, 'epoch': 0.9987819732034104}
+2025-06-02 02:36:20,775 - INFO - Training progress: {'eval_loss': 0.6936748027801514, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.1685, 'eval_samples_per_second': 1.829, 'eval_steps_per_second': 1.829, 'epoch': 0.9987819732034104}
+2025-06-02 02:36:20,775 - INFO - Training metrics: {'eval_loss': 0.6936748027801514, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.1685, 'eval_samples_per_second': 1.829, 'eval_steps_per_second': 1.829, 'epoch': 0.9987819732034104}
+2025-06-02 02:36:20,800 - INFO - INFO: CUDA cache cleared
+2025-06-02 02:36:20,925 - INFO - INFO: Garbage collector freed 9 objects
+2025-06-02 02:36:20,925 - INFO - INFO: Final test metrics: {'eval_loss': 0.6936748027801514, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.1685, 'eval_samples_per_second': 1.829, 'eval_steps_per_second': 1.829, 'epoch': 0.9987819732034104}
+2025-06-02 02:36:20,925 - INFO - INFO: Final test metrics: {'eval_loss': 0.6936748027801514, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.1685, 'eval_samples_per_second': 1.829, 'eval_steps_per_second': 1.829, 'epoch': 0.9987819732034104}
+2025-06-02 02:36:20,925 - INFO - Final test metrics: {'eval_loss': 0.6936748027801514, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.1685, 'eval_samples_per_second': 1.829, 'eval_steps_per_second': 1.829, 'epoch': 0.9987819732034104}
+2025-06-02 02:36:20,925 - INFO - Final test metrics: {'eval_loss': 0.6936748027801514, 'eval_model_preparation_time': 0.0, 'eval_runtime': 154.1685, 'eval_samples_per_second': 1.829, 'eval_steps_per_second': 1.829, 'epoch': 0.9987819732034104}
+2025-06-02 02:36:20,925 - INFO - Training complete!

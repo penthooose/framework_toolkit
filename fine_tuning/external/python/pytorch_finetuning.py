@@ -527,8 +527,8 @@ def load_model(
         device_map: Device mapping strategy
         freeze_partly: Whether to freeze a portion of the model layers
         freeze_partly_layers: Number of layers to freeze from the beginning
-        unfreeze_specific: Whether to unfreeze specific layers
-        unfreeze_specific_layers: List of layer indices to unfreeze
+        unfreeze_specific: Whether to keep only specific layers trainable
+        unfreeze_specific_layers: List of layer indices to keep trainable (all others will be frozen)
 
     Returns:
         Loaded model
@@ -619,39 +619,46 @@ def load_model(
         logger.info(
             f"Trainable: last {total_layers - freeze_partly_layers}/{total_layers} transformer layers and LM head"
         )
-    # Implement specific layer unfreezing if requested
+    # Implement specific layer selection if requested
     elif unfreeze_specific and unfreeze_specific_layers:
-        # First freeze all layers
-        total_layers = len(model.model.layers)
-        logger.info(f"Freezing all {total_layers} layers first")
-        for layer in model.model.layers:
-            for param in layer.parameters():
-                param.requires_grad = False
+        # With this approach, only the specified layers will be kept trainable,
+        # and all other layers will be frozen. This avoids ever setting
+        # requires_grad=True on quantized tensors.
 
-        # Unfreeze only specified layers
+        total_layers = len(model.model.layers)
+        logger.info(f"Total transformer layers in model: {total_layers}")
+
+        # Convert all layer indices to integers and validate them
+        specified_layers = []
         for i in unfreeze_specific_layers:
-            # Convert to integer here - directly before using it
             try:
                 layer_idx = int(i) if isinstance(i, str) else i
+                if 0 <= layer_idx < total_layers:
+                    specified_layers.append(layer_idx)
+                else:
+                    logger.warning(
+                        f"Layer index {layer_idx} is out of range (0-{total_layers-1}), ignoring"
+                    )
             except (ValueError, TypeError):
-                logger.warning(f"Invalid layer index: {i}, skipping")
-                continue
+                logger.warning(f"Invalid layer index: {i}, ignoring")
 
-            if 0 <= layer_idx < total_layers:
-                logger.info(f"Unfreezing specific layer {layer_idx}/{total_layers}")
-                for param in model.model.layers[layer_idx].parameters():
-                    param.requires_grad = True
+        logger.info(f"Keeping only specified layers trainable: {specified_layers}")
+
+        # Freeze all layers EXCEPT the specified ones
+        for i, layer in enumerate(model.model.layers):
+            if i in specified_layers:
+                logger.info(f"Keeping layer {i}/{total_layers} trainable")
             else:
-                logger.warning(
-                    f"Layer index {layer_idx} is out of range (0-{total_layers-1})"
-                )
+                logger.info(f"Freezing layer {i}/{total_layers}")
+                for param in layer.parameters():
+                    param.requires_grad = False
 
         # Ensure LM head is always trainable
         logger.info("Ensuring LM head is trainable")
         for param in model.lm_head.parameters():
             param.requires_grad = True
 
-        # Log unfreezing statistics
+        # Log layer selection statistics
         frozen_params = sum(
             p.numel() for p in model.parameters() if not p.requires_grad
         )
@@ -659,13 +666,13 @@ def load_model(
         total_params = frozen_params + trainable_params
 
         logger.info(
-            f"Specific layer unfreezing: {frozen_params}/{total_params} parameters frozen ({frozen_params/total_params:.2%})"
+            f"Selective layer training: {frozen_params}/{total_params} parameters frozen ({frozen_params/total_params:.2%})"
         )
         logger.info(
             f"Trainable: {trainable_params}/{total_params} parameters ({trainable_params/total_params:.2%})"
         )
         logger.info(
-            f"Unfrozen layers: {unfreeze_specific_layers} out of {total_layers} layers plus LM head"
+            f"Trainable layers: {specified_layers} out of {total_layers} layers plus LM head"
         )
 
     logger.info(f"Model loaded from {model_path}")
@@ -1192,18 +1199,8 @@ def format_parameters(params):
     if params is None:
         return None
 
-    # Convert Erlang charlists (list of integers representing characters) to Python strings
-    if isinstance(params, list) and all(
-        isinstance(item, int) and 0 <= item <= 0x10FFFF for item in params
-    ):
-        try:
-            return "".join(chr(c) for c in params)
-        except (ValueError, TypeError, OverflowError):
-            # If conversion fails, keep the original list
-            pass
-
-    # Handle dictionaries - recursively format all values
-    elif isinstance(params, dict):
+    # Special handling for dictionaries - process keys that need special handling first
+    if isinstance(params, dict):
         # Create a new dictionary with formatted keys and values
         formatted_dict = {}
         for k, v in params.items():
@@ -1213,27 +1210,46 @@ def format_parameters(params):
             if isinstance(formatted_key, bytes):
                 formatted_key = formatted_key.decode("utf-8")
 
-            # Special handling for unfreeze_specific_layers to ensure integers
-            if formatted_key == "unfreeze_specific_layers" and isinstance(v, list):
-                try:
-                    # Convert all elements to integers
-                    formatted_dict[formatted_key] = [
-                        int(item) if isinstance(item, str) else item
-                        for item in format_parameters(v)
-                    ]
-                    continue  # Skip the normal processing below
-                except (ValueError, TypeError) as e:
-                    logger.warning(
-                        f"Error converting unfreeze_specific_layers to integers: {e}"
-                    )
-                    # Fall back to normal processing
-
-            formatted_dict[formatted_key] = format_parameters(v)
+            # Special handling for specific keys that should always be processed as lists of integers
+            if formatted_key in ["unfreeze_specific_layers"] and isinstance(v, list):
+                # Ensure we keep integer lists as lists
+                formatted_dict[formatted_key] = [
+                    int(item) if isinstance(item, str) and item.isdigit() else item
+                    for item in format_parameters(v)
+                ]
+            else:
+                # Normal processing for other keys
+                formatted_dict[formatted_key] = format_parameters(v)
         return formatted_dict
 
-    # Handle lists - recursively format all items
+    # Handle lists with different strategies based on content
     elif isinstance(params, list):
-        return [format_parameters(item) for item in params]
+        # Check if this looks like a numeric list (not meant to be a charlist/string)
+        # Common numeric lists in ML contexts tend to contain values > 7 (control chars)
+        # or have a clear numerical pattern of layer indices
+        if any(isinstance(i, int) and i > 31 for i in params) or (
+            all(isinstance(i, int) for i in params)
+            and len(params) > 0
+            and any(i > 7 for i in params)
+        ):
+            # Preserve as list of integers - this is probably model parameters, indices, etc.
+            return [format_parameters(item) for item in params]
+
+        # Check for traditional charlist (list of integers representing characters)
+        elif all(isinstance(item, int) and 0 <= item <= 0x10FFFF for item in params):
+            try:
+                # Only convert to string if it produces printable ASCII or common Unicode
+                result = "".join(chr(c) for c in params)
+                # If result contains mostly control characters, it was probably not meant to be a string
+                if sum(1 for c in result if ord(c) < 32) > len(result) * 0.5:
+                    return [format_parameters(item) for item in params]
+                return result
+            except (ValueError, TypeError, OverflowError):
+                # If conversion fails, keep the original list
+                return [format_parameters(item) for item in params]
+        else:
+            # Standard list processing for mixed content
+            return [format_parameters(item) for item in params]
 
     # Handle tuples - recursively format and convert to tuple
     elif isinstance(params, tuple):
