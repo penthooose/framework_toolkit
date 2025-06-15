@@ -2,7 +2,7 @@ defmodule ModelToolsController do
   alias ModelConverter
   alias ModelQuantizer
 
-  def convert_and_integrate_model(file_param_entry \\ "3") do
+  def convert_and_integrate_model(file_param_entry \\ "5") do
     ModelConverter.convert_safetensors_to_gguf(file_param_entry)
   end
 
