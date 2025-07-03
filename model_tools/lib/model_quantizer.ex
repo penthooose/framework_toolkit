@@ -58,9 +58,7 @@ defmodule ModelQuantizer do
     # Convert to lowercase for consistent comparison
     lowercase_type = String.downcase(quant_type)
 
-    # Check direct match with lowercase keys
     cond do
-      # Direct match in the map
       Map.has_key?(@quant_types, lowercase_type) ->
         @quant_types[lowercase_type]
 
@@ -92,13 +90,13 @@ defmodule ModelQuantizer do
             v
 
           nil ->
-            IO.puts("Warning: Unknown quantization type '#{quant_type}', defaulting to Q8_0")
-            "Q8_0"
+            IO.puts("Warning: Unknown quantization type '#{quant_type}', defaulting to q8_0")
+            "q8_0"
         end
     end
   end
 
-  def normalize_quant_type(nil), do: "Q8_0"
+  def normalize_quant_type(nil), do: "q8_0"
 
   # Quantize model using parameters from file_param_entry
   def quantize_model(file_param_entry \\ nil)
@@ -138,34 +136,77 @@ defmodule ModelQuantizer do
         {:python_path, String.to_charlist(@path_quantizer)}
       ])
 
-    file_basename = Path.basename(path_input_model, ".gguf")
-    output_filename = "#{file_basename}_#{normalized_quant}"
+    # Determine input type
+    is_dir = File.dir?(path_input_model)
+    is_gguf = is_binary(path_input_model) and String.ends_with?(path_input_model, ".gguf")
+
+    is_safetensors =
+      (is_binary(path_input_model) and String.ends_with?(path_input_model, ".safetensors")) or
+        (is_dir and
+           File.ls!(path_input_model) |> Enum.any?(&String.ends_with?(&1, ".safetensors")))
+
+    file_basename =
+      cond do
+        is_dir ->
+          Path.basename(path_input_model)
+
+        is_gguf or is_safetensors ->
+          Path.basename(path_input_model, Path.extname(path_input_model))
+
+        true ->
+          "model"
+      end
+
+    output_filename = "#{file_basename}_#{normalized_quant}.gguf"
     path_output = Path.join(path_output_dir, output_filename)
+
+    IO.inspect(
+      %{
+        is_dir: is_dir,
+        is_gguf: is_gguf,
+        is_safetensors: is_safetensors,
+        use_safetensors: use_safetensors,
+        path_input_model: path_input_model
+      },
+      label: "Quantize input info"
+    )
 
     result =
       try do
-        if use_safetensors do
-          # Calculate output path based on input path and quantization
+        cond do
+          is_gguf and use_safetensors ->
+            raise ArgumentError,
+                  "Cannot use 'use_safetensors=true' when input is already a GGUF file."
 
-          output_filename = "#{file_basename}_#{normalized_quant}.gguf"
-          path_output_gguf = Path.join(path_output_dir, output_filename)
+          is_gguf ->
+            # Quantize GGUF file to another GGUF file
+            :python.call(pid, :quantize_wrapper, :quantize_model, [
+              String.to_charlist(path_input_model),
+              String.to_charlist(path_output),
+              String.to_charlist(normalized_quant)
+            ])
+            |> convert_charlists_in_map()
 
-          :python.call(pid, :convert_wrapper, :quantize_model, [
-            String.to_charlist(path_input_model),
-            String.to_charlist(path_output_gguf),
-            String.to_charlist(normalized_quant)
-          ])
-          |> convert_charlists_in_map()
-        else
-          output_filename = "#{file_basename}_#{normalized_quant}"
-          path_output = Path.join(path_output_dir, output_filename)
+          (is_safetensors or is_dir) and use_safetensors ->
+            # Quantize safetensors model and keep as safetensors
+            :python.call(pid, :quantize_wrapper, :quantize_safetensors_inplace, [
+              String.to_charlist(path_input_model),
+              String.to_charlist(path_output),
+              String.to_charlist(normalized_quant)
+            ])
+            |> convert_charlists_in_map()
 
-          :python.call(pid, :convert_wrapper, :quantize_safetensors_model, [
-            String.to_charlist(path_input_model),
-            String.to_charlist(path_output),
-            String.to_charlist(normalized_quant)
-          ])
-          |> convert_charlists_in_map()
+          (is_safetensors or is_dir) and not use_safetensors ->
+            # Quantize safetensors model (convert to GGUF with quantization)
+            :python.call(pid, :quantize_wrapper, :quantize_safetensors_model, [
+              String.to_charlist(path_input_model),
+              String.to_charlist(path_output),
+              String.to_charlist(normalized_quant)
+            ])
+            |> convert_charlists_in_map()
+
+          true ->
+            {:error, "Unknown input type for quantization: #{inspect(path_input_model)}"}
         end
       catch
         kind, error ->
@@ -174,9 +215,6 @@ defmodule ModelQuantizer do
       end
 
     try do
-      # Call the quantize_model function from our Python wrapper module
-
-      # Process result here and store it
       quantization_result =
         case result do
           %{"returncode" => 0, "stdout" => stdout} ->
@@ -190,7 +228,6 @@ defmodule ModelQuantizer do
             {:error, "Unexpected result structure: #{inspect(result)}"}
         end
 
-      # Handle integration if needed
       final_result =
         if integrate_in_ollama do
           try do
@@ -257,7 +294,8 @@ defmodule ModelQuantizer do
           "path_output_dir" => params_entry["path_output_dir"],
           "quantization" => normalized_quant,
           "integrate_in_ollama" => params_entry["integrate_in_ollama"] || false,
-          "modelfile_contents" => params_entry["modelfile_contents"]
+          "modelfile_contents" => params_entry["modelfile_contents"],
+          "use_safetensors" => params_entry["use_safetensors"] || false
         }
       else
         error ->

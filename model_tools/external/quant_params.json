@@ -1,21 +1,20 @@
 {
   "1": {
-    "path_input_gguf_model": "N:/LLMs/gguf_models/llama3_german_instruct_FT_stage1.gguf",
-    "path_output_dir": "N:/LLMs/gguf_models",
+    "path_input_model": "C:/Users/Paul/.cache/gguf_models/llama3_german_instruct_FT_stage1.gguf",
+    "path_output_dir": "C:/Users/Paul/.cache/gguf_models",
     "quantization": "q8_0",
     "integrate_in_ollama": true
   },
   "2": {
-    "path_input_gguf_model": "N:/LLMs/gguf_models/llama3_german_instruct_FT_stage_D.gguf",
-    "path_output_dir": "N:/LLMs/gguf_models",
+    "path_input_model": "C:/Users/Paul/.cache/gguf_models/llama3_german_instruct_FT_stage_D.gguf",
+    "path_output_dir": "C:/Users/Paul/.cache/gguf_models",
     "quantization": "q8_0",
     "integrate_in_ollama": true
   },
   "3": {
-    "path_input_gguf_model": "C:/Users/Paul/.cache/merged_models/llama3_german_merged_V3",
-    "path_output_dir": "N:/LLMs/gguf_models",
+    "path_input_model": "C:/Users/Paul/.cache/gguf_models/llama3_german_V3.gguf",
+    "path_output_dir": "C:/Users/Paul/.cache/gguf_models",
     "quantization": "q8_0",
-    "use_safetensors": true,
     "integrate_in_ollama": false
   }
 }
